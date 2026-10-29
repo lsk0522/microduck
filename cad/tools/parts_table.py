@@ -36,10 +36,10 @@ CLASS = {
     "tire": ("출력(연질)", "TPU 95A", "롤러 타이어 (선택)"),
     "ankle_l_v1": ("출력(경질)", "PETG 또는 PLA+", "롤러 장착용 발목 변형"),
     "ankle_r_v1": ("출력(경질)", "PETG 또는 PLA+", "롤러 장착용 발목 변형"),
-    "upper_leg_rigidity_plate": ("판재", "1 mm CF/알루미늄 판 (추정)", "두께 1 mm — 출력이면 보강 필요"),
-    "neck": ("판재/출력", "2 mm 판 (추정)", ""),
-    "trunk_base": ("판재/출력", "3 mm 판 (추정)", "몸통 바닥판"),
-    "bearing_roll": ("판재/출력", "3 mm 판 (추정)", "고관절 롤 베어링 판"),
+    "upper_leg_rigidity_plate": ("판재", "알루미늄 1 mm", "허벅지 보강판 — DXF: cad/plates/dynamixel"),
+    "neck": ("판재", "알루미늄 2 mm", "목 연결판 — DXF: cad/plates/dynamixel"),
+    "trunk_base": ("판재", "알루미늄 1 mm", "몸통 바닥판 (+높이 2 mm 보스 4개는 생략) — DXF: cad/plates/dynamixel"),
+    "bearing_roll": ("판재", "알루미늄 1 mm", "고관절 롤 베어링판 (+보스 2개 생략) — DXF: cad/plates/dynamixel"),
 }
 OPTIONAL = {"roller_blade", "rim", "tire", "ankle_l_v1", "ankle_r_v1"}
 

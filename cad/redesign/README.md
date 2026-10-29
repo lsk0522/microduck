@@ -1,4 +1,6 @@
-# 재설계
+# 재설계 (트랙 A — 다이나믹셀)
+
+작업 방법: [`../FUSION_REDESIGN.md`](../FUSION_REDESIGN.md). 트랙 B(일반 서보) 결과물은 `../hobby_servo/`에 같은 구조로 둔다.
 
 `plan.md` §4의 규칙을 따른다. 요약:
 
@@ -12,7 +14,7 @@
 redesign/
 ├── step/        # 부품 STEP (Fusion/Onshape 원본에서 내보냄)
 ├── stl/         # 출력용 STL (방향·공차 반영본)
-├── mjcf/        # onshape-to-robot 결과 (robot_*.xml, scene*.xml, assets/)
+├── mjcf/        # Fusion 내보내기(robot.json) → json_to_mjcf.py 결과 (robot_*.xml, scene*.xml, assets/)
 └── CHANGELOG.md # 원본 대비 변경점, 질량 변화
 ```
 

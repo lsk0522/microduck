@@ -17,6 +17,8 @@
 | `microduck/assets/*.part` | 부품별 Onshape 메타데이터 (documentId, partId) |
 | `xl330_test_bench/` | 서보 1개 식별(BAM)용 테스트벤치 모델 |
 | `parts.csv` | 부품 치수·부피·수량·재질 추정표 (`../tools/parts_table.py`로 생성) |
+| `joint_frames.csv` / `.json` | 관절 위치·축·가동범위, 링크 길이(축 사이 최단거리) (`../tools/extract_joint_frames.py`) |
+| `fusion_params.csv` | Fusion 사용자 매개변수용 기준 치수 |
 
 ## 원본 Onshape 문서
 
@@ -40,4 +42,4 @@ https://cad.onshape.com/documents/804927696f06d877f3f1803e/w/5b75db19292e71970de
   자세한 내용은 [`LICENSE-MODELS.md`](LICENSE-MODELS.md).
 - MJCF(`.xml`), 설정(`.json`), `.part` 메타데이터: Apache-2.0 (© Pollen Robotics).
 
-수정 사항: 없음 (원본 그대로 복사).
+수정 사항: 원본 파일은 그대로 복사. `parts.csv`, `joint_frames.*`, `fusion_params.csv`는 이 저장소에서 원본으로부터 생성한 파일.

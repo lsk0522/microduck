@@ -1,6 +1,7 @@
-# Microduck 클론 제작 계획 (다이나믹셀 XL330)
+# 트랙 A — 다이나믹셀(XL330) 제작 계획
 
 > 개인·비상업 목적의 Microduck(Pollen Robotics / Hugging Face) 재현 및 재설계 프로젝트.
+> 전체 개요와 현재 상태는 [`README.md`](README.md), 일반 서보 트랙은 [`plan-hobby-servo.md`](plan-hobby-servo.md).
 > 작성일 2026-10-29. 기준 소스: `pollen-robotics/microduck`(런타임), `pollen-robotics/microduck_rl`(학습, commit `bae39f5`).
 
 ---
@@ -16,7 +17,7 @@
 | 몸통 IMU | `imu_to_dxl` v2 보드 (LSM6DSV16X, 버스 ID 200) | ESP32-C3/STM32 + LSM6DSV16X로 **직접 제작** |
 | 전원 | NP-F550 2S, 서보 직결 6.6–8.2 V | 동일 (⚠ 결정 D1 참고) |
 | 학습 | mjlab(MuJoCo Warp) + PPO, BAM 액추에이터 모델 | 동일 파이프라인, 재설계 모델로 재학습 |
-| CAD | Onshape 원본 비공개 추정, STL/MJCF만 공개 | 공개 STL/MJCF 기반 **재설계** |
+| CAD | Onshape 원본 비공개 추정, STL/MJCF만 공개 | 공개 STL/MJCF 기반 **Fusion + Claude 재설계** |
 
 **핵심 전략:** 원본과 *관절 이름·순서·HOME 자세·관측 61차원 규약*을 그대로 지키면, Pollen의 런타임과
 학습 코드를 거의 수정 없이 쓸 수 있다. 재설계는 "형상과 질량 분포는 바꾸되 인터페이스는 지킨다"가 원칙이다.
@@ -27,7 +28,7 @@
 
 | 트랙 | 서보 | 크기 | 비용 | 문서 |
 |---|---|---|---|---|
-| **A. 다이나믹셀** | XL330-M288-T | 25 cm (원본) | ₩55–86만 | 이 문서 |
+| **A. 다이나믹셀** | XL330-M288-T | 25 cm (원본) | 약 ₩56–90만 | 이 문서 |
 | **B. 일반 서보** | MG996R ×11 + MG90S ×4 | 약 37 cm (1.5배) | 약 ₩26–28만 | [`plan-hobby-servo.md`](plan-hobby-servo.md) |
 
 트랙 A는 Pollen의 CAD·정책·런타임을 그대로 활용하는 쪽이고, 트랙 B는 싸지만 위치 피드백 개조,
@@ -46,7 +47,8 @@
 | 오디오·조종기 | 코덱·스피커·마이크, Xbox 패드 | 없음, 노트북 UDP 패드 |
 | 서보 인터페이스 | U2D2 + 전원 허브 | CP2102 + 반이중 버퍼 IC |
 | 런타임 | 수정 없음 | 부리(ID 34) 제외 수정 필요 |
-| **합계** | **약 ₩86만** | **약 ₩55만** (필라멘트 보유 시 약 ₩52만) |
+| 판재 | 알루미늄 4종 레이저 가공 | FR4(PCB) 3종 + 목판 출력 |
+| **합계** | **약 ₩90만** | **약 ₩56만** (필라멘트 보유 시 약 ₩53만) |
 
 저렴한 버전은 기구가 같아서, 나중에 서보 1개와 센서를 추가하면 오리지널로 바꿀 수 있다.
 서보(로보티즈 공식몰 26,400원)가 두 버전 모두 비용의 50–70 %이고 준비기간 40일이라 가장 먼저 주문한다.
@@ -57,14 +59,14 @@
 
 ## 1. 먼저 정해야 할 결정 (Decision log)
 
-진행 전에 아래 네 가지를 정해서 이 표의 "결정" 칸을 채운다.
+진행 전에 아래 네 가지를 정해서 이 표의 "결정" 칸을 채운다. (D4는 결정됨)
 
 | ID | 질문 | 선택지 | 권장 | 결정 |
 |---|---|---|---|---|
 | D1 | 서보 전원 | **A.** 2S 배터리 직결(원본과 동일) / **B.** 5 V 강압 | A로 시작, 서보 1개로 발열·수명 시험 후 확정 | |
 | D2 | 몸통 IMU | **A.** 버스 ID 200 브리지 보드 자작 / **B.** SBC I²C 직결 + robotd 수정 | A (런타임 무수정) | |
 | D3 | 서보 버스 인터페이스 | **A.** U2D2(USB) / **B.** 자작 HAT(UART 반이중) | 1단계 A → 2단계 B | |
-| D4 | 재설계 CAD 도구 | **A.** Onshape / **B.** Fusion + URDF 변환 / **C.** 혼합 | C: 부품은 Fusion, 조립·관절 모델은 Onshape | |
+| D4 | 재설계 CAD 도구 | **A.** Onshape + onshape-to-robot / **B.** Fusion + Claude(MCP·API 스크립트) | — | **B. Fusion + Claude** (2026-10-29) → [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md) |
 
 ### D1 상세 — 서보 전원 (가장 중요)
 
@@ -89,34 +91,7 @@ B로 가면 시뮬레이션 단계에서 먼저 `vin_range=(4.8, 5.2)`로 학습
 
 ## 2. 저장소 구조
 
-```
-microduck/
-├── plan.md                  ← 이 문서
-├── README.md
-├── bom/
-│   ├── build_bom.py         ← BOM 원본 데이터 (여기를 수정)
-│   ├── BOM.csv
-│   └── BOM.xlsx             ← 환율·예비수량 입력칸, 합계 수식, 부품 치수 시트
-├── cad/
-│   ├── reference/           ← Pollen 원본 (CC BY-NC-SA 4.0 / Apache-2.0, 수정 금지)
-│   │   ├── microduck/       ← MJCF(.xml) + assets/(STL 43종, Onshape .part 메타데이터)
-│   │   ├── xl330_test_bench/← 서보 식별용 테스트벤치 모델
-│   │   ├── parts.csv        ← 부품별 치수·부피·수량·재질 추정
-│   │   ├── README.md
-│   │   └── LICENSE-MODELS.md
-│   ├── redesign/            ← 재설계 결과물 (STEP, STL, 새 MJCF)
-│   └── tools/parts_table.py
-├── sim/
-│   ├── check_model.py       ← 질량·관절범위·자세 유지 토크 점검
-│   ├── render.py            ← 모델 렌더 이미지
-│   └── README.md
-├── firmware/imu_to_dxl/     ← IMU 브리지 보드 펌웨어 (사양서 포함)
-├── hardware/hat/            ← (예정) KiCad HAT 설계
-├── training/README.md       ← 학습 실행·실험 기록 규칙
-└── docs/
-    ├── hardware-notes.md    ← 원본 런타임에서 뽑은 버스·레지스터·전원 사양
-    └── images/
-```
+폴더 구조와 문서 지도는 [`README.md`](README.md)에 있다.
 
 ---
 
@@ -178,7 +153,9 @@ sim2real 격차의 대부분은 액추에이터에서 생긴다(원본 README). 
 - 경질 실부피 합 약 207 cm³, 연질 약 34 cm³. 인필 30–40 %, 벽 3–4개 (관절부는 100 % 권장).
 - **주의:** 공개 STL은 시뮬레이션용으로 내보낸 메시(`simplify_stls: true`)라서 일부 형상이 단순화되었을 수 있다.
   나사 구멍·끼워맞춤 공차가 없거나 부정확할 수 있으므로, 출력 전에 슬라이서에서 구멍 지름을 확인하고
-  필요하면 재설계 단계의 수정본을 먼저 만든다. `upper_leg_rigidity_plate`(1 mm)는 판재 가공 권장.
+  필요하면 재설계 단계의 수정본을 먼저 만든다.
+- **판재 4종**(허벅지 보강판 ×2, 몸통 바닥판, 고관절 롤 베어링판 ×2: 알루미늄 1 mm / 목판 ×2: 2 mm)은
+  출력하지 않고 레이저 가공한다. DXF는 [`cad/plates/dynamixel/`](cad/plates/dynamixel/), 설명은 [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md) 6절.
 - 서보 ID 설정 (U2D2 + DYNAMIXEL Wizard 또는 스크립트):
 
 | 관절 | ID | 관절 | ID | 관절 | ID |
@@ -288,34 +265,24 @@ sim2real 격차의 대부분은 액추에이터에서 생긴다(원본 README). 
 정적 토크는 여유가 크지만, 걷기·일어서기·구르기의 **동적 피크는 이보다 몇 배** 크다.
 재설계 후 같은 스크립트를 돌려 정적 토크가 원본의 1.2배를 넘지 않게 관리한다.
 
-### 4.4 CAD 작업 흐름 (D4)
+### 4.4 CAD 작업 흐름 (D4 = Fusion + Claude)
 
-> Fusion + Claude로 진행하는 구체적 절차는 [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md).
+구체적 절차(MCP 연결, 매개변수 스켈레톤, 부품 순서, 판재, MJCF 내보내기, 프롬프트 예)는
+[`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md)에 있다. 요점만:
 
-
-원본은 **Onshape → [onshape-to-robot](https://github.com/Rhoban/onshape-to-robot) → MJCF**로 만든다.
-`cad/reference/microduck/config_mjcf_*.json`과 `.part` 파일에 원본 Onshape 문서 ID가 남아 있다:
+- 기준 치수: [`cad/reference/joint_frames.csv`](cad/reference/joint_frames.csv), `fusion_params.csv`
+  (허벅지·정강이 각 42 mm, 고관절 3축 한 점 교차, 좌우 hip_yaw 축 간 35 mm).
+- 부품·조인트 이름 = MJCF 바디·관절명. 질량은 실측값으로.
+- MJCF는 Fusion 내보내기 스크립트(`robot.json`) → `json_to_mjcf.py`로 만든다 (첫 부품들이 나온 뒤 작성 예정).
+- 원본 Onshape 문서 ID가 내보내기 설정에 남아 있다 (공개 여부 미확인). 열리면 STEP으로 내보내 Fusion에 참고용으로 넣는다:
 
 ```
 https://cad.onshape.com/documents/804927696f06d877f3f1803e/w/5b75db19292e71970de02dee/e/ef6e972847fec8d82570b35e
 ```
-→ **공개 여부 미확인.** 로그인 후 열어보고, 열리면 "Make a copy"로 원본 CAD를 그대로 가져와 재설계하는 것이 최선.
-
-열리지 않으면:
-1. **STL → 솔리드 변환:** Fusion에서 `assets/*.stl`을 Mesh로 가져와 "Convert Mesh → Prismatic"으로 변환하거나,
-   치수(`parts.csv`)를 참고해 다시 모델링. 서보 장착부는 ROBOTIS 공식 XL330 STEP 도면을 기준으로 새로 그린다
-   (메시 변환본은 구멍 위치가 부정확할 수 있음).
-2. **조립·관절 정의:** Onshape(무료 플랜) 어셈블리에 STEP을 넣고 회전 메이트 이름을 원본 관절명과 동일하게 지정.
-   onshape-to-robot 규칙: 메이트 이름 `dof_<관절명>`, 프레임 `frame_<이름>`.
-3. **MJCF 생성:** 원본 `config_mjcf_walk.json` 등을 복사해 `url`만 내 문서로 바꾸고 `onshape-to-robot` 실행.
-   `joints_properties.xml`, `sensors.xml`, `additional.xml`은 원본 것을 그대로 포함.
-4. Fusion만 쓰려면 `fusion2urdf` 계열 애드인으로 URDF 생성 → MuJoCo `compile`로 MJCF 변환 →
-   위 세 XML과 관절 클래스를 수작업으로 병합. 관리 부담이 커서 권장하지 않음.
-5. 질량: CAD 질량 대신 실제 출력물·부품을 **저울로 측정**한 값을 MJCF에 넣는다 (인필 때문에 CAD 질량은 부정확).
 
 ### 4.5 재설계 검증 체크리스트
 
-- [ ] `python sim/check_model.py cad/redesign/scene.xml` — 총 질량, 관절 범위, STAND/SIT 유지
+- [ ] `python sim/check_model.py cad/redesign/mjcf/scene_allcollisions.xml` — 총 질량, 관절 범위, STAND/SIT 유지
 - [ ] 원본과 관절 이름·순서 diff 없음 (`uv run list-envs` 후 env 생성 에러 없음)
 - [ ] 자기 충돌: `robot_allcollisions` 계열로 FOLD·SIT 키프레임에서 관통 없음
 - [ ] 무게중심이 HOME 자세 발목 축 위 (±5 mm)

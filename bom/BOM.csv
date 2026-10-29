@@ -28,7 +28,8 @@
 기구,볼베어링 (소),10×15×3 mm,3,1,3,1000,KRW,추정,알리익스프레스,https://www.aliexpress.com/w/wholesale-10x15x3-bearing.html?SortType=price_asc,검색,네이버: https://search.shopping.naver.com/search/all?query=10x15x3+%EB%B2%A0%EC%96%B4%EB%A7%81&sort=price_asc,MJCF 실측
 기구,볼트 키트,M2/M2.5/M3 볼트·너트 키트,1,0,1,6000,KRW,추정,알리익스프레스,https://www.aliexpress.com/w/wholesale-M2-M2.5-M3-screw-kit.html?SortType=price_asc,검색,,보유 시 0원. 서보 체결은 동봉 M2 탭볼트
 기구,인서트 너트,M2/M2.5 열압착 인서트,1,0,0,4000,KRW,추정,알리익스프레스,https://www.aliexpress.com/w/wholesale-M2-heat-set-insert.html?SortType=price_asc,검색,,저렴한 버전은 탭볼트 직결
-기구,보강판,1 mm 카본 판 100×100,1,0,0,6000,KRW,추정,알리익스프레스,https://www.aliexpress.com/w/wholesale-carbon-fiber-plate-1mm-100x100.html?SortType=price_asc,검색,,upper_leg_rigidity_plate ×2. 저렴한 버전은 출력으로 두께 보강
+기구,판재 4종 (알루미늄),레이저 가공: 1 mm ×5장(보강판2·몸통판1·롤판2) + 2 mm ×2장(목판),1,0,0,40000,KRW,추정,레이저 가공 업체,https://search.shopping.naver.com/search/all?query=%EC%95%8C%EB%A3%A8%EB%AF%B8%EB%8A%84+%EB%A0%88%EC%9D%B4%EC%A0%80+%EA%B0%80%EA%B3%B5+%EC%86%8C%EB%9F%89&sort=price_asc,검색,JLCCNC 판금: https://jlccnc.com/ / PCBWay: https://www.pcbway.com/,DXF: cad/plates/dynamixel. 소량 최소주문·배송비 때문에 견적 편차 큼 — 견적 받아 수정
+기구,판재 3종 (FR4 대체),"PCB 업체 FR4 1.0 mm 외곽 가공 (보강판·몸통판·롤판), 목판은 출력",0,0,1,8.0,USD,추정,JLCPCB,https://jlcpcb.com/,사이트,,HAT PCB와 같이 주문하면 배송비 합산. 알루미늄보다 강성 낮지만 출력물보다 훨씬 단단
 출력소재,경질 필라멘트,PETG 1 kg,1,0,1,15000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=PETG+%ED%95%84%EB%9D%BC%EB%A9%98%ED%8A%B8+1kg&sort=price_asc,검색,,보유 재고 있으면 0원. 실부피 약 207 cm³
 출력소재,연질 필라멘트,TPU 95A 0.5–1 kg,1,0,1,18000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=TPU+95A+%ED%95%84%EB%9D%BC%EB%A9%98%ED%8A%B8&sort=price_asc,검색,,발바닥·부리 연질부 약 34 cm³
 기타,게임패드,Xbox 무선 컨트롤러,1,0,0,55000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=Xbox+%EB%AC%B4%EC%84%A0+%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC&sort=price_asc,검색,,원본 기본 조종기. 저렴한 버전은 노트북 UDP 패드(런타임 지원)
