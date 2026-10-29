@@ -1,0 +1,44 @@
+﻿part,분류,수량,X_mm,Y_mm,Z_mm,부피_cm3,권장재질/품목,메모,파일
+ankle_l_v1,출력(경질),1,39.5,46.5,25.4,6.69,PETG 또는 PLA+,롤러 장착용 발목 변형 롤러 옵션,assets/ankle_l_v1.stl
+ankle_left,출력(경질),1,39.5,36.5,25.5,7.88,PETG 또는 PLA+,,assets/ankle_left.stl
+ankle_r_v1,출력(경질),1,39.5,46.5,25.4,6.69,PETG 또는 PLA+,롤러 장착용 발목 변형 롤러 옵션,assets/ankle_r_v1.stl
+ankle_right,출력(경질),1,39.5,36.5,25.5,7.88,PETG 또는 PLA+,,assets/ankle_right.stl
+banana_pcb_locker,출력(경질),1,54.1,3.8,6.7,0.46,PETG 또는 PLA+,,assets/banana_pcb_locker.stl
+bearing_roll,판재/출력,2,23.0,3.0,40.0,0.63,3 mm 판 (추정),고관절 롤 베어링 판,assets/bearing_roll.stl
+bottom_head_shell,출력(경질),1,91.8,116.7,20.1,23.8,PETG 또는 PLA+,,assets/bottom_head_shell.stl
+elec_rpi_robot_hat_pcb,자작 PCB,1,65.0,30.0,0.8,1.57,65×30 HAT,반이중 버스·전원·오디오 등 (직접 설계),assets/elec_rpi_robot_hat_pcb.stl
+face_part,출력(경질),1,87.7,12.5,44.6,5.82,PETG 또는 PLA+,,assets/face_part.stl
+foot_left,출력(경질),1,40.1,54.0,16.9,12.18,PETG 또는 PLA+,,assets/foot_left.stl
+foot_right,출력(경질),1,40.1,54.0,16.9,12.18,PETG 또는 PLA+,,assets/foot_right.stl
+hip_l,출력(경질),2,32.5,34.5,19.0,4.52,PETG 또는 PLA+,,assets/hip_l.stl
+jaw,출력(경질),1,91.4,68.7,29.4,9.36,PETG 또는 PLA+,,assets/jaw.stl
+jaw_soft,출력(연질),1,87.7,32.2,8.4,18.6,TPU 95A,부리 아래 연질부,assets/jaw_soft.stl
+left_shell,출력(경질),1,33.7,80.9,41.7,11.39,PETG 또는 PLA+,,assets/left_shell.stl
+leg,출력(경질),2,8.0,20.0,58.0,3.41,PETG 또는 PLA+,,assets/leg.stl
+lens,구매품,1,16.9,18.9,16.9,2.8,M12 광각 렌즈,IMX219 카메라용,assets/lens.stl
+m12_lens_holder,출력(경질),1,24.0,14.8,16.0,1.1,PETG 또는 PLA+,,assets/m12_lens_holder.stl
+motor_support,출력(경질),1,73.5,54.2,18.8,7.52,PETG 또는 PLA+,,assets/motor_support.stl
+neck,판재/출력,2,2.0,20.0,11.0,0.4,2 mm 판 (추정),,assets/neck.stl
+neck_pitch,출력(경질),1,35.0,18.0,27.7,4.11,PETG 또는 PLA+,,assets/neck_pitch.stl
+noenoeil,출력(경질),1,30.0,9.5,30.0,4.25,PETG 또는 PLA+,,assets/noenoeil.stl
+np_f970,구매품,1,38.6,20.6,70.8,51.56,Sony NP-F 계열 배터리 외형,"모델은 NP-F970 크기, 실물은 NP-F550",assets/np_f970.stl
+pcb__raspberry_pi_zero_2_w,구매품,1,65.0,1.6,30.0,3.02,Radxa Zero 3W (동일 65×30 폼팩터),모델은 Pi Zero 2W 자리표시자,assets/pcb__raspberry_pi_zero_2_w.stl
+power_support,출력(경질),1,54.5,17.0,83.5,10.49,PETG 또는 PLA+,,assets/power_support.stl
+right_shell,출력(경질),1,31.8,80.9,41.7,11.22,PETG 또는 PLA+,,assets/right_shell.stl
+rim,출력(경질),4,7.6,20.2,20.2,1.03,PETG 또는 PLA+,롤러 옵션,assets/rim.stl
+roller_blade,출력(경질),2,40.5,73.0,30.4,11.81,PETG 또는 PLA+,롤러 옵션,assets/roller_blade.stl
+seeed_bearing__configuration__22x16x4,구매품,11,22.0,22.0,4.0,0.49,볼베어링 16×22×4,관절 지지 베어링,assets/seeed_bearing__configuration__22x16x4.stl
+seeed_bearing__configuration_default,구매품,3,15.0,15.0,3.0,0.19,볼베어링 10×15×3,소형 베어링,assets/seeed_bearing__configuration_default.stl
+soft_mouth_top,출력(연질),1,87.8,32.6,3.3,2.7,TPU 95A,부리 위 연질부,assets/soft_mouth_top.stl
+sole_left,출력(연질),1,41.1,54.0,12.9,6.25,TPU 95A,발바닥,assets/sole_left.stl
+sole_right,출력(연질),1,41.1,54.0,12.9,6.25,TPU 95A,발바닥,assets/sole_right.stl
+speaker,구매품,1,35.0,25.0,7.0,6.13,35×25×7 mm 소형 스피커,,assets/speaker.stl
+tire,출력(연질),4,7.6,30.0,30.0,2.81,TPU 95A,롤러 타이어 (선택) 롤러 옵션,assets/tire.stl
+top_head_shell,출력(경질),1,91.8,122.7,46.3,29.87,PETG 또는 PLA+,,assets/top_head_shell.stl
+trunk_base,판재/출력,1,57.0,36.0,3.0,1.42,3 mm 판 (추정),몸통 바닥판,assets/trunk_base.stl
+upper_leg_left,출력(경질),1,28.0,47.7,61.0,4.15,PETG 또는 PLA+,,assets/upper_leg_left.stl
+upper_leg_right,출력(경질),1,28.0,47.7,61.0,4.15,PETG 또는 PLA+,,assets/upper_leg_right.stl
+upper_leg_rigidity_plate,판재,2,1.0,45.0,58.1,0.75,1 mm CF/알루미늄 판 (추정),두께 1 mm — 출력이면 보강 필요,assets/upper_leg_rigidity_plate.stl
+xl330,구매품,15,29.0,20.0,34.0,15.68,ROBOTIS XL330-M288-T,서보 외형 (20×34×26 mm),assets/xl330.stl
+yaw2roll,출력(경질),2,23.0,25.8,20.5,2.82,PETG 또는 PLA+,,assets/yaw2roll.stl
+yaw_roll_motion,출력(경질),1,34.0,35.9,22.5,4.56,PETG 또는 PLA+,,assets/yaw_roll_motion.stl

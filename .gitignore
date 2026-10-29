@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+*.onnx
+*.pt
+wandb/
+logs/
+outputs/
+~$*.xlsx
+.DS_Store
