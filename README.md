@@ -9,7 +9,7 @@ Pollen Robotics / Hugging Face의 25 cm 2족 오리 로봇 **Microduck**을 개�
 | 문서 | 내용 |
 |---|---|
 | [`plan.md`](plan.md) | **전체 계획** — 결정 사항, 단계별 구현, 재설계, 시뮬레이션, 학습 |
-| [`bom/BOM.xlsx`](bom/BOM.xlsx) · [`bom/BOM.csv`](bom/BOM.csv) | 부품 목록·가격 (수정은 `bom/build_bom.py`) |
+| [`bom/BOM.xlsx`](bom/BOM.xlsx) · [`bom/BOM.csv`](bom/BOM.csv) | 부품 목록·구매처 — 오리지널(약 ₩86만) / 저렴한 버전(약 ₩55만) (수정은 `bom/build_bom.py`) |
 | [`cad/reference/`](cad/reference/) | 원본 MJCF·STL·Onshape 메타데이터, 부품 치수표 |
 | [`docs/hardware-notes.md`](docs/hardware-notes.md) | 서보 버스·ID·레지스터·전원 사양 |
 | [`firmware/imu_to_dxl/`](firmware/imu_to_dxl/) | IMU 브리지 보드(버스 ID 200) 사양 |
