@@ -290,6 +290,9 @@ sim2real 격차의 대부분은 액추에이터에서 생긴다(원본 README). 
 
 ### 4.4 CAD 작업 흐름 (D4)
 
+> Fusion + Claude로 진행하는 구체적 절차는 [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md).
+
+
 원본은 **Onshape → [onshape-to-robot](https://github.com/Rhoban/onshape-to-robot) → MJCF**로 만든다.
 `cad/reference/microduck/config_mjcf_*.json`과 `.part` 파일에 원본 Onshape 문서 ID가 남아 있다:
 

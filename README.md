@@ -11,7 +11,9 @@ Pollen Robotics / Hugging Face의 25 cm 2족 오리 로봇 **Microduck**을 개�
 | [`plan.md`](plan.md) | **트랙 A 다이나믹셀** 계획 — 결정 사항, 단계별 구현, 재설계, 시뮬레이션, 학습 |
 | [`plan-hobby-servo.md`](plan-hobby-servo.md) | **트랙 B 일반 서보(MG996R+MG90S)** 계획 — 1.5배 설계, 피드백 개조, Pi 제어, 재학습 |
 | [`bom/BOM.xlsx`](bom/BOM.xlsx) · [`bom/BOM.csv`](bom/BOM.csv) | 부품 목록·구매처 — 오리지널(약 ₩86만) / 저렴한 버전(약 ₩55만) / 일반 서보(약 ₩26–28만) (수정은 `bom/build_bom.py`) |
-| [`cad/reference/`](cad/reference/) | 원본 MJCF·STL·Onshape 메타데이터, 부품 치수표 |
+| [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md) | **Fusion + Claude 재설계 방법** — MCP 연결, 매개변수 스켈레톤, 부품 순서, 판재, MJCF 내보내기 |
+| [`cad/plates/`](cad/plates/) | 알루미늄 판재 DXF (트랙 A 4종) |
+| [`cad/reference/`](cad/reference/) | 원본 MJCF·STL·Onshape 메타데이터, 부품 치수표, 관절 프레임(`joint_frames.csv`) |
 | [`docs/hardware-notes.md`](docs/hardware-notes.md) | 서보 버스·ID·레지스터·전원 사양 |
 | [`firmware/imu_to_dxl/`](firmware/imu_to_dxl/) | IMU 브리지 보드(버스 ID 200) 사양 |
 | [`sim/`](sim/) | 모델 점검·렌더 스크립트 |

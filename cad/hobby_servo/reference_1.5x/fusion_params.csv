@@ -1,0 +1,10 @@
+﻿name,value,unit,comment
+scale,1.50,,원본 대비 배율
+hip_width,52.50,mm,좌우 hip_yaw 축 간 거리
+sole_width,146.28,mm,좌우 발바닥 중심 간 거리
+L_yaw_roll,0.00,mm,hip_yaw→hip_roll 축 간
+L_roll_pitch,0.00,mm,hip_roll→hip_pitch 축 간
+L_thigh,63.00,mm,hip_pitch→knee (허벅지)
+L_shin,63.00,mm,knee→ankle (정강이)
+L_ankle_sole,29.19,mm,ankle 축→발바닥 중심
+L_neck,75.00,mm,neck_pitch→head_pitch

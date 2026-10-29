@@ -1,0 +1,189 @@
+{
+  "scale": 1.0,
+  "units": "mm",
+  "frame": "MuJoCo world (X fwd, Y left, Z up), origin = trunk_base",
+  "joints": {
+    "left_hip_yaw": {
+      "x": 6.0,
+      "y": 17.5,
+      "z": -5.0,
+      "ax": 0.0,
+      "ay": 0.0,
+      "az": -1.0,
+      "lo": -25.0,
+      "hi": 30.0,
+      "body": "yaw2roll"
+    },
+    "left_hip_roll": {
+      "x": 22.5,
+      "y": 17.5,
+      "z": -17.5,
+      "ax": 1.0,
+      "ay": 0.0,
+      "az": 0.0,
+      "lo": -22.0,
+      "hi": 22.0,
+      "body": "hip_l"
+    },
+    "left_hip_pitch": {
+      "x": 4.0,
+      "y": 42.5,
+      "z": -17.5,
+      "ax": -0.0,
+      "ay": 1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "upper_leg_left"
+    },
+    "left_knee": {
+      "x": -31.7771,
+      "y": 38.5,
+      "z": -39.5,
+      "ax": 0.0,
+      "ay": -1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "leg"
+    },
+    "left_ankle": {
+      "x": -31.7771,
+      "y": 64.5,
+      "z": -81.5,
+      "ax": -0.0,
+      "ay": 1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "ankle_left"
+    },
+    "neck_pitch": {
+      "x": 26.0,
+      "y": 14.5,
+      "z": 32.4215,
+      "ax": 0.0,
+      "ay": -1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 60.0,
+      "body": "neck"
+    },
+    "head_pitch": {
+      "x": 26.0,
+      "y": 14.5,
+      "z": 82.4215,
+      "ax": 0.0,
+      "ay": 1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "neck_pitch"
+    },
+    "head_yaw": {
+      "x": 26.0,
+      "y": 0.0,
+      "z": 101.1146,
+      "ax": 0.0,
+      "ay": 0.0,
+      "az": 1.0,
+      "lo": -170.0,
+      "hi": 170.0,
+      "body": "yaw_roll_motion"
+    },
+    "head_roll": {
+      "x": 8.1,
+      "y": 0.0,
+      "z": 115.6146,
+      "ax": -1.0,
+      "ay": 0.0,
+      "az": 0.0,
+      "lo": -25.0,
+      "hi": 25.0,
+      "body": "jaw_soft"
+    },
+    "right_hip_yaw": {
+      "x": 6.0,
+      "y": -17.5,
+      "z": -5.0,
+      "ax": 0.0,
+      "ay": 0.0,
+      "az": -1.0,
+      "lo": -30.0,
+      "hi": 25.0,
+      "body": "bearing_roll"
+    },
+    "right_hip_roll": {
+      "x": 22.5,
+      "y": -17.5,
+      "z": -17.5,
+      "ax": 1.0,
+      "ay": 0.0,
+      "az": 0.0,
+      "lo": -22.0,
+      "hi": 22.0,
+      "body": "hip_l_2"
+    },
+    "right_hip_pitch": {
+      "x": 4.0,
+      "y": -42.5,
+      "z": -17.5,
+      "ax": -0.0,
+      "ay": -1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "upper_leg_right"
+    },
+    "right_knee": {
+      "x": -31.7771,
+      "y": -38.5,
+      "z": -39.5,
+      "ax": 0.0,
+      "ay": 1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "leg_2"
+    },
+    "right_ankle": {
+      "x": -31.7771,
+      "y": -64.5,
+      "z": -81.5,
+      "ax": -0.0,
+      "ay": -1.0,
+      "az": 0.0,
+      "lo": -90.0,
+      "hi": 90.0,
+      "body": "ankle_right"
+    }
+  },
+  "link_lengths": {
+    "left_hip_yaw->left_hip_roll": 0.0,
+    "left_hip_roll->left_hip_pitch": 0.0,
+    "left_hip_pitch->left_knee": 42.0,
+    "left_knee->left_ankle": 42.0,
+    "left_ankle->sole": 19.46,
+    "right_hip_yaw->right_hip_roll": 0.0,
+    "right_hip_roll->right_hip_pitch": 0.0,
+    "right_hip_pitch->right_knee": 42.0,
+    "right_knee->right_ankle": 42.0,
+    "right_ankle->sole": 19.46,
+    "neck_pitch->head_pitch": 50.0,
+    "head_pitch->head_yaw": 0.0,
+    "head_yaw->head_roll": 0.0
+  },
+  "feet": {
+    "left": [
+      -24.95,
+      48.76,
+      -99.72
+    ],
+    "right": [
+      -24.94,
+      -48.76,
+      -99.72
+    ]
+  },
+  "hip_width": 35.0
+}

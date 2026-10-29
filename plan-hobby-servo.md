@@ -134,6 +134,9 @@ RL 정책은 관절 각도·속도를 관측한다. 일반 서보는 이 값을 
 
 ### 4.1 직접 설계 순서
 
+Fusion + Claude 절차와 판재 후보는 [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md) (1.5배 기준 치수: `cad/hobby_servo/reference_1.5x/`).
+
+
 1. 원본 MJCF/STL(`cad/reference/`)에서 **관절 축 위치와 링크 비율**을 뽑아 1.5배로 키운다.
 2. 서보 포켓은 MG996R(40.7×19.7×42.9 mm)·MG90S(22.8×12.2×28.5 mm) 실측 기준으로 새로 그린다.
    호환품마다 크기가 조금씩 다르므로 **실물을 사서 캘리퍼로 잰 뒤** 설계한다.
