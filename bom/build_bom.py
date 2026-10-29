@@ -1,11 +1,12 @@
-"""BOM 원본 데이터 → bom/BOM.csv + bom/BOM.xlsx (오리지널 / 저렴한 버전)
+"""BOM 원본 데이터 → bom/BOM.csv, bom/BOM_hobby_servo.csv, bom/BOM.xlsx
 
 BOM을 고칠 때는 이 파일의 ITEMS만 수정하고 다시 실행한다:
     python bom/build_bom.py
 
-두 가지 구성:
-- 오리지널 : Pollen Microduck 하드웨어를 최대한 그대로 (15축, ToF·카메라·오디오, 정품 인터페이스, 예비 부품)
-- 저렴한   : 걷기에 필요한 것만 (14축·부리 고정, 센서·오디오·게임패드 제외, 대용 부품, 예비 없음)
+세 가지 구성:
+- 오리지널      : 다이나믹셀, Pollen Microduck 하드웨어 그대로 (15축, ToF·카메라·오디오, 정품 인터페이스, 예비)
+- 저렴한 버전   : 다이나믹셀, 걷기에 필요한 것만 (14축·부리 고정, 센서·오디오·게임패드 제외, 예비 없음)
+- 일반 서보 버전: MG996R + MG90S, 1.5배 확대, Raspberry Pi + PCA9685 (ITEMS_HOBBY, plan-hobby-servo.md)
 
 각 품목의 o / os / c = 오리지널 수량 / 오리지널 예비 / 저렴한 버전 수량 (0이면 해당 구성에서 제외).
 
@@ -166,11 +167,85 @@ ITEMS = [
          memo="원본 기본 조종기. 저렴한 버전은 노트북 UDP 패드(런타임 지원)"),
 ]
 
+# ── 일반 서보 버전 (MG996R + MG90S, 1.5배 확대) — plan-hobby-servo.md ──
+# h = 수량, hs = 예비
+ITEMS_HOBBY = [
+    dict(cat="구동", name="다리·목 서보", spec="MG996R 메탈기어 (TowerPro 호환)", h=11, hs=2,
+         price=5000, cur="KRW", src="추정", shop="디바이스마트",
+         url="https://www.devicemart.co.kr/goods/view?no=1313388", kind="상품",
+         alt=f"네이버: {naver('MG996R 서보모터')} / 알리: {ali('MG996R servo')}",
+         memo="다리 10 + neck_pitch 1. 9.4 kgf·cm@4.8V, 11 kgf·cm@6V, 55 g. 호환품 편차 커서 예비 2개"),
+    dict(cat="구동", name="머리·부리 서보", spec="MG90S 메탈기어", h=4, hs=1,
+         price=3000, cur="KRW", src="추정", shop=NAVER, url=naver("MG90S 서보모터"), kind="검색",
+         alt=f"알리: {ali('MG90S servo')}",
+         memo="head_pitch·yaw·roll + 부리. 2.2 kgf·cm@6V, 13.4 g. SG90(플라스틱 기어)은 낙하에 약함"),
+    dict(cat="구동", name="알루미늄 서보 혼", spec="25T 알루미늄 원형 혼 (MG996R용)", h=11, hs=0,
+         price=1500, cur="KRW", src="추정", shop=ALI, url=ali("25T aluminum servo horn"), kind="검색", alt="",
+         memo="동봉 플라스틱 혼은 하중에 약함"),
+    dict(cat="구동", name="서보 연장선", spec="서보 연장 케이블 15–30 cm", h=15, hs=0,
+         price=300, cur="KRW", src="추정", shop=ALI, url=ali("servo extension cable 30cm"), kind="검색", alt="",
+         memo="다리 끝 서보용"),
+    dict(cat="컴퓨팅", name="메인 컴퓨터", spec="Raspberry Pi Zero 2 W (헤더 포함)", h=1, hs=0,
+         price=30300, cur="KRW", src="확인", shop="에듀이노",
+         url="https://eduino.kr/product/라즈베리파이-제로-2-w-raspberry-pi-zero-2-w/2949/{$url}", kind="상품",
+         alt=f"네이버: {naver('라즈베리파이 제로 2W')}",
+         memo="⚠ 2026-10-29 에듀이노 품절. 대안 Pi 4 1–2GB (1.5배 몸통에 들어감)"),
+    dict(cat="컴퓨팅", name="microSD", spec="32GB A1", h=1, hs=0,
+         price=6000, cur="KRW", src="추정", shop=NAVER, url=naver("microSD 32GB A1"), kind="검색", alt="", memo=""),
+    dict(cat="센서", name="IMU", spec="BNO085 모듈 (게임 회전 벡터)", h=1, hs=0,
+         price=12000, cur="KRW", src="추정", shop=ALI, url=ali("BNO085 module"), kind="검색",
+         alt=f"BNO055(Open Duck 사용): {ali('BNO055 module')}", memo="쿼터니언+자이로를 칩이 계산"),
+    dict(cat="센서", name="위치 피드백 ADC", spec="ADS1115 16비트 4채널 모듈", h=4, hs=1,
+         price=3000, cur="KRW", src="추정", shop=NAVER, url=naver("ADS1115 모듈"), kind="검색",
+         alt=f"알리: {ali('ADS1115 module')}", memo="4개 × 4ch = 16ch, 주소 0x48–0x4B"),
+    dict(cat="센서", name="피드백 배선", spec="AWG30 랩핑 와이어 + 분압 저항 10kΩ 키트", h=1, hs=0,
+         price=5000, cur="KRW", src="추정", shop=NAVER, url=naver("AWG30 랩핑 와이어"), kind="검색", alt="",
+         memo="서보 가변저항 와이퍼 배선 개조용"),
+    dict(cat="제어·배선", name="PWM 드라이버", spec="PCA9685 16채널 서보 드라이버", h=1, hs=0,
+         price=4000, cur="KRW", src="추정", shop=NAVER, url=naver("PCA9685 서보 드라이버"), kind="검색",
+         alt=f"알리: {ali('PCA9685 servo driver')}", memo="I²C, 하드웨어 PWM"),
+    dict(cat="제어·배선", name="만능기판·헤더", spec="만능기판 + 핀헤더 + 전선", h=1, hs=0,
+         price=5000, cur="KRW", src="추정", shop=NAVER, url=naver("만능기판 양면"), kind="검색", alt="",
+         memo="전원 분배·ADC 배선판"),
+    dict(cat="전원", name="배터리", spec="2S LiPo 7.4V 2200mAh (XT60)", h=1, hs=0,
+         price=20000, cur="KRW", src="추정", shop=NAVER, url=naver("2S 리포 2200mAh"), kind="검색", alt="",
+         memo="대안: 2S LiFePO4(최대 7.2V)는 MG996R 직결 가능"),
+    dict(cat="전원", name="충전기", spec="2S/3S 밸런스 충전기", h=1, hs=0,
+         price=10000, cur="KRW", src="추정", shop=NAVER, url=naver("리포 밸런스 충전기 2S 3S"), kind="검색", alt="",
+         memo="보유 시 0원"),
+    dict(cat="전원", name="서보 전원", spec="6V 10A 이상 UBEC", h=1, hs=0,
+         price=12000, cur="KRW", src="추정", shop=NAVER, url=naver("UBEC 6V 10A"), kind="검색", alt="",
+         memo="MG996R 정지전류 2.5A@6V × 11 → 여유 필요"),
+    dict(cat="전원", name="머리 서보·Pi 전원", spec="MP1584EN 3A 강압 모듈", h=2, hs=0,
+         price=1500, cur="KRW", src="추정", shop=NAVER, url=naver("MP1584EN 강압 모듈"), kind="검색", alt="",
+         memo="Pi 5.1V 1개, MG90S 5–6V 1개 (서보 레일과 분리)"),
+    dict(cat="전원", name="전해 커패시터", spec="2200µF 16V", h=2, hs=0,
+         price=500, cur="KRW", src="추정", shop=NAVER, url=naver("2200uF 16V 콘덴서"), kind="검색", alt="",
+         memo="서보 레일 전압 강하 완화"),
+    dict(cat="전원", name="스위치·퓨즈·커넥터", spec="로커스위치 10A, 블레이드 퓨즈 15A+홀더, XT60", h=1, hs=0,
+         price=4000, cur="KRW", src="추정", shop=NAVER, url=naver("블레이드 퓨즈 홀더 15A"), kind="검색", alt="",
+         memo=""),
+    dict(cat="기구", name="관절 지지 베어링", spec="623ZZ 3×10×4 mm", h=16, hs=4,
+         price=300, cur="KRW", src="추정", shop=ALI, url=ali("623ZZ bearing"), kind="검색",
+         alt=f"네이버: {naver('623ZZ 베어링')}", memo="서보 반대편 축 지지"),
+    dict(cat="기구", name="볼트 키트", spec="M2/M3 볼트·너트·인서트 키트", h=1, hs=0,
+         price=8000, cur="KRW", src="추정", shop=ALI, url=ali("M3 screw kit heat insert"), kind="검색", alt="",
+         memo="보유 시 0원"),
+    dict(cat="출력소재", name="경질 필라멘트", spec="PETG 1 kg", h=1, hs=0,
+         price=15000, cur="KRW", src="추정", shop=NAVER, url=naver("PETG 필라멘트 1kg"), kind="검색", alt="",
+         memo="1.5배 확대로 부피 약 3배 → 1 kg 거의 다 사용"),
+    dict(cat="출력소재", name="연질 필라멘트", spec="TPU 95A 0.5 kg", h=1, hs=0,
+         price=18000, cur="KRW", src="추정", shop=NAVER, url=naver("TPU 95A 필라멘트"), kind="검색", alt="",
+         memo="발바닥"),
+]
+
 VERSIONS = [
-    ("오리지널", "o", "os",
-     "Pollen Microduck 하드웨어 그대로: 15축(부리 포함), ToF·카메라·오디오, U2D2, 게임패드, 예비 부품."),
-    ("저렴한 버전", "c", None,
-     "걷기·일어서기·구르기에 필요한 것만: 14축(부리 고정), 센서·오디오·게임패드 제외, CP2102로 U2D2 대체, 예비 없음."),
+    ("오리지널", ITEMS, "o", "os",
+     "다이나믹셀 · Pollen Microduck 하드웨어 그대로: 15축(부리 포함), ToF·카메라·오디오, U2D2, 게임패드, 예비 부품."),
+    ("저렴한 버전", ITEMS, "c", None,
+     "다이나믹셀 · 걷기에 필요한 것만: 14축(부리 고정), 센서·오디오·게임패드 제외, CP2102로 U2D2 대체, 예비 없음."),
+    ("일반 서보 버전", ITEMS_HOBBY, "h", "hs",
+     "MG996R ×11 + MG90S ×4, 1.5배 확대, Raspberry Pi + PCA9685 + ADS1115 위치 피드백 개조. plan-hobby-servo.md 참고."),
 ]
 HEAD = ["분류", "품목", "규격/모델", "수량", "예비", "총수량", "단가", "통화", "단가(원)", "합계(원)",
         "가격근거", "구매처", "구매 링크", "링크유형", "대안 구매처", "메모"]
@@ -194,6 +269,13 @@ def write_csv() -> None:
         for it in ITEMS:
             w.writerow([it["cat"], it["name"], it["spec"], it["o"], it["os"], it["c"], it["price"], it["cur"],
                         it["src"], it["shop"], it["url"], it["kind"], it["alt"], it["memo"]])
+    with (HERE / "BOM_hobby_servo.csv").open("w", newline="", encoding="utf-8-sig") as f:
+        w = csv.writer(f)
+        w.writerow(["분류", "품목", "규격/모델", "수량", "예비", "단가", "통화", "가격근거", "구매처", "구매링크",
+                    "링크유형", "대안", "메모"])
+        for it in ITEMS_HOBBY:
+            w.writerow([it["cat"], it["name"], it["spec"], it["h"], it["hs"], it["price"], it["cur"], it["src"],
+                        it["shop"], it["url"], it["kind"], it["alt"], it["memo"]])
 
 
 def header(ws, row: int) -> None:
@@ -204,7 +286,7 @@ def header(ws, row: int) -> None:
         c.alignment = Alignment(horizontal="center", vertical="center")
 
 
-def version_sheet(wb, title: str, qk: str, sk: str | None, desc: str) -> dict:
+def version_sheet(wb, title: str, items: list, qk: str, sk: str | None, desc: str) -> dict:
     """한 구성의 BOM 시트. 환율·예비 토글은 '비교' 시트 셀을 참조한다."""
     ws = wb.create_sheet(title)
     ws["A1"] = f"Microduck 클론 BOM — {title}"
@@ -216,7 +298,7 @@ def version_sheet(wb, title: str, qk: str, sk: str | None, desc: str) -> dict:
     r0 = 5
     header(ws, r0)
     r = r0
-    for it in ITEMS:
+    for it in items:
         q = it[qk]
         if q == 0:
             continue
@@ -263,7 +345,7 @@ def version_sheet(wb, title: str, qk: str, sk: str | None, desc: str) -> dict:
 
 def compare_sheet(ws, refs: dict) -> None:
     ws.title = "비교"
-    ws["A1"] = "Microduck 클론 — 오리지널 vs 저렴한 버전"
+    ws["A1"] = "Microduck 클론 — 다이나믹셀(오리지널·저렴) vs 일반 서보"
     ws["A1"].font = Font(name="Arial", size=14, bold=True)
     ws["A2"] = "범례: 노란 칸·파란 글씨 = 입력값. 각 버전 시트의 수량·단가(파란 글씨)도 수정 가능."
     ws["A2"].font = F_NOTE
@@ -272,60 +354,54 @@ def compare_sheet(ws, refs: dict) -> None:
     ws["C4"].comment = Comment("가정값. 결제 시점 환율로 바꾸세요. USD 항목에만 적용.", "build_bom.py")
     ws["A5"] = "예비 포함 (1=포함, 0=제외)"
     ws["C5"] = 1
-    ws["C5"].comment = Comment("오리지널 버전의 예비 부품에만 영향 (저렴한 버전은 예비 0).", "build_bom.py")
+    ws["C5"].comment = Comment("오리지널·일반 서보 버전의 예비 부품에 적용 (저렴한 버전은 예비 0).", "build_bom.py")
     for c in ("C4", "C5"):
         ws[c].font = F_BLUE
         ws[c].fill = YELLOW
     for c in ("A4", "A5"):
         ws[c].font = F_BASE
 
-    ws["A7"] = "분류"
-    ws["B7"] = "오리지널"
-    ws["C7"] = "저렴한 버전"
-    ws["D7"] = "차이"
-    for c in ("A7", "B7", "C7", "D7"):
-        ws[c].font = Font(name="Arial", size=10, bold=True, color="FFFFFF")
-        ws[c].fill = HDR
-    cats = list(dict.fromkeys(it["cat"] for it in ITEMS))
-    o, c = refs["오리지널"], refs["저렴한 버전"]
+    titles = [v[0] for v in VERSIONS]
+    heads = ["분류"] + titles
+    for i, h in enumerate(heads, 1):
+        cell = ws.cell(7, i, h)
+        cell.font = Font(name="Arial", size=10, bold=True, color="FFFFFF")
+        cell.fill = HDR
+    cats = list(dict.fromkeys(it["cat"] for v in VERSIONS for it in v[1]))
     r = 8
     for cat in cats:
         ws.cell(r, 1, cat).font = F_BASE
-        ws.cell(r, 2, f'=SUMIFS({o["rows"]},{o["cats"]},A{r})')
-        ws.cell(r, 3, f'=SUMIFS({c["rows"]},{c["cats"]},A{r})')
-        ws.cell(r, 4, f"=B{r}-C{r}")
-        for col in (2, 3, 4):
-            ws.cell(r, col).number_format = "₩#,##0"
-            ws.cell(r, col).font = F_BASE
+        for j, t in enumerate(titles, 2):
+            ref = refs[t]
+            cell = ws.cell(r, j, f'=SUMIFS({ref["rows"]},{ref["cats"]},A{r})')
+            cell.number_format = "₩#,##0"
+            cell.font = F_BASE
         r += 1
     ws.cell(r, 1, "합계").font = F_BOLD
-    for col, ref in ((2, o["total"]), (3, c["total"])):
-        cell = ws.cell(r, col, f"={ref}")
+    for j, t in enumerate(titles, 2):
+        cell = ws.cell(r, j, f"={refs[t]['total']}")
         cell.font = F_BOLD
         cell.number_format = "₩#,##0"
-    d = ws.cell(r, 4, f"=B{r}-C{r}")
-    d.font = F_BOLD
-    d.number_format = "₩#,##0"
     r += 1
-    ws.cell(r, 1, "서보 비용").font = F_BASE
-    for col, ref in ((2, o["servo"]), (3, c["servo"])):
-        cell = ws.cell(r, col, f"={ref}")
+    ws.cell(r, 1, "주력 서보 비용 (첫 행)").font = F_BASE
+    for j, t in enumerate(titles, 2):
+        cell = ws.cell(r, j, f"={refs[t]['servo']}")
         cell.number_format = "₩#,##0"
         cell.font = F_BASE
     r += 2
 
     diffs = [
-        ("서보", "XL330 15개 + 예비 1", "XL330 14개 (부리 고정), 예비 없음"),
-        ("서보 인터페이스", "U2D2 + 전원 허브", "CP2102 USB-TTL + 반이중 버퍼 IC"),
-        ("센서", "몸통 IMU + ToF + 카메라", "몸통 IMU만"),
-        ("오디오", "TLV320AIC3104 코덱 + 스피커 + 마이크", "없음"),
-        ("조종", "Xbox 무선 컨트롤러", "노트북 UDP 패드"),
-        ("기구", "카본 보강판, 인서트 너트, XT30", "출력 보강, 탭볼트 직결, 리드선 직결"),
-        ("기능", "걷기·일어서기·구르기·땅집기(부리)·공차기·영상·소리", "걷기·일어서기·구르기·공차기 (부리·영상·소리 없음)"),
-        ("소프트웨어", "Pollen 런타임 그대로", "부리 ID 34 제외하도록 런타임 수정 필요"),
-        ("업그레이드", "—", "나중에 서보 1개 + 센서 추가하면 오리지널로 전환 가능 (기구 동일)"),
+        ("서보", "XL330 15개 + 예비 1", "XL330 14개 (부리 고정)", "MG996R 11 + MG90S 4 (+예비)"),
+        ("크기·무게", "25 cm, 약 0.74 kg", "25 cm, 약 0.74 kg", "약 37 cm, 1.4–1.7 kg (추정)"),
+        ("위치 피드백", "서보 내장", "서보 내장", "가변저항 배선 개조 + ADS1115"),
+        ("제어기", "Radxa Zero 3W + UART 버스", "Radxa Zero 3W + UART 버스", "Pi Zero 2W + PCA9685 (I²C)"),
+        ("센서", "IMU + ToF + 카메라", "IMU만", "BNO085 IMU만"),
+        ("오디오·조종", "코덱·스피커·마이크, Xbox 패드", "없음, UDP 패드", "없음, UDP 패드"),
+        ("CAD", "Pollen 형상 그대로", "Pollen 형상 그대로", "1.5배 새로 설계"),
+        ("정책·런타임", "Pollen 것 그대로", "부리 제외 패치", "새 액추에이터 모델로 재학습, 파이썬 런타임 새로 작성"),
+        ("난이도", "중", "중", "상 (sim2real 어려움)"),
     ]
-    for i, h in enumerate(["항목", "오리지널", "저렴한 버전"], 1):
+    for i, h in enumerate(["항목"] + titles, 1):
         cell = ws.cell(r, i, h)
         cell.font = Font(name="Arial", size=10, bold=True, color="FFFFFF")
         cell.fill = HDR
@@ -336,9 +412,9 @@ def compare_sheet(ws, refs: dict) -> None:
             cell.font = F_BASE
             cell.alignment = Alignment(wrap_text=True, vertical="top")
     r += 2
-    ws.cell(r, 1, "⚠ Radxa Zero 3W: 2026-10-29 기준 주요 판매처 품절 (두 버전 공통).").font = F_BOLD
+    ws.cell(r, 1, "⚠ 2026-10-29 기준 Radxa Zero 3W(다이나믹셀 버전)·Pi Zero 2W(일반 서보 버전) 모두 일부 판매처 품절.").font = F_BOLD
     ws.cell(r + 1, 1, "가격근거 '확인' = 판매 페이지 정가 확인, '추정' = 시세 추정. 배송비 별도.").font = F_NOTE
-    for col, w in zip("ABCD", (18, 46, 46, 14)):
+    for col, w in zip("ABCD", (18, 40, 40, 44)):
         ws.column_dimensions[col].width = w
 
 
@@ -369,7 +445,7 @@ def parts_sheet(wb) -> None:
 def write_xlsx() -> None:
     wb = Workbook()
     cmp_ws = wb.active
-    refs = {title: version_sheet(wb, title, qk, sk, desc) for title, qk, sk, desc in VERSIONS}
+    refs = {title: version_sheet(wb, title, items, qk, sk, desc) for title, items, qk, sk, desc in VERSIONS}
     compare_sheet(cmp_ws, refs)
     parts_sheet(wb)
     wb.save(HERE / "BOM.xlsx")

@@ -14,6 +14,7 @@ uv run --with mujoco python -m mujoco.viewer --mjcf cad/reference/microduck/scen
 # 점검
 uv run --with mujoco --with trimesh python sim/check_model.py
 uv run --with mujoco --with trimesh python sim/check_model.py --key SIT --vin 5.0
+uv run --with mujoco --with trimesh python sim/check_model.py --servo mg90s --vin 6.0   # 일반 서보 여유율
 uv run --with mujoco --with trimesh python sim/check_model.py cad/redesign/mjcf/scene_allcollisions.xml
 
 # 렌더 (헤드리스 서버는 MUJOCO_GL=osmesa 또는 egl)
