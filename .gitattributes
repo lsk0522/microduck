@@ -1,0 +1,9 @@
+# .bat은 CRLF 그대로 저장 (GitHub raw로 받아도 CRLF 유지 → goto/call :label 안전)
+*.bat -text
+*.cmd -text
+*.sh  text eol=lf
+*.py  text eol=lf
+*.md  text eol=lf
+*.xlsx binary
+*.stl  binary
+*.dxf  text

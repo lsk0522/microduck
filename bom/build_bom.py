@@ -453,6 +453,10 @@ def write_xlsx() -> None:
     refs = {title: version_sheet(wb, title, items, qk, sk, desc) for title, items, qk, sk, desc in VERSIONS}
     compare_sheet(cmp_ws, refs)
     parts_sheet(wb)
+    # Excel이 열 때 모든 수식을 다시 계산하도록 (openpyxl은 계산값을 저장하지 않음)
+    from openpyxl.workbook.properties import CalcProperties
+
+    wb.calculation = CalcProperties(fullCalcOnLoad=True)
     wb.save(HERE / "BOM.xlsx")
 
 

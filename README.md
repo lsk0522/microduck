@@ -33,6 +33,7 @@ Pollen Robotics / Hugging Face의 25 cm 2족 오리 로봇 **Microduck**을 개�
 | 자작 HAT 보드 계획 | [`hardware/hat/`](hardware/hat/) |
 | 모델 점검·렌더 스크립트 | [`sim/`](sim/) |
 | 학습 명령·실험 기록 | [`training/`](training/) |
+| Windows 실행 파일(.bat) 목록 | [`bat/README.md`](bat/README.md) |
 
 ## 현재 상태 (2026-10-29)
 
@@ -67,20 +68,32 @@ Pollen Robotics / Hugging Face의 25 cm 2족 오리 로봇 **Microduck**을 개�
 4. 서보 1–2개만 먼저 사서 실측·특성 시험 (트랙 A: 발열 / 트랙 B: 가변저항 개조)
 5. Fusion에서 관절 스켈레톤 → 발·발목부터 설계 시작
 
-## 빠른 시작
+## 설치와 실행 (Windows)
+
+1. [`install_microduck_to_desktop.bat`](install_microduck_to_desktop.bat)을 내려받아 더블클릭
+   → **바탕화면에 `Microduck` 폴더**가 생기고 (git clone), Python 환경 설치, 바탕화면 바로가기 `Microduck - START` 생성.
+   Git이 없으면 winget으로 설치를 시도하고, 그것도 안 되면 ZIP으로 받는다.
+2. 이후엔 **`START_HERE.bat`** (또는 바로가기) 하나로 모든 기능을 메뉴에서 실행. 목록: [`bat/README.md`](bat/README.md)
+
+```
+Desktop\Microduck\
+├── START_HERE.bat          ← 메인 메뉴
+├── bat\                    ← 기능별 .bat (00 setup ~ 10 train)
+├── (이 저장소의 모든 폴더: bom, cad, sim, docs …)
+├── external\               ← 메뉴 8: 참고 저장소 (git 제외)
+├── logs\  renders\         ← 점검 결과, 렌더 이미지 (git 제외)
+└── .venv\                  ← Python 환경 (git 제외)
+```
+
+### 명령줄로 (Linux / macOS / Windows 공통)
 
 ```bash
-# 원본 모델 보기
-uv run --with mujoco python -m mujoco.viewer --mjcf cad/reference/microduck/scene.xml
-
-# 질량·토크 점검 (서보 바꿔 보기: --servo xl330|mg90s|sg90|mg996r --vin <전압>)
-uv run --with mujoco --with trimesh python sim/check_model.py
-uv run --with mujoco --with trimesh python sim/check_model.py --servo mg90s --vin 6.0
-
-# 데이터 재생성
-uv run --with openpyxl python bom/build_bom.py                                   # BOM
-uv run --with trimesh --with shapely --with networkx --with ezdxf --with matplotlib python cad/tools/plates_to_dxf.py   # 판재 DXF
-uv run --with mujoco python cad/tools/extract_joint_frames.py [--scale 1.5 --out ...]                 # 관절 프레임
+uv sync                                                        # 환경 설치 (pyproject.toml)
+uv run python -m mujoco.viewer --mjcf=cad/reference/microduck/scene.xml
+uv run python sim/check_model.py --servo mg90s --vin 6.0       # xl330 | mg90s | sg90 | mg996r
+uv run python bom/build_bom.py
+uv run python cad/tools/plates_to_dxf.py
+uv run python cad/tools/extract_joint_frames.py --scale 1.5 --out cad/hobby_servo/reference_1.5x
 ```
 
 ## 폴더 구조
@@ -88,6 +101,10 @@ uv run --with mujoco python cad/tools/extract_joint_frames.py [--scale 1.5 --out
 ```
 microduck/
 ├── README.md                 ← 이 문서 (전체 허브)
+├── START_HERE.bat            ← Windows 메인 메뉴
+├── install_microduck_to_desktop.bat ← 바탕화면 설치
+├── bat/                      ← 기능별 .bat
+├── pyproject.toml, uv.lock   ← Python 환경 정의
 ├── plan.md                   ← 트랙 A 다이나믹셀 계획
 ├── plan-hobby-servo.md       ← 트랙 B 일반 서보 계획
 ├── bom/                      ← build_bom.py(원본 데이터) → BOM.xlsx·BOM.csv·BOM_hobby_servo.csv

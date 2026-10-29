@@ -1,0 +1,21 @@
+[project]
+name = "microduck-tools"
+version = "0.1.0"
+description = "Microduck clone: BOM, CAD reference tools, model checks"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "mujoco>=3.2",
+    "trimesh>=4.0",
+    "shapely>=2.0",
+    "networkx>=3.0",
+    "rtree>=1.0",
+    "ezdxf>=1.1",
+    "matplotlib>=3.7",
+    "openpyxl>=3.1",
+    "pillow>=10.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[tool.uv]
+package = false

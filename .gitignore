@@ -8,3 +8,5 @@ logs/
 outputs/
 ~$*.xlsx
 .DS_Store
+external/
+renders/
