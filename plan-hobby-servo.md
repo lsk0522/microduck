@@ -115,6 +115,25 @@ RL 정책은 관절 각도·속도를 관측한다. 일반 서보는 이 값을 
 
 ## 4. 기구 설계
 
+**결론: 기구는 전부 새로 설계해야 한다.** MG996R·MG90S로 만든 공개 오리(BDX 계열) 설계는 찾지 못했다(2026-10-29 조사).
+대신 출발점으로 쓸 수 있는 공개 설계가 있다.
+
+| 후보 | 서보 | 크기 | 공개 자료 | 활용법 |
+|---|---|---|---|---|
+| **Open Duck Mini v2** | Feetech STS3215 ×14 (45.2×24.7×35 mm, 55 g) | 약 42 cm | 편집 가능한 Onshape CAD, BOM, 출력·조립 가이드, 런타임, RL 학습 코드 | **1순위.** 서보 무게(55 g)가 MG996R과 같고 크기도 비슷해 다리 구조를 거의 그대로 쓸 수 있다. 서보 포켓만 MG996R로 바꾸고 반대편 베어링 지지 추가 |
+| rubieluo BDX 클론 | Waveshare ST3215 | 미기재 | SolidWorks→URDF, MuJoCo XML | 다리 5자유도 배치 참고 |
+| MG996R 알루미늄 브라켓 휴머노이드 키트 | MG996R | — | 상용 키트 | 다리 뼈대를 빨리 만들 때. 단 다리당 3자유도라 hip_yaw·hip_roll 추가 필요 |
+| Pollen Microduck (`cad/reference/`) | XL330 | 25 cm | STL·MJCF | 오리 외형(머리·몸통 셸)을 1.5배로 키워 씌울 때 |
+
+- Open Duck Mini v2: https://github.com/apirrone/Open_Duck_Mini (저장소 Apache-2.0, **CAD 파일 라이선스는 별도 명시가 없어 확인 필요**)
+- rubieluo: https://github.com/rubieluo/bipedal_cad
+- STS3215는 MG996R보다 토크가 약 1.5배(16.5 vs 11 kgf·cm @6 V)라, 같은 다리를 쓰면 토크 여유가 줄어든다.
+  다리 링크를 10–15 % 짧게 하거나 몸통을 가볍게 해서 보정한다.
+
+추천 조합: **Open Duck Mini v2의 다리 기구 + Microduck 외형 셸(1.5배) + MG996R/MG90S 포켓 재설계.**
+
+### 4.1 직접 설계 순서
+
 1. 원본 MJCF/STL(`cad/reference/`)에서 **관절 축 위치와 링크 비율**을 뽑아 1.5배로 키운다.
 2. 서보 포켓은 MG996R(40.7×19.7×42.9 mm)·MG90S(22.8×12.2×28.5 mm) 실측 기준으로 새로 그린다.
    호환품마다 크기가 조금씩 다르므로 **실물을 사서 캘리퍼로 잰 뒤** 설계한다.
