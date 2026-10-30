@@ -15,6 +15,7 @@
 | 8 | `08_get_reference_repos.bat` | 참고 저장소를 `external\`로 받기: microduck_rl, microduck 런타임, Open Duck Mini | Git |
 | 9 | `09_policy_sim.bat` | 학습된 걷기 정책(.onnx)을 키보드로 조종 (시뮬레이션) | 8, **Windows에서는 실험적** |
 | 10 | `10_train_walk.bat` | 걷기 정책 학습 (로컬 GPU 또는 Hugging Face Jobs) | 8, NVIDIA GPU, **Ubuntu/WSL2 권장** |
+| 11 | `11_assembly_guide.bat` | 조립 가이드 PDF 다시 만들기 (선택: 구멍·나사 재계산) | 0, 인터넷(처음 Chromium) |
 
 - `_env.bat`은 공용 설정이라 직접 실행하지 않는다.
 - 9·10은 Pollen의 `microduck_rl`이 Linux + CUDA 기준이라 Windows에서 설치가 실패할 수 있다.

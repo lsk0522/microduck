@@ -1,0 +1,5783 @@
+{
+ "screws": [
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.06,
+   "Lmin": 6.56,
+   "Lmax": 9.66,
+   "clamp": 4.06,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "right_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    2,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    -18.31,
+    26.5
+   ],
+   "tip_pt": [
+    26.0,
+    -10.31,
+    26.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.06,
+   "Lmin": 6.56,
+   "Lmax": 9.66,
+   "clamp": 4.06,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "right_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    2,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.0,
+    -18.31,
+    32.5
+   ],
+   "tip_pt": [
+    32.0,
+    -10.31,
+    32.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.06,
+   "Lmin": 6.56,
+   "Lmax": 9.66,
+   "clamp": 4.06,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "right_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    2,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.0,
+    -18.31,
+    32.5
+   ],
+   "tip_pt": [
+    20.0,
+    -10.31,
+    32.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.06,
+   "Lmin": 6.56,
+   "Lmax": 9.66,
+   "clamp": 4.06,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "right_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    2,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    -18.31,
+    38.5
+   ],
+   "tip_pt": [
+    26.0,
+    -10.31,
+    38.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.3,
+   "Lmin": 3.8,
+   "Lmax": 8.5,
+   "clamp": 1.3,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "banana_pcb_locker",
+    "power_support"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    4,
+    10
+   ],
+   "cbore": [],
+   "clear": [
+    2.18
+   ],
+   "tap": [
+    1.64
+   ],
+   "head_pt": [
+    -32.05,
+    -25.0,
+    36.08
+   ],
+   "tip_pt": [
+    -27.05,
+    -25.0,
+    36.08
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.3,
+   "Lmin": 3.8,
+   "Lmax": 8.5,
+   "clamp": 1.3,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "banana_pcb_locker",
+    "power_support"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    4,
+    10
+   ],
+   "cbore": [],
+   "clear": [
+    2.18
+   ],
+   "tap": [
+    1.64
+   ],
+   "head_pt": [
+    -32.05,
+    25.0,
+    36.08
+   ],
+   "tip_pt": [
+    -27.05,
+    25.0,
+    36.08
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "trunk_base",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    6,
+    14
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    -25.5,
+    -1.05
+   ],
+   "tip_pt": [
+    -16.5,
+    -25.5,
+    4.95
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.97,
+   "Lmin": 5.97,
+   "Lmax": 14.47,
+   "clamp": 3.47,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "power_support",
+    "trunk_base",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    6,
+    10,
+    14
+   ],
+   "cbore": [],
+   "clear": [
+    2.5,
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    -9.5,
+    -3.32
+   ],
+   "tip_pt": [
+    -16.5,
+    -9.5,
+    4.68
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.63,
+   "Lmin": 4.63,
+   "Lmax": 13.13,
+   "clamp": 2.13,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "power_support",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    10,
+    14
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    -9.5,
+    25.08
+   ],
+   "tip_pt": [
+    -16.5,
+    -9.5,
+    19.08
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.97,
+   "Lmin": 5.97,
+   "Lmax": 14.47,
+   "clamp": 3.47,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "power_support",
+    "trunk_base",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    6,
+    8,
+    10
+   ],
+   "cbore": [],
+   "clear": [
+    2.5,
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    9.5,
+    -3.32
+   ],
+   "tip_pt": [
+    -16.5,
+    9.5,
+    4.68
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.63,
+   "Lmin": 4.63,
+   "Lmax": 13.13,
+   "clamp": 2.13,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "power_support",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    8,
+    10
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    9.5,
+    25.08
+   ],
+   "tip_pt": [
+    -16.5,
+    9.5,
+    19.08
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "trunk_base",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    6,
+    8
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -16.5,
+    25.5,
+    -1.05
+   ],
+   "tip_pt": [
+    -16.5,
+    25.5,
+    4.95
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "trunk_base",
+    "yaw2roll"
+   ],
+   "geoms": [
+    8,
+    20
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    0.0,
+    17.5,
+    -6.15
+   ],
+   "tip_pt": [
+    0.0,
+    17.5,
+    -0.15
+   ],
+   "dir": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "trunk_base",
+    "yaw2roll"
+   ],
+   "geoms": [
+    8,
+    20
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    6.0,
+    23.5,
+    -6.15
+   ],
+   "tip_pt": [
+    6.0,
+    23.5,
+    -0.15
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "trunk_base",
+    "yaw2roll"
+   ],
+   "geoms": [
+    8,
+    20
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    6.0,
+    11.5,
+    -6.15
+   ],
+   "tip_pt": [
+    6.0,
+    11.5,
+    -0.15
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "trunk_base",
+    "yaw2roll"
+   ],
+   "geoms": [
+    8,
+    20
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    12.0,
+    17.5,
+    -6.15
+   ],
+   "tip_pt": [
+    12.0,
+    17.5,
+    -0.15
+   ],
+   "dir": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.56,
+   "Lmin": 4.56,
+   "Lmax": 13.06,
+   "clamp": 2.06,
+   "head": "SHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "left_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    8,
+    16
+   ],
+   "cbore": [
+    5.09
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    13.5,
+    25.5,
+    25.01
+   ],
+   "tip_pt": [
+    13.5,
+    25.5,
+    19.01
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "left_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "trunk_base"
+   ],
+   "geoms": [
+    14,
+    106
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    0.0,
+    -17.5,
+    -6.15
+   ],
+   "tip_pt": [
+    0.0,
+    -17.5,
+    -0.15
+   ],
+   "dir": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "trunk_base"
+   ],
+   "geoms": [
+    14,
+    106
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    6.0,
+    -11.5,
+    -6.15
+   ],
+   "tip_pt": [
+    6.0,
+    -11.5,
+    -0.15
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "trunk_base"
+   ],
+   "geoms": [
+    14,
+    106
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    6.0,
+    -23.5,
+    -6.15
+   ],
+   "tip_pt": [
+    6.0,
+    -23.5,
+    -0.15
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.2,
+   "Lmin": 5.7,
+   "Lmax": 8.7,
+   "clamp": 3.2,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "trunk_base"
+   ],
+   "geoms": [
+    14,
+    106
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    12.0,
+    -17.5,
+    -6.15
+   ],
+   "tip_pt": [
+    12.0,
+    -17.5,
+    -0.15
+   ],
+   "dir": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "right_hip_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.45,
+   "Lmin": 5.95,
+   "Lmax": 9.05,
+   "clamp": 3.45,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "left_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    16,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    18.0,
+    26.42
+   ],
+   "tip_pt": [
+    26.0,
+    12.0,
+    26.42
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.45,
+   "Lmin": 5.95,
+   "Lmax": 9.05,
+   "clamp": 3.45,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "left_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    16,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.0,
+    18.0,
+    32.42
+   ],
+   "tip_pt": [
+    32.0,
+    12.0,
+    32.42
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.45,
+   "Lmin": 5.95,
+   "Lmax": 9.05,
+   "clamp": 3.45,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "left_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    16,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.0,
+    18.0,
+    32.42
+   ],
+   "tip_pt": [
+    20.0,
+    12.0,
+    32.42
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.45,
+   "Lmin": 5.95,
+   "Lmax": 9.05,
+   "clamp": 3.45,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "left_shell",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "trunk_base"
+   ],
+   "geoms": [
+    16,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    18.0,
+    38.42
+   ],
+   "tip_pt": [
+    26.0,
+    12.0,
+    38.42
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 4,
+   "need": 4.8,
+   "Lmin": 3.7,
+   "Lmax": 4.4,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bearing_roll",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    20,
+    26
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.05
+   ],
+   "head_pt": [
+    18.55,
+    26.5,
+    -5.0
+   ],
+   "tip_pt": [
+    14.55,
+    26.5,
+    -5.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 4,
+   "need": 4.8,
+   "Lmin": 3.7,
+   "Lmax": 4.4,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bearing_roll",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    20,
+    26
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.05
+   ],
+   "head_pt": [
+    18.55,
+    8.5,
+    -5.0
+   ],
+   "tip_pt": [
+    14.55,
+    8.5,
+    -5.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.3,
+   "Lmin": 3.3,
+   "Lmax": 11.8,
+   "clamp": 0.8,
+   "head": "SHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    20,
+    22
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -6.25,
+    9.5,
+    -10.0
+   ],
+   "tip_pt": [
+    -0.25,
+    9.5,
+    -10.0
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.3,
+   "Lmin": 3.3,
+   "Lmax": 11.8,
+   "clamp": 0.8,
+   "head": "SHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    20,
+    22
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -6.25,
+    25.5,
+    -10.0
+   ],
+   "tip_pt": [
+    -0.25,
+    25.5,
+    -10.0
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    30
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    17.5,
+    -23.5
+   ],
+   "tip_pt": [
+    17.45,
+    17.5,
+    -23.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    30
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    23.5,
+    -17.5
+   ],
+   "tip_pt": [
+    17.45,
+    23.5,
+    -17.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    30
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    11.5,
+    -17.5
+   ],
+   "tip_pt": [
+    17.45,
+    11.5,
+    -17.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    30
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    17.5,
+    -11.5
+   ],
+   "tip_pt": [
+    17.45,
+    17.5,
+    -11.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "bearing_roll",
+    "xl330"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    26
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.55,
+    25.5,
+    -40.0
+   ],
+   "tip_pt": [
+    12.55,
+    25.5,
+    -40.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "bearing_roll",
+    "xl330"
+   ],
+   "bodies": [
+    "yaw2roll"
+   ],
+   "geoms": [
+    22,
+    26
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.55,
+    9.5,
+    -40.0
+   ],
+   "tip_pt": [
+    12.55,
+    9.5,
+    -40.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "upper_leg_left"
+   ],
+   "geoms": [
+    30,
+    40
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    4.0,
+    37.55,
+    -23.5
+   ],
+   "tip_pt": [
+    4.0,
+    43.55,
+    -23.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "upper_leg_left"
+   ],
+   "geoms": [
+    30,
+    40
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    10.0,
+    37.55,
+    -17.5
+   ],
+   "tip_pt": [
+    10.0,
+    43.55,
+    -17.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "upper_leg_left"
+   ],
+   "geoms": [
+    30,
+    40
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -2.0,
+    37.55,
+    -17.5
+   ],
+   "tip_pt": [
+    -2.0,
+    43.55,
+    -17.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l",
+    "upper_leg_left"
+   ],
+   "geoms": [
+    30,
+    40
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    4.0,
+    37.55,
+    -11.5
+   ],
+   "tip_pt": [
+    4.0,
+    43.55,
+    -11.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_left"
+   ],
+   "geoms": [
+    34,
+    36
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -39.78,
+    42.45,
+    -17.0
+   ],
+   "tip_pt": [
+    -39.78,
+    48.45,
+    -17.0
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_knee"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_left"
+   ],
+   "geoms": [
+    34,
+    36
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -23.78,
+    42.45,
+    -17.0
+   ],
+   "tip_pt": [
+    -23.78,
+    48.45,
+    -17.0
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_knee"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_left"
+   ],
+   "geoms": [
+    36,
+    40
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -18.5,
+    42.45,
+    -9.5
+   ],
+   "tip_pt": [
+    -18.5,
+    48.45,
+    -9.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_left"
+   ],
+   "geoms": [
+    36,
+    40
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -18.5,
+    42.45,
+    -25.5
+   ],
+   "tip_pt": [
+    -18.5,
+    48.45,
+    -25.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.0,
+   "Lmin": 5.0,
+   "Lmax": 13.5,
+   "clamp": 2.5,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "leg",
+    "xl330"
+   ],
+   "bodies": [
+    "leg"
+   ],
+   "geoms": [
+    42,
+    44
+   ],
+   "cbore": [],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -23.78,
+    36.05,
+    -59.0
+   ],
+   "tip_pt": [
+    -23.78,
+    44.05,
+    -59.0
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.0,
+   "Lmin": 5.0,
+   "Lmax": 13.5,
+   "clamp": 2.5,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "leg",
+    "xl330"
+   ],
+   "bodies": [
+    "leg"
+   ],
+   "geoms": [
+    42,
+    44
+   ],
+   "cbore": [],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -39.78,
+    36.05,
+    -59.0
+   ],
+   "tip_pt": [
+    -39.78,
+    44.05,
+    -59.0
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.16,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_left",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_left",
+    "leg"
+   ],
+   "geoms": [
+    44,
+    52
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -31.78,
+    66.11,
+    -75.5
+   ],
+   "tip_pt": [
+    -31.78,
+    61.11,
+    -75.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.16,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_left",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_left",
+    "leg"
+   ],
+   "geoms": [
+    44,
+    52
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -25.78,
+    66.11,
+    -81.5
+   ],
+   "tip_pt": [
+    -25.78,
+    61.11,
+    -81.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.16,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_left",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_left",
+    "leg"
+   ],
+   "geoms": [
+    44,
+    52
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -37.78,
+    66.11,
+    -81.5
+   ],
+   "tip_pt": [
+    -37.78,
+    61.11,
+    -81.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.16,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_left",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_left",
+    "leg"
+   ],
+   "geoms": [
+    44,
+    52
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -31.78,
+    66.11,
+    -87.5
+   ],
+   "tip_pt": [
+    -31.78,
+    61.11,
+    -87.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "left_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.33,
+   "Lmin": 4.83,
+   "Lmax": 6.73,
+   "clamp": 2.33,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "ankle_left",
+    "foot_left"
+   ],
+   "bodies": [
+    "ankle_left"
+   ],
+   "geoms": [
+    48,
+    52
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    3.0,
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -14.28,
+    49.8,
+    -89.45
+   ],
+   "tip_pt": [
+    -14.28,
+    49.8,
+    -95.45
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    54,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    -13.55,
+    54.92
+   ],
+   "tip_pt": [
+    34.0,
+    -7.55,
+    54.92
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    56,
+    60
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    13.45,
+    54.92
+   ],
+   "tip_pt": [
+    34.0,
+    7.45,
+    54.92
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    54,
+    56
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    -13.55,
+    54.92
+   ],
+   "tip_pt": [
+    18.0,
+    -7.55,
+    54.92
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    56,
+    60
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    13.45,
+    54.92
+   ],
+   "tip_pt": [
+    18.0,
+    7.45,
+    54.92
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "neck_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    54,
+    58
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    -13.55,
+    59.92
+   ],
+   "tip_pt": [
+    34.0,
+    -7.55,
+    59.92
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    58,
+    60
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    13.45,
+    59.92
+   ],
+   "tip_pt": [
+    34.0,
+    7.45,
+    59.92
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    54,
+    58
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    -13.55,
+    59.92
+   ],
+   "tip_pt": [
+    18.0,
+    -7.55,
+    59.92
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.6,
+   "Lmin": 4.6,
+   "Lmax": 13.1,
+   "clamp": 2.1,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "neck",
+    "xl330"
+   ],
+   "bodies": [
+    "neck"
+   ],
+   "geoms": [
+    58,
+    60
+   ],
+   "cbore": [],
+   "clear": [
+    2.3
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    13.45,
+    59.92
+   ],
+   "tip_pt": [
+    18.0,
+    7.45,
+    59.92
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.8,
+   "Lmin": 5.3,
+   "Lmax": 8.3,
+   "clamp": 2.8,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    17.25,
+    76.42
+   ],
+   "tip_pt": [
+    26.0,
+    11.25,
+    76.42
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.8,
+   "Lmin": 5.3,
+   "Lmax": 8.3,
+   "clamp": 2.8,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.0,
+    17.25,
+    82.42
+   ],
+   "tip_pt": [
+    20.0,
+    11.25,
+    82.42
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.8,
+   "Lmin": 5.3,
+   "Lmax": 8.3,
+   "clamp": 2.8,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.0,
+    17.25,
+    82.42
+   ],
+   "tip_pt": [
+    32.0,
+    11.25,
+    82.42
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.8,
+   "Lmin": 5.3,
+   "Lmax": 8.3,
+   "clamp": 2.8,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    17.25,
+    88.42
+   ],
+   "tip_pt": [
+    26.0,
+    11.25,
+    88.42
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.3,
+   "Lmin": 5.8,
+   "Lmax": 8.9,
+   "clamp": 3.3,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    -17.55,
+    76.42
+   ],
+   "tip_pt": [
+    26.0,
+    -11.55,
+    76.42
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.3,
+   "Lmin": 5.8,
+   "Lmax": 8.9,
+   "clamp": 3.3,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.0,
+    -17.55,
+    82.42
+   ],
+   "tip_pt": [
+    20.0,
+    -11.55,
+    82.42
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.3,
+   "Lmin": 5.8,
+   "Lmax": 8.9,
+   "clamp": 3.3,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.0,
+    -17.55,
+    82.42
+   ],
+   "tip_pt": [
+    32.0,
+    -11.55,
+    82.42
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.3,
+   "Lmin": 5.8,
+   "Lmax": 8.9,
+   "clamp": 3.3,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck",
+    "neck_pitch"
+   ],
+   "geoms": [
+    58,
+    62
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    -17.55,
+    88.42
+   ],
+   "tip_pt": [
+    26.0,
+    -11.55,
+    88.42
+   ],
+   "dir": [
+    -0.0,
+    1.0,
+    -0.0
+   ],
+   "servo": [
+    "head_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.89,
+   "Lmin": 5.39,
+   "Lmax": 8.49,
+   "clamp": 2.89,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck_pitch",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    62,
+    68
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.0,
+    0.0,
+    98.17
+   ],
+   "tip_pt": [
+    32.0,
+    0.0,
+    104.17
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.89,
+   "Lmin": 5.39,
+   "Lmax": 8.49,
+   "clamp": 2.89,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck_pitch",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    62,
+    68
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.0,
+    0.0,
+    98.17
+   ],
+   "tip_pt": [
+    20.0,
+    0.0,
+    104.17
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.89,
+   "Lmin": 5.39,
+   "Lmax": 8.49,
+   "clamp": 2.89,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck_pitch",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    62,
+    68
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    -6.0,
+    98.17
+   ],
+   "tip_pt": [
+    26.0,
+    -6.0,
+    104.17
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.89,
+   "Lmin": 5.39,
+   "Lmax": 8.49,
+   "clamp": 2.89,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "neck_pitch",
+    "xl330"
+   ],
+   "bodies": [
+    "neck_pitch",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    62,
+    68
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.0,
+    6.0,
+    98.17
+   ],
+   "tip_pt": [
+    26.0,
+    6.0,
+    104.17
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 9.1,
+   "clamp": 3.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "jaw_soft",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    86
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    11.65,
+    0.0,
+    109.61
+   ],
+   "tip_pt": [
+    3.65,
+    0.0,
+    109.61
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "servo": [
+    "head_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 9.1,
+   "clamp": 3.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "jaw_soft",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    86
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    11.65,
+    6.0,
+    115.61
+   ],
+   "tip_pt": [
+    3.65,
+    6.0,
+    115.61
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "head_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 9.1,
+   "clamp": 3.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "jaw_soft",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    86
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    11.65,
+    0.0,
+    121.61
+   ],
+   "tip_pt": [
+    3.65,
+    0.0,
+    121.61
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "head_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 9.1,
+   "clamp": 3.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "jaw_soft",
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    86
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    11.65,
+    -6.0,
+    115.61
+   ],
+   "tip_pt": [
+    3.65,
+    -6.0,
+    115.61
+   ],
+   "dir": [
+    -1.0,
+    -0.0,
+    0.0
+   ],
+   "servo": [
+    "head_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.5,
+   "Lmin": 4.5,
+   "Lmax": 12.9,
+   "clamp": 2.0,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    68
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    -22.5,
+    128.96
+   ],
+   "tip_pt": [
+    34.0,
+    -22.5,
+    122.96
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.5,
+   "Lmin": 4.5,
+   "Lmax": 12.9,
+   "clamp": 2.0,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    68
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    -22.5,
+    128.96
+   ],
+   "tip_pt": [
+    18.0,
+    -22.5,
+    122.96
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.1,
+   "Lmin": 4.1,
+   "Lmax": 12.5,
+   "clamp": 1.6,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    68
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    34.0,
+    7.5,
+    128.56
+   ],
+   "tip_pt": [
+    34.0,
+    7.5,
+    122.56
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 7.1,
+   "Lmin": 4.1,
+   "Lmax": 12.5,
+   "clamp": 1.6,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw_roll_motion"
+   ],
+   "bodies": [
+    "yaw_roll_motion"
+   ],
+   "geoms": [
+    66,
+    68
+   ],
+   "cbore": [],
+   "clear": [
+    2.5
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.0,
+    7.5,
+    128.56
+   ],
+   "tip_pt": [
+    18.0,
+    7.5,
+    122.56
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": [
+    "head_yaw"
+   ]
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.59,
+   "Lmin": 5.09,
+   "Lmax": 6.59,
+   "clamp": 2.59,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "face_part",
+    "pcb__raspberry_pi_zero_2_w"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    76,
+    102
+   ],
+   "cbore": [],
+   "clear": [
+    2.7,
+    2.7
+   ],
+   "tap": [
+    1.55,
+    2.05
+   ],
+   "head_pt": [
+    67.26,
+    -29.01,
+    119.68
+   ],
+   "tip_pt": [
+    73.26,
+    -29.01,
+    119.68
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.59,
+   "Lmin": 5.09,
+   "Lmax": 6.59,
+   "clamp": 2.59,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "face_part",
+    "pcb__raspberry_pi_zero_2_w"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    76,
+    102
+   ],
+   "cbore": [],
+   "clear": [
+    2.7,
+    2.7
+   ],
+   "tap": [
+    1.55,
+    2.05
+   ],
+   "head_pt": [
+    67.26,
+    28.83,
+    119.68
+   ],
+   "tip_pt": [
+    73.26,
+    28.83,
+    119.68
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.59,
+   "Lmin": 5.09,
+   "Lmax": 6.59,
+   "clamp": 2.59,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "face_part",
+    "pcb__raspberry_pi_zero_2_w"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    76,
+    102
+   ],
+   "cbore": [],
+   "clear": [
+    2.7,
+    2.7
+   ],
+   "tap": [
+    1.55,
+    2.05
+   ],
+   "head_pt": [
+    67.26,
+    -29.01,
+    142.55
+   ],
+   "tip_pt": [
+    73.26,
+    -29.01,
+    142.55
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.59,
+   "Lmin": 5.09,
+   "Lmax": 6.59,
+   "clamp": 2.59,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "face_part",
+    "pcb__raspberry_pi_zero_2_w"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    76,
+    102
+   ],
+   "cbore": [],
+   "clear": [
+    2.7,
+    2.7
+   ],
+   "tap": [
+    1.55,
+    2.05
+   ],
+   "head_pt": [
+    67.26,
+    28.83,
+    142.55
+   ],
+   "tip_pt": [
+    73.26,
+    28.83,
+    142.55
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.4,
+   "Lmin": 6.9,
+   "Lmax": 9.79,
+   "clamp": 4.4,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "jaw",
+    "xl330"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    78,
+    96
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    32.1,
+    44.24,
+    118.61
+   ],
+   "tip_pt": [
+    32.1,
+    36.24,
+    118.61
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "mouth"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 8.99,
+   "clamp": 3.6,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "jaw",
+    "xl330"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    78,
+    96
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.1,
+    43.44,
+    112.61
+   ],
+   "tip_pt": [
+    26.1,
+    35.44,
+    112.61
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "mouth"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.4,
+   "Lmin": 6.9,
+   "Lmax": 9.79,
+   "clamp": 4.4,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "jaw",
+    "xl330"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    78,
+    96
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    26.1,
+    44.24,
+    124.61
+   ],
+   "tip_pt": [
+    26.1,
+    36.24,
+    124.61
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "mouth"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 7.6,
+   "Lmin": 6.1,
+   "Lmax": 8.99,
+   "clamp": 3.6,
+   "head": "BHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "jaw",
+    "xl330"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    78,
+    96
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    20.1,
+    43.44,
+    118.61
+   ],
+   "tip_pt": [
+    20.1,
+    35.44,
+    118.61
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "mouth"
+   ]
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.44,
+   "Lmin": 4.94,
+   "Lmax": 11.24,
+   "clamp": 2.44,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "motor_support"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    82,
+    98
+   ],
+   "cbore": [],
+   "clear": [
+    2.78,
+    2.7
+   ],
+   "tap": [
+    2.2
+   ],
+   "head_pt": [
+    42.1,
+    -30.0,
+    113.06
+   ],
+   "tip_pt": [
+    42.1,
+    -30.0,
+    107.06
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.44,
+   "Lmin": 4.94,
+   "Lmax": 7.64,
+   "clamp": 2.44,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "motor_support"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    82,
+    98
+   ],
+   "cbore": [],
+   "clear": [
+    2.78,
+    2.7
+   ],
+   "tap": [
+    2.2
+   ],
+   "head_pt": [
+    49.1,
+    9.35,
+    113.06
+   ],
+   "tip_pt": [
+    49.1,
+    9.35,
+    107.06
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.44,
+   "Lmin": 4.94,
+   "Lmax": 11.24,
+   "clamp": 2.44,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "motor_support"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    82,
+    98
+   ],
+   "cbore": [],
+   "clear": [
+    2.78,
+    2.7
+   ],
+   "tap": [
+    2.2
+   ],
+   "head_pt": [
+    3.1,
+    -30.0,
+    113.06
+   ],
+   "tip_pt": [
+    3.1,
+    -30.0,
+    107.06
+   ],
+   "dir": [
+    0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.44,
+   "Lmin": 4.94,
+   "Lmax": 11.24,
+   "clamp": 2.44,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "motor_support"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    82,
+    98
+   ],
+   "cbore": [],
+   "clear": [
+    2.78,
+    2.7
+   ],
+   "tap": [
+    2.2
+   ],
+   "head_pt": [
+    6.6,
+    19.0,
+    113.06
+   ],
+   "tip_pt": [
+    6.6,
+    19.0,
+    107.06
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.83,
+   "Lmin": 5.33,
+   "Lmax": 14.03,
+   "clamp": 2.83,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "top_head_shell"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    84,
+    98
+   ],
+   "cbore": [
+    5.5
+   ],
+   "clear": [
+    2.69,
+    2.8
+   ],
+   "tap": [
+    2.1,
+    1.6
+   ],
+   "head_pt": [
+    75.6,
+    -39.0,
+    112.23
+   ],
+   "tip_pt": [
+    75.6,
+    -39.0,
+    118.23
+   ],
+   "dir": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.83,
+   "Lmin": 5.33,
+   "Lmax": 14.03,
+   "clamp": 2.83,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "top_head_shell"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    84,
+    98
+   ],
+   "cbore": [
+    5.5
+   ],
+   "clear": [
+    2.69,
+    2.8
+   ],
+   "tap": [
+    2.1,
+    1.6
+   ],
+   "head_pt": [
+    75.6,
+    39.0,
+    112.23
+   ],
+   "tip_pt": [
+    75.6,
+    39.0,
+    118.23
+   ],
+   "dir": [
+    0.0,
+    -0.0,
+    1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2.5",
+   "len": 6,
+   "need": 6.83,
+   "Lmin": 5.33,
+   "Lmax": 14.03,
+   "clamp": 2.83,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "bottom_head_shell",
+    "top_head_shell"
+   ],
+   "bodies": [
+    "jaw_soft"
+   ],
+   "geoms": [
+    84,
+    98
+   ],
+   "cbore": [
+    6.24,
+    5.94,
+    5.64
+   ],
+   "clear": [
+    2.69,
+    2.8
+   ],
+   "tap": [
+    2.1,
+    1.6
+   ],
+   "head_pt": [
+    -23.4,
+    0.0,
+    112.23
+   ],
+   "tip_pt": [
+    -23.4,
+    0.0,
+    118.23
+   ],
+   "dir": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 4,
+   "need": 4.8,
+   "Lmin": 3.7,
+   "Lmax": 4.4,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bearing_roll",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    106,
+    110
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.05
+   ],
+   "head_pt": [
+    18.55,
+    -8.5,
+    -5.0
+   ],
+   "tip_pt": [
+    14.55,
+    -8.5,
+    -5.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 4,
+   "need": 4.8,
+   "Lmin": 3.7,
+   "Lmax": 4.4,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "printed tap",
+   "parts": [
+    "bearing_roll",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    106,
+    110
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.05
+   ],
+   "head_pt": [
+    18.55,
+    -26.5,
+    -5.0
+   ],
+   "tip_pt": [
+    14.55,
+    -26.5,
+    -5.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": []
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.3,
+   "Lmin": 3.3,
+   "Lmax": 11.8,
+   "clamp": 0.8,
+   "head": "SHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    106,
+    108
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -6.25,
+    -25.5,
+    -10.0
+   ],
+   "tip_pt": [
+    -0.25,
+    -25.5,
+    -10.0
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.3,
+   "Lmin": 3.3,
+   "Lmax": 11.8,
+   "clamp": 0.8,
+   "head": "SHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "xl330",
+    "yaw2roll"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    106,
+    108
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -6.25,
+    -9.5,
+    -10.0
+   ],
+   "tip_pt": [
+    -0.25,
+    -9.5,
+    -10.0
+   ],
+   "dir": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "hip_l_2"
+   ],
+   "geoms": [
+    108,
+    114
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    -17.5,
+    -23.5
+   ],
+   "tip_pt": [
+    17.45,
+    -17.5,
+    -23.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "hip_l_2"
+   ],
+   "geoms": [
+    108,
+    114
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    -11.5,
+    -17.5
+   ],
+   "tip_pt": [
+    17.45,
+    -11.5,
+    -17.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "hip_l_2"
+   ],
+   "geoms": [
+    108,
+    114
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    -23.5,
+    -17.5
+   ],
+   "tip_pt": [
+    17.45,
+    -23.5,
+    -17.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll",
+    "hip_l_2"
+   ],
+   "geoms": [
+    108,
+    114
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    23.45,
+    -17.5,
+    -11.5
+   ],
+   "tip_pt": [
+    17.45,
+    -17.5,
+    -11.5
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "bearing_roll",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    108,
+    110
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.55,
+    -9.5,
+    -40.0
+   ],
+   "tip_pt": [
+    12.55,
+    -9.5,
+    -40.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.7,
+   "Lmin": 3.7,
+   "Lmax": 12.2,
+   "clamp": 1.2,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "bearing_roll",
+    "xl330"
+   ],
+   "bodies": [
+    "bearing_roll"
+   ],
+   "geoms": [
+    108,
+    110
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    18.55,
+    -25.5,
+    -40.0
+   ],
+   "tip_pt": [
+    12.55,
+    -25.5,
+    -40.0
+   ],
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_roll"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l_2",
+    "upper_leg_right"
+   ],
+   "geoms": [
+    114,
+    126
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    4.0,
+    -37.55,
+    -11.5
+   ],
+   "tip_pt": [
+    4.0,
+    -43.55,
+    -11.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l_2",
+    "upper_leg_right"
+   ],
+   "geoms": [
+    114,
+    126
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    10.0,
+    -37.55,
+    -17.5
+   ],
+   "tip_pt": [
+    10.0,
+    -43.55,
+    -17.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l_2",
+    "upper_leg_right"
+   ],
+   "geoms": [
+    114,
+    126
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -2.0,
+    -37.55,
+    -17.5
+   ],
+   "tip_pt": [
+    -2.0,
+    -43.55,
+    -17.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.9,
+   "Lmin": 5.4,
+   "Lmax": 8.5,
+   "clamp": 2.9,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "hip_l",
+    "xl330"
+   ],
+   "bodies": [
+    "hip_l_2",
+    "upper_leg_right"
+   ],
+   "geoms": [
+    114,
+    126
+   ],
+   "cbore": [
+    4.84
+   ],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    4.0,
+    -37.55,
+    -23.5
+   ],
+   "tip_pt": [
+    4.0,
+    -43.55,
+    -23.5
+   ],
+   "dir": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.4,
+   "Lmin": 3.4,
+   "Lmax": 11.9,
+   "clamp": 0.9,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_right"
+   ],
+   "geoms": [
+    118,
+    122
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -23.78,
+    -42.75,
+    -17.0
+   ],
+   "tip_pt": [
+    -23.78,
+    -48.75,
+    -17.0
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_knee"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.4,
+   "Lmin": 3.4,
+   "Lmax": 11.9,
+   "clamp": 0.9,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_right"
+   ],
+   "geoms": [
+    118,
+    122
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -39.78,
+    -42.75,
+    -17.0
+   ],
+   "tip_pt": [
+    -39.78,
+    -48.75,
+    -17.0
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_knee"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.4,
+   "Lmin": 3.4,
+   "Lmax": 11.9,
+   "clamp": 0.9,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_right"
+   ],
+   "geoms": [
+    122,
+    126
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -18.5,
+    -42.75,
+    -9.5
+   ],
+   "tip_pt": [
+    -18.5,
+    -48.75,
+    -9.5
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.4,
+   "Lmin": 3.4,
+   "Lmax": 11.9,
+   "clamp": 0.9,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "upper_leg_rigidity_plate",
+    "xl330"
+   ],
+   "bodies": [
+    "upper_leg_right"
+   ],
+   "geoms": [
+    122,
+    126
+   ],
+   "cbore": [],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -18.5,
+    -42.75,
+    -25.5
+   ],
+   "tip_pt": [
+    -18.5,
+    -48.75,
+    -25.5
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "right_hip_pitch"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.15,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_right",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_right",
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    132
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -31.78,
+    -66.1,
+    -75.5
+   ],
+   "tip_pt": [
+    -31.78,
+    -61.1,
+    -75.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.15,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_right",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_right",
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    132
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -37.78,
+    -66.1,
+    -81.5
+   ],
+   "tip_pt": [
+    -37.78,
+    -61.1,
+    -81.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.15,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_right",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_right",
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    132
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -25.78,
+    -66.1,
+    -81.5
+   ],
+   "tip_pt": [
+    -25.78,
+    -61.1,
+    -81.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 5,
+   "need": 5.6,
+   "Lmin": 4.1,
+   "Lmax": 7.15,
+   "clamp": 1.6,
+   "head": "SHCS",
+   "term": "XL330 horn",
+   "parts": [
+    "ankle_right",
+    "xl330"
+   ],
+   "bodies": [
+    "ankle_right",
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    132
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -31.78,
+    -66.1,
+    -87.5
+   ],
+   "tip_pt": [
+    -31.78,
+    -61.1,
+    -87.5
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.0,
+   "Lmin": 5.0,
+   "Lmax": 13.5,
+   "clamp": 2.5,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "leg",
+    "xl330"
+   ],
+   "bodies": [
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    130
+   ],
+   "cbore": [],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -39.78,
+    -36.05,
+    -59.0
+   ],
+   "tip_pt": [
+    -39.78,
+    -44.05,
+    -59.0
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 8,
+   "need": 8.0,
+   "Lmin": 5.0,
+   "Lmax": 13.5,
+   "clamp": 2.5,
+   "head": "BHCS",
+   "term": "XL330 frame",
+   "parts": [
+    "leg",
+    "xl330"
+   ],
+   "bodies": [
+    "leg_2"
+   ],
+   "geoms": [
+    128,
+    130
+   ],
+   "cbore": [],
+   "clear": [
+    2.4
+   ],
+   "tap": [
+    2.0
+   ],
+   "head_pt": [
+    -23.78,
+    -36.05,
+    -59.0
+   ],
+   "tip_pt": [
+    -23.78,
+    -44.05,
+    -59.0
+   ],
+   "dir": [
+    -0.0,
+    -1.0,
+    0.0
+   ],
+   "servo": [
+    "right_ankle"
+   ]
+  },
+  {
+   "size": "M2",
+   "len": 6,
+   "need": 6.33,
+   "Lmin": 4.83,
+   "Lmax": 6.73,
+   "clamp": 2.33,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "ankle_right",
+    "foot_right"
+   ],
+   "bodies": [
+    "ankle_right"
+   ],
+   "geoms": [
+    132,
+    138
+   ],
+   "cbore": [
+    4.4
+   ],
+   "clear": [
+    3.0,
+    2.2
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -14.28,
+    -49.8,
+    -89.45
+   ],
+   "tip_pt": [
+    -14.28,
+    -49.8,
+    -95.45
+   ],
+   "dir": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "servo": []
+  }
+ ],
+ "skipped": [
+  {
+   "size": "M2",
+   "len": 3,
+   "need": -27.91,
+   "Lmin": -13.9,
+   "Lmax": -28.31,
+   "clamp": -16.4,
+   "head": "SHCS",
+   "term": "printed tap",
+   "parts": [
+    "left_shell",
+    "right_shell"
+   ],
+   "bodies": [
+    "trunk_base"
+   ],
+   "geoms": [
+    2,
+    16
+   ],
+   "cbore": [
+    4.02,
+    3.7,
+    3.96,
+    4.25
+   ],
+   "clear": [
+    3.39,
+    3.11,
+    2.2,
+    3.65
+   ],
+   "tap": [
+    1.6
+   ],
+   "head_pt": [
+    -38.0,
+    27.2,
+    35.0
+   ],
+   "tip_pt": [
+    -38.0,
+    30.2,
+    35.0
+   ],
+   "dir": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  }
+ ],
+ "servos": {
+  "8": {
+   "joint": "left_hip_yaw",
+   "dist": 16.5,
+   "body": "trunk_base",
+   "center": [
+    6.0,
+    17.5,
+    11.5
+   ]
+  },
+  "14": {
+   "joint": "right_hip_yaw",
+   "dist": 16.5,
+   "body": "trunk_base",
+   "center": [
+    6.0,
+    -17.5,
+    11.5
+   ]
+  },
+  "22": {
+   "joint": "left_hip_roll",
+   "dist": 16.5,
+   "body": "yaw2roll",
+   "center": [
+    6.0,
+    17.5,
+    -17.5
+   ]
+  },
+  "34": {
+   "joint": "left_knee",
+   "dist": 16.5,
+   "body": "upper_leg_left",
+   "center": [
+    -31.8,
+    55.0,
+    -39.5
+   ]
+  },
+  "40": {
+   "joint": "left_hip_pitch",
+   "dist": 12.5,
+   "body": "upper_leg_left",
+   "center": [
+    4.0,
+    55.0,
+    -17.5
+   ]
+  },
+  "44": {
+   "joint": "left_ankle",
+   "dist": 14.5,
+   "body": "leg",
+   "center": [
+    -31.8,
+    50.0,
+    -81.5
+   ]
+  },
+  "56": {
+   "joint": "neck_pitch",
+   "dist": 14.5,
+   "body": "neck",
+   "center": [
+    26.0,
+    0.0,
+    32.4
+   ]
+  },
+  "58": {
+   "joint": "head_pitch",
+   "dist": 14.5,
+   "body": "neck",
+   "center": [
+    26.0,
+    0.0,
+    82.4
+   ]
+  },
+  "68": {
+   "joint": "head_yaw",
+   "dist": 14.5,
+   "body": "yaw_roll_motion",
+   "center": [
+    26.0,
+    0.0,
+    115.6
+   ]
+  },
+  "78": {
+   "joint": "mouth",
+   "dist": null,
+   "body": "jaw_soft",
+   "center": [
+    26.1,
+    25.5,
+    118.6
+   ]
+  },
+  "86": {
+   "joint": "head_roll",
+   "dist": 14.5,
+   "body": "jaw_soft",
+   "center": [
+    -6.4,
+    0.0,
+    115.6
+   ]
+  },
+  "108": {
+   "joint": "right_hip_roll",
+   "dist": 16.5,
+   "body": "bearing_roll",
+   "center": [
+    6.0,
+    -17.5,
+    -17.5
+   ]
+  },
+  "118": {
+   "joint": "right_knee",
+   "dist": 16.5,
+   "body": "upper_leg_right",
+   "center": [
+    -31.8,
+    -55.0,
+    -39.5
+   ]
+  },
+  "126": {
+   "joint": "right_hip_pitch",
+   "dist": 12.5,
+   "body": "upper_leg_right",
+   "center": [
+    4.0,
+    -55.0,
+    -17.5
+   ]
+  },
+  "128": {
+   "joint": "right_ankle",
+   "dist": 14.5,
+   "body": "leg_2",
+   "center": [
+    -31.8,
+    -50.0,
+    -81.5
+   ]
+  }
+ }
+}

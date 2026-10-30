@@ -20,6 +20,7 @@ echo   7   Update from GitHub
 echo   8   Download reference repos    - microduck_rl, runtime, Open Duck Mini
 echo   9   Drive policy in sim         - experimental on Windows
 echo   10  Train walking policy        - Linux/WSL2 or HF Jobs
+echo   11  Build assembly guide PDF    - docs\assembly
 echo.
 echo   D   Open docs (README)          G   Open GitHub page
 echo   F   Open this folder            Q   Quit
@@ -38,6 +39,7 @@ if "%SEL%"=="7" call "bat\07_update.bat"
 if "%SEL%"=="8" call "bat\08_get_reference_repos.bat"
 if "%SEL%"=="9" call "bat\09_policy_sim.bat"
 if "%SEL%"=="10" call "bat\10_train_walk.bat"
+if "%SEL%"=="11" call "bat\11_assembly_guide.bat"
 if /i "%SEL%"=="D" start "" "https://github.com/lsk0522/microduck#readme"
 if /i "%SEL%"=="G" start "" "https://github.com/lsk0522/microduck"
 if /i "%SEL%"=="F" start "" "%~dp0"
