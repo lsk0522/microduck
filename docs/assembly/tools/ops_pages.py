@@ -27,6 +27,32 @@ def load(data_dir: Path):
     return Z, L
 
 
+def _w(v):
+    import numpy as np
+    v = np.asarray(v); k = int(np.argmax(np.abs(v)))
+    return {0: ("앞", "뒤"), 1: ("왼쪽", "오른쪽"), 2: ("위", "아래")}[k][0 if v[k] > 0 else 1]
+
+
+def horn_face_svg():
+    """혼을 마주 본 XL330 그림 + 케이스 기준 방향 A–D."""
+    return """<svg viewBox="0 0 300 330" width="100%" style="font-family:'Noto Sans CJK KR';font-size:13px">
+<defs><marker id="am" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L10 4 L0 8 z" fill="#d63031"/></marker></defs>
+<rect x="100" y="40" width="100" height="170" rx="8" fill="#2b2b2e"/>
+<circle cx="150" cy="90" r="34" fill="#55565b" stroke="#888" stroke-width="2"/>
+<circle cx="150" cy="90" r="6" fill="#222"/>
+""" + "".join(f'<circle cx="{150 + 18 * dx}" cy="{90 + 18 * dy}" r="3.5" fill="#222"/>' for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))) + """
+<rect x="112" y="192" width="30" height="12" rx="2" fill="#ddd"/><rect x="158" y="192" width="30" height="12" rx="2" fill="#ddd"/>
+<text x="206" y="202" font-size="10" fill="#666">커넥터</text>
+<line x1="150" y1="90" x2="150" y2="18" stroke="#d63031" stroke-width="2.5" marker-end="url(#am)"/><text x="150" y="13" text-anchor="middle" font-weight="700">A 축 쪽 끝</text>
+<line x1="150" y1="90" x2="62" y2="90" stroke="#d63031" stroke-width="2.5" marker-end="url(#am)"/><text x="52" y="84" text-anchor="end" font-weight="700">B</text><text x="52" y="100" text-anchor="end" font-size="11">왼쪽</text>
+<line x1="150" y1="124" x2="150" y2="250" stroke="#d63031" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#am)"/><text x="150" y="268" text-anchor="middle" font-weight="700">C 먼 쪽 끝</text>
+<line x1="150" y1="90" x2="238" y2="90" stroke="#d63031" stroke-width="2.5" marker-end="url(#am)"/><text x="248" y="84" font-weight="700">D</text><text x="248" y="100" font-size="11">오른쪽</text>
+<path d="M 176 64 A 37 37 0 0 0 124 64" fill="none" stroke="#3b7d3b" stroke-width="2.5" marker-end="url(#am)"/>
+<text x="150" y="296" text-anchor="middle" font-size="11">혼을 마주 보고 본 모습 · 초록 화살표 = + 방향(반시계)</text>
+<text x="150" y="314" text-anchor="middle" font-size="11">무릎: 기준 글자에서 반시계로 45° (A→B→C→D 순서 쪽)</text>
+</svg>"""
+
+
 def zero_pages(img: str, data_dir: Path):
     Z, L = load(data_dir)
     rows = ""
@@ -60,6 +86,35 @@ def zero_pages(img: str, data_dir: Path):
 45°(무릎 오프셋 누락)는 아예 구멍이 안 맞는다.</div>
 </div></div>""")
 
+    Ls = L["servos"]
+    mrows = ""
+    for i in ORDER:
+        r = Ls[str(i)]
+        g, col = GROUP[i // 10]
+        knee = " <b style='color:#d63031'>+45°</b>" if i in (13, 23) else ""
+        mrows += (f"<tr><td><b style='color:{col}'>{i}</b></td><td>{KOR[r['joint']]}{knee}</td><td>{_w(r['horn_out'])}</td>"
+                  f"<td>{_w(r['A_shaft_end'])}</td><td>{_w(r['B_left'])}</td><td>{_w(r['C_far_end'])}</td><td>{_w(r['D_right'])}</td></tr>")
+    pm = ("준비", "혼 마크 기준", f"""
+<h2>혼의 원점 마크는 어디를 가리켜야 하나</h2>
+<div class="two" style="grid-template-columns:0.75fr 1.25fr"><div>
+{horn_face_svg()}
+<div class="note warn" style="margin-top:2mm;font-size:8.5pt"><b>기준은 마크가 아니라 위치값 2048이다.</b> 마크가 2048에서 케이스의 어느 쪽(A–D)을 가리키는지는
+ROBOTIS 문서에 글로 나와 있지 않아 <b>서보 1개로 실측</b>해서 정한다. 그 뒤로 마크는 "2048이 맞나"를 눈으로 보는 확인용이다.</div>
+</div><div>
+<h3>① 마크 기준 정하기 (처음 한 번)</h3>
+<ol style="font-size:8.8pt;line-height:1.5;padding-left:4mm">
+<li><code>dxl_zero.py zero --ids &lt;무릎 아닌 서보&gt;</code> → 2048, 토크 켠 상태</li>
+<li>혼을 마주 보고 마크가 <b>A·B·C·D 중 어디</b>를 가리키는지 본다 (커넥터가 아래로 오게 들고)</li>
+<li>서보 2–3개 더 보고 같은지 확인 → <code>docs/build-log.md</code>에 "2048 마크 = A" 처럼 기록</li></ol>
+<h3>② 관절마다 마크가 향할 방향 (원점 자세, 로봇 기준)</h3>
+<table class="tight" style="font-size:8pt"><tr><th>ID</th><th>관절</th><th>혼이 향함</th><th>기준 A이면</th><th>B이면</th><th>C이면</th><th>D이면</th></tr>{mrows}</table>
+<p style="font-size:7.5pt;color:#666;margin-top:1mm">예: 실측 결과가 A라면 오른 고관절 요(10)의 마크는 '앞'을 가리킨다. 무릎(13, 23)은 homing −512 때문에 실제 축이 +45°에 있어
+마크가 그 칸에서 <b>반시계로 45°</b>(다음 글자 쪽) 돌아가 있다 — 예: A였다면 A와 B 사이.
+방향은 관절각 0 자세에서 로봇 기준 (앞 = 부리 쪽, 왼쪽 = 로봇의 왼쪽).</p>
+<div class="note" style="font-size:8pt">장착 때: 서보를 2048에 두고 → 마크가 표의 방향인지 확인 → 원점 그림 자세로 부품을 대고 혼 볼트.
+마크가 표와 90° 다르면 서보를 프레임에 잘못 넣었거나 2048이 아니다. 재설계 출력물에는 이 방향에 <b>표시선(홈)</b>을 새기면 실수가 없다.</div>
+</div></div>""")
+
     p2 = ("준비", "원점 자세 그림", f"""
 <h2>원점 자세 — 서보가 모두 2048일 때 로봇 모양</h2>
 <div class="two" style="gap:4mm"><div class="img" style="height:160mm"><img src="{img}/zero_front.png" style="max-height:160mm"></div>
@@ -73,7 +128,7 @@ MuJoCo 뷰어에서 키프레임 <code>INIT</code>을 고르면 같은 자세를
 <ol style="font-size:9.5pt;line-height:1.55;padding-left:5mm">
 <li><b>서보 1개씩 설정</b> (0단계 표): <code>dxl_zero.py setup --port COM5 --new-id 23</code><br><small>ID·1 Mbps·return delay 0·PWM slope 255·shutdown 52·무릎 homing −512를 한 번에 쓴다.</small></li>
 <li><b>원점으로 보내고 토크를 켠 채</b> 둔다: <code>dxl_zero.py zero --port COM5 --ids 23</code><br><small>토크가 켜져 있으면 나사를 조일 때 혼이 돌아가지 않는다. 벤치 전원은 5 V로 충분.</small></li>
-<li>표의 <b>혼 방향</b>대로 서보를 프레임에 넣는다 (프레임 볼트).</li>
+<li>표의 <b>혼 방향</b>대로 서보를 프레임에 넣는다 (프레임 볼트). <b>혼 마크</b>가 마크 기준 표(앞쪽)의 방향인지 본다.</li>
 <li>원점 자세 그림처럼 자식 부품을 대고, 혼 구멍 4개 중 맞는 각도로 <b>혼 볼트</b>를 조인다.</li>
 <li><code>dxl_zero.py off</code> 후 손으로 관절을 끝까지 돌려 <b>가동 범위 안에서 걸림·케이블 당김</b>이 없는지 본다.</li>
 <li>다 조립하면 <b>끈으로 매단 상태</b>에서 <code>dxl_zero.py zero --all</code> → 원점 그림과 비교,
@@ -88,7 +143,7 @@ MuJoCo 뷰어에서 키프레임 <code>INIT</code>을 고르면 같은 자세를
 <p style="font-size:8.5pt">원점과 다르다: 고관절 피치 ∓26°, 발목 ±26°, 고관절 롤 ∓5°, 목·머리 피치 +20°.
 정책은 이 자세를 기준(0)으로 관측하고 움직인다 — 조립은 원점에서, 서기는 기본 자세에서.</p>
 </div></div>""")
-    return [p1, p2, p3]
+    return [p1, pm, p2, p3]
 
 
 def elec_pages(img: str, data_dir: Path):

@@ -207,6 +207,18 @@ def annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=False):
     return img
 
 
+def case_dirs(sc, g, horn):
+    """혼을 마주 보고 볼 때 케이스 기준 4방향 (A 축 쪽 끝, B 왼쪽, C 먼 쪽 끝, D 오른쪽)의 월드 방향.
+    관절각 0(= 2048) 자세. 혼 마크가 2048에서 케이스의 어느 쪽을 가리키는지 실측하면 관절마다 마크 방향이 정해진다."""
+    c = sc.local_to_world(g, [0, 0, 0])
+    a = sc.local_to_world(g, [0, 0, 1]) - c; a /= np.linalg.norm(a)        # 축 쪽 끝 (케이스 긴 방향, 축에 가까운 끝)
+    h = np.asarray(horn, float) / np.linalg.norm(horn)                       # 혼 바깥 방향 (보는 사람 쪽)
+    f = -h                                                                   # 보는 사람의 시선
+    right = np.cross(f, a); right /= np.linalg.norm(right)
+    r = lambda v: np.round(v, 3).tolist()
+    return dict(horn_out=r(h), A_shaft_end=r(a), B_left=r(-right), C_far_end=r(-a), D_right=r(right))
+
+
 def legend(img, lines):
     dr = ImageDraw.Draw(img)
     y = 24
@@ -310,7 +322,8 @@ def main():
                parts={k: dict(label=ELEC[k][0] if k in ELEC else "버스 허브 (권장 위치)",
                               pos_mm=np.round((v - sc.base) * 1000, 1).tolist()) for k, v in pts.items()},
                servos={str(sid): dict(joint=jn, shaft_mm=np.round((S[g]["shaft"] - sc.base) * 1000, 1).tolist(),
-                                      connector_mm=np.round((S[g]["conn"] - sc.base) * 1000, 1).tolist())
+                                      connector_mm=np.round((S[g]["conn"] - sc.base) * 1000, 1).tolist(),
+                                      **case_dirs(sc, g, horns.get(sid, mouth_horn if sid == 34 else None)))
                        for g, (sid, jn) in sorted(ids.items(), key=lambda kv: kv[1][0])},
                mouth_horn_faces=np.round(mouth_horn, 3).tolist(),
                chain=[[str(x) for x in ch] for ch in CHAIN], cables=cables)
