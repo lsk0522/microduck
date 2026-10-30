@@ -1,0 +1,166 @@
+{
+ "1": [],
+ "2": [
+  {
+   "id": 24,
+   "joint": "left_ankle",
+   "new": true,
+   "horn": true
+  },
+  {
+   "id": 14,
+   "joint": "right_ankle",
+   "new": true,
+   "horn": true,
+   "mirror": true
+  }
+ ],
+ "3": [
+  {
+   "id": 22,
+   "joint": "left_hip_pitch",
+   "new": true,
+   "horn": false
+  },
+  {
+   "id": 12,
+   "joint": "right_hip_pitch",
+   "new": true,
+   "horn": false,
+   "mirror": true
+  },
+  {
+   "id": 23,
+   "joint": "left_knee",
+   "new": true,
+   "horn": true
+  },
+  {
+   "id": 13,
+   "joint": "right_knee",
+   "new": true,
+   "horn": true,
+   "mirror": true
+  }
+ ],
+ "4": [
+  {
+   "id": 22,
+   "joint": "left_hip_pitch",
+   "new": false,
+   "horn": true
+  },
+  {
+   "id": 12,
+   "joint": "right_hip_pitch",
+   "new": false,
+   "horn": true,
+   "mirror": true
+  }
+ ],
+ "5": [
+  {
+   "id": 20,
+   "joint": "left_hip_yaw",
+   "new": true,
+   "horn": false
+  },
+  {
+   "id": 10,
+   "joint": "right_hip_yaw",
+   "new": true,
+   "horn": false
+  }
+ ],
+ "6": [
+  {
+   "id": 20,
+   "joint": "left_hip_yaw",
+   "new": false,
+   "horn": true
+  },
+  {
+   "id": 10,
+   "joint": "right_hip_yaw",
+   "new": false,
+   "horn": true
+  }
+ ],
+ "7": [
+  {
+   "id": 21,
+   "joint": "left_hip_roll",
+   "new": true,
+   "horn": true
+  },
+  {
+   "id": 11,
+   "joint": "right_hip_roll",
+   "new": true,
+   "horn": true
+  }
+ ],
+ "8": [],
+ "9": [
+  {
+   "id": 30,
+   "joint": "neck_pitch",
+   "new": true,
+   "horn": false
+  },
+  {
+   "id": 31,
+   "joint": "head_pitch",
+   "new": true,
+   "horn": false
+  }
+ ],
+ "10": [
+  {
+   "id": 30,
+   "joint": "neck_pitch",
+   "new": false,
+   "horn": true
+  }
+ ],
+ "11": [
+  {
+   "id": 32,
+   "joint": "head_yaw",
+   "new": true,
+   "horn": true
+  },
+  {
+   "id": 33,
+   "joint": "head_roll",
+   "new": true,
+   "horn": true
+  }
+ ],
+ "12": [
+  {
+   "id": 31,
+   "joint": "head_pitch",
+   "new": false,
+   "horn": true
+  }
+ ],
+ "13": [
+  {
+   "id": 34,
+   "joint": "mouth",
+   "new": true,
+   "horn": false
+  }
+ ],
+ "14": [],
+ "15": [],
+ "16": [
+  {
+   "id": 34,
+   "joint": "mouth",
+   "new": false,
+   "horn": true
+  }
+ ]
+}

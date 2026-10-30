@@ -140,7 +140,11 @@ table {{ border-collapse:collapse; width:100%; font-size:9pt; }}
 th {{ background:#1d1d1f; color:#fff; text-align:left; padding:1.6mm 2mm; font-weight:600; }}
 td {{ border-bottom:0.3mm solid #e3e3e3; padding:1.4mm 2mm; vertical-align:top; }}
 tr:nth-child(even) td {{ background:#fafafa; }}
-.step {{ display:grid; grid-template-columns:84mm 1fr; gap:7mm; height:100%; }}
+.step {{ display:grid; grid-template-columns:100mm 1fr; gap:6mm; height:100%; }}
+.step .note {{ font-size:8pt; padding:1.4mm 2.5mm; }}
+.step .box {{ padding:1.8mm 2.5mm; }}
+.step .box li {{ font-size:8.8pt; margin:0.1mm 0; }}
+.step .side {{ gap:1.8mm; }}
 .side {{ display:flex; flex-direction:column; gap:2.5mm; }}
 .stepno {{ font-size:34pt; font-weight:800; color:{ACCENT}; line-height:1; }}
 .stitle {{ font-size:14pt; font-weight:700; line-height:1.25; }}
@@ -340,6 +344,7 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 <div><span class="stepno">{st['id']:02d}</span> {x2}</div><div class="stitle">{html.escape(st['title'])}</div>
 <div class="box"><h4>부품</h4><ul>{''.join(f'<li>{html.escape(p)}</li>' for p in st['parts'])}</ul></div>
 <div class="box"><h4>하드웨어 (계산 길이)</h4>{chips}</div>
+{ops_pages.servo_box(st['id'], data_dir)}
 {notes}</div>
 <div class="img"><img src="{img}/step_{st['id']:02d}.png"></div></div>"""
         pages.append((st["section"].upper(), f"STEP {st['id']} / {len(STEPS)}", body))

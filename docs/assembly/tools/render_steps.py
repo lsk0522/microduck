@@ -124,7 +124,73 @@ def render_step(m, d, geoms, step, screws, out, base, cum):
     img = rgb.copy()
     img[bg] = 255
     Image.fromarray(img).save(out)
-    return new
+    return new, (cam.lookat.copy(), cam.distance, cam.azimuth, cam.elevation)
+
+
+def servo_tables():
+    """geom → (ID, 관절), 서보 축 위치(m), ID → 혼 바깥 방향 (원점 자세)."""
+    import layout
+    sc = layout.Scene()
+    ids = layout.servo_ids(sc)
+    S = sc.servos()
+    L = json.load(open(ROOT / "docs/assembly/data/layout.json"))
+    horns = {int(k): np.array(v["horn_out"]) for k, v in L["servos"].items()}
+    geo = {g: S[g]["shaft"] for g in ids}
+    return ids, geo, horns
+
+
+def project(m, cam, p):
+    lookat, dist, az, el = cam
+    az, el = np.radians(az), np.radians(el)
+    f = np.array([np.cos(el) * np.cos(az), np.cos(el) * np.sin(az), np.sin(el)])
+    up = np.array([-np.sin(el) * np.cos(az), -np.sin(el) * np.sin(az), np.cos(el)])
+    rt = np.cross(f, up)
+    v = np.asarray(p) - (np.asarray(lookat) - dist * f)
+    z = v @ f
+    t = np.tan(np.radians(m.vis.global_.fovy) / 2)
+    return np.array([W / 2 * (1 + (v @ rt) / z / (t * W / H)), H / 2 * (1 - (v @ up) / z / t)])
+
+
+def annotate_servos(m, d, st, new, mine, cam, path, sv_ids, sv_geo, horns):
+    """이 단계에서 들어가는 서보(새로 장착) + 혼을 고정하는 서보에 ID·2048·혼 화살표를 그린다."""
+    from PIL import ImageDraw
+    import layout
+    horn_now = {mujoco_id for s in mine if s.get("term") == "XL330 horn"
+                for mujoco_id in [ID_OF.get(x) for x in s["servo"]] if mujoco_id}
+    rows = {}
+    for g, (sid, jn) in sv_ids.items():
+        is_new = g in new
+        if not (is_new or sid in horn_now):
+            continue
+        rows[sid] = dict(id=sid, joint=jn, new=is_new, horn=sid in horn_now)
+    if st.get("x2"):   # 오른쪽 짝도 표에는 넣는다 (그림은 왼쪽만)
+        for sid in list(rows):
+            if sid // 10 == 2:
+                rows[sid - 10] = dict(rows[sid], id=sid - 10, joint=rows[sid]["joint"].replace("left_", "right_"), mirror=True)
+    img = Image.open(path).convert("RGB")
+    dr = ImageDraw.Draw(img)
+    col = {2: (239, 106, 31), 1: (74, 127, 181), 3: (59, 125, 59)}
+    for g, (sid, jn) in sv_ids.items():
+        if sid not in rows or rows[sid].get("mirror") or (st.get("x2") and sid // 10 == 1):
+            continue
+        c = sv_geo[g]
+        p0 = project(m, cam, c)
+        p1 = project(m, cam, c + horns[sid] * 0.02)
+        layout.arrow(dr, p0, p1, (214, 48, 49), w=6)
+        txt = f"{sid} · 2048" + (" (−512)" if sid in (13, 23) else "")
+        layout.tag(dr, tuple(p0 + np.array([0, -34])), txt, col[sid // 10], sz=32)
+        if rows[sid]["horn"]:
+            layout.tag(dr, tuple(p0 + np.array([0, 6])), "혼 고정", (214, 48, 49), sz=24)
+    if rows:
+        layout.tag(dr, (20, 20), "숫자 = 서보 ID · 2048에 두고 조립 · 빨간 화살표 = 혼 방향", (40, 40, 40), sz=28, anchor="lt")
+    img.save(path)
+    return sorted(rows.values(), key=lambda r: ORDER.index(r["id"]))
+
+
+ID_OF = dict(left_hip_yaw=20, left_hip_roll=21, left_hip_pitch=22, left_knee=23, left_ankle=24,
+             neck_pitch=30, head_pitch=31, head_yaw=32, head_roll=33, mouth=34,
+             right_hip_yaw=10, right_hip_roll=11, right_hip_pitch=12, right_knee=13, right_ankle=14)
+ORDER = [20, 10, 21, 11, 22, 12, 23, 13, 24, 14, 30, 31, 32, 33, 34]
 
 
 def render_cover(m, d, out, key="STAND"):
@@ -201,14 +267,19 @@ def main():
     geoms = mesh_geoms(m)
     cum = set()
     mirror = dict(zip(LEFT, RIGHT))
+    sv_ids, sv_geo, horns = servo_tables()
+    step_servos = {}
     for st in STEPS:
         mine = [s for s in screws if step_of(s) == st["id"]]
         drawn = [s for s in mine if not st.get("x2") or s["head_pt"][1] > 0]   # 다리는 왼쪽만 그림
-        new = render_step(m, d, geoms, st, drawn, outdir / f"step_{st['id']:02d}.png", base, cum)
+        new, cam = render_step(m, d, geoms, st, drawn, outdir / f"step_{st['id']:02d}.png", base, cum)
+        info = annotate_servos(m, d, st, new, mine, cam, outdir / f"step_{st['id']:02d}.png", sv_ids, sv_geo, horns)
+        step_servos[st["id"]] = info
         cum |= new
         if st.get("x2"):   # 오른쪽 다리도 조립된 것으로 누적 (렌더는 왼쪽만)
             cum |= resolve([(mirror[e[0]],) + tuple(e[1:]) for e in st["new"] if e[0] in mirror], geoms)
         print(f"step {st['id']:2d} {st['key']:14s} screws {len(mine):3d} (drawn {len(drawn)})")
+    json.dump(step_servos, open(screws_json.parent / "step_servos.json", "w"), indent=1, ensure_ascii=False)
     render_cover(m, d, outdir / "cover.png")
     m, d = load()
     parts = render_parts(m, d, mesh_geoms(m), outdir)

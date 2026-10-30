@@ -333,3 +333,40 @@ def control_pages():
 <div class="note" style="font-size:8pt">Windows에서는 레벨 1만 확실히 된다. 레벨 2·3·학습은 Ubuntu(또는 WSL2) 기준 — 명령은 plan.md 5·6절.</div>
 </div></div>""")
     return [p_ctrl, p_sim]
+
+
+def servo_box(step_id: int, data_dir: Path) -> str:
+    """조립 단계 쪽에 넣을 '다이나믹셀' 상자: 이 단계에서 넣거나 혼을 고정하는 서보의 원점·방향."""
+    f = data_dir / "step_servos.json"
+    if not f.exists():
+        return ""
+    rows = json.load(open(f)).get(str(step_id), [])
+    if not rows:
+        return ""
+    Z, L = load(data_dir)
+    S = L["servos"]
+    by = {r["id"]: r for r in rows}
+    lines = []
+    done = set()
+    for r in rows:
+        i = r["id"]
+        if i in done:
+            continue
+        pair = [i] + ([i - 10] if i // 10 == 2 and (i - 10) in by else [])
+        done.update(pair)
+        act = " + ".join(a for a, k in (("서보 장착", "new"), ("혼 고정", "horn")) if r[k])
+        z = Z[i]
+        knee = i in (13, 23)
+        horn = " / ".join(f"{j}: {_w(S[str(j)]['horn_out'])}" for j in pair) if len(pair) > 1 else _w(S[str(i)]["horn_out"])
+        mk = lambda j: " ".join(f"{k}{_w(S[str(j)][key])}" for k, key in (("A", "A_shaft_end"), ("B", "B_left"), ("C", "C_far_end"), ("D", "D_right")))
+        mark = " / ".join(f"{j}: {mk(j)}" for j in pair) if len(pair) > 1 else mk(i)
+        plus = " / ".join(f"{j}: {Z[j].get('plus', '')}" for j in pair) if len(pair) > 1 else Z[i].get("plus", "")
+        lines.append(
+            f"<div style='border-bottom:0.25mm dashed #e0e0e0;padding:0.9mm 0'>"
+            f"<b style='color:{GROUP[i // 10][1]}'>{' / '.join(map(str, pair))}</b> {KOR[z['joint']].replace('왼 ', '')}"
+            f" <span style='color:#d63031;font-weight:700'>{act}</span><br>"
+            f"<small>2048{' (homing −512 먼저)' if knee else ''} · 혼 → {horn}<br>+ = {html.escape(plus)}<br>"
+            f"마크{'(+45°)' if knee else ''} {mark}</small></div>")
+    return (f'<div class="box" style="border-color:#d63031"><h4 style="color:#d63031">다이나믹셀 — 2048(토크 켬)에 두고 체결</h4>'
+            f'<div style="font-size:7.6pt;line-height:1.3">{"".join(lines)}</div>'
+            f'<div style="font-size:6.8pt;color:#777;margin-top:0.8mm">마크: 2048에서 혼 마크가 케이스의 A(축 쪽 끝)·B·C(커넥터 쪽)·D를 가리키는지 실측한 글자 → 로봇 기준 방향 (8쪽)</div></div>')

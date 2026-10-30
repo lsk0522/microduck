@@ -117,12 +117,9 @@ STEPS = [
          new=[("yaw_roll_motion", None), HEAD_ROLL_SERVO, ("neck_pitch", None)],
          show=[], cam=(140, 10),
          parts=["yaw_roll_motion ×1", "XL330 (머리 요 ID 32, 머리 롤 ID 33)", "neck_pitch ×1", "베어링 16×22×4 ×3"],
-         notes=["⚠ 순서가 정해져 있다 (검증 T5 — 다른 순서면 공구가 이미 단 서보에 막힘):",
-                "① 머리 롤 서보(ID 33) 혼 → yaw_roll_motion: M2×8 ×4. 요 서보를 넣기 전에 한다. "
-                "4개 중 3개는 맞은편 벽까지 24.5 mm뿐 — 짧은 비트(＜20 mm)나 ㄱ자 드라이버가 필요하다.",
-                "② 머리 요 서보(ID 32)를 yaw_roll_motion에 넣고 프레임 볼트로 고정, 베어링 압입.",
-                "③ 요 서보 혼 → neck_pitch: M2×6 ×4. 목(9단계)에 달기 전, 책상 위에서 한다.",
-                "요·롤 서보를 2048에 두고 조립한다."]),
+         notes=["⚠ 순서 (검증 T5 — 바꾸면 공구가 막힘): ① 롤 서보(33) 혼 → yaw_roll_motion M2×8 ×4, 요 서보 넣기 전 "
+                "(4개 중 3개는 맞은편 벽까지 24.5 mm — 짧은 비트·ㄱ자 드라이버) ② 요 서보(32)를 yaw_roll_motion에 넣고 프레임 볼트, 베어링 압입 "
+                "③ 요 혼 → neck_pitch M2×6 ×4, 목에 달기 전 책상 위에서."]),
     dict(id=12, key="head_mount", section="목·머리", title="머리 블록을 머리 피치 혼에 장착",
          new=[], focus=[("neck_pitch", None), ("yaw_roll_motion", None), HEAD_ROLL_SERVO],
          show=["neck", "neck_pitch", "yaw_roll_motion", HEAD_BODY], cam=(140, 10),
