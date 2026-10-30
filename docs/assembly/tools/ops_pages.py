@@ -44,30 +44,35 @@ def _w2(v):
 
 
 def horn_face_svg():
-    """XL330 원점 홈: 혼을 마주 본 그림 2개 (일반 / 무릎)."""
-    def one(x0, title, ang, sub):
-        import math
-        cx, cy = x0 + 70, 92
-        nx, ny = cx - 30 * math.sin(math.radians(ang)), cy - 30 * math.cos(math.radians(ang))
-        nx2, ny2 = cx - 38 * math.sin(math.radians(ang)), cy - 38 * math.cos(math.radians(ang))
-        holes = "".join(f'<circle cx="{cx + 17 * math.cos(math.radians(t + ang))}" cy="{cy + 17 * math.sin(math.radians(t + ang))}" r="3" fill="#222"/>'
+    """XL330 원점 홈: 혼을 마주 본 그림 2개 (일반 / 무릎). 케이스 홈은 그대로, 혼 홈만 돈다."""
+    import math
+
+    def one(x0, title, ang, top, notch_lbl, sub):
+        cx, cy = x0 + 70, 100
+        rad = math.radians(ang)
+        nx, ny = cx - 30 * math.sin(rad), cy - 30 * math.cos(rad)
+        nx2, ny2 = cx - 38 * math.sin(rad), cy - 38 * math.cos(rad)
+        holes = "".join(f'<circle cx="{cx + 17 * math.cos(math.radians(t) + rad)}" cy="{cy + 17 * math.sin(math.radians(t) + rad)}" r="3" fill="#222"/>'
                         for t in (0, 90, 180, 270))
-        return (f'<text x="{x0 + 70}" y="16" text-anchor="middle" font-weight="700">{title}</text>'
-                f'<rect x="{x0 + 22}" y="48" width="96" height="160" rx="8" fill="#2b2b2e"/>'
-                f'<rect x="{x0 + 66}" y="48" width="8" height="14" fill="#ffc400" stroke="#222"/>'
-                f'<text x="{x0 + 70}" y="40" text-anchor="middle" font-size="10" fill="#8a6d00">케이스 홈 (A)</text>'
-                f'<circle cx="{cx}" cy="{cy}" r="38" fill="#55565b" stroke="#888" stroke-width="2"/>'
-                f'<circle cx="{cx}" cy="{cy}" r="5" fill="#222"/>{holes}'
-                f'<line x1="{nx}" y1="{ny}" x2="{nx2}" y2="{ny2}" stroke="#ffc400" stroke-width="5"/>'
-                f'<circle cx="{nx2}" cy="{ny2}" r="4" fill="#ffc400" stroke="#222"/>'
-                f'<rect x="{x0 + 38}" y="190" width="26" height="11" rx="2" fill="#ddd"/><rect x="{x0 + 76}" y="190" width="26" height="11" rx="2" fill="#ddd"/>'
-                f'<text x="{x0 + 70}" y="226" text-anchor="middle" font-size="10" fill="#666">커넥터 쪽 (C)</text>'
-                f'<text x="{x0 + 70}" y="246" text-anchor="middle" font-size="11">{sub}</text>')
-    return ('<svg viewBox="0 0 300 300" width="100%" style="font-family:\'Noto Sans CJK KR\';font-size:12px">'
-            + one(0, "일반 서보 · 2048", 0, "혼 홈 = 케이스 홈 (한 줄)")
-            + one(155, "무릎 13·23 · 2048", 45, "혼 홈이 반시계 45°")
-            + '<text x="150" y="272" text-anchor="middle" font-size="10.5">혼을 마주 보고, 커넥터가 아래로 오게 든 모습</text>'
-            + '<text x="150" y="289" text-anchor="middle" font-size="10.5">노랑 = 원점 홈 (케이스 축 쪽 끝면 가운데 + 혼 테두리)</text></svg>')
+        out = (f'<text x="{x0 + 70}" y="16" text-anchor="middle" font-weight="700">{title}</text>'
+               f'<rect x="{x0 + 22}" y="56" width="96" height="160" rx="8" fill="#2b2b2e"/>'
+               f'<rect x="{x0 + 66}" y="56" width="8" height="14" fill="#ffc400" stroke="#222"/>'
+               f'<text x="{x0 + 70}" y="44" text-anchor="middle" font-size="10.5" fill="#8a6d00">{top}</text>'
+               f'<circle cx="{cx}" cy="{cy}" r="38" fill="#55565b" stroke="#888" stroke-width="2"/>'
+               f'<circle cx="{cx}" cy="{cy}" r="5" fill="#222"/>{holes}'
+               f'<line x1="{nx}" y1="{ny}" x2="{nx2}" y2="{ny2}" stroke="#ffc400" stroke-width="5"/>'
+               f'<circle cx="{nx2}" cy="{ny2}" r="4" fill="#ffc400" stroke="#222"/>'
+               f'<rect x="{x0 + 38}" y="198" width="26" height="11" rx="2" fill="#ddd"/><rect x="{x0 + 76}" y="198" width="26" height="11" rx="2" fill="#ddd"/>'
+               f'<text x="{x0 + 70}" y="236" text-anchor="middle" font-size="11">{sub}</text>')
+        if notch_lbl:   # 돌아간 혼 홈에 따로 이름표
+            out += (f'<line x1="{nx2}" y1="{ny2}" x2="{x0 + 16}" y2="{ny2 + 24}" stroke="#8a6d00" stroke-width="1"/>'
+                    f'<text x="{x0 + 14}" y="{ny2 + 38}" text-anchor="end" font-size="10.5" fill="#8a6d00">{notch_lbl}</text>')
+        return out
+    return ('<svg viewBox="0 0 300 290" width="100%" style="font-family:\'Noto Sans CJK KR\';font-size:12px">'
+            + one(0, "일반 서보 · 2048", 0, "케이스 홈 = 혼 홈", "", "두 홈이 한 줄")
+            + one(155, "무릎 13·23 · 2048", 45, "케이스 홈 (그대로)", "혼 홈", "혼 홈만 반시계로 45°")
+            + '<text x="150" y="262" text-anchor="middle" font-size="10.5">두 그림 모두 혼을 마주 보고, 커넥터(회색)가 아래로 오게 든 모습</text>'
+            + '<text x="150" y="279" text-anchor="middle" font-size="10.5">케이스 홈 = 축 쪽 끝면 가운데의 세로 홈 · 혼 홈 = 혼 테두리 홈</text></svg>')
 
 
 def zero_pages(img: str, data_dir: Path):
@@ -116,7 +121,7 @@ def zero_pages(img: str, data_dir: Path):
 <h2>원점 홈 — 케이스 홈과 혼 홈을 한 줄로</h2>
 <div class="two" style="grid-template-columns:0.8fr 1.2fr"><div>
 {horn_face_svg()}
-<div class="note warn" style="margin-top:2mm;font-size:8.5pt">XL330은 케이스 <b>축 쪽 끝면(A) 가운데</b>에 세로 홈이 파여 있고, 혼 테두리에도 홈이 있다.
+<div class="note warn" style="margin-top:2mm;font-size:8.5pt">XL330은 케이스 <b>축 쪽 끝면 가운데</b>(커넥터 반대쪽 끝)에 세로 홈이 파여 있고, 혼 테두리에도 홈이 있다.
 두 홈이 한 줄이면 기계적 원점이다. 이 가이드는 <b>홈이 맞는 위치 = 2048</b>로 본다 — 서보를 받으면 <code>dxl_zero.py zero</code> 후 홈이 맞는지 한 번 확인하고,
 어긋나면 홈이 아니라 <b>2048을 기준</b>으로 조립한다 (결과를 build-log에).</div>
 </div><div>
