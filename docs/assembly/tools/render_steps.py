@@ -130,13 +130,18 @@ def render_step(m, d, geoms, step, screws, out, base, cum):
 def servo_tables():
     """geom → (ID, 관절), 서보 축 위치(m), ID → 혼 바깥 방향 (원점 자세)."""
     import layout
+    global GS
     sc = layout.Scene()
+    GS = sc
     ids = layout.servo_ids(sc)
     S = sc.servos()
     L = json.load(open(ROOT / "docs/assembly/data/layout.json"))
     horns = {int(k): np.array(v["horn_out"]) for k, v in L["servos"].items()}
     geo = {g: S[g]["shaft"] for g in ids}
     return ids, geo, horns
+
+
+GS = None   # layout.Scene (서보 홈 위치 계산용)
 
 
 def project(m, cam, p):
@@ -177,12 +182,14 @@ def annotate_servos(m, d, st, new, mine, cam, path, sv_ids, sv_geo, horns):
         p0 = project(m, cam, c)
         p1 = project(m, cam, c + horns[sid] * 0.02)
         layout.arrow(dr, p0, p1, (214, 48, 49), w=6)
+        layout.draw_grooves(dr, lambda q: project(m, cam, q), GS, g, horns[sid], sid)
         txt = f"{sid} · 2048" + (" (−512)" if sid in (13, 23) else "")
         layout.tag(dr, tuple(p0 + np.array([0, -34])), txt, col[sid // 10], sz=32)
         if rows[sid]["horn"]:
             layout.tag(dr, tuple(p0 + np.array([0, 6])), "혼 고정", (214, 48, 49), sz=24)
     if rows:
         layout.tag(dr, (20, 20), "숫자 = 서보 ID · 2048에 두고 조립 · 빨간 화살표 = 혼 방향", (40, 40, 40), sz=28, anchor="lt")
+        layout.tag(dr, (20, 62), "노랑 네모 = 케이스 원점 홈 · 노랑 점 = 혼 홈 → 한 줄로 맞춤 (무릎은 45° 돌림)", (120, 90, 0), sz=26, anchor="lt")
     img.save(path)
     return sorted(rows.values(), key=lambda r: ORDER.index(r["id"]))
 

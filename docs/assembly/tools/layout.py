@@ -189,7 +189,7 @@ def horn_dirs():
     return {r["id"]: np.array(r["horn_faces"]) for r in z if "horn_faces" in r}
 
 
-def annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=False):
+def annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=False, grooves=False):
     """side_only: 오른쪽 옆에서 본 그림 — 왼다리(2x) 라벨은 가려지므로 생략 (대칭)."""
     dr = ImageDraw.Draw(img)
     S = sc.servos()
@@ -203,13 +203,15 @@ def annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=False):
             p1 = sc.project(cam, s["shaft"] + h * 0.022)
             arrow(dr, p0, p1, (231, 76, 60))
         col = {2: (239, 106, 31), 1: (74, 127, 181), 3: (59, 125, 59)}[sid // 10]
+        if h is not None and grooves:
+            draw_grooves(dr, lambda p: sc.project(cam, p), sc, g, h, sid)
         tag(dr, tuple(p0), str(sid), col, sz=34)
     return img
 
 
 def case_dirs(sc, g, horn):
     """혼을 마주 보고 볼 때 케이스 기준 4방향 (A 축 쪽 끝, B 왼쪽, C 먼 쪽 끝, D 오른쪽)의 월드 방향.
-    관절각 0(= 2048) 자세. 혼 마크가 2048에서 케이스의 어느 쪽을 가리키는지 실측하면 관절마다 마크 방향이 정해진다."""
+    관절각 0(= 2048) 자세. A 끝면 가운데에 케이스 원점 홈이 있다 (groove_points)."""
     c = sc.local_to_world(g, [0, 0, 0])
     a = sc.local_to_world(g, [0, 0, 1]) - c; a /= np.linalg.norm(a)        # 축 쪽 끝 (케이스 긴 방향, 축에 가까운 끝)
     h = np.asarray(horn, float) / np.linalg.norm(horn)                       # 혼 바깥 방향 (보는 사람 쪽)
@@ -217,6 +219,48 @@ def case_dirs(sc, g, horn):
     right = np.cross(f, a); right /= np.linalg.norm(right)
     r = lambda v: np.round(v, 3).tolist()
     return dict(horn_out=r(h), A_shaft_end=r(a), B_left=r(-right), C_far_end=r(-a), D_right=r(right))
+
+
+def rot(axis, v, deg):
+    k = np.asarray(axis, float) / np.linalg.norm(axis)
+    v = np.asarray(v, float); t = np.radians(deg)
+    return v * np.cos(t) + np.cross(k, v) * np.sin(t) + k * (k @ v) * (1 - np.cos(t))
+
+
+KNEE_IDS = (13, 23)
+
+
+def groove_points(sc, g, horn, sid):
+    """XL330 원점 홈: 케이스 축 쪽 끝면(A) 가운데, 혼 쪽 모서리에 세로 홈이 있고 혼 테두리에도 홈이 있다.
+    두 홈이 한 줄이면 기계적 원점 (= 2048로 본다). 무릎은 homing −512라 2048에서 혼 홈이 반시계 45° 돌아가 있다.
+    반환 (m, 월드): 케이스 홈 위치, 2048에서 혼 홈 위치, 혼 홈 방향(단위벡터)."""
+    c = sc.local_to_world(g, [0, 0, 0])
+    xw = sc.local_to_world(g, [1, 0, 0]) - c
+    h = np.asarray(horn, float) / np.linalg.norm(horn)
+    sgn = 1.0 if xw @ h > 0 else -1.0
+    a = sc.local_to_world(g, [0, 0, 1]) - c; a /= np.linalg.norm(a)
+    case_groove = sc.local_to_world(g, [sgn * 11.0, 0, 9.5])
+    nd = rot(h, a, 45.0 if sid in KNEE_IDS else 0.0)
+    horn_notch = c + h * 0.0130 + nd * 0.0080
+    return case_groove, horn_notch, nd
+
+
+def groove_info(sc, g, horn, sid):
+    cg, hn, nd = groove_points(sc, g, horn, sid)
+    r = lambda v: np.round(v, 3).tolist()
+    return dict(case_groove_mm=r((cg - sc.base) * 1000), horn_notch_mm=r((hn - sc.base) * 1000), notch_dir=r(nd))
+
+
+def draw_grooves(dr, project, sc, g, horn, sid, big=True):
+    """케이스 홈(노랑 막대)과 2048에서의 혼 홈(노랑 점) 표시."""
+    cg, hn, nd = groove_points(sc, g, horn, sid)
+    yel, ink = (255, 196, 0), (30, 30, 30)
+    p_c = project(cg); p_h = project(hn)
+    r = 12 if big else 9
+    dr.rectangle((p_c[0] - r, p_c[1] - r, p_c[0] + r, p_c[1] + r), fill=yel, outline=ink, width=2)
+    dr.ellipse((p_h[0] - r, p_h[1] - r, p_h[0] + r, p_h[1] + r), fill=yel, outline=ink, width=2)
+    dr.line([tuple(p_c), tuple(p_h)], fill=ink, width=3)
+    return p_c, p_h
 
 
 def legend(img, lines):
@@ -244,10 +288,11 @@ def main():
     look = sc.base + np.array([0.01, 0, 0.03])
 
     leg_lines = [("숫자 = 서보 ID", None), ("빨간 화살표 = 혼(출력축)이 향하는 쪽", None),
+                 ("노랑 네모 = 케이스 원점 홈, 노랑 점 = 혼 홈 (2048에서 둘이 한 줄, 무릎만 45°)", None),
                  ("주황 2x 왼다리 · 파랑 1x 오른다리 · 초록 3x 목·머리", None)]
     for name, cam in (("zero_front", (look, 0.50, 180, -8)), ("zero_side", (look, 0.50, 90, -8))):
         img = sc.render(cam, prev_color=(0.83, 0.83, 0.85, 1))
-        annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=name == "zero_side")
+        annotate_servos(sc, img, cam, ids, horns, mouth_horn, side_only=name == "zero_side", grooves=True)
         extra = [("오른쪽에서 본 그림 — 왼다리(2x)는 거울 대칭", None)] if name == "zero_side" else []
         legend(img, [("관절각 0 = 서보 2048 (무릎은 오프셋 −512 적용 후)", None)] + leg_lines + extra)
         save(img, imgdir / f"{name}.png")
@@ -323,7 +368,8 @@ def main():
                               pos_mm=np.round((v - sc.base) * 1000, 1).tolist()) for k, v in pts.items()},
                servos={str(sid): dict(joint=jn, shaft_mm=np.round((S[g]["shaft"] - sc.base) * 1000, 1).tolist(),
                                       connector_mm=np.round((S[g]["conn"] - sc.base) * 1000, 1).tolist(),
-                                      **case_dirs(sc, g, horns.get(sid, mouth_horn if sid == 34 else None)))
+                                      **case_dirs(sc, g, horns.get(sid, mouth_horn if sid == 34 else None)),
+                                      **groove_info(sc, g, horns.get(sid, mouth_horn if sid == 34 else None), sid))
                        for g, (sid, jn) in sorted(ids.items(), key=lambda kv: kv[1][0])},
                mouth_horn_faces=np.round(mouth_horn, 3).tolist(),
                chain=[[str(x) for x in ch] for ch in CHAIN], cables=cables)
