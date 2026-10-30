@@ -1,14 +1,14 @@
 # 조립 가이드 (트랙 A · 다이나믹셀 XL330 · 원본 형상)
 
-**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 21쪽, VORON 2.4 매뉴얼 형식.
+**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 24쪽, VORON 2.4 매뉴얼 형식. 검증 기록: [`VERIFICATION.md`](VERIFICATION.md)
 
 | 쪽 | 내용 |
 |---|---|
 | 1–3 | 표지, 읽는 법(색 범례·조립 3원칙·공구), 하드웨어 레퍼런스 **1:1 실물 크기** |
 | 4–5 | BOM (나사 126개 계산값, 조달 방법), 출력물·판재 썸네일 |
 | 6 | 0단계: 서보 15개 설정 (ID, 레지스터, 무릎 homing offset −512) |
-| 7–19 | 조립 13단계 (다리 ×2 → 몸통 → 목·머리) |
-| 20–21 | 배선·첫 전원 점검, 모델에서 확인되지 않은 체결, 출처 |
+| 7–22 | 조립 16단계 (다리 ×2 → 몸통·전원부 → 목 → 머리 서브조립 → 머리) |
+| 23–24 | 배선·첫 전원 점검, 모델에서 확인되지 않은 체결, 기하 검증 요약, 출처 |
 
 ## 주의
 
@@ -19,6 +19,8 @@
   - M2 체결은 **M2×4 4개를 빼고 전부 XL330 동봉 탭볼트(M2×6·M2×8)** 로 된다. 별도 구매: M2×4 ×4, M2.5×6 ×11 (+여유).
   - **무릎 혼은 45° 돌아간 상태**로 정강이에 붙는다 (homing_offset −512와 일치).
   - 고관절 요 ↔ yaw2roll 나사는 아래에서 위로 들어가 롤 서보에 가려진다 → yaw2roll을 **빈 상태로 먼저** 고정 (6단계).
+  - 조립 순서는 공구 경로 검사(verify T5)로 정했다: 전원부는 다리 연결 뒤(8단계), 머리 요·롤 블록은 책상 위 서브조립(11단계),
+    보드는 얼굴판에 먼저(14단계), 윗셸은 부리보다 먼저(15단계).
 - 그림은 Pollen 원본 메시 렌더 → CC BY-NC-SA 4.0 (비상업).
 
 ## 다시 만들기
@@ -29,6 +31,7 @@ Windows: `START_HERE.bat` → **11**. 명령줄 (저장소 루트):
 uv run python docs/assembly/tools/find_holes.py cad/reference/microduck/assets docs/assembly/data/holes.json   # 몇 분
 uv run python docs/assembly/tools/find_screws.py docs/assembly/data/holes.json docs/assembly/data/screws.json
 uv run python docs/assembly/tools/render_steps.py docs/assembly/data/screws.json docs/assembly/img             # 헤드리스: MUJOCO_GL=egl
+uv run python docs/assembly/tools/verify_screws.py docs/assembly/data/screws.json docs/assembly/data/verify.json     # 검증, 약 2분 (PDF 부록 요약에 쓰임)
 cd docs/assembly && uv run --with playwright python tools/build_guide.py data/screws.json img Microduck_Assembly_Guide.pdf
 ```
 (처음 한 번 `uv run --with playwright python -m playwright install chromium`. playwright가 없으면 HTML만 만들어지니
@@ -39,7 +42,8 @@ cd docs/assembly && uv run --with playwright python tools/build_guide.py data/sc
 | `tools/steps.py` | 조립 단계 정의(부품·카메라·주의사항), 나사 → 단계 배정, 무릎 나사 수동 추가 |
 | `tools/find_holes.py`, `tools/find_screws.py` | 구멍 검출 → 나사 묶기·길이 계산 |
 | `tools/render_steps.py` | 단계 렌더, 표지, 부품 썸네일 |
+| `tools/verify_screws.py` | 독립 기하 검증 (통과·물림·바닥·머리·공구 경로) → `data/verify.json`, [`VERIFICATION.md`](VERIFICATION.md) |
 | `tools/build_guide.py` | HTML → PDF |
-| `data/holes.json`, `data/screws.json` | 계산 결과 |
+| `data/holes.json`, `data/screws.json`, `data/verify.json` | 계산·검증 결과 |
 
 단계 내용을 고칠 때는 `tools/steps.py`만 수정하고 다시 생성한다.

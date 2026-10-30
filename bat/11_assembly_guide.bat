@@ -13,6 +13,10 @@ if /i "%RE%"=="y" (
   uv run python docs\assembly\tools\find_screws.py docs\assembly\data\holes.json docs\assembly\data\screws.json
   if errorlevel 1 (pause & exit /b 1)
 )
+set /p VF=Run geometric screw verification? Takes ~2 min [y/N]: 
+if /i "%VF%"=="y" (
+  uv run python docs\assembly\tools\verify_screws.py docs\assembly\data\screws.json docs\assembly\data\verify.json
+)
 echo [1/3] Rendering step images ...
 uv run python docs\assembly\tools\render_steps.py docs\assembly\data\screws.json docs\assembly\img
 if errorlevel 1 (pause & exit /b 1)

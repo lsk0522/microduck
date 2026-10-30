@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
-from steps import COL, KIND, LEFT, RIGHT, SCREW_COL, STEPS, knee_screws, step_of  # noqa: E402
+from steps import COL, KIND, LEFT, RIGHT, SCREW_COL, STEPS, knee_screws, resolve, step_of  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[3]
 XML = ROOT / "cad/reference/microduck/robot_allcollisions.xml"
@@ -75,26 +75,19 @@ def draw_screw(scn, base, s, explode=EXPLODE):
     add_cyl(scn, h0 + u * L, hp + u * 0.0005, 0.00018, (0.35, 0.35, 0.35, 0.8))   # 안내선
 
 
-def render_step(m, d, geoms, step, screws, out, base, cum_new):
-    new = set()
-    for b, ms in step["new"]:
-        for _, gb, gm in geoms:
-            if gb == b and (ms is None or gm == ms):
-                new.add((gb, gm))
+def render_step(m, d, geoms, step, screws, out, base, cum):
+    """cum = 이전 단계까지 조립된 geom 번호 집합. 반환: 이번 단계 신규 geom 집합."""
+    new = resolve(step["new"], geoms)
+    focus = resolve(step.get("focus", []), geoms)
     show_b = set(step["show"])
-    focus = {(b, ms) for b, ms in step.get("focus", [])}
     vis = []
     for g, b, ms in geoms:
         m.geom_matid[g] = -1
-        if (b, ms) in new:
+        if g in new or g in focus:
             m.geom_rgba[g] = COL[KIND.get(ms, "printed")]
             m.geom_group[g] = 0
             vis.append(g)
-        elif (b, ms) in focus:
-            m.geom_rgba[g] = COL[KIND.get(ms, "printed")]
-            m.geom_group[g] = 0
-            vis.append(g)
-        elif b in show_b and (b, ms) in cum_new:
+        elif b in show_b and g in cum:
             m.geom_rgba[g] = COL["prev"]
             m.geom_group[g] = 0
             vis.append(g)
@@ -207,18 +200,14 @@ def main():
     base = d.xpos[mujoco.mj_name2id(m, 1, "trunk_base")].copy()
     geoms = mesh_geoms(m)
     cum = set()
-    summary = {}
+    mirror = dict(zip(LEFT, RIGHT))
     for st in STEPS:
         mine = [s for s in screws if step_of(s) == st["id"]]
         drawn = [s for s in mine if not st.get("x2") or s["head_pt"][1] > 0]   # 다리는 왼쪽만 그림
-        new = render_step(m, d, geoms, st, drawn, outdir / f"step_{st['id']:02d}.png", base, cum | {
-            (b, ms) for b, ms in [(gb, gm) for _, gb, gm in geoms]
-            if any(b == nb and (nm is None or ms == nm) for nb, nm in st["new"])})
+        new = render_step(m, d, geoms, st, drawn, outdir / f"step_{st['id']:02d}.png", base, cum)
         cum |= new
         if st.get("x2"):   # 오른쪽 다리도 조립된 것으로 누적 (렌더는 왼쪽만)
-            mirror = dict(zip(LEFT, RIGHT))
-            cum |= {(gb, gm) for _, gb, gm in geoms if any(gb == mirror.get(b) for b, _ in new)}
-        summary[st["id"]] = len(mine)
+            cum |= resolve([(mirror[e[0]],) + tuple(e[1:]) for e in st["new"] if e[0] in mirror], geoms)
         print(f"step {st['id']:2d} {st['key']:14s} screws {len(mine):3d} (drawn {len(drawn)})")
     render_cover(m, d, outdir / "cover.png")
     m, d = load()

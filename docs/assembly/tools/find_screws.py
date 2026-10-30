@@ -5,12 +5,16 @@
 저장소 루트에서 실행. 규칙: Ø1.6·XL330 = 탭, Ø2.15–2.6 = M2 통과, Ø2.6–3.05 = M2.5, Ø3.7–6.6 = 머리 자리.
 XL330 Ø2.0 관통 구멍은 양쪽에서 짧은 탭볼트 2개로 나눈다. 물림 4–5.5 mm, 바닥 0.4 mm 전에서 멈춤.
 """
-import json, math, sys, numpy as np, mujoco
+import json, os, math, sys, numpy as np, mujoco
+np_deg=np.radians
 from pathlib import Path
 R=Path('cad/reference/microduck')
 H=json.load(open(sys.argv[1])); OUT=sys.argv[2]
 m=mujoco.MjModel.from_xml_path(str(R/'robot_allcollisions.xml')); d=mujoco.MjData(m)
-mujoco.mj_resetData(m,d); mujoco.mj_forward(m,d)
+mujoco.mj_resetData(m,d)
+for kv in filter(None, os.environ.get('MD_POSE','').split(',')):   # 예: MD_POSE=left_knee=45,right_knee=45 (도)
+    jn,deg=kv.split('='); d.qpos[m.jnt_qposadr[mujoco.mj_name2id(m,3,jn)]]=np_deg(float(deg))
+mujoco.mj_forward(m,d)
 base=d.xpos[mujoco.mj_name2id(m,1,'trunk_base')].copy()
 def q2m(q): M=np.zeros(9); mujoco.mju_quat2Mat(M,np.array(q,float)); return M.reshape(3,3)
 feats=[]
@@ -99,6 +103,8 @@ def classify(fs, a0, u):
         need = clear_end-seat + 1.6; term='through + nut?'; Lmin=need; Lmax=need+3
     L=max([v for v in STD if v<=min(need+0.3, Lmax) and v>=Lmin-0.01], default=None)
     if L is None: L=max([v for v in STD if v<=Lmax], default=STD[0])
+    # 참고: XL330 혼(출력 휠기어) 나사는 로보티즈 동봉 길이(M2×6)를 우선한다 — 조임 3.2–3.45 mm 자리는 물림 2.55–2.8 mm (경계).
+    #       모델 구멍 깊이(6 mm)로는 M2×8도 들어가지만 실물 깊이를 재기 전엔 늘리지 않는다 (VERIFICATION.md).
     clamp=round((max(tstart,clear_end) if tp else clear_end)-seat,2)
     pts=lambda t: a0+u*(t*sgn)
     return dict(size=size,len=L,need=round(need,2),Lmin=round(Lmin,2),Lmax=round(Lmax,2),clamp=clamp,head='SHCS' if cb else 'BHCS',term=term,

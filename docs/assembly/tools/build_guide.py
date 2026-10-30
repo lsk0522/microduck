@@ -196,7 +196,7 @@ def build(screws_path, img, out_pdf):
     pages.append(("", "", f"""
 <div class="l"><div class="kicker">ASSEMBLY GUIDE · 트랙 A</div>
 <h1>MICRODUCK<br>조립 가이드</h1>
-<div style="font-size:12pt;line-height:1.7">다이나믹셀 XL330 ×15 · 원본 25 cm 형상<br>하드웨어 {len(screws)}개 · 조립 13단계</div>
+<div style="font-size:12pt;line-height:1.7">다이나믹셀 XL330 ×15 · 원본 25 cm 형상<br>하드웨어 {len(screws)}개 · 조립 {len(STEPS)}단계</div>
 <div class="meta">버전 {date.today().isoformat()} · lsk0522/microduck<br>
 원본: Pollen Robotics Microduck (MJCF·STL, CC BY-NC-SA 4.0)<br>
 이 문서는 비공식이다. Pollen의 공식 조립 문서는 공개되지 않았고,<br>나사 규격·수량은 원본 CAD 메시의 구멍(지름·깊이·동축)에서 계산했다.</div></div>
@@ -346,12 +346,18 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 <svg viewBox="0 0 520 330" width="100%" style="font-family:'Noto Sans CJK KR';font-size:12px">
 <rect x="185" y="10" width="150" height="56" rx="8" fill="#1d1d1f"/><text x="260" y="34" fill="#fff" text-anchor="middle" font-weight="700">HAT (머리)</text>
 <text x="260" y="52" fill="#ccc" text-anchor="middle" font-size="10">UART2 1 Mbps · 반이중</text>
+<line x1="335" y1="38" x2="372" y2="38" stroke="#888" stroke-width="2"/>
+<rect x="372" y="14" width="140" height="48" rx="8" fill="#fff" stroke="#8a5a00" stroke-width="2.5"/>
+<text x="442" y="34" text-anchor="middle" font-weight="700">200 IMU 브리지</text>
+<text x="442" y="52" text-anchor="middle" font-size="10">몸통 (trunk imu site)</text>
 {''.join(f'<line x1="260" y1="66" x2="{x}" y2="110" stroke="#888" stroke-width="2"/>' for x in (80, 260, 440))}
 {''.join(f'<rect x="{x-75}" y="110" width="150" height="{h}" rx="8" fill="#fff" stroke="{c}" stroke-width="2.5"/><text x="{x}" y="132" text-anchor="middle" font-weight="700">{t}</text>' + ''.join(f'<text x="{x}" y="{152+18*i}" text-anchor="middle">{l}</text>' for i, l in enumerate(ls)) for x, h, c, t, ls in [
     (80, 200, "#EF6A1F", "왼다리", ["20 hip_yaw", "21 hip_roll", "22 hip_pitch", "23 knee", "24 ankle"]),
-    (260, 200, "#3b7d3b", "목·머리", ["200 IMU 브리지", "30 neck_pitch", "31 head_pitch", "32 head_yaw", "33 head_roll", "34 mouth"]),
+    (260, 200, "#3b7d3b", "목·머리", ["30 neck_pitch", "31 head_pitch", "32 head_yaw", "33 head_roll", "34 mouth"]),
     (440, 200, "#4a7fb5", "오른다리", ["10 hip_yaw", "11 hip_roll", "12 hip_pitch", "13 knee", "14 ankle"])])}
 </svg>
+<p style="font-size:8.5pt">IMU 브리지(ID 200)는 <b>몸통</b>에 단다 — 정책 관측의 몸통 IMU. 모델 위치: trunk_base 기준 X −21, Y 0, Z −15 mm, 축은 몸통과 같은 방향 (머리 IMU는 HAT 쪽, 별개).
+버스는 한 줄이라 어느 가지에 이어도 된다.</p>
 <p style="font-size:8.5pt">서보끼리는 동봉 X3P 180 mm 케이블로 데이지체인. 가동 범위 끝까지 돌려 케이블이 당기거나 끼이지 않는지 확인.</p>
 </div><div>
 <h3>전원</h3>
@@ -364,6 +370,31 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 <li>서기 자세 → 바닥에 내려 서기 → 전진 0.1 m/s</li>
 <li>루프 50 Hz 유지, 버스 오류 0, 서보 온도 추세 확인</li></ol>
 </div></div>"""))
+
+    # 검증 요약 (verify_screws.py 결과가 있으면)
+    vpath = Path(screws_path).parent / "verify.json"
+    if vpath.exists():
+        V = json.load(open(vpath))
+        n = len(V)
+        cnt = lambda k: sum(1 for r in V if r[k])
+        border = [r for r in V if r.get("T2_border")]
+        hard = [r for r in V if r["T5_tool"]]
+        rows = "".join(f"<tr><td>{k}</td><td>{d}</td><td><b>{cnt(k)}</b> / {n}</td></tr>" for k, d in [
+            ("T1_clear", "통과 구멍에서 나사가 재료에 걸리지 않음"),
+            ("T2_engage", "끝부분 물림 ≥ 2.5 mm (M2.5 ≥ 3 mm)"),
+            ("T3_no_bottom", "막힌 구멍 바닥에 닿지 않음"),
+            ("T4_head_free", "머리 자리에 다른 부품 없음")])
+        rows += f"<tr><td>T5</td><td>공구 경로 25 mm 안에 그때 있는 부품 없음 (조립 순서)</td><td><b>{n - len(hard)}</b> / {n}</td></tr>"
+        issues = "".join(f"<li>{r['step']}단계 {label(r['key'])} ({'+'.join(r['parts'])}): 물림 계산 {r['engage_calc']} mm — 경계</li>" for r in border[:1])
+        issues += "".join(f"<li>{r['step']}단계 {label(r['key'])} ({'+'.join(r['parts'])}) ×{sum(1 for x in hard if x['key']==r['key'] and x['parts']==r['parts'])}: "
+                          f"공구 경로 {r['T5_tool'][0]['at_mm']} mm 앞에 {r['T5_tool'][0]['mesh']} — 짧은 비트·ㄱ자 드라이버</li>"
+                          for i, r in enumerate(hard) if all(not (x['key'] == r['key'] and x['parts'] == r['parts']) for x in hard[:i]))
+        verify_html = f"""<h3>기하 검증 (verify_screws.py)</h3>
+<p style="font-size:8pt">계산과 다른 방법(메시 안/밖 판정)으로 가상 나사를 넣어 확인. 무릎 나사는 무릎을 45° 돌려 혼 구멍과 겹치는지 확인. 자세한 내용: docs/assembly/VERIFICATION.md</p>
+<table style="font-size:8pt"><tr><th>검사</th><th>내용</th><th>통과</th></tr>{rows}</table>
+<ul style="font-size:8pt">{issues}</ul>"""
+    else:
+        verify_html = ""
 
     # 확인 필요
     pages.append(("부록", "확인 필요 · 출처", f"""
@@ -392,6 +423,7 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 이 문서는 Pollen Robotics / Hugging Face와 관계없는 개인 프로젝트 문서다.</p>
 <h3>건너뛴 체결 {len(skipped)}건</h3>
 <p style="font-size:8.5pt">{'; '.join('+'.join(s['parts']) for s in skipped) or '없음'}</p>
+{verify_html}
 </div></div>"""))
 
     total = len(pages)
