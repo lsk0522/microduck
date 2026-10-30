@@ -216,8 +216,10 @@ sim2real 격차의 대부분은 액추에이터에서 생긴다(원본 README). 
 
 원본 MJCF에 `elec_rpi_robot_hat_pcb`(65×30×0.8 mm)가 있다. 같은 자리에 들어가도록 KiCad로 설계:
 - SN74LVC2G241 반이중 버퍼 (ROBOTIS 레퍼런스 회로) → Radxa UART2(TX/RX) + 방향 제어 GPIO.
-- 배터리 입력, 퓨즈, 5 V 강압, 서보 버스용 JST EH 3핀 ×3 (다리 L/R, 목).
-- IMU 브리지 MCU + LSM6DSV16X를 HAT에 통합하면 별도 보드가 필요 없다.
+- 5 V 강압(3 A 이상) — 목 버스 케이블로 올라온 2S를 받아 SBC에 준다. 버스용 JST EH 3핀 ×1–2 (목 줄, 여분).
+- 배터리·퓨즈·스위치·버스 허브(3핀 ×4)는 **몸통 전원부**에 둔다 (HAT는 머리 안이고 배터리·다리는 몸통이라).
+- IMU 브리지(ID 200)는 **몸통**에 따로 둔다 — 정책 관측이 몸통 IMU다. HAT에 넣으면 머리 IMU가 되어 맞지 않는다.
+- 배선 권장안: [`docs/assembly/OPERATION.md`](docs/assembly/OPERATION.md) 3절.
 - (선택) TLV320AIC3104 코덱 — 원본 런타임이 이 코덱을 전제로 한다.
 - 완료 후 `robotd.toml`의 `port = "/dev/ttyS2"` 기본값 그대로 사용.
 

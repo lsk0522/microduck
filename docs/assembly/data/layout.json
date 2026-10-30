@@ -1,0 +1,430 @@
+{
+ "origin": "trunk_base, 관절각 0, mm",
+ "parts": {
+  "board": {
+   "label": "SBC (Radxa Zero 3W)",
+   "pos_mm": [
+    68.1,
+    -0.0,
+    132.6
+   ]
+  },
+  "hat": {
+   "label": "HAT (버스 인터페이스)",
+   "pos_mm": [
+    59.6,
+    -1.1,
+    132.4
+   ]
+  },
+  "battery": {
+   "label": "배터리 NP-F550",
+   "pos_mm": [
+    -35.6,
+    -0.0,
+    -4.1
+   ]
+  },
+  "power": {
+   "label": "전원부 (퓨즈·스위치·허브)",
+   "pos_mm": [
+    -24.4,
+    0.0,
+    2.9
+   ]
+  },
+  "banana": {
+   "label": "banana PCB 고정부 (용도 미확인)",
+   "pos_mm": [
+    -31.3,
+    -0.0,
+    34.6
+   ]
+  },
+  "speaker": {
+   "label": "스피커",
+   "pos_mm": [
+    -5.4,
+    0.7,
+    129.1
+   ]
+  },
+  "imu": {
+   "label": "IMU 브리지 ID 200",
+   "pos_mm": [
+    -21.0,
+    0.1,
+    -14.7
+   ]
+  },
+  "camera": {
+   "label": "카메라 IMX219",
+   "pos_mm": [
+    81.4,
+    -0.1,
+    131.1
+   ]
+  },
+  "tof": {
+   "label": "ToF VL53L8CX",
+   "pos_mm": [
+    81.4,
+    22.4,
+    129.1
+   ]
+  },
+  "head_imu": {
+   "label": "머리 IMU",
+   "pos_mm": [
+    59.2,
+    0.1,
+    130.8
+   ]
+  },
+  "hub": {
+   "label": "버스 허브 (권장 위치)",
+   "pos_mm": [
+    -24.4,
+    0.0,
+    14.9
+   ]
+  }
+ },
+ "servos": {
+  "10": {
+   "joint": "right_hip_yaw",
+   "shaft_mm": [
+    6.0,
+    -17.5,
+    11.5
+   ],
+   "connector_mm": [
+    -18.5,
+    -17.5,
+    11.5
+   ]
+  },
+  "11": {
+   "joint": "right_hip_roll",
+   "shaft_mm": [
+    6.0,
+    -17.5,
+    -17.5
+   ],
+   "connector_mm": [
+    6.0,
+    -17.5,
+    -42.0
+   ]
+  },
+  "12": {
+   "joint": "right_hip_pitch",
+   "shaft_mm": [
+    4.0,
+    -55.0,
+    -17.5
+   ],
+   "connector_mm": [
+    -20.5,
+    -55.0,
+    -17.5
+   ]
+  },
+  "13": {
+   "joint": "right_knee",
+   "shaft_mm": [
+    -31.8,
+    -55.0,
+    -39.5
+   ],
+   "connector_mm": [
+    -31.8,
+    -55.0,
+    -15.0
+   ]
+  },
+  "14": {
+   "joint": "right_ankle",
+   "shaft_mm": [
+    -31.8,
+    -50.0,
+    -81.5
+   ],
+   "connector_mm": [
+    -31.8,
+    -50.0,
+    -57.0
+   ]
+  },
+  "20": {
+   "joint": "left_hip_yaw",
+   "shaft_mm": [
+    6.0,
+    17.5,
+    11.5
+   ],
+   "connector_mm": [
+    -18.5,
+    17.5,
+    11.5
+   ]
+  },
+  "21": {
+   "joint": "left_hip_roll",
+   "shaft_mm": [
+    6.0,
+    17.5,
+    -17.5
+   ],
+   "connector_mm": [
+    6.0,
+    17.5,
+    -42.0
+   ]
+  },
+  "22": {
+   "joint": "left_hip_pitch",
+   "shaft_mm": [
+    4.0,
+    55.0,
+    -17.5
+   ],
+   "connector_mm": [
+    -20.5,
+    55.0,
+    -17.5
+   ]
+  },
+  "23": {
+   "joint": "left_knee",
+   "shaft_mm": [
+    -31.8,
+    55.0,
+    -39.5
+   ],
+   "connector_mm": [
+    -31.8,
+    55.0,
+    -15.0
+   ]
+  },
+  "24": {
+   "joint": "left_ankle",
+   "shaft_mm": [
+    -31.8,
+    50.0,
+    -81.5
+   ],
+   "connector_mm": [
+    -31.8,
+    50.0,
+    -57.0
+   ]
+  },
+  "30": {
+   "joint": "neck_pitch",
+   "shaft_mm": [
+    26.0,
+    0.0,
+    32.4
+   ],
+   "connector_mm": [
+    26.0,
+    0.0,
+    56.9
+   ]
+  },
+  "31": {
+   "joint": "head_pitch",
+   "shaft_mm": [
+    26.0,
+    0.0,
+    82.4
+   ],
+   "connector_mm": [
+    26.0,
+    0.0,
+    57.9
+   ]
+  },
+  "32": {
+   "joint": "head_yaw",
+   "shaft_mm": [
+    26.0,
+    0.0,
+    115.6
+   ],
+   "connector_mm": [
+    26.0,
+    -24.5,
+    115.6
+   ]
+  },
+  "33": {
+   "joint": "head_roll",
+   "shaft_mm": [
+    -6.4,
+    0.0,
+    115.6
+   ],
+   "connector_mm": [
+    -6.4,
+    -24.5,
+    115.6
+   ]
+  },
+  "34": {
+   "joint": "mouth",
+   "shaft_mm": [
+    26.1,
+    25.5,
+    118.6
+   ],
+   "connector_mm": [
+    50.6,
+    25.5,
+    118.6
+   ]
+  }
+ },
+ "mouth_horn_faces": [
+  -0.0,
+  1.0,
+  -0.0
+ ],
+ "chain": [
+  [
+   "hat",
+   "34",
+   "33",
+   "32",
+   "31",
+   "30",
+   "hub"
+  ],
+  [
+   "hub",
+   "imu"
+  ],
+  [
+   "hub",
+   "20",
+   "21",
+   "22",
+   "23",
+   "24"
+  ],
+  [
+   "hub",
+   "10",
+   "11",
+   "12",
+   "13",
+   "14"
+  ]
+ ],
+ "cables": [
+  {
+   "frm": "hat",
+   "to": "34",
+   "straight_mm": 31.3,
+   "crosses_joint": false
+  },
+  {
+   "frm": "34",
+   "to": "33",
+   "straight_mm": 75.9,
+   "crosses_joint": false
+  },
+  {
+   "frm": "33",
+   "to": "32",
+   "straight_mm": 32.4,
+   "crosses_joint": true
+  },
+  {
+   "frm": "32",
+   "to": "31",
+   "straight_mm": 62.7,
+   "crosses_joint": true
+  },
+  {
+   "frm": "31",
+   "to": "30",
+   "straight_mm": 1.0,
+   "crosses_joint": false
+  },
+  {
+   "frm": "30",
+   "to": "hub",
+   "straight_mm": 65.6,
+   "crosses_joint": true
+  },
+  {
+   "frm": "hub",
+   "to": "imu",
+   "straight_mm": 29.8,
+   "crosses_joint": false
+  },
+  {
+   "frm": "hub",
+   "to": "20",
+   "straight_mm": 18.8,
+   "crosses_joint": false
+  },
+  {
+   "frm": "20",
+   "to": "21",
+   "straight_mm": 58.8,
+   "crosses_joint": true
+  },
+  {
+   "frm": "21",
+   "to": "22",
+   "straight_mm": 52.0,
+   "crosses_joint": true
+  },
+  {
+   "frm": "22",
+   "to": "23",
+   "straight_mm": 11.6,
+   "crosses_joint": false
+  },
+  {
+   "frm": "23",
+   "to": "24",
+   "straight_mm": 42.3,
+   "crosses_joint": true
+  },
+  {
+   "frm": "hub",
+   "to": "10",
+   "straight_mm": 18.8,
+   "crosses_joint": false
+  },
+  {
+   "frm": "10",
+   "to": "11",
+   "straight_mm": 58.8,
+   "crosses_joint": true
+  },
+  {
+   "frm": "11",
+   "to": "12",
+   "straight_mm": 52.0,
+   "crosses_joint": true
+  },
+  {
+   "frm": "12",
+   "to": "13",
+   "straight_mm": 11.6,
+   "crosses_joint": false
+  },
+  {
+   "frm": "13",
+   "to": "14",
+   "straight_mm": 42.3,
+   "crosses_joint": true
+  }
+ ]
+}

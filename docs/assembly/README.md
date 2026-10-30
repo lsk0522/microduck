@@ -1,14 +1,18 @@
 # 조립 가이드 (트랙 A · 다이나믹셀 XL330 · 원본 형상)
 
-**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 24쪽, VORON 2.4 매뉴얼 형식. 검증 기록: [`VERIFICATION.md`](VERIFICATION.md)
+**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 32쪽, VORON 2.4 매뉴얼 형식. 검증 기록: [`VERIFICATION.md`](VERIFICATION.md) ·
+서보 원점·배선·배치·제어·시뮬레이션: [`OPERATION.md`](OPERATION.md)
 
 | 쪽 | 내용 |
 |---|---|
 | 1–3 | 표지, 읽는 법(색 범례·조립 3원칙·공구), 하드웨어 레퍼런스 **1:1 실물 크기** |
 | 4–5 | BOM (나사 126개 계산값, 조달 방법), 출력물·판재 썸네일 |
 | 6 | 0단계: 서보 15개 설정 (ID, 레지스터, 무릎 homing offset −512) |
-| 7–22 | 조립 16단계 (다리 ×2 → 몸통·전원부 → 목 → 머리 서브조립 → 머리) |
-| 23–24 | 배선·첫 전원 점검, 모델에서 확인되지 않은 체결, 기하 검증 요약, 출처 |
+| 7–9 | **서보 원점(2048)·혼 방향·+ 방향 표**, 원점 자세 그림, 장착 절차·기본 자세 |
+| 10–25 | 조립 16단계 (다리 ×2 → 몸통·전원부 → 목 → 머리 서브조립 → 머리) |
+| 26–29 | **부품 배치도, 배선도, 배선 경로·케이블 길이**, 첫 전원 점검·문제 해결 |
+| 30–31 | **제어 방법**(robotd 50 Hz 루프, 관측 61, 게인), **시뮬레이션 방법**(레벨 1–3, 학습) |
+| 32 | 모델에서 확인되지 않은 체결, 기하 검증 요약, 출처 |
 
 ## 주의
 
@@ -32,6 +36,8 @@ uv run python docs/assembly/tools/find_holes.py cad/reference/microduck/assets d
 uv run python docs/assembly/tools/find_screws.py docs/assembly/data/holes.json docs/assembly/data/screws.json
 uv run python docs/assembly/tools/render_steps.py docs/assembly/data/screws.json docs/assembly/img             # 헤드리스: MUJOCO_GL=egl
 uv run python docs/assembly/tools/verify_screws.py docs/assembly/data/screws.json docs/assembly/data/verify.json     # 검증, 약 2분 (PDF 부록 요약에 쓰임)
+uv run python docs/assembly/tools/servo_zero.py docs/assembly/data/servo_zero.json                                  # 서보 혼 방향·+ 방향·기본 자세
+uv run python docs/assembly/tools/layout.py docs/assembly/img docs/assembly/data                                    # 원점·배치·배선 그림, 케이블 길이
 cd docs/assembly && uv run --with playwright python tools/build_guide.py data/screws.json img Microduck_Assembly_Guide.pdf
 ```
 (처음 한 번 `uv run --with playwright python -m playwright install chromium`. playwright가 없으면 HTML만 만들어지니
@@ -43,7 +49,11 @@ cd docs/assembly && uv run --with playwright python tools/build_guide.py data/sc
 | `tools/find_holes.py`, `tools/find_screws.py` | 구멍 검출 → 나사 묶기·길이 계산 |
 | `tools/render_steps.py` | 단계 렌더, 표지, 부품 썸네일 |
 | `tools/verify_screws.py` | 독립 기하 검증 (통과·물림·바닥·머리·공구 경로) → `data/verify.json`, [`VERIFICATION.md`](VERIFICATION.md) |
+| `tools/servo_zero.py` | 관절마다 서보·혼 방향·+ 방향·가동 범위·기본 자세 → `data/servo_zero.json` |
+| `tools/layout.py` | 원점·기본 자세·부품 배치·배선 경로 그림, 부품 위치·케이블 길이 → `data/layout.json` |
+| `tools/ops_pages.py` | PDF의 원점·전장·제어·시뮬레이션 쪽 |
+| `tools/dxl_zero.py` | 실물 서보 설정·원점(2048)·기본 자세·위치 읽기 (dynamixel-sdk, 미검증) |
 | `tools/build_guide.py` | HTML → PDF |
-| `data/holes.json`, `data/screws.json`, `data/verify.json` | 계산·검증 결과 |
+| `data/holes.json`, `data/screws.json`, `data/verify.json`, `data/servo_zero.json`, `data/layout.json` | 계산·검증 결과 |
 
 단계 내용을 고칠 때는 `tools/steps.py`만 수정하고 다시 생성한다.

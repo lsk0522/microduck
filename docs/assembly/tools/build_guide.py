@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from steps import COL, SCREW_COL, STEPS, knee_screws, step_of  # noqa: E402
+import ops_pages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[3]
 ACCENT = "#EF6A1F"
@@ -175,6 +176,7 @@ tr:nth-child(even) td {{ background:#fafafa; }}
 .scale {{ display:flex; align-items:center; gap:6mm; padding:2mm 0; border-bottom:0.25mm dashed #ddd; }}
 .scale .nm {{ width:40mm; font-weight:700; }}
 .ruler {{ height:6mm; }}
+table.tight td {{ padding:0.8mm 1.5mm; }} table.tight th {{ padding:1.2mm 1.5mm; }}
 code {{ font-family:'DejaVu Sans Mono',monospace; font-size:8.5pt; background:#f0f0f0; padding:0 1mm; border-radius:0.8mm; }}
 """
 
@@ -322,6 +324,9 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 <p style="font-size:8pt;color:#666">버스: /dev/ttyS2, 1 Mbps, Protocol 2.0 · IMU 브리지 ID 200 · 출처 docs/hardware-notes.md</p>
 </div></div>"""))
 
+    data_dir = Path(screws_path).parent
+    pages.extend(ops_pages.zero_pages(img, data_dir))
+
     # 단계
     for st in STEPS:
         mine = [s for s in screws if s["step"] == st["id"]]
@@ -339,37 +344,28 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
 <div class="img"><img src="{img}/step_{st['id']:02d}.png"></div></div>"""
         pages.append((st["section"].upper(), f"STEP {st['id']} / {len(STEPS)}", body))
 
-    # 배선
-    pages.append(("배선", "버스·전원·첫 전원", f"""
+    # 전장 · 제어 · 시뮬레이션
+    pages.extend(ops_pages.elec_pages(img, data_dir))
+    pages.append(("전장", "첫 전원 점검", """
 <div class="two"><div>
-<h2>배선</h2>
-<svg viewBox="0 0 520 330" width="100%" style="font-family:'Noto Sans CJK KR';font-size:12px">
-<rect x="185" y="10" width="150" height="56" rx="8" fill="#1d1d1f"/><text x="260" y="34" fill="#fff" text-anchor="middle" font-weight="700">HAT (머리)</text>
-<text x="260" y="52" fill="#ccc" text-anchor="middle" font-size="10">UART2 1 Mbps · 반이중</text>
-<line x1="335" y1="38" x2="372" y2="38" stroke="#888" stroke-width="2"/>
-<rect x="372" y="14" width="140" height="48" rx="8" fill="#fff" stroke="#8a5a00" stroke-width="2.5"/>
-<text x="442" y="34" text-anchor="middle" font-weight="700">200 IMU 브리지</text>
-<text x="442" y="52" text-anchor="middle" font-size="10">몸통 (trunk imu site)</text>
-{''.join(f'<line x1="260" y1="66" x2="{x}" y2="110" stroke="#888" stroke-width="2"/>' for x in (80, 260, 440))}
-{''.join(f'<rect x="{x-75}" y="110" width="150" height="{h}" rx="8" fill="#fff" stroke="{c}" stroke-width="2.5"/><text x="{x}" y="132" text-anchor="middle" font-weight="700">{t}</text>' + ''.join(f'<text x="{x}" y="{152+18*i}" text-anchor="middle">{l}</text>' for i, l in enumerate(ls)) for x, h, c, t, ls in [
-    (80, 200, "#EF6A1F", "왼다리", ["20 hip_yaw", "21 hip_roll", "22 hip_pitch", "23 knee", "24 ankle"]),
-    (260, 200, "#3b7d3b", "목·머리", ["30 neck_pitch", "31 head_pitch", "32 head_yaw", "33 head_roll", "34 mouth"]),
-    (440, 200, "#4a7fb5", "오른다리", ["10 hip_yaw", "11 hip_roll", "12 hip_pitch", "13 knee", "14 ankle"])])}
-</svg>
-<p style="font-size:8.5pt">IMU 브리지(ID 200)는 <b>몸통</b>에 단다 — 정책 관측의 몸통 IMU. 모델 위치: trunk_base 기준 X −21, Y 0, Z −15 mm, 축은 몸통과 같은 방향 (머리 IMU는 HAT 쪽, 별개).
-버스는 한 줄이라 어느 가지에 이어도 된다.</p>
-<p style="font-size:8.5pt">서보끼리는 동봉 X3P 180 mm 케이블로 데이지체인. 가동 범위 끝까지 돌려 케이블이 당기거나 끼이지 않는지 확인.</p>
-</div><div>
-<h3>전원</h3>
-<p>NP-F550 (2S, 6.6–8.2 V) → 퓨즈 5 A → 스위치 → 서보 버스 직결 · 5 V 강압 → 보드. (plan.md 결정 D1: 서보 전원 방식 확인)</p>
-<h3>첫 전원 점검</h3>
-<ol style="font-size:9.5pt;line-height:1.6">
-<li>배터리 없이 USB로 보드만 켜고 <code>robotctl health</code> — 15개 서보 + ID 200 응답</li>
-<li>로봇을 <b>끈으로 매단 상태</b>에서 배터리 연결</li>
-<li><code>robotctl monitor</code>로 각 관절을 손으로 살짝 움직여 <b>부호(방향)</b> 확인 — 하나라도 반대면 즉시 넘어진다</li>
+<h2>첫 전원 점검</h2>
+<ol style="font-size:10pt;line-height:1.7">
+<li>배터리 없이 USB로 보드만 켜고 SSH 접속, <code>robotctl health</code>가 답하는지 확인 (서보는 전원이 없어 '응답 없음'이 정상)</li>
+<li>로봇을 <b>끈으로 매단 상태</b>에서 배터리 연결 → <code>robotctl health</code> — 15개 서보 + ID 200 응답</li>
+<li><code>robotctl monitor</code>로 각 관절을 손으로 살짝 움직여 <b>부호(방향)</b> 확인 — 하나라도 반대면 즉시 넘어진다 (+ 방향 표 참고)</li>
 <li>서기 자세 → 바닥에 내려 서기 → 전진 0.1 m/s</li>
 <li>루프 50 Hz 유지, 버스 오류 0, 서보 온도 추세 확인</li></ol>
+</div><div>
+<h3>문제가 생기면</h3>
+<table style="font-size:9pt"><tr><th>증상</th><th>먼저 볼 것</th></tr>
+<tr><td>서보 몇 개가 응답 없음</td><td>그 서보 앞 케이블 (데이지체인이라 뒤쪽이 전부 사라짐), ID·baud</td></tr>
+<tr><td>모든 읽기 실패 <code>bus read failed</code></td><td>펌웨어 v46 미만 또는 IMU 브리지가 Fast Sync Read 미지원</td></tr>
+<tr><td>무릎만 45° 틀어짐</td><td>homing_offset −512 누락</td></tr>
+<tr><td>한 관절만 반대로 움직임</td><td>서보가 뒤집혀 장착됨 (혼 방향 표)</td></tr>
+<tr><td>배터리 완충 시 서보가 꺼짐</td><td>shutdown 52가 아님 (전압 보호 비트)</td></tr>
+<tr><td>루프 45 Hz 미만</td><td>return delay 0 확인, 콘솔(serial-getty) 마스크</td></tr></table>
 </div></div>"""))
+    pages.extend(ops_pages.control_pages())
 
     # 검증 요약 (verify_screws.py 결과가 있으면)
     vpath = Path(screws_path).parent / "verify.json"

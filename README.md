@@ -26,6 +26,7 @@ Pollen Robotics / Hugging Face의 25 cm 2족 오리 로봇 **Microduck**을 개�
 | 일반 서보 트랙 계획 (토크 분석, 1.5배 설계, 피드백 개조, Pi 제어, 재학습) | [`plan-hobby-servo.md`](plan-hobby-servo.md) |
 | 부품·가격·구매 링크 (3개 버전 비교) | [`bom/BOM.xlsx`](bom/BOM.xlsx), [`bom/BOM.csv`](bom/BOM.csv), [`bom/BOM_hobby_servo.csv`](bom/BOM_hobby_servo.csv) |
 | **조립 가이드 PDF** (나사 BOM 126개, 16단계, 1:1 하드웨어 도면, 기하 검증) | [`docs/assembly/`](docs/assembly/) |
+| 서보 원점(2048)·혼 방향, 배선도, 부품 배치도, 제어 방법, 시뮬레이션 방법 | [`docs/assembly/OPERATION.md`](docs/assembly/OPERATION.md) |
 | Fusion + Claude로 CAD 재설계하는 방법 | [`cad/FUSION_REDESIGN.md`](cad/FUSION_REDESIGN.md) |
 | 알루미늄 판재 가공 부품 (DXF) | [`cad/plates/`](cad/plates/) |
 | 원본 CAD 자료 (MJCF·STL·관절 프레임) | [`cad/reference/`](cad/reference/) |

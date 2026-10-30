@@ -20,6 +20,9 @@ if /i "%VF%"=="y" (
 echo [1/3] Rendering step images ...
 uv run python docs\assembly\tools\render_steps.py docs\assembly\data\screws.json docs\assembly\img
 if errorlevel 1 (pause & exit /b 1)
+uv run python docs\assembly\tools\servo_zero.py docs\assembly\data\servo_zero.json
+uv run python docs\assembly\tools\layout.py docs\assembly\img docs\assembly\data
+if errorlevel 1 (pause & exit /b 1)
 echo [2/3] Preparing PDF engine (first run downloads Chromium) ...
 uv run --with playwright python -m playwright install chromium
 echo [3/3] Building PDF ...

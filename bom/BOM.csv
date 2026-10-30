@@ -3,7 +3,8 @@
 구동,서보 설정 인터페이스,ROBOTIS U2D2,1,0,0,36300,KRW,확인,로보티즈 공식몰,https://www.robotis.com/shop/item.php?it_id=902-0132-000,상품,,정품 USB 인터페이스. 준비기간 10일
 구동,U2D2 전원 허브,U2D2 PHB Set,1,0,0,21780,KRW,확인,로보티즈 공식몰,https://www.robotis.com/shop/list.php?ca_id=202030,목록,,벤치에서 서보 여러 개 전원 분배
 구동,USB-TTL 변환기 (U2D2 대용),CP2102 모듈 3.3V,0,0,1,2500,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=CP2102+USB+TTL+%EB%AA%A8%EB%93%88&sort=price_asc,검색,,SN74LVC2G241 반이중 회로와 함께 서보 ID 설정·벤치 테스트
-구동,서보 케이블 추가,로봇 케이블-X3P 180mm 10개,1,0,0,18150,KRW,확인,로보티즈 공식몰,https://www.robotis.com/shop/list.php?ca_id=202030,목록,자작: https://search.shopping.naver.com/search/all?query=JST+EH+3%ED%95%80+%EC%BC%80%EC%9D%B4%EB%B8%94&sort=price_asc,저렴한 버전은 서보 동봉 케이블(개당 1개)로 해결
+구동,서보 케이블 추가,로봇 케이블-X3P 180mm 10개,1,0,0,18150,KRW,확인,로보티즈 공식몰,https://www.robotis.com/shop/list.php?ca_id=202030,목록,자작: https://search.shopping.naver.com/search/all?query=JST+EH+3%ED%95%80+%EC%BC%80%EC%9D%B4%EB%B8%94&sort=price_asc,"필요 17가닥(머리·목 6, IMU 1, 다리 10) vs 서보 동봉 15가닥 → 최소 2가닥 부족. 나머지는 예비 (docs/assembly/OPERATION.md 3절)"
+구동,버스 케이블 자작,JST EH 3핀 케이블 180 mm 2가닥,0,0,1,1000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=JST+EH+3%ED%95%80+%EC%BC%80%EC%9D%B4%EB%B8%94&sort=price_asc,검색,,저렴한 버전: 필요 16가닥(부리 서보 없음) vs 동봉 14가닥
 컴퓨팅,메인 SBC,Radxa Zero 3W (1GB/8GB eMMC 또는 2GB/16GB),1,0,1,20.0,USD,확인,ARACE (Radxa 공식 파트너),https://arace.tech/products/radxa-zero-3w,상품,알리: https://www.aliexpress.com/w/wholesale-Radxa-Zero-3W.html?SortType=price_asc / allnetchina: https://shop.allnetchina.cn/products/copy-of-radxa-zero-3w,"⚠ 2026-10-29 확인 시 ARACE·ameridroid·allnetchina 전 모델 품절. 재입고 알림 신청. 대안: Orange Pi Zero 2W / Pi Zero 2W (같은 65×30, 런타임 포팅 필요)"
 컴퓨팅,방열판,Radxa ZERO 3W/3E 전용 히트싱크,1,0,1,3000,KRW,추정,알리익스프레스,https://www.aliexpress.us/item/3256806829446736.html,상품,,원본 문서에 95 °C 스로틀링 사례
 컴퓨팅,microSD,32GB A1 (eMMC 없는 보드일 때만),0,0,1,6000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=microSD+32GB+A1&sort=price_asc,검색,,eMMC 없는 저가 보드 선택 시. 보유 중이면 0원
@@ -20,6 +21,7 @@
 전원,5V 강압 모듈,MP1584EN 3A,1,1,1,1500,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=MP1584EN+%EA%B0%95%EC%95%95+%EB%AA%A8%EB%93%88&sort=price_asc,검색,,SBC·센서용. 출력 5.1V로 조정 후 연결
 전원,전원 스위치,슬라이드/로커 스위치 5 A 이상,1,0,1,1000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=%EB%AF%B8%EB%8B%88+%EB%A1%9C%EC%BB%A4%EC%8A%A4%EC%9C%84%EC%B9%98+5A&sort=price_asc,검색,,
 전원,퓨즈,미니 블레이드 퓨즈 5A + 홀더,1,0,1,1500,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=%EB%AF%B8%EB%8B%88+%EB%B8%94%EB%A0%88%EC%9D%B4%EB%93%9C+%ED%93%A8%EC%A6%88+%ED%99%80%EB%8D%94&sort=price_asc,검색,,서보 버스 단락 보호
+전원,버스 허브 (자작),JST EH 3핀 기판 커넥터 ×5 + 만능기판 (전원 입력·목·다리 L/R·IMU 병렬),1,0,1,2000,KRW,추정,네이버쇼핑 최저가,https://search.shopping.naver.com/search/all?query=JST+EH+2.5mm+3%ED%95%80+%EA%B8%B0%ED%8C%90+%EC%BB%A4%EB%84%A5%ED%84%B0&sort=price_asc,검색,,몸통 전원부에 둔다 (docs/assembly/OPERATION.md 3절)
 전원,커넥터,XT30 수/암 세트,2,0,0,500,KRW,추정,알리익스프레스,https://www.aliexpress.com/w/wholesale-XT30-connector.html?SortType=price_asc,검색,,저렴한 버전은 배터리 플레이트 리드선 직결
 버스·PCB,반이중 버퍼 IC,SN74LVC2G241DCUR,1,2,1,0.15,USD,추정,LCSC,https://www.lcsc.com/search?q=SN74LVC2G241,검색,,ROBOTIS 레퍼런스 반이중 회로. 1단계는 변환기판에 납땜
 버스·PCB,자작 HAT PCB,65×30 mm 2층 PCB 5장 (배송 포함),1,0,1,10.0,USD,추정,JLCPCB,https://jlcpcb.com/,사이트,,LCSC 부품과 함께 주문하면 배송 합산. 저렴한 버전은 만능기판으로 대체 가능

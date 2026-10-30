@@ -1,0 +1,478 @@
+[
+ {
+  "joint": "left_hip_yaw",
+  "id": 20,
+  "axis": [
+   0.0,
+   0.0,
+   -1.0
+  ],
+  "anchor_mm": [
+   6.0,
+   17.5,
+   -5.0
+  ],
+  "servo_body": "trunk_base",
+  "servo_on": "parent",
+  "child_body": "yaw2roll",
+  "horn_faces": [
+   0.0,
+   0.0,
+   -1.0
+  ],
+  "horn_faces_txt": "−Z (아래)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발끝이 오른쪽으로 돈다",
+  "range_deg": [
+   -25.0,
+   30.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.0,
+  "default_deg": 0.0,
+  "default_pos": 2048
+ },
+ {
+  "joint": "left_hip_roll",
+  "id": 21,
+  "axis": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "anchor_mm": [
+   22.5,
+   17.5,
+   -17.5
+  ],
+  "servo_body": "yaw2roll",
+  "servo_on": "parent",
+  "child_body": "hip_l",
+  "horn_faces": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "horn_faces_txt": "+X (앞)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 왼쪽으로",
+  "range_deg": [
+   -22.0,
+   22.0
+  ],
+  "homing_offset": 0,
+  "default_rad": -0.0873,
+  "default_deg": -5.0,
+  "default_pos": 1991
+ },
+ {
+  "joint": "left_hip_pitch",
+  "id": 22,
+  "axis": [
+   -0.0,
+   1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   4.0,
+   42.5,
+   -17.5
+  ],
+  "servo_body": "upper_leg_left",
+  "servo_on": "child",
+  "child_body": "upper_leg_left",
+  "horn_faces": [
+   0.0,
+   -1.0,
+   -0.0
+  ],
+  "horn_faces_txt": "−Y (오른쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 뒤로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": 0,
+  "default_rad": -0.4579,
+  "default_deg": -26.2,
+  "default_pos": 1749
+ },
+ {
+  "joint": "left_knee",
+  "id": 23,
+  "axis": [
+   0.0,
+   -1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   -31.8,
+   38.5,
+   -39.5
+  ],
+  "servo_body": "upper_leg_left",
+  "servo_on": "parent",
+  "child_body": "leg",
+  "horn_faces": [
+   0.0,
+   -1.0,
+   0.0
+  ],
+  "horn_faces_txt": "−Y (오른쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 앞으로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": -512,
+  "default_rad": -0.0049,
+  "default_deg": -0.3,
+  "default_pos": 2045
+ },
+ {
+  "joint": "left_ankle",
+  "id": 24,
+  "axis": [
+   -0.0,
+   1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   -31.8,
+   64.5,
+   -81.5
+  ],
+  "servo_body": "leg",
+  "servo_on": "parent",
+  "child_body": "ankle_left",
+  "horn_faces": [
+   -0.0,
+   1.0,
+   0.0
+  ],
+  "horn_faces_txt": "+Y (왼쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발끝이 아래로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.453,
+  "default_deg": 26.0,
+  "default_pos": 2343
+ },
+ {
+  "joint": "neck_pitch",
+  "id": 30,
+  "axis": [
+   0.0,
+   -1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   26.0,
+   14.5,
+   32.4
+  ],
+  "servo_body": "neck",
+  "servo_on": "child",
+  "child_body": "neck",
+  "horn_faces": [
+   -0.0,
+   1.0,
+   -0.0
+  ],
+  "horn_faces_txt": "+Y (왼쪽)",
+  "horn_screw_sides": 2,
+  "horn_check": null,
+  "plus": "부리가 뒤로",
+  "range_deg": [
+   -90.0,
+   60.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.3491,
+  "default_deg": 20.0,
+  "default_pos": 2276
+ },
+ {
+  "joint": "head_pitch",
+  "id": 31,
+  "axis": [
+   0.0,
+   1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   26.0,
+   14.5,
+   82.4
+  ],
+  "servo_body": "neck",
+  "servo_on": "parent",
+  "child_body": "neck_pitch",
+  "horn_faces": [
+   0.0,
+   1.0,
+   0.0
+  ],
+  "horn_faces_txt": "+Y (왼쪽)",
+  "horn_screw_sides": 2,
+  "horn_check": null,
+  "plus": "부리가 아래로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.3491,
+  "default_deg": 20.0,
+  "default_pos": 2276
+ },
+ {
+  "joint": "head_yaw",
+  "id": 32,
+  "axis": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "anchor_mm": [
+   26.0,
+   0.0,
+   101.1
+  ],
+  "servo_body": "yaw_roll_motion",
+  "servo_on": "child",
+  "child_body": "yaw_roll_motion",
+  "horn_faces": [
+   -0.0,
+   -0.0,
+   -1.0
+  ],
+  "horn_faces_txt": "−Z (아래)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "얼굴이 왼쪽으로 돈다",
+  "range_deg": [
+   -170.0,
+   170.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.0,
+  "default_deg": 0.0,
+  "default_pos": 2048
+ },
+ {
+  "joint": "head_roll",
+  "id": 33,
+  "axis": [
+   -1.0,
+   0.0,
+   0.0
+  ],
+  "anchor_mm": [
+   8.1,
+   0.0,
+   115.6
+  ],
+  "servo_body": "jaw_soft",
+  "servo_on": "child",
+  "child_body": "jaw_soft",
+  "horn_faces": [
+   1.0,
+   -0.0,
+   -0.0
+  ],
+  "horn_faces_txt": "+X (앞)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "머리 윗부분이 왼쪽으로 기운다",
+  "range_deg": [
+   -25.0,
+   25.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.0,
+  "default_deg": 0.0,
+  "default_pos": 2048
+ },
+ {
+  "joint": "right_hip_yaw",
+  "id": 10,
+  "axis": [
+   0.0,
+   0.0,
+   -1.0
+  ],
+  "anchor_mm": [
+   6.0,
+   -17.5,
+   -5.0
+  ],
+  "servo_body": "trunk_base",
+  "servo_on": "parent",
+  "child_body": "bearing_roll",
+  "horn_faces": [
+   0.0,
+   0.0,
+   -1.0
+  ],
+  "horn_faces_txt": "−Z (아래)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발끝이 오른쪽으로 돈다",
+  "range_deg": [
+   -30.0,
+   25.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.0,
+  "default_deg": 0.0,
+  "default_pos": 2048
+ },
+ {
+  "joint": "right_hip_roll",
+  "id": 11,
+  "axis": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "anchor_mm": [
+   22.5,
+   -17.5,
+   -17.5
+  ],
+  "servo_body": "bearing_roll",
+  "servo_on": "parent",
+  "child_body": "hip_l_2",
+  "horn_faces": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "horn_faces_txt": "+X (앞)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 왼쪽으로",
+  "range_deg": [
+   -22.0,
+   22.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.0873,
+  "default_deg": 5.0,
+  "default_pos": 2105
+ },
+ {
+  "joint": "right_hip_pitch",
+  "id": 12,
+  "axis": [
+   -0.0,
+   -1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   4.0,
+   -42.5,
+   -17.5
+  ],
+  "servo_body": "upper_leg_right",
+  "servo_on": "child",
+  "child_body": "upper_leg_right",
+  "horn_faces": [
+   0.0,
+   1.0,
+   -0.0
+  ],
+  "horn_faces_txt": "+Y (왼쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 앞으로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": 0,
+  "default_rad": 0.4579,
+  "default_deg": 26.2,
+  "default_pos": 2347
+ },
+ {
+  "joint": "right_knee",
+  "id": 13,
+  "axis": [
+   0.0,
+   1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   -31.8,
+   -38.5,
+   -39.5
+  ],
+  "servo_body": "upper_leg_right",
+  "servo_on": "parent",
+  "child_body": "leg_2",
+  "horn_faces": [
+   0.0,
+   1.0,
+   0.0
+  ],
+  "horn_faces_txt": "+Y (왼쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발이 뒤로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": -512,
+  "default_rad": 0.0049,
+  "default_deg": 0.3,
+  "default_pos": 2051
+ },
+ {
+  "joint": "right_ankle",
+  "id": 14,
+  "axis": [
+   -0.0,
+   -1.0,
+   0.0
+  ],
+  "anchor_mm": [
+   -31.8,
+   -64.5,
+   -81.5
+  ],
+  "servo_body": "leg_2",
+  "servo_on": "parent",
+  "child_body": "ankle_right",
+  "horn_faces": [
+   -0.0,
+   -1.0,
+   0.0
+  ],
+  "horn_faces_txt": "−Y (오른쪽)",
+  "horn_screw_sides": 1,
+  "horn_check": true,
+  "plus": "발끝이 위로",
+  "range_deg": [
+   -90.0,
+   90.0
+  ],
+  "homing_offset": 0,
+  "default_rad": -0.453,
+  "default_deg": -26.0,
+  "default_pos": 1753
+ }
+]
