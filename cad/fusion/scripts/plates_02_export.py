@@ -1,8 +1,8 @@
 """마이크로덕 판재 작업 3단계 (Fusion 안): 판 외곽·구멍 루프를 JSON으로, 3D를 STEP으로 내보낸다.
 
 run('upper_leg_rigidity_plate') / run('all')
-- 출력: cad/redesign/plates/<part>.step, cad/redesign/plates/build/<part>_loops.json
-- DXF·PDF는 저장소 쪽 도구가 JSON으로 만든다: cad/redesign/plates/make_outputs.py
+- 출력: cad/redesign/dynamixel/v1.x/parts/<part>/<part>.step, cad/redesign/tools/build/<part>_loops.json
+- DXF·PDF는 저장소 쪽 도구가 JSON으로 만든다: cad/redesign/tools/make_plate_outputs.py
 2D 좌표계 (도면·DXF): 판을 아래 방향에서 본 평면 좌표, mm, 왼쪽 아래 = (0,0)
   upper_leg_rigidity_plate: (X, Z)  몸통 안쪽(-Y)에서 본 모습
   trunk_base:               (X, Y)  위(+Z)에서 본 모습
@@ -12,7 +12,9 @@ run('upper_leg_rigidity_plate') / run('all')
 import adsk.core, adsk.fusion, json, os
 
 REPO = os.path.join(os.path.expanduser('~'), 'Desktop', 'Microduck')
-OUT = os.path.join(REPO, 'cad', 'redesign', 'plates')
+VER = 'v1.0'
+OUTV = os.path.join(REPO, 'cad', 'redesign', 'dynamixel', VER, 'parts')
+BUILD = os.path.join(REPO, 'cad', 'redesign', 'tools', 'build')
 FRAME = {'upper_leg_rigidity_plate': (0, 2), 'trunk_base': (0, 1), 'bearing_roll': (1, 2), 'neck': (0, 2)}
 INFO = {  # 수량, 두께 매개변수
     'upper_leg_rigidity_plate': (2, 't_plate'), 'trunk_base': (1, 't_plate'),
@@ -24,7 +26,7 @@ def run(_context: str):
     app = adsk.core.Application.get()
     des = adsk.fusion.Design.cast(app.activeProduct)
     names = list(FRAME) if _context in ('', 'all') else [_context]
-    os.makedirs(os.path.join(OUT, 'build'), exist_ok=True)
+    os.makedirs(BUILD, exist_ok=True)
     for n in names:
         export(des, n)
 
@@ -71,11 +73,12 @@ def export(des, name):
         'material': body.material.name if body.material else None,
         'mass_g': pp.mass * 1000, 'volume_mm3': body.volume * 1000, 'face_area_mm2': face.area * 100,
         'frame': ['XYZ'[fr[0]], 'XYZ'[fr[1]]], 'loops': loops,
-        'params': {p.name: p.expression for p in des.userParameters},
+        'params': {p.name: p.expression for p in des.userParameters}, 'track': 'Microduck 다이나믹셀 ' + VER + ' (XL330, 원본 크기)',
     }
-    with open(os.path.join(OUT, 'build', f'{name}_loops.json'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(BUILD, f'{name}_loops.json'), 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
     em = des.exportManager
-    opt = em.createSTEPExportOptions(os.path.join(OUT, f'{name}.step'), comp)
+    od = os.path.join(OUTV, name); os.makedirs(od, exist_ok=True)
+    opt = em.createSTEPExportOptions(os.path.join(od, f'{name}.step'), comp)
     em.execute(opt)
     print(f'[{name}] loops={len(loops)} mass={data["mass_g"]:.2f} g -> json + step')

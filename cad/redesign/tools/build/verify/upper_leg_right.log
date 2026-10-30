@@ -1,0 +1,2 @@
+  new_to_orig >0.3mm 0.0%: [{'at': [-70.2, 23.1, 33.6], 'n': 1, 'max': np.float64(0.31)}]
+upper_leg_right: orig->new mean 0.026 p95 0.129 max 0.233 | new->orig mean 0.032 p95 0.155 max 0.307 | vol -0.47% | PASS

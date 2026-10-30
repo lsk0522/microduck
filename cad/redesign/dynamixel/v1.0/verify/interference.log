@@ -1,0 +1,56 @@
+only got 1136/1500 samples!
+only got 1473/1500 samples!
+only got 880/1500 samples!
+only got 1498/1500 samples!
+only got 1265/1500 samples!
+only got 1067/1500 samples!
+only got 1105/1500 samples!
+only got 1493/1500 samples!
+only got 1441/1500 samples!
+only got 1477/1500 samples!
+only got 1481/1500 samples!
+ORIG {'config': 'zero', 'a': 'seeed_bearing__configuration__22x16x4@yaw_roll_motion', 'b': 'speaker@jaw_soft', 'new_depth': 0.863, 'orig_depth': 0.807}
+ORIG {'config': 'left_hip_yaw=min', 'a': 'np_f970@trunk_base', 'b': 'leg@leg', 'new_depth': 3.843, 'orig_depth': 3.532}
+ORIG {'config': 'left_knee=max', 'a': 'hip_l@hip_l', 'b': 'sole_left@ankle_left', 'new_depth': 2.996, 'orig_depth': 2.921}
+ORIG {'config': 'left_knee=max', 'a': 'hip_l@hip_l', 'b': 'foot_left@ankle_left', 'new_depth': 3.473, 'orig_depth': 3.227}
+ORIG {'config': 'left_knee=max', 'a': 'hip_l@hip_l', 'b': 'ankle_left@ankle_left', 'new_depth': 2.024, 'orig_depth': 1.835}
+ORIG {'config': 'left_ankle=min', 'a': 'xl330@upper_leg_left', 'b': 'foot_left@ankle_left', 'new_depth': 0.519, 'orig_depth': 0.888}
+ORIG {'config': 'left_ankle=min', 'a': 'leg@leg', 'b': 'foot_left@ankle_left', 'new_depth': 1.472, 'orig_depth': 1.557}
+ORIG {'config': 'left_ankle=min', 'a': 'leg@leg', 'b': 'ankle_left@ankle_left', 'new_depth': 1.188, 'orig_depth': 1.274}
+ORIG {'config': 'left_ankle=min', 'a': 'xl330@leg', 'b': 'foot_left@ankle_left', 'new_depth': 1.398, 'orig_depth': 1.382}
+ORIG {'config': 'left_ankle=min', 'a': 'xl330@leg', 'b': 'ankle_left@ankle_left', 'new_depth': 2.881, 'orig_depth': 2.881}
+ORIG {'config': 'left_ankle=max', 'a': 'leg@leg', 'b': 'foot_left@ankle_left', 'new_depth': 2.127, 'orig_depth': 1.969}
+ORIG {'config': 'left_ankle=max', 'a': 'leg@leg', 'b': 'ankle_left@ankle_left', 'new_depth': 1.422, 'orig_depth': 1.396}
+ORIG {'config': 'left_ankle=max', 'a': 'xl330@leg', 'b': 'foot_left@ankle_left', 'new_depth': 3.881, 'orig_depth': 3.881}
+ORIG {'config': 'left_ankle=max', 'a': 'xl330@leg', 'b': 'ankle_left@ankle_left', 'new_depth': 2.881, 'orig_depth': 2.881}
+only got 1144/1500 samples!
+ORIG {'config': 'head_pitch=min', 'a': 'right_shell@trunk_base', 'b': 'top_head_shell@jaw_soft', 'new_depth': 0.747, 'orig_depth': 0.972}
+ORIG {'config': 'head_pitch=min', 'a': 'right_shell@trunk_base', 'b': 'xl330@jaw_soft', 'new_depth': 2.642, 'orig_depth': 2.635}
+only got 1127/1500 samples!
+ORIG {'config': 'head_pitch=min', 'a': 'right_shell@trunk_base', 'b': 'bottom_head_shell@jaw_soft', 'new_depth': 1.002, 'orig_depth': 1.05}
+ORIG {'config': 'head_pitch=min', 'a': 'right_shell@trunk_base', 'b': 'speaker@jaw_soft', 'new_depth': 2.946, 'orig_depth': 3.119}
+ORIG {'config': 'head_pitch=min', 'a': 'banana_pcb_locker@trunk_base', 'b': 'top_head_shell@jaw_soft', 'new_depth': 0.831, 'orig_depth': 0.828}
+ORIG {'config': 'head_pitch=min', 'a': 'power_support@trunk_base', 'b': 'top_head_shell@jaw_soft', 'new_depth': 2.379, 'orig_depth': 2.49}
+ORIG {'config': 'head_pitch=min', 'a': 'power_support@trunk_base', 'b': 'speaker@jaw_soft', 'new_depth': 0.839, 'orig_depth': 0.827}
+ORIG {'config': 'head_pitch=min', 'a': 'left_shell@trunk_base', 'b': 'top_head_shell@jaw_soft', 'new_depth': 0.72, 'orig_depth': 0.848}
+ORIG {'config': 'head_pitch=min', 'a': 'left_shell@trunk_base', 'b': 'bottom_head_shell@jaw_soft', 'new_depth': 0.947, 'orig_depth': 1.002}
+ORIG {'config': 'head_pitch=min', 'a': 'left_shell@trunk_base', 'b': 'speaker@jaw_soft', 'new_depth': 2.867, 'orig_depth': 3.126}
+ORIG {'config': 'head_roll=min', 'a': 'yaw_roll_motion@yaw_roll_motion', 'b': 'xl330@jaw_soft', 'new_depth': 2.455, 'orig_depth': 2.187}
+ORIG {'config': 'head_roll=min', 'a': 'xl330@yaw_roll_motion', 'b': 'xl330@jaw_soft', 'new_depth': 2.368, 'orig_depth': 2.468}
+ORIG {'config': 'head_roll=min', 'a': 'seeed_bearing__configuration__22x16x4@yaw_roll_motion', 'b': 'speaker@jaw_soft', 'new_depth': 0.92, 'orig_depth': 0.799}
+ORIG {'config': 'head_roll=max', 'a': 'xl330@yaw_roll_motion', 'b': 'xl330@jaw_soft', 'new_depth': 1.512, 'orig_depth': 1.415}
+ORIG {'config': 'head_roll=max', 'a': 'seeed_bearing__configuration__22x16x4@yaw_roll_motion', 'b': 'speaker@jaw_soft', 'new_depth': 0.922, 'orig_depth': 0.797}
+ORIG {'config': 'right_hip_yaw=max', 'a': 'np_f970@trunk_base', 'b': 'leg@leg_2', 'new_depth': 3.57, 'orig_depth': 3.828}
+ORIG {'config': 'right_knee=min', 'a': 'hip_l@hip_l_2', 'b': 'ankle_right@ankle_right', 'new_depth': 2.028, 'orig_depth': 2.07}
+ORIG {'config': 'right_knee=min', 'a': 'hip_l@hip_l_2', 'b': 'sole_right@ankle_right', 'new_depth': 3.173, 'orig_depth': 2.519}
+ORIG {'config': 'right_knee=min', 'a': 'hip_l@hip_l_2', 'b': 'foot_right@ankle_right', 'new_depth': 2.787, 'orig_depth': 3.53}
+ORIG {'config': 'right_ankle=min', 'a': 'xl330@leg_2', 'b': 'ankle_right@ankle_right', 'new_depth': 2.881, 'orig_depth': 2.881}
+ORIG {'config': 'right_ankle=min', 'a': 'xl330@leg_2', 'b': 'foot_right@ankle_right', 'new_depth': 3.881, 'orig_depth': 3.876}
+ORIG {'config': 'right_ankle=min', 'a': 'leg@leg_2', 'b': 'ankle_right@ankle_right', 'new_depth': 1.441, 'orig_depth': 1.298}
+ORIG {'config': 'right_ankle=min', 'a': 'leg@leg_2', 'b': 'foot_right@ankle_right', 'new_depth': 2.056, 'orig_depth': 1.771}
+ORIG {'config': 'right_ankle=max', 'a': 'xl330@upper_leg_right', 'b': 'foot_right@ankle_right', 'new_depth': 0.515, 'orig_depth': 0.852}
+ORIG {'config': 'right_ankle=max', 'a': 'xl330@leg_2', 'b': 'ankle_right@ankle_right', 'new_depth': 2.896, 'orig_depth': 2.881}
+ORIG {'config': 'right_ankle=max', 'a': 'xl330@leg_2', 'b': 'foot_right@ankle_right', 'new_depth': 1.389, 'orig_depth': 1.214}
+ORIG {'config': 'right_ankle=max', 'a': 'leg@leg_2', 'b': 'ankle_right@ankle_right', 'new_depth': 1.23, 'orig_depth': 1.279}
+ORIG {'config': 'right_ankle=max', 'a': 'leg@leg_2', 'b': 'foot_right@ankle_right', 'new_depth': 1.581, 'orig_depth': 1.806}
+configs 29 pairs checked 354 new interferences 0 pre-existing (orig too) 42

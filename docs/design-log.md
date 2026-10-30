@@ -22,3 +22,17 @@
 - 계획 대화에 요청:
   - `bom/` 에 다이나믹셀 v1.0 부품 목록 반영 (v1.0 폴더의 BOM_dynamixel_v1.0.csv 기준, 완료 후)
   - 사용자 지시: CAD 결과물은 `cad/redesign/<dynamixel|hobby_servo>/v1.x/` 버전 폴더로 관리, 어셈블리 파일명 앞에 `1_`. README·FUSION_REDESIGN.md 폴더 규칙 갱신 필요
+
+### 2026-10-30~31 다이나믹셀 v1.0 완료
+- 한 일:
+  - 출력 부품 26종: 메시→솔리드 변환(작업 규칙 위반 + Fusion 다운)을 버리고 **단면 추적 재모델링**으로 새로 그림 (`tools/trace_part.py` → `dyn_33_part_doc.py`, 측면 보스는 `dyn_34_boss_fix.py`)
+  - 어셈블리 `1_microduck_dynamixel_v1.0` (Fusion 개인 프로젝트), 부품별 STEP·STL, 판재 DXF·PDF, BOM, MJCF, 검증
+- 결과: 완료
+  - 형상 26/26 (표면 거리 p95 ≤ 0.18 mm, 부피 차 ≤ 0.64 %), 관절 14/14 (+20° 실측), 판재 가공 4/4
+  - 간섭 29자세·354쌍: 새 간섭 0 (원본에도 있는 관절 끝 각도 간섭 42건)
+  - MuJoCo STAND 2 s 유지 통과, 관절 토크 원본과 ±0.5 %p
+- 원본 대비 변경: `cad/redesign/dynamixel/v1.0/CHANGELOG.md` (허벅지 보강판에 무릎 접힘 여유 홈 추가 — 무릎 +62~90°에서 정강이 XL330과 5 mm 간섭)
+- 확인 필요 / 가정: 위치결정 핀 생략 (사용자 확인 대기), XL330 공식 STEP 대조 아직
+- 계획 대화에 요청:
+  - `bom/`에 다이나믹셀 v1.0 부품 목록 반영 (`cad/redesign/dynamixel/v1.0/BOM_dynamixel_v1.0.csv`)
+  - README·FUSION_REDESIGN.md 폴더 규칙 갱신: 결과물 = `cad/redesign/<dynamixel|hobby_servo>/v1.x/`, 어셈블리 파일명 앞 `1_`, 판재는 `parts/<부품>/`

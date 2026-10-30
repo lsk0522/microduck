@@ -39,9 +39,13 @@ def bearing(name, mesh, ri, ri_ring, ro_ring, ro, h, groove=0.2):
 
 def battery():
     c = make_part('np_f970')
-    box(c, 'z', -19.3, 19.3, -10.3, 10.3, -35.4, 35.4, NEW)
+    # Sony NP-F 외형: 38.5 x 20.5 x 70.7, 윗면(+Y) 양쪽 모서리 R8, 단자면(-Y)은 각짐 (원본 메시 단면 측정)
+    box(c, 'z', -19.25, 19.25, -10.25, 10.25, -35.35, 35.35, NEW)
     b = c.bRepBodies.item(0)
-    fillet_edges(c, b, edges_parallel(b, 'z', 50), 1.5)
+    top = [e for e in edges_parallel(b, 'z', 50) if e.startVertex.geometry.y > 0]
+    fillet_edges(c, b, top, 8.0)
+    bot = [e for e in edges_parallel(b, 'z', 50) if e.startVertex.geometry.y < 0]
+    fillet_edges(c, b, bot, 0.5)
     finish(c, ['ABS', '플라스틱'])
     return c
 
@@ -82,8 +86,9 @@ def speaker():
 
 PARTS = {
     'xl330': xl330,
-    'bearing_16x22x4': lambda: bearing('bearing_16x22x4', 'seeed_bearing__configuration__22x16x4', 8.0, 9.03, 9.95, 11.0, 4.0),
-    'bearing_10x15x3': lambda: bearing('bearing_10x15x3', 'seeed_bearing__configuration_default', 5.0, 5.9, 6.7, 7.5, 3.0),
+    # 내륜·외륜 사이는 양쪽 면에서 16x22x4: 1.4 mm, 10x15x3: 0.85 mm 떨어져 있다 (원본 메시 0.2 mm 간격 단면, 가운데 볼 부분만 이어짐)
+    'bearing_16x22x4': lambda: bearing('bearing_16x22x4', 'seeed_bearing__configuration__22x16x4', 8.0, 9.03, 9.95, 11.0, 4.0, 1.4),
+    'bearing_10x15x3': lambda: bearing('bearing_10x15x3', 'seeed_bearing__configuration_default', 5.0, 5.9, 6.7, 7.5, 3.0, 0.85),
     'np_f970': battery, 'pcb__raspberry_pi_zero_2_w': pi_zero, 'elec_rpi_robot_hat_pcb': hat, 'lens': lens, 'speaker': speaker,
 }
 MESH = {'bearing_16x22x4': 'seeed_bearing__configuration__22x16x4', 'bearing_10x15x3': 'seeed_bearing__configuration_default'}

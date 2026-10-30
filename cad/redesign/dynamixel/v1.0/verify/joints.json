@@ -1,0 +1,198 @@
+[
+ {
+  "joint": "left_hip_yaw",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -25.0,
+   30.0
+  ],
+  "child": "body_yaw2roll",
+  "parent": "body_trunk_base",
+  "pass": true
+ },
+ {
+  "joint": "left_hip_roll",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -22.0,
+   22.0
+  ],
+  "child": "body_hip_l",
+  "parent": "body_yaw2roll",
+  "pass": true
+ },
+ {
+  "joint": "left_hip_pitch",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_upper_leg_left",
+  "parent": "body_hip_l",
+  "pass": true
+ },
+ {
+  "joint": "left_knee",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.001,
+  "origin_to_axis_mm": 0.0029,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_leg",
+  "parent": "body_upper_leg_left",
+  "pass": true
+ },
+ {
+  "joint": "left_ankle",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.001,
+  "origin_to_axis_mm": 0.0029,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_ankle_left",
+  "parent": "body_leg",
+  "pass": true
+ },
+ {
+  "joint": "neck_pitch",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0005,
+  "origin_to_axis_mm": 0.0015,
+  "range": [
+   -90.0,
+   60.0
+  ],
+  "child": "body_neck",
+  "parent": "body_trunk_base",
+  "pass": true
+ },
+ {
+  "joint": "head_pitch",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0005,
+  "origin_to_axis_mm": 0.0015,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_neck_pitch",
+  "parent": "body_neck",
+  "pass": true
+ },
+ {
+  "joint": "head_yaw",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -170.0,
+   170.0
+  ],
+  "child": "body_yaw_roll_motion",
+  "parent": "body_neck_pitch",
+  "pass": true
+ },
+ {
+  "joint": "head_roll",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0016,
+  "origin_to_axis_mm": 0.0046,
+  "range": [
+   -25.0,
+   25.0
+  ],
+  "child": "body_jaw_soft",
+  "parent": "body_yaw_roll_motion",
+  "pass": true
+ },
+ {
+  "joint": "right_hip_yaw",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -30.0,
+   25.0
+  ],
+  "child": "body_bearing_roll",
+  "parent": "body_trunk_base",
+  "pass": true
+ },
+ {
+  "joint": "right_hip_roll",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -22.0,
+   22.0
+  ],
+  "child": "body_hip_l_2",
+  "parent": "body_bearing_roll",
+  "pass": true
+ },
+ {
+  "joint": "right_hip_pitch",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.0,
+  "origin_to_axis_mm": 0.0,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_upper_leg_right",
+  "parent": "body_hip_l_2",
+  "pass": true
+ },
+ {
+  "joint": "right_knee",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.001,
+  "origin_to_axis_mm": 0.0029,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_leg_2",
+  "parent": "body_upper_leg_right",
+  "pass": true
+ },
+ {
+  "joint": "right_ankle",
+  "axis_cos": 1.0,
+  "angle_deg": 20.0,
+  "pivot_drift_mm": 0.001,
+  "origin_to_axis_mm": 0.0029,
+  "range": [
+   -90.0,
+   90.0
+  ],
+  "child": "body_ankle_right",
+  "parent": "body_leg_2",
+  "pass": true
+ }
+]

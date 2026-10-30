@@ -27,6 +27,7 @@ SPECS = {
             ('tap', 'left_knee', {'x': '-xl_tap_half', 'z': 'xl_tap_back'}, 'd_m2'),
             ('tap', 'left_knee', {'x': 'xl_tap_half', 'z': 'xl_tap_back'}, 'd_m2'),
         ],
+        notches=[('left_hip_pitch', '-ul_notch_x0', 'ul_notch_x1', '-(ul_notch_dz + 30 mm)', '-ul_notch_dz', 'ul_notch_r')],
         slots=[
             ('left_knee', {'x': '0 mm', 'z': 'ul_slotA_dz'}, 'x', 'ul_slotA_L', 'ul_slot_W'),
             ('left_hip_pitch', {'x': '-ul_slotC_dx', 'z': '0 mm'}, 'z', 'ul_slotC_L', 'ul_slot_W'),
@@ -276,8 +277,44 @@ def build(des, name, S):
         rd = dims.addRadialDimension(a1, adsk.core.Point3D.create(q1.x + 0.05, q1.y - 0.05, 0))
         rd.parameter.expression = f'({Wexpr}) / 2'
 
+    # 홈 (외곽에서 잘라냄): 축 기준 사각형, 판 쪽 오목 모서리(x0, z1)는 반지름 r 호
+    for axis_name, x0, x1, z0, z1, rexpr in S.get('notches', []):
+        pa, pma = place(axis_name, {'x': x0, 'z': z0})                       # 아래-왼쪽
+        pc, pmc = place(axis_name, {'x': x1, 'z': z1})                       # 위-오른쪽
+        r = ev(des, rexpr)
+        # 호 중심은 치수로 박지 않는다 (두 선 접선 + 반지름으로 정해짐 → 과구속 방지)
+        pmr = [pma[0] + r, pma[1], pmc[2] - r]
+        pr = sk.sketchPoints.add(to_sk(pmr))
+        L = sk.sketchCurves.sketchLines
+        qb = to_sk([pmc[0], pma[1], pma[2]])                                 # 아래-오른쪽
+        qd = to_sk([pmr[0], pma[1], pmc[2]])                                 # 위쪽 호 끝
+        qe = to_sk([pma[0], pma[1], pmr[2]])                                 # 왼쪽 호 끝
+        l_bot = L.addByTwoPoints(pa, qb)
+        l_rt = L.addByTwoPoints(l_bot.endSketchPoint, pc)
+        l_top = L.addByTwoPoints(pc, qd)
+        a0 = math.atan2(qd.y - pr.geometry.y, qd.x - pr.geometry.x)
+        a1 = math.atan2(qe.y - pr.geometry.y, qe.x - pr.geometry.x)
+        sw = (a1 - a0) % (2 * math.pi)
+        if sw > math.pi:
+            sw -= 2 * math.pi
+        arc = sk.sketchCurves.sketchArcs.addByCenterStartSweep(pr, qd, sw)
+        cons.addCoincident(arc.startSketchPoint, l_top.endSketchPoint) if arc.startSketchPoint.geometry.distanceTo(qd) < 1e-5 else cons.addCoincident(arc.endSketchPoint, l_top.endSketchPoint)
+        far = arc.endSketchPoint if arc.startSketchPoint.geometry.distanceTo(qd) < 1e-5 else arc.startSketchPoint
+        l_lt = L.addByTwoPoints(far, pa)
+        tie(cons, arc.centerSketchPoint, pr)  # (pr은 자유점: 호 중심과 같은 점으로만 묶음)
+        hv_x = model_axis_in_sketch(0)
+        (cons.addHorizontal if hv_x == 'H' else cons.addVertical)(l_bot)
+        (cons.addHorizontal if hv_x == 'H' else cons.addVertical)(l_top)
+        (cons.addVertical if hv_x == 'H' else cons.addHorizontal)(l_rt)
+        (cons.addVertical if hv_x == 'H' else cons.addHorizontal)(l_lt)
+        cons.addTangent(arc, l_top)
+        cons.addTangent(arc, l_lt)
+        rd = dims.addRadialDimension(arc, adsk.core.Point3D.create(pr.geometry.x - 0.2, pr.geometry.y - 0.2, 0))
+        rd.parameter.expression = rexpr
+
     # 돌출
-    prof = max(sk.profiles, key=lambda p: p.areaProperties().area)
+    # 판 = 구멍(안쪽 루프)을 가장 많이 품은 영역 (홈 사각형 영역이 더 넓을 수 있어 넓이만으로 고르지 않음)
+    prof = max(sk.profiles, key=lambda p: (p.profileLoops.count, p.areaProperties().area))
     xd, yd = sk.xDirection, sk.yDirection
     nz = xd.crossProduct(yd)
     want = adsk.core.Vector3D.create(*S['extrude'])
@@ -299,7 +336,7 @@ def build(des, name, S):
     # 판금 변환
     sm = 'skipped'
     try:
-        rule = find_sm_rule(des)
+        rule = comp.activeSheetMetalRule if getattr(comp, 'activeSheetMetalRule', None) else find_sm_rule(des)
         face = max((f for f in body.faces if f.geometry.surfaceType == adsk.core.SurfaceTypes.PlaneSurfaceType),
                    key=lambda f: f.area)
         sm = f'rule={rule.name if rule else None} ok={body.convertToSheetMetal(face, rule)}'

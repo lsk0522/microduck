@@ -92,11 +92,12 @@ def run(_context: str):
         T = sk.transform.copy(); T.invert()
         p0.transformBy(T); p1.transformBy(T)
         ln = sk.sketchCurves.sketchLines.addByTwoPoints(p0, p1)
-        mid = sk.sketchPoints.add(adsk.core.Point3D.create((p0.x + p1.x) / 2, (p0.y + p1.y) / 2, (p0.z + p1.z) / 2))
         sk.isVisible = False
-        jg = adsk.fusion.JointGeometry.createByPoint(mid.createForAssemblyContext(child))
+        # 관절 기준 = 축 선(시작→끝 = MJCF axis). 선의 가운데 점이 원점, 선 방향이 회전축 (+ 방향 = MJCF + 방향)
+        # (점 + CustomJointDirection 조합은 방향 선을 무시하고 Z축으로 돈다 — 2026-10-31 검증에서 발견)
+        jg = adsk.fusion.JointGeometry.createByCurve(ln.createForAssemblyContext(child), adsk.fusion.JointKeyPointTypes.MiddleKeyPoint)
         ji = root.asBuiltJoints.createInput(child, parent, jg)
-        ji.setAsRevoluteJointMotion(adsk.fusion.JointDirections.CustomJointDirection, ln.createForAssemblyContext(child))
+        ji.setAsRevoluteJointMotion(adsk.fusion.JointDirections.ZAxisJointDirection)
         jt = root.asBuiltJoints.add(ji)
         jt.name = j['name']
         lim = jt.jointMotion.rotationLimits

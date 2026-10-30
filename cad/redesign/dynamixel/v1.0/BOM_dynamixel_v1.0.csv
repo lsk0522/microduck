@@ -1,0 +1,44 @@
+﻿번호,부품명,무엇인지,분류,수량,재질·규격,들어가는 곳,부피 cm³,질량 g/개,파일 (parts/<부품명>/),비고
+1,trunk_base,몸통 바닥판. 좌우 hip_yaw XL330을 받치고 Ø19 구멍으로 혼·베어링이 지나감,판재,1,알루미늄 5052-H32 1.0 mm,몸통,1.35,3.61,"trunk_base.dxf, trunk_base.pdf, trunk_base.step, trunk_base.stl",레이저/워터젯. DXF·PDF 도면
+2,bearing_roll,고관절 롤 베어링판 (고관절 앞면 수직판). 좌우 같은 부품,판재,2,알루미늄 5052-H32 1.0 mm,"왼쪽 고관절 yaw, 오른쪽 고관절 yaw",0.59,1.58,"bearing_roll.dxf, bearing_roll.pdf, bearing_roll.step, bearing_roll.stl",원본 위치결정 핀 생략
+3,upper_leg_rigidity_plate,"허벅지 보강판 (허벅지 바깥 옆면, hip_pitch·knee 서보를 잇는 측판). 좌우 같은 부품",판재,2,알루미늄 5052-H32 1.0 mm,"왼쪽 허벅지, 오른쪽 허벅지",0.87,2.34,"upper_leg_rigidity_plate.dxf, upper_leg_rigidity_plate.pdf, upper_leg_rigidity_plate.step, upper_leg_rigidity_plate.stl",v1.0: 무릎 접힘 여유 홈
+4,neck,"목 옆판 (목 서보 2개를 잇는 판, 양옆 2장)",판재,2,알루미늄 5052-H32 2.0 mm,목,0.58,1.56,"neck.dxf, neck.pdf, neck.step, neck.stl",테두리 1.5t로 외형 확대 24.3×13.3
+5,right_shell,몸통 오른쪽 외피(셸),출력(경질),1,PETG 또는 PLA+,몸통,11.21,14.24,"right_shell.step, right_shell.stl",
+6,left_shell,몸통 왼쪽 외피(셸),출력(경질),1,PETG 또는 PLA+,몸통,11.38,14.46,"left_shell.step, left_shell.stl",
+7,power_support,몸통 전원부 지지대 (배터리·스위치·퓨즈 자리),출력(경질),1,PETG 또는 PLA+,몸통,10.55,13.39,"power_support.step, power_support.stl",
+8,banana_pcb_locker,"몸통 안 보드/배선 고정 막대 (원본 명칭 banana PCB locker, 정확한 용도 미확인)",출력(경질),1,PETG 또는 PLA+,몸통,0.46,0.58,"banana_pcb_locker.step, banana_pcb_locker.stl",
+9,yaw2roll,고관절 yaw→roll 연결 브래킷 (hip_yaw 혼에 붙고 hip_roll 서보를 잡음). 좌우 공용,출력(경질),2,PETG 또는 PLA+,"왼쪽 고관절 yaw, 오른쪽 고관절 yaw",2.82,3.58,"yaw2roll.step, yaw2roll.stl",
+10,hip_l,고관절 roll→pitch 브래킷 (Ø16 축이 베어링에 끼움). 좌우 공용,출력(경질),2,PETG 또는 PLA+,"왼쪽 고관절 roll, 오른쪽 고관절 roll",4.54,5.77,"hip_l.step, hip_l.stl",v1.0: Ø16 축 정확한 원통
+11,upper_leg_left,왼쪽 허벅지 링크 (hip_pitch·knee XL330 홀더),출력(경질),1,PETG 또는 PLA+,왼쪽 허벅지,4.14,5.26,"upper_leg_left.step, upper_leg_left.stl",
+12,upper_leg_right,오른쪽 허벅지 링크 (hip_pitch·knee XL330 홀더),출력(경질),1,PETG 또는 PLA+,오른쪽 허벅지,4.13,5.25,"upper_leg_right.step, upper_leg_right.stl",
+13,leg,정강이 링크 (knee 혼 ↔ ankle XL330). 좌우 공용,출력(경질),2,PETG 또는 PLA+,"왼쪽 정강이, 오른쪽 정강이",3.38,4.3,"leg.step, leg.stl",
+14,ankle_left,왼쪽 발목 브래킷 (ankle 혼 ↔ 발판),출력(경질),1,PETG 또는 PLA+,왼발,7.88,10.01,"ankle_left.step, ankle_left.stl",
+15,ankle_right,오른쪽 발목 브래킷,출력(경질),1,PETG 또는 PLA+,오른발,7.89,10.02,"ankle_right.step, ankle_right.stl",
+16,foot_left,왼쪽 발판,출력(경질),1,PETG 또는 PLA+,왼발,12.21,15.5,"foot_left.step, foot_left.stl",
+17,foot_right,오른쪽 발판,출력(경질),1,PETG 또는 PLA+,오른발,12.2,15.5,"foot_right.step, foot_right.stl",
+18,sole_left,왼쪽 발바닥 (미끄럼 방지),출력(연질),1,TPU 95A,왼발,6.26,7.58,"sole_left.step, sole_left.stl",
+19,sole_right,오른쪽 발바닥,출력(연질),1,TPU 95A,오른발,6.26,7.58,"sole_right.step, sole_right.stl",
+20,neck_pitch,"목 위 브래킷 (head_pitch 서보·혼, Ø16 축 베어링)",출력(경질),1,PETG 또는 PLA+,머리 pitch,4.11,5.22,"neck_pitch.step, neck_pitch.stl",v1.0: Ø16·Ø18 원통 정확
+21,yaw_roll_motion,머리 yaw–roll 브래킷 (head_yaw 혼 ↔ head_roll 서보),출력(경질),1,PETG 또는 PLA+,머리 yaw,4.56,5.79,"yaw_roll_motion.step, yaw_roll_motion.stl",재설계 때 롤 혼 볼트용 Ø4 공구 구멍 추가 예정
+22,face_part,얼굴판 (보드·카메라 장착면),출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),5.81,7.38,"face_part.step, face_part.stl",
+23,motor_support,머리 안 서보 지지대 (M2.5 ×4 체결),출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),7.51,9.54,"motor_support.step, motor_support.stl",
+24,noenoeil,얼굴의 눈 링 (원본 명칭 noenoeil),출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),4.26,5.41,"noenoeil.step, noenoeil.stl",
+25,m12_lens_holder,M12 렌즈 홀더 (IMX219 카메라용),출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),1.1,1.39,"m12_lens_holder.step, m12_lens_holder.stl",
+26,top_head_shell,머리 윗 셸,출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),29.83,37.89,"top_head_shell.step, top_head_shell.stl",
+27,bottom_head_shell,머리 아래 셸,출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),23.82,30.25,"bottom_head_shell.step, bottom_head_shell.stl",
+28,jaw,부리 아래(경질),출력(경질),1,PETG 또는 PLA+,머리 roll(머리 전체),9.34,11.86,"jaw.step, jaw.stl",
+29,jaw_soft,부리 아래 연질부,출력(연질),1,TPU 95A,머리 roll(머리 전체),18.61,22.51,"jaw_soft.step, jaw_soft.stl",
+30,soft_mouth_top,부리 위 연질부,출력(연질),1,TPU 95A,머리 roll(머리 전체),2.69,3.26,"soft_mouth_top.step, soft_mouth_top.stl",
+31,xl330,"서보 ROBOTIS DYNAMIXEL XL330-M288-T (20×34×26 mm, 18 g)",구매품,15,ROBOTIS XL330-M288-T,"몸통, 왼쪽 고관절 yaw, 왼쪽 허벅지, 왼쪽 정강이, 목, 머리 yaw, 머리 roll(머리 전체), 오른쪽 고관절 yaw, 오른쪽 허벅지, 오른쪽 정강이",,18,"xl330.step, xl330.stl",혼·탭 구멍은 실측 모델. 동봉 볼트 사용
+32,bearing_16x22x4,볼베어링 내경16·외경22·폭4 (관절 지지),구매품,11,16×22×4 mm 볼베어링,"몸통, 왼쪽 고관절 yaw, 왼쪽 고관절 roll, 왼쪽 허벅지, 머리 pitch, 머리 yaw, 오른쪽 고관절 yaw, 오른쪽 고관절 roll, 오른쪽 허벅지",,,"bearing_16x22x4.step, bearing_16x22x4.stl",
+33,bearing_10x15x3,볼베어링 내경10·외경15·폭3 (발목·머리),구매품,3,10×15×3 mm 볼베어링,"왼발, 머리 roll(머리 전체), 오른발",,,"bearing_10x15x3.step, bearing_10x15x3.stl",
+34,np_f970,"배터리 (모델 외형 NP-F970, 실물 NP-F550 2S)",구매품,1,Sony NP-F 호환 7.4 V,몸통,,,"np_f970.step, np_f970.stl",외형만 모델링
+35,pcb__raspberry_pi_zero_2_w,메인 보드 자리 (65×30 폼팩터: Radxa Zero 3W 또는 Pi Zero 2W),구매품,1,Radxa Zero 3W,머리 roll(머리 전체),,,"pcb__raspberry_pi_zero_2_w.step, pcb__raspberry_pi_zero_2_w.stl",외형·장착 구멍만
+36,elec_rpi_robot_hat_pcb,"로봇 HAT PCB (반이중 버스·전원·오디오, 직접 설계)",구매품,1,65×30 자작 PCB,머리 roll(머리 전체),,,"elec_rpi_robot_hat_pcb.step, elec_rpi_robot_hat_pcb.stl",외형·장착 구멍만 (hardware/hat)
+37,lens,M12 광각 렌즈 (IMX219 카메라),구매품,1,M12 렌즈,머리 roll(머리 전체),,,"lens.step, lens.stl",외형만
+38,speaker,소형 스피커 35×25×7 mm,구매품,1,35×25×7 스피커,머리 roll(머리 전체),,,"speaker.step, speaker.stl",외형만
+39,M2×6 탭볼트,체결 나사,체결품,83,M2×6 탭볼트,조립 가이드 단계별,,,,XL330 동봉품 사용 (혼 PHS M2×6 TAP) (docs/assembly 계산값)
+40,M2×8 탭볼트,체결 나사,체결품,18,M2×8 탭볼트,조립 가이드 단계별,,,,XL330 동봉품 사용 (프레임 PHS M2×8 TAP) (docs/assembly 계산값)
+41,M2×5,체결 나사,체결품,10,M2×5,조립 가이드 단계별,,,, (docs/assembly 계산값)
+42,M2×4,체결 나사,체결품,4,M2×4,조립 가이드 단계별,,,,별도 구매 (docs/assembly 계산값)
+43,M2.5×6,체결 나사,체결품,11,M2.5×6,조립 가이드 단계별,,,,별도 구매 (docs/assembly 계산값)

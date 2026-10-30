@@ -45,6 +45,11 @@ PLATE_PARAMS = [
     # bearing_roll 윗줄 구멍 (yaw2roll 출력 부품에 체결)
     ('br_top_dz', '12.5 mm', 'mm', 'hip_roll 축 → bearing_roll 윗줄 M2 Z 거리'),
     ('br_top_half', '9 mm', 'mm', 'bearing_roll 윗줄 M2 좌우 반간격 (간격 18)'),
+    # upper_leg 무릎 접힘 여유 홈 (knee +62°~+90°에서 정강이 XL330 윗면이 지나감, 2026-10-31 간섭 검증)
+    ('ul_notch_x0', '20.5 mm', 'mm', '홈 왼쪽 끝: hip_pitch 축에서 뒤(−X)로'),
+    ('ul_notch_x1', '15 mm', 'mm', '홈 오른쪽 끝: hip_pitch 축에서 앞(+X)으로 (판 밖까지)'),
+    ('ul_notch_dz', 'd_axis / 2 + e_edge + 0.5 mm', 'mm', '홈 윗변: hip_pitch 축 아래 거리 (Ø19 테두리 1.5t + 서보 여유 0.5)'),
+    ('ul_notch_r', '1 mm', 'mm', '홈 안쪽 모서리 R'),
     # trunk_base 가운데 장공 (배선 통과로 추정)
     ('tb_slot_L', '12 mm', 'mm', 'trunk_base 장공 길이 (X)'),
     ('tb_slot_W', '6 mm', 'mm', 'trunk_base 장공 폭 (Y)'),
