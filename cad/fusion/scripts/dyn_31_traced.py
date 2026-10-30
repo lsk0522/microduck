@@ -41,6 +41,8 @@ def draw_loop(sk, Ti, ax, w, loop):
 
 def layer(comp, ax, L, body):
     w0, w1 = L['w0'], L['w1']
+    if not L['polys']:  # 끝 꼭짓점처럼 면적이 0인 층
+        return body
     sk, Ti = _sk(comp, ax, w0)
     sk.isComputeDeferred = True
     targets = []

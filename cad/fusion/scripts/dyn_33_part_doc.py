@@ -68,11 +68,11 @@ def run(_context: str):
         o.unitType = adsk.fusion.DistanceUnits.MillimeterDistanceUnits
         em.execute(o)
     py = os.path.join(REPO, '.venv', 'Scripts', 'python.exe')
-    r = subprocess.run([py, 'cad/redesign/tools/compare_part.py', name], cwd=REPO, capture_output=True, text=True,
-                       encoding='utf-8', errors='replace', creationflags=0x08000000, timeout=40)
+    # 원본 비교는 백그라운드 (큰 셸은 수십 초) → tools/build/verify/<name>.json / .log
+    subprocess.Popen([py, 'cad/redesign/tools/compare_part.py', name], cwd=REPO, creationflags=0x08000000 | 0x00000008,
+                     stdout=open(os.path.join(VERIFY, name + '.log'), 'w'), stderr=subprocess.STDOUT)
     pp = bdy.physicalProperties
-    print(f"{name}: layers {n} cuts {len(data['cuts'])} solid {bdy.isSolid} vol {bdy.volume*1000:.1f} (mesh {data['mesh_volume_mm3']:.1f}) mass {pp.mass*1000:.2f} g {bdy.material.name if bdy.material else ''}")
-    print('  ' + r.stdout.strip().splitlines()[-1] if r.stdout.strip() else r.stderr[-500:])
+    print(f"{name}: layers {n} cuts {len(data['cuts'])} solid {bdy.isSolid} vol {bdy.volume*1000:.1f} (mesh {data['mesh_volume_mm3']:.1f}) mass {pp.mass*1000:.2f} g {bdy.material.name if bdy.material else ''} | compare started")
     # 저장 후 닫기
     doc = app.activeDocument
     ok = doc.saveAs(name, cloud_folder(CLOUD_TOP, 'parts'), f'Microduck dynamixel {VER} 출력 부품 (원본 단면 추적)', '')
