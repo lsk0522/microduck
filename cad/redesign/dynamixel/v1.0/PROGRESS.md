@@ -3,8 +3,10 @@
 작성 2026-10-30 00:10. 다음 작업은 이 순서대로 이어 한다.
 
 ## Fusion 문서
-- 작업 문서: Fusion에서 열려 있는 세 번째 "제목 없음" 문서 (아직 클라우드 저장 안 함) → `1_microduck_dynamixel_v1.0` 으로 저장 예정
-  - 앞의 "제목 없음" 2개는 판재 시험용 (닫아도 됨, 사용자 확인 후)
+- `개인` 프로젝트 / `1_microduck_dynamixel_v1.0` (2026-10-31 버전 3): 매개변수 44, skeleton 14축, body_ 15, 관절 14, 판재 4종, 구매품 8종, 원본 참조 메시 70
+- 2026-10-30: 출력 부품 메시 변환(hip_l) 중 Fusion 재시작 → 그 전 작업 소실. 스크립트로 재생성함
+- 메시 변환(dyn_30_printed.py)은 쓰지 않는다: 작업 규칙 "원본 STL을 솔리드로 변환해 그대로 쓰지 않는다" 위반 + Fusion 다운
+- 출처 모르는 문서 `microduck/1_microduck_v1.0` 있음 — 건드리지 않음 (사용자 확인)
 - 재생성 순서 (새 문서에서 처음부터 만들 수 있음):
   1. `cad/fusion/scripts/plates_00_params_skeleton.py` — 매개변수 44개 + skeleton 관절축 14개
   2. `cad/fusion/scripts/dyn_10_assembly.py` — body_<MJCF 바디> 15개, MJCF 관절 14개(as-built 회전, 범위), 원본 메시 참조 70개
@@ -18,7 +20,7 @@
   - upper_leg_rigidity_plate: DXF·STEP·PDF 내보냄, 가공 검사 통과 (테두리 1.50, 웹 2.95)
 - 구매품 8종 배치 완료
 - 출력 부품 변환 완료: yaw2roll, upper_leg_left, upper_leg_right, leg, ankle_left, ankle_right (부피 = 원본)
-- hip_l: 프리즘 변환 실패(원본이 단순화 메시) → 면 단위 변환으로 재시도 중이었음 (결과 확인 필요)
+- 출력 부품 분류 (`tools/classify_printed.py` → `tools/build/printed_classes.json`): 단순 돌출 1~2종, 다축 특징 다수, 곡면 셸 6종 → 새로 그리는 방식 사용자 확인 중
 
 ## 남은 일
 1. hip_l 결과 확인, 나머지 출력 부품 19종 변환:

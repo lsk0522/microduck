@@ -1,0 +1,392 @@
+{
+ "right_shell": {
+  "axis": "y",
+  "score": {
+   "x": 0.366,
+   "y": 0.457,
+   "z": 0.182
+  },
+  "axis_aligned": 0.36,
+  "kind": "organic",
+  "ext": [
+   31.8,
+   80.9,
+   41.7
+  ]
+ },
+ "left_shell": {
+  "axis": "y",
+  "score": {
+   "x": 0.387,
+   "y": 0.452,
+   "z": 0.18
+  },
+  "axis_aligned": 0.354,
+  "kind": "organic",
+  "ext": [
+   33.7,
+   80.9,
+   41.7
+  ]
+ },
+ "banana_pcb_locker": {
+  "axis": "y",
+  "score": {
+   "x": 0.922,
+   "y": 0.987,
+   "z": 0.922
+  },
+  "axis_aligned": 0.922,
+  "kind": "prism",
+  "ext": [
+   54.1,
+   3.8,
+   6.7
+  ]
+ },
+ "power_support": {
+  "axis": "y",
+  "score": {
+   "x": 0.942,
+   "y": 0.969,
+   "z": 0.931
+  },
+  "axis_aligned": 0.924,
+  "kind": "prism+",
+  "ext": [
+   54.5,
+   17.0,
+   83.5
+  ]
+ },
+ "yaw2roll": {
+  "axis": "y",
+  "score": {
+   "x": 0.748,
+   "y": 0.837,
+   "z": 0.823
+  },
+  "axis_aligned": 0.721,
+  "kind": "organic",
+  "ext": [
+   23.0,
+   25.8,
+   20.5
+  ]
+ },
+ "hip_l": {
+  "axis": "x",
+  "score": {
+   "x": 0.657,
+   "y": 0.617,
+   "z": 0.526
+  },
+  "axis_aligned": 0.478,
+  "kind": "organic",
+  "ext": [
+   32.5,
+   34.5,
+   19.0
+  ]
+ },
+ "upper_leg_left": {
+  "axis": "z",
+  "score": {
+   "x": 0.351,
+   "y": 0.367,
+   "z": 0.575
+  },
+  "axis_aligned": 0.351,
+  "kind": "organic",
+  "ext": [
+   28.0,
+   47.7,
+   61.0
+  ]
+ },
+ "upper_leg_right": {
+  "axis": "z",
+  "score": {
+   "x": 0.351,
+   "y": 0.367,
+   "z": 0.575
+  },
+  "axis_aligned": 0.351,
+  "kind": "organic",
+  "ext": [
+   28.0,
+   47.7,
+   61.0
+  ]
+ },
+ "leg": {
+  "axis": "x",
+  "score": {
+   "x": 0.744,
+   "y": 0.562,
+   "z": 0.644
+  },
+  "axis_aligned": 0.579,
+  "kind": "organic",
+  "ext": [
+   8.0,
+   20.0,
+   58.0
+  ]
+ },
+ "ankle_left": {
+  "axis": "x",
+  "score": {
+   "x": 0.878,
+   "y": 0.63,
+   "z": 0.542
+  },
+  "axis_aligned": 0.542,
+  "kind": "prism+",
+  "ext": [
+   39.5,
+   36.5,
+   25.5
+  ]
+ },
+ "ankle_right": {
+  "axis": "x",
+  "score": {
+   "x": 0.878,
+   "y": 0.63,
+   "z": 0.542
+  },
+  "axis_aligned": 0.542,
+  "kind": "prism+",
+  "ext": [
+   39.5,
+   36.5,
+   25.5
+  ]
+ },
+ "foot_left": {
+  "axis": "x",
+  "score": {
+   "x": 0.871,
+   "y": 0.821,
+   "z": 0.789
+  },
+  "axis_aligned": 0.771,
+  "kind": "prism+",
+  "ext": [
+   40.1,
+   54.0,
+   16.9
+  ]
+ },
+ "foot_right": {
+  "axis": "x",
+  "score": {
+   "x": 0.871,
+   "y": 0.821,
+   "z": 0.789
+  },
+  "axis_aligned": 0.771,
+  "kind": "prism+",
+  "ext": [
+   40.1,
+   54.0,
+   16.9
+  ]
+ },
+ "sole_left": {
+  "axis": "y",
+  "score": {
+   "x": 0.269,
+   "y": 0.61,
+   "z": 0.255
+  },
+  "axis_aligned": 0.24,
+  "kind": "organic",
+  "ext": [
+   41.1,
+   54.0,
+   12.9
+  ]
+ },
+ "sole_right": {
+  "axis": "y",
+  "score": {
+   "x": 0.269,
+   "y": 0.61,
+   "z": 0.254
+  },
+  "axis_aligned": 0.24,
+  "kind": "organic",
+  "ext": [
+   41.1,
+   54.0,
+   12.9
+  ]
+ },
+ "neck_pitch": {
+  "axis": "x",
+  "score": {
+   "x": 0.793,
+   "y": 0.63,
+   "z": 0.71
+  },
+  "axis_aligned": 0.601,
+  "kind": "organic",
+  "ext": [
+   35.0,
+   18.0,
+   27.7
+  ]
+ },
+ "yaw_roll_motion": {
+  "axis": "y",
+  "score": {
+   "x": 0.711,
+   "y": 0.964,
+   "z": 0.716
+  },
+  "axis_aligned": 0.709,
+  "kind": "prism+",
+  "ext": [
+   34.0,
+   35.9,
+   22.5
+  ]
+ },
+ "face_part": {
+  "axis": "y",
+  "score": {
+   "x": 0.771,
+   "y": 0.964,
+   "z": 0.77
+  },
+  "axis_aligned": 0.781,
+  "kind": "prism+",
+  "ext": [
+   87.7,
+   12.5,
+   44.6
+  ]
+ },
+ "jaw_soft": {
+  "axis": "z",
+  "score": {
+   "x": 0.721,
+   "y": 0.735,
+   "z": 0.78
+  },
+  "axis_aligned": 0.724,
+  "kind": "organic",
+  "ext": [
+   87.7,
+   32.2,
+   8.4
+  ]
+ },
+ "motor_support": {
+  "axis": "x",
+  "score": {
+   "x": 0.837,
+   "y": 0.813,
+   "z": 0.474
+  },
+  "axis_aligned": 0.787,
+  "kind": "organic",
+  "ext": [
+   73.5,
+   54.2,
+   18.8
+  ]
+ },
+ "top_head_shell": {
+  "axis": "x",
+  "score": {
+   "x": 0.076,
+   "y": 0.065,
+   "z": 0.063
+  },
+  "axis_aligned": 0.057,
+  "kind": "organic",
+  "ext": [
+   91.8,
+   122.7,
+   46.3
+  ]
+ },
+ "soft_mouth_top": {
+  "axis": "x",
+  "score": {
+   "x": 0.929,
+   "y": 0.861,
+   "z": 0.86
+  },
+  "axis_aligned": 0.853,
+  "kind": "prism+",
+  "ext": [
+   87.8,
+   32.6,
+   3.3
+  ]
+ },
+ "noenoeil": {
+  "axis": "y",
+  "score": {
+   "x": 0.458,
+   "y": 0.902,
+   "z": 0.461
+  },
+  "axis_aligned": 0.486,
+  "kind": "prism+",
+  "ext": [
+   30.0,
+   9.5,
+   30.0
+  ]
+ },
+ "jaw": {
+  "axis": "x",
+  "score": {
+   "x": 0.495,
+   "y": 0.482,
+   "z": 0.477
+  },
+  "axis_aligned": 0.467,
+  "kind": "organic",
+  "ext": [
+   91.4,
+   68.7,
+   29.4
+  ]
+ },
+ "bottom_head_shell": {
+  "axis": "x",
+  "score": {
+   "x": 0.646,
+   "y": 0.64,
+   "z": 0.547
+  },
+  "axis_aligned": 0.629,
+  "kind": "organic",
+  "ext": [
+   91.8,
+   116.7,
+   20.1
+  ]
+ },
+ "m12_lens_holder": {
+  "axis": "y",
+  "score": {
+   "x": 0.613,
+   "y": 0.909,
+   "z": 0.599
+  },
+  "axis_aligned": 0.607,
+  "kind": "prism+",
+  "ext": [
+   24.0,
+   14.8,
+   16.0
+  ]
+ }
+}
