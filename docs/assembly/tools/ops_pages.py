@@ -43,36 +43,60 @@ def _w2(v):
     return f"{nm(o[0])}·{nm(o[1])} 사이"
 
 
-def horn_face_svg():
-    """XL330 원점 홈: 혼을 마주 본 그림 2개 (일반 / 무릎). 케이스 홈은 그대로, 혼 홈만 돈다."""
-    import math
+def origin_case(i: int) -> str:
+    """원점 상황 글자: A = 홈 한 줄, B = 혼 홈 45° (무릎)."""
+    return "B" if i in (13, 23) else "A"
 
-    def one(x0, title, ang, top, notch_lbl, sub):
-        cx, cy = x0 + 70, 100
+
+def origin_abc_svg():
+    """원점 상황 A·B·C — 혼 쪽에서 본 큰 그림."""
+    import math
+    Y, K = "#ffc400", "#222"
+
+    def servo(cx, ang, wrong=False):
+        top, cy, r = 70, 150, 62
         rad = math.radians(ang)
-        nx, ny = cx - 30 * math.sin(rad), cy - 30 * math.cos(rad)
-        nx2, ny2 = cx - 38 * math.sin(rad), cy - 38 * math.cos(rad)
-        holes = "".join(f'<circle cx="{cx + 17 * math.cos(math.radians(t) + rad)}" cy="{cy + 17 * math.sin(math.radians(t) + rad)}" r="3" fill="#222"/>'
-                        for t in (0, 90, 180, 270))
-        out = (f'<text x="{x0 + 70}" y="16" text-anchor="middle" font-weight="700">{title}</text>'
-               f'<rect x="{x0 + 22}" y="56" width="96" height="160" rx="8" fill="#2b2b2e"/>'
-               f'<rect x="{x0 + 66}" y="56" width="8" height="14" fill="#ffc400" stroke="#222"/>'
-               f'<text x="{x0 + 70}" y="44" text-anchor="middle" font-size="10.5" fill="#8a6d00">{top}</text>'
-               f'<circle cx="{cx}" cy="{cy}" r="38" fill="#55565b" stroke="#888" stroke-width="2"/>'
-               f'<circle cx="{cx}" cy="{cy}" r="5" fill="#222"/>{holes}'
-               f'<line x1="{nx}" y1="{ny}" x2="{nx2}" y2="{ny2}" stroke="#ffc400" stroke-width="5"/>'
-               f'<circle cx="{nx2}" cy="{ny2}" r="4" fill="#ffc400" stroke="#222"/>'
-               f'<rect x="{x0 + 38}" y="198" width="26" height="11" rx="2" fill="#ddd"/><rect x="{x0 + 76}" y="198" width="26" height="11" rx="2" fill="#ddd"/>'
-               f'<text x="{x0 + 70}" y="236" text-anchor="middle" font-size="11">{sub}</text>')
-        if notch_lbl:   # 돌아간 혼 홈에 따로 이름표
-            out += (f'<line x1="{nx2}" y1="{ny2}" x2="{x0 + 16}" y2="{ny2 + 24}" stroke="#8a6d00" stroke-width="1"/>'
-                    f'<text x="{x0 + 14}" y="{ny2 + 38}" text-anchor="end" font-size="10.5" fill="#8a6d00">{notch_lbl}</text>')
-        return out
-    return ('<svg viewBox="0 0 300 290" width="100%" style="font-family:\'Noto Sans CJK KR\';font-size:12px">'
-            + one(0, "일반 서보 · 2048", 0, "케이스 홈 = 혼 홈", "", "두 홈이 한 줄")
-            + one(155, "무릎 13·23 · 2048", 45, "케이스 홈 (그대로)", "혼 홈", "혼 홈만 반시계로 45°")
-            + '<text x="150" y="262" text-anchor="middle" font-size="10.5">두 그림 모두 혼을 마주 보고, 커넥터(회색)가 아래로 오게 든 모습</text>'
-            + '<text x="150" y="279" text-anchor="middle" font-size="10.5">케이스 홈 = 축 쪽 끝면 가운데의 세로 홈 · 혼 홈 = 혼 테두리 홈</text></svg>')
+        g = (f'<rect x="{cx - 78}" y="{top}" width="156" height="250" rx="12" fill="#2b2b2e"/>'
+             f'<rect x="{cx - 34}" y="{top + 214}" width="30" height="16" rx="3" fill="#ccc"/>'
+             f'<rect x="{cx + 4}" y="{top + 214}" width="30" height="16" rx="3" fill="#ccc"/>'
+             f'<rect x="{cx - 7}" y="{top - 2}" width="14" height="26" fill="{Y}" stroke="{K}" stroke-width="2"/>'
+             f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="#5b5c61" stroke="#999" stroke-width="3"/>'
+             f'<circle cx="{cx}" cy="{cy}" r="8" fill="#1b1b1b"/>')
+        g += "".join(f'<circle cx="{cx + 30 * math.sin(rad + t)}" cy="{cy - 30 * math.cos(rad + t)}" r="5" fill="#1b1b1b"/>'
+                     for t in (0, math.pi / 2, math.pi, 1.5 * math.pi))
+        x1, y1 = cx - (r - 16) * math.sin(rad), cy - (r - 16) * math.cos(rad)
+        x2, y2 = cx - (r + 2) * math.sin(rad), cy - (r + 2) * math.cos(rad)
+        g += f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{Y}" stroke-width="10" stroke-linecap="round"/>'
+        g += f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{K}" stroke-width="1.5"/>'
+        return g
+
+    def badge(cx, ch, col):
+        return (f'<circle cx="{cx - 128}" cy="30" r="22" fill="{col}"/>'
+                f'<text x="{cx - 128}" y="39" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">{ch}</text>')
+
+    out = '<svg viewBox="0 0 900 420" width="100%" style="font-family:\'Noto Sans CJK KR\';max-height:96mm">'
+    # A
+    out += badge(150, "A", "#2e7d32") + servo(150, 0)
+    out += '<text x="150" y="38" text-anchor="middle" font-size="22" font-weight="800">홈이 한 줄</text>'
+    out += '<text x="150" y="358" text-anchor="middle" font-size="16" font-weight="700">무릎 빼고 13개 서보</text>'
+    out += '<text x="150" y="382" text-anchor="middle" font-size="14">2048에서 위 홈과 혼 홈이 일직선</text>'
+    # B
+    out += badge(450, "B", "#ef6a1f") + servo(450, 45)
+    out += ('<path d="M 450 58 A 92 92 0 0 0 385 85" fill="none" stroke="#d63031" stroke-width="4"/>'
+            '<polygon points="379,92 392,78 382,73" fill="#d63031"/>'
+            '<text x="372" y="64" text-anchor="end" font-size="17" font-weight="800" fill="#d63031">45°</text>')
+    out += '<text x="450" y="38" text-anchor="middle" font-size="22" font-weight="800">혼 홈만 왼쪽 45°</text>'
+    out += '<text x="450" y="358" text-anchor="middle" font-size="16" font-weight="700">무릎 2개 (ID 13 · 23)</text>'
+    out += '<text x="450" y="382" text-anchor="middle" font-size="14">오프셋 −512를 쓴 뒤 2048</text>'
+    # C
+    out += badge(750, "C", "#c62828") + servo(750, 90)
+    out += ('<line x1="680" y1="80" x2="820" y2="220" stroke="#c62828" stroke-width="9" stroke-linecap="round" opacity="0.85"/>'
+            '<line x1="820" y1="80" x2="680" y2="220" stroke="#c62828" stroke-width="9" stroke-linecap="round" opacity="0.85"/>')
+    out += '<text x="750" y="38" text-anchor="middle" font-size="22" font-weight="800">이렇게 보이면 틀림</text>'
+    out += '<text x="750" y="358" text-anchor="middle" font-size="16" font-weight="700">90°·180° 어긋남, 무릎이 한 줄</text>'
+    out += '<text x="750" y="382" text-anchor="middle" font-size="14">zero 다시 → 무릎은 오프셋 −512 확인</text>'
+    out += '<text x="450" y="412" text-anchor="middle" font-size="13" fill="#555">세 그림 모두 혼을 마주 보고, 커넥터(회색)가 아래로 오게 든 모습 · 노랑 = 홈</text>'
+    return out + "</svg>"
 
 
 def zero_pages(img: str, data_dir: Path):
@@ -109,30 +133,25 @@ def zero_pages(img: str, data_dir: Path):
 </div></div>""")
 
     Ls = L["servos"]
-    mrows = ""
-    for i in ORDER:
-        r = Ls[str(i)]
-        g, col = GROUP[i // 10]
-        knee = i in (13, 23)
-        mrows += (f"<tr><td><b style='color:{col}'>{i}</b></td><td>{KOR[r['joint']]}</td><td>{_w(r['horn_out'])}</td>"
-                  f"<td>{_w(r['A_shaft_end'])}</td>"
-                  f"<td><b>{_w2(r['notch_dir']) if knee else _w(r['A_shaft_end'])}</b>{' <small style=\'color:#d63031\'>(45°)</small>' if knee else ''}</td></tr>")
-    pm = ("준비", "원점 홈 맞추기", f"""
-<h2>원점 홈 — 케이스 홈과 혼 홈을 한 줄로</h2>
-<div class="two" style="grid-template-columns:0.8fr 1.2fr"><div>
-{horn_face_svg()}
-<div class="note warn" style="margin-top:2mm;font-size:8.5pt">XL330은 케이스 <b>축 쪽 끝면 가운데</b>(커넥터 반대쪽 끝)에 세로 홈이 파여 있고, 혼 테두리에도 홈이 있다.
-두 홈이 한 줄이면 기계적 원점이다. 이 가이드는 <b>홈이 맞는 위치 = 2048</b>로 본다 — 서보를 받으면 <code>dxl_zero.py zero</code> 후 홈이 맞는지 한 번 확인하고,
-어긋나면 홈이 아니라 <b>2048을 기준</b>으로 조립한다 (결과를 build-log에).</div>
-</div><div>
-<h3>관절마다 홈이 향하는 쪽 (원점 자세, 로봇 기준)</h3>
-<table class="tight" style="font-size:8.2pt"><tr><th>ID</th><th>관절</th><th>혼이 향함</th><th>케이스 홈 쪽</th><th>2048에서 혼 홈</th></tr>{mrows}</table>
-<p style="font-size:7.5pt;color:#666;margin-top:1mm">앞 = 부리 쪽, 왼쪽 = 로봇의 왼쪽. 무릎은 homing −512 때문에 2048에서 실제 축이 +45°라 혼 홈이 케이스 홈에서 반시계 45° 돌아가 있다.
-조립 단계 그림에는 노랑 네모(케이스 홈)·노랑 점(혼 홈)으로 표시했다.</p>
-<div class="note" style="font-size:8pt"><b>장착할 때</b>: ① <code>dxl_zero.py zero</code>로 2048, 토크 켬 → ② 홈이 한 줄인지(무릎은 45°) 본다 →
-③ 표의 '케이스 홈 쪽'이 로봇의 그 방향을 보게 서보를 프레임에 넣는다 → ④ 원점 그림 자세로 부품을 대고 혼 볼트.
-홈 방향이 표와 90°·180° 다르면 서보를 잘못 넣은 것이다. 재설계 출력물의 혼 자리에도 같은 방향으로 표시선을 새긴다.</div>
-</div></div>""")
+    half = lambda ids: "".join(
+        f"<tr><td><b style='color:{GROUP[i // 10][1]}'>{i}</b></td><td>{KOR[Ls[str(i)]['joint']]}</td>"
+        f"<td style='font-size:11pt;font-weight:800;color:{'#ef6a1f' if origin_case(i) == 'B' else '#2e7d32'}'>{origin_case(i)}</td>"
+        f"<td><b>{_w(Ls[str(i)]['A_shaft_end'])}</b></td></tr>" for i in ids)
+    head = "<tr><th>ID</th><th>관절</th><th>원점</th><th>위 홈이 보는 쪽</th></tr>"
+    pm = ("준비", "원점 맞추기 A·B·C", f"""
+<h2>원점 맞추기 — 서보를 2048에 두고 홈을 본다</h2>
+{origin_abc_svg()}
+<div class="two" style="grid-template-columns:1fr 1fr 1.05fr;gap:5mm;margin-top:1mm">
+<table class="tight" style="font-size:8pt">{head}{half([20, 21, 22, 23, 24, 30, 31, 32])}</table>
+<table class="tight" style="font-size:8pt">{head}{half([10, 11, 12, 13, 14, 33, 34])}</table>
+<div style="font-size:8.6pt;line-height:1.5"><b>순서</b>
+<ol style="padding-left:4.5mm;margin:1mm 0">
+<li><code>dxl_zero.py zero</code> → 2048, 토크 켬</li>
+<li>표의 글자(A/B)와 그림이 같은지 본다. C면 다시</li>
+<li>'위 홈이 보는 쪽'이 로봇의 그 방향을 보게 서보를 넣는다</li>
+<li>원점 자세 그림처럼 부품을 대고 혼 볼트</li></ol>
+<div class="note" style="font-size:7.8pt">위 홈 = 케이스 끝면 가운데의 세로 홈(커넥터 반대쪽 끝). 방향은 로봇 기준 (앞 = 부리 쪽).
+"홈 한 줄 = 2048"은 서보를 받으면 한 번 확인 — 어긋나면 2048을 기준으로 한다.</div></div></div>""")
 
     p2 = ("준비", "원점 자세 그림", f"""
 <h2>원점 자세 — 서보가 모두 2048일 때 로봇 모양</h2>
@@ -147,7 +166,7 @@ MuJoCo 뷰어에서 키프레임 <code>INIT</code>을 고르면 같은 자세를
 <ol style="font-size:9.5pt;line-height:1.55;padding-left:5mm">
 <li><b>서보 1개씩 설정</b> (0단계 표): <code>dxl_zero.py setup --port COM5 --new-id 23</code><br><small>ID·1 Mbps·return delay 0·PWM slope 255·shutdown 52·무릎 homing −512를 한 번에 쓴다.</small></li>
 <li><b>원점으로 보내고 토크를 켠 채</b> 둔다: <code>dxl_zero.py zero --port COM5 --ids 23</code><br><small>토크가 켜져 있으면 나사를 조일 때 혼이 돌아가지 않는다. 벤치 전원은 5 V로 충분.</small></li>
-<li>표의 <b>혼 방향</b>대로 서보를 프레임에 넣는다 (프레임 볼트). <b>원점 홈</b>(케이스 홈 + 혼 홈)이 한 줄인지(무릎은 45°), 케이스 홈이 표의 방향인지 본다 (8쪽).</li>
+<li>표의 <b>혼 방향</b>대로 서보를 프레임에 넣는다 (프레임 볼트). <b>원점 A/B</b>(8쪽 그림)와 같은지, 위 홈이 표의 방향인지 본다.</li>
 <li>원점 자세 그림처럼 자식 부품을 대고, 혼 구멍 4개 중 맞는 각도로 <b>혼 볼트</b>를 조인다.</li>
 <li><code>dxl_zero.py off</code> 후 손으로 관절을 끝까지 돌려 <b>가동 범위 안에서 걸림·케이블 당김</b>이 없는지 본다.</li>
 <li>다 조립하면 <b>끈으로 매단 상태</b>에서 <code>dxl_zero.py zero --all</code> → 원점 그림과 비교,
@@ -377,8 +396,7 @@ def servo_box(step_id: int, data_dir: Path) -> str:
         z = Z[i]
         knee = i in (13, 23)
         horn = " / ".join(f"{j}: {_w(S[str(j)]['horn_out'])}" for j in pair) if len(pair) > 1 else _w(S[str(i)]["horn_out"])
-        mk = lambda j: (f"케이스 홈 {_w(S[str(j)]['A_shaft_end'])} · 혼 홈 " +
-                        (f"{_w2(S[str(j)]['notch_dir'])} (반시계 45°)" if j in (13, 23) else "한 줄"))
+        mk = lambda j: f"<b>{origin_case(j)}</b>, 위 홈 → {_w(S[str(j)]['A_shaft_end'])}"
         mark = " / ".join(f"{j}: {mk(j)}" for j in pair) if len(pair) > 1 else mk(i)
         plus = " / ".join(f"{j}: {Z[j].get('plus', '')}" for j in pair) if len(pair) > 1 else Z[i].get("plus", "")
         lines.append(
@@ -386,7 +404,7 @@ def servo_box(step_id: int, data_dir: Path) -> str:
             f"<b style='color:{GROUP[i // 10][1]}'>{' / '.join(map(str, pair))}</b> {KOR[z['joint']].replace('왼 ', '')}"
             f" <span style='color:#d63031;font-weight:700'>{act}</span><br>"
             f"<small>2048{' (homing −512 먼저)' if knee else ''} · 혼 → {horn}<br>+ = {html.escape(plus)}<br>"
-            f"원점 홈: {mark}</small></div>")
+            f"원점 {mark}</small></div>")
     return (f'<div class="box" style="border-color:#d63031"><h4 style="color:#d63031">다이나믹셀 — 2048(토크 켬)에 두고 체결</h4>'
             f'<div style="font-size:7.6pt;line-height:1.3">{"".join(lines)}</div>'
-            f'<div style="font-size:6.8pt;color:#777;margin-top:0.8mm">원점 홈 = 케이스 축 쪽 끝면의 홈 + 혼 테두리 홈. 그림의 노랑 네모·점 (8쪽)</div></div>')
+            f'<div style="font-size:6.8pt;color:#777;margin-top:0.8mm">원점 A = 홈 한 줄, B = 혼 홈 왼쪽 45° (무릎) — 8쪽 그림</div></div>')

@@ -181,6 +181,7 @@ tr:nth-child(even) td {{ background:#fafafa; }}
 .scale .nm {{ width:40mm; font-weight:700; }}
 .ruler {{ height:6mm; }}
 table.tight td {{ padding:0.8mm 1.5mm; }} table.tight th {{ padding:1.2mm 1.5mm; }}
+table.tight td:nth-child(3) {{ line-height:1; }}
 code {{ font-family:'DejaVu Sans Mono',monospace; font-size:8.5pt; background:#f0f0f0; padding:0 1mm; border-radius:0.8mm; }}
 """
 

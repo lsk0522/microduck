@@ -183,13 +183,13 @@ def annotate_servos(m, d, st, new, mine, cam, path, sv_ids, sv_geo, horns):
         p1 = project(m, cam, c + horns[sid] * 0.02)
         layout.arrow(dr, p0, p1, (214, 48, 49), w=6)
         layout.draw_grooves(dr, lambda q: project(m, cam, q), GS, g, horns[sid], sid)
-        txt = f"{sid} · 2048" + (" (−512)" if sid in (13, 23) else "")
+        txt = f"{sid} · 원점 {'B' if sid in (13, 23) else 'A'}"
         layout.tag(dr, tuple(p0 + np.array([0, -34])), txt, col[sid // 10], sz=32)
         if rows[sid]["horn"]:
             layout.tag(dr, tuple(p0 + np.array([0, 6])), "혼 고정", (214, 48, 49), sz=24)
     if rows:
-        layout.tag(dr, (20, 20), "숫자 = 서보 ID · 2048에 두고 조립 · 빨간 화살표 = 혼 방향", (40, 40, 40), sz=28, anchor="lt")
-        layout.tag(dr, (20, 62), "노랑 네모 = 케이스 원점 홈 · 노랑 점 = 혼 홈 → 한 줄로 맞춤 (무릎은 45° 돌림)", (120, 90, 0), sz=26, anchor="lt")
+        layout.tag(dr, (20, 20), "숫자 = 서보 ID · 원점 A/B = 8쪽 그림 · 빨간 화살표 = 혼 방향", (40, 40, 40), sz=28, anchor="lt")
+        layout.tag(dr, (20, 62), "노랑 네모 = 위 홈 · 노랑 점 = 혼 홈", (120, 90, 0), sz=26, anchor="lt")
     img.save(path)
     return sorted(rows.values(), key=lambda r: ORDER.index(r["id"]))
 
