@@ -1,0 +1,17 @@
+[upper_leg_rigidity_plate] sketch fully constrained: True  profiles=9
+  bbox mm: (-42.78,42.50,-50.50) .. (15.00,43.50,-6.50)
+  volume 1033.3 mm3  mass 2.77 g  material 알루미늄 5052
+  sheet metal: rule=알루미늄(mm) (변환) ok=True  isSheetMetal=True  copies=1
+  holes (model mm):
+    Ø19.00 at (4.00,43.50,-17.50)
+    Ø19.00 at (-31.78,43.50,-39.50)
+    Ø2.20 at (-18.50,43.50,-9.50)
+    Ø2.20 at (-18.50,43.50,-25.50)
+    Ø2.20 at (-39.78,43.50,-17.00)
+    Ø2.20 at (-23.78,43.50,-17.00)
+plates_01_build.py ok 22
+[upper_leg_rigidity_plate] loops=9 mass=2.77 g -> json + step
+plates_02_export.py ok 22
+body_upper_leg_left:1+upper_leg_rigidity_plate:1 1033.3
+body_upper_leg_right:1+upper_leg_rigidity_plate:7 1033.3
+DONE plate 22s

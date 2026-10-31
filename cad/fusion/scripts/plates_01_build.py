@@ -27,7 +27,9 @@ SPECS = {
             ('tap', 'left_knee', {'x': '-xl_tap_half', 'z': 'xl_tap_back'}, 'd_m2'),
             ('tap', 'left_knee', {'x': 'xl_tap_half', 'z': 'xl_tap_back'}, 'd_m2'),
         ],
-        notches=[('left_hip_pitch', '-ul_notch_x0', 'ul_notch_x1', '-(ul_notch_dz + 30 mm)', '-ul_notch_dz', 'ul_notch_r')],
+        # 무릎 접힘 여유 홈은 원작에 없는 추가라 뺌 (2026-10-31 사용자: 원작과 똑같이, 추가는 제안 후). 다시 넣으려면 아래 줄 주석 해제
+        # notches=[('left_hip_pitch', '-ul_notch_x0', 'ul_notch_x1', '-(ul_notch_dz + 30 mm)', '-ul_notch_dz', 'ul_notch_r')],
+        notches=[],
         slots=[
             ('left_knee', {'x': '0 mm', 'z': 'ul_slotA_dz'}, 'x', 'ul_slotA_L', 'ul_slot_W'),
             ('left_hip_pitch', {'x': '-ul_slotC_dx', 'z': '0 mm'}, 'z', 'ul_slotC_L', 'ul_slot_W'),
