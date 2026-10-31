@@ -10,7 +10,15 @@
 ## 진행 중: 출력 부품 26종을 피처 솔리드로 다시 모델링 (사용자 선택)
 - 이유: 지금 솔리드는 0.1 mm 단면을 쌓은 것이라 면이 수천~2만 개 (줄무늬, 수정 불가)
 - 방법: 원작 STL을 참고로 스케치·돌출·필렛·챔퍼·로프트로 새로 그림. 목표 원작 대비 ±0.2 mm, 부품마다 스크린샷 → 사용자 확인 → 다음
-- 순서 (단순 → 복잡): banana_pcb_locker, neck_pitch, yaw_roll_motion, motor_support, m12_lens_holder, noenoeil, face_part, yaw2roll, hip_l, leg, ankle_left/right, foot_left/right, upper_leg_left/right, power_support, sole_left/right, soft_mouth_top, jaw_soft, jaw, left/right_shell, bottom/top_head_shell
+- 방법 (neck_pitch에서 확정): 원작 STL 단면 분석 → `cad/redesign/tools/feat/<부품>_csg.py`로 같은 형상을 먼저 만들어 원작과 비교(표면 거리 p95 ≤ 0.1 mm 목표) → `cad/fusion/scripts/feat_<부품>.py` (feat_lib.py)로 부품 문서를 피처로 다시 그림 → STL 다시 비교 → 저장, 어셈블리 참조 갱신(updateAllReferences), STEP·STL 내보내기
+- 이미 깔끔해서 안 해도 되는 것: banana_pcb_locker, yaw_roll_motion, noenoeil
+- 묶음 순서:
+  1. 머리·목 브래킷: ~~neck_pitch~~ (완료 2026-10-31, 42면, p95 0.046 mm), motor_support, m12_lens_holder
+  2. 다리: yaw2roll, hip_l, upper_leg_left/right, leg, ankle_left/right
+  3. 발: foot_left/right, sole_left/right
+  4. 몸통: power_support, left_shell, right_shell
+  5. 머리: face_part, jaw, jaw_soft, soft_mouth_top, bottom_head_shell, top_head_shell
+  6. 마무리: 참고 메시 70개 삭제, 원작 비교 검증, STEP·STL·바탕화면 파일 갱신
 - 다 끝나면 참고 메시(ref_*, 숨김 70개) 삭제 → 어셈블리에 메시 0
 
 ## 사용자 확인 대기
