@@ -51,3 +51,11 @@
   - `plan-hobby-servo.md` 서보 수 갱신: MG996R ×11 + MG90S ×4 → **MG996R ×12 + MG90S ×2** (head_pitch MG996R, mouth 생략), 전원(UBEC) 계산도 MG996R 12개 기준으로
   - `bom/`에 `cad/redesign/hobby_servo/v1.0/BOM_hobby_servo_v1.0.csv` 반영
   - 사용자 지시: 세 번째 버전 `cad/redesign/mg996r/v1.0/` (14축 전부 MG996R) 추가 — README 폴더 규칙에 반영
+
+### 2026-10-31 MG996R v1.0 (14축 전부 MG996R, 1.5배) 완료
+- 한 일: 일반 서보 v1.0 설계에 변형(`MD_VARIANT=mg996r`) 추가 → 머리 yaw·roll MG996R, 머리 yaw 베어링 6706ZZ. Fusion `1_microduck_mg996r_v1.0`, BOM, MJCF, 검증
+- 결과: 완료 — 배치 간섭 0, 메시 간섭 새 간섭 0 (33자세), 관절 14/14, STAND 유지, 질량 1.81 kg
+- 일반 서보판 대비 변경: `cad/redesign/mg996r/v1.0/CHANGELOG.md` (머리 셸 나사 4 → 3곳)
+- 확인 필요: 무릎 유지 토크 26 %
+- 기타: 바탕화면 `마이크로덕_설계/` 에 세 버전 .f3d (사용자 요청, 저장소 밖)
+- 계획 대화에 요청: README 폴더 규칙에 `cad/redesign/mg996r/` 추가, `bom/`에 BOM_mg996r_v1.0 반영

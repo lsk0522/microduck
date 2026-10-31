@@ -46,12 +46,12 @@ SHELL = {'left_shell': '몸통 왼쪽 외피', 'right_shell': '몸통 오른쪽 
          'face_part': '얼굴판', 'noenoeil': '눈 링', 'jaw': '부리 아래(경질)', 'jaw_soft': '부리 아래 연질부', 'soft_mouth_top': '부리 위 연질부'}
 SOFT = {'jaw_soft', 'soft_mouth_top'}
 PUR = {
-    'MG996R': ('서보 TowerPro MG996R (메탈 기어, 40.7×19.7×42.9 mm, 6 V 정지 약 11 kgf·cm)', 'MG996R', '다리 10 + 목 pitch + 머리 pitch. 치수는 대표값 — 캘리퍼 실측 필요'),
+    'MG996R': ('서보 TowerPro MG996R (메탈 기어, 40.7×19.7×42.9 mm, 6 V 정지 약 11 kgf·cm)', 'MG996R', ('모든 관절 14' if TOP == 'mg996r' else '다리 10 + 목 pitch + 머리 pitch') + '. 치수는 대표값 — 캘리퍼 실측 필요'),
     'MG90S': ('서보 TowerPro MG90S (메탈 기어, 22.8×12.2×28.5 mm)', 'MG90S', '머리 yaw·roll'),
     'horn_25T_alu': ('MG996R용 25T 알루미늄 원형 혼 Ø24, PCD 14 M3 ×4', '25T 알루미늄 혼', '서보 동봉 플라스틱 혼 대신'),
     'horn_20T_metal': ('MG90S용 20T 금속 원형 혼 Ø16, PCD 9 M2 ×4', '20T 금속 혼', ''),
     '623ZZ': ('볼베어링 3×10×4 (U자 브래킷 혼 반대편 지지)', '623ZZ', 'M3 볼트가 축'),
-    '6706ZZ': ('얇은 볼베어링 30×37×4 (고관절 yaw 혼 둘레)', '6706ZZ (61706)', ''),
+    '6706ZZ': ('얇은 볼베어링 30×37×4 (yaw 관절 혼 둘레)', '6706ZZ (61706)', ''),
     '6704ZZ': ('얇은 볼베어링 20×27×4 (머리 yaw 혼 둘레)', '6704ZZ (61704)', ''),
 }
 ELEC = {'battery_2s2200': ('배터리 2S 리포 2200 mAh (자리·질량만)', '7.4 V 2S 2200 mAh'),
@@ -112,7 +112,8 @@ for n, what in SHELL.items():
         '머리: M4 ×4로 head_frame에 고정' if n == 'bottom_head_shell' else ('몸통 셸 고정 방법 v1.1에서 (현재 임시: 양면테이프/케이블타이)' if n.endswith('_shell') and 'head' not in n else ''))
 SPM = {'MG996R': 55.0, 'MG90S': 13.4, 'horn_25T_alu': 6.0, 'horn_20T_metal': 2.0, '623ZZ': 1.0, '6706ZZ': 8.0, '6704ZZ': 4.0}
 for n, (what, mat, note) in PUR.items():
-    row(n, B, what, mat, note, SPM[n])
+    if cnt.get(n, 0):                       # 이 판에 없는 종류(MG996R판의 MG90S 등)는 뺀다
+        row(n, B, what, mat, note, SPM[n])
 for n, (what, mat) in ELEC.items():
     row(n, E, what, mat, '외형·질량만 모델링', next(Pp['meta']['mass'] for k, Pp in LAY['parts'].items() if k == n))
 for nm, q, note in SCREWS:
@@ -147,4 +148,4 @@ for k, v in tot.items():
 ws.append(['', '합계', round(sum(tot.values()), 1)])
 wb.save(V / f'BOM_{TOP}_{VER}.xlsx')
 print('rows', len(rows), {k: round(v, 1) for k, v in tot.items()}, 'total', round(sum(tot.values()), 1))
-print({k: cnt[k] for k in PUR})
+print({k: cnt.get(k, 0) for k in PUR})
