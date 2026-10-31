@@ -1,0 +1,17 @@
+total mass 1694.3 g
+  trunk_base           485.3 g
+  yaw2roll              81.8 g
+  hip_l                 30.3 g
+  upper_leg_left       130.2 g
+  leg                   81.2 g
+  ankle_left            48.8 g
+  neck                  85.7 g
+  neck_pitch            21.6 g
+  yaw_roll_motion       29.0 g
+  jaw_soft             328.2 g
+  bearing_roll          81.8 g
+  hip_l_2               30.3 g
+  upper_leg_right      130.2 g
+  leg_2                 81.2 g
+  ankle_right           48.8 g
+loaded scene_allcollisions: nbody 16 njnt 15 nmesh 79 mass 1.694

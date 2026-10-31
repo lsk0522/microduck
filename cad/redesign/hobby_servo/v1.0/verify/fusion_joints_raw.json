@@ -1,0 +1,240 @@
+{
+ "left_hip_yaw": {
+  "child": "body_yaw2roll",
+  "parent": "body_trunk_base",
+  "p": [
+   9.0,
+   26.25,
+   -7.5
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -25.0,
+  "hi": 29.999999999999996,
+  "suppressed": false
+ },
+ "left_hip_roll": {
+  "child": "body_hip_l",
+  "parent": "body_yaw2roll",
+  "p": [
+   33.75,
+   26.25,
+   -26.25
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -22.0,
+  "hi": 22.0,
+  "suppressed": false
+ },
+ "left_hip_pitch": {
+  "child": "body_upper_leg_left",
+  "parent": "body_hip_l",
+  "p": [
+   6.000000000000001,
+   63.75,
+   -26.25
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "left_knee": {
+  "child": "body_leg",
+  "parent": "body_upper_leg_left",
+  "p": [
+   -47.67,
+   57.75,
+   -59.25000000000001
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "left_ankle": {
+  "child": "body_ankle_left",
+  "parent": "body_leg",
+  "p": [
+   -47.67,
+   96.75,
+   -122.25000000000001
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "neck_pitch": {
+  "child": "body_neck",
+  "parent": "body_trunk_base",
+  "p": [
+   39.0,
+   21.75,
+   48.63
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 59.99999999999999,
+  "suppressed": false
+ },
+ "head_pitch": {
+  "child": "body_neck_pitch",
+  "parent": "body_neck",
+  "p": [
+   39.0,
+   21.75,
+   123.63
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "head_yaw": {
+  "child": "body_yaw_roll_motion",
+  "parent": "body_neck_pitch",
+  "p": [
+   39.0,
+   0.0,
+   151.67
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -170.0,
+  "hi": 170.0,
+  "suppressed": false
+ },
+ "head_roll": {
+  "child": "body_jaw_soft",
+  "parent": "body_yaw_roll_motion",
+  "p": [
+   12.15,
+   0.0,
+   173.42
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -25.0,
+  "hi": 25.0,
+  "suppressed": false
+ },
+ "right_hip_yaw": {
+  "child": "body_bearing_roll",
+  "parent": "body_trunk_base",
+  "p": [
+   9.0,
+   -26.25,
+   -7.5
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -29.999999999999996,
+  "hi": 25.0,
+  "suppressed": false
+ },
+ "right_hip_roll": {
+  "child": "body_hip_l_2",
+  "parent": "body_bearing_roll",
+  "p": [
+   33.75,
+   -26.25,
+   -26.25
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -22.0,
+  "hi": 22.0,
+  "suppressed": false
+ },
+ "right_hip_pitch": {
+  "child": "body_upper_leg_right",
+  "parent": "body_hip_l_2",
+  "p": [
+   6.000000000000001,
+   -63.75,
+   -26.25
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "right_knee": {
+  "child": "body_leg_2",
+  "parent": "body_upper_leg_right",
+  "p": [
+   -47.67,
+   -57.75,
+   -59.25000000000001
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ },
+ "right_ankle": {
+  "child": "body_ankle_right",
+  "parent": "body_leg_2",
+  "p": [
+   -47.67,
+   -96.75,
+   -122.25000000000001
+  ],
+  "a": [
+   0.0,
+   0.0,
+   1.0
+  ],
+  "lo": -90.0,
+  "hi": 90.0,
+  "suppressed": false
+ }
+}

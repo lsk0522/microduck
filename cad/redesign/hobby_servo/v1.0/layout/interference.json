@@ -1,0 +1,169 @@
+{
+ "static": {
+  "zero": [],
+  "INIT": [],
+  "STAND": [],
+  "SIT": [],
+  "FOLD": []
+ },
+ "sweep": {
+  "left_hip_yaw": {
+   "range": [
+    -25.0,
+    30.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "left_hip_roll": {
+   "range": [
+    -22.0,
+    22.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "left_hip_pitch": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "left_knee": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": [
+     75.0,
+     [
+      [
+       "hip_l_left",
+       "ankle_left",
+       1.07
+      ]
+     ]
+    ]
+   }
+  },
+  "left_ankle": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "neck_pitch": {
+   "range": [
+    -90.0,
+    60.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "head_pitch": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "head_yaw": {
+   "range": [
+    -170.0,
+    170.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "head_roll": {
+   "range": [
+    -25.0,
+    25.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "right_hip_yaw": {
+   "range": [
+    -30.0,
+    25.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "right_hip_roll": {
+   "range": [
+    -22.0,
+    22.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "right_hip_pitch": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  },
+  "right_knee": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": [
+     -75.0,
+     [
+      [
+       "hip_l_right",
+       "ankle_right",
+       1.07
+      ]
+     ]
+    ],
+    "max": null
+   }
+  },
+  "right_ankle": {
+   "range": [
+    -90.0,
+    90.0
+   ],
+   "first_collision": {
+    "min": null,
+    "max": null
+   }
+  }
+ }
+}

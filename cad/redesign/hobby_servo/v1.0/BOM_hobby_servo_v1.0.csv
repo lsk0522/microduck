@@ -1,0 +1,54 @@
+﻿번호,부품명,무엇인지,분류,수량,재질·규격,들어가는 곳,부피 cm³,질량 g/개,파일 (parts/<부품명>/),비고
+1,trunk_frame,"몸통 프레임: 바닥판 + 뒤판, 고관절 yaw MG996R 2개·목 MG996R 포켓, 6706ZZ 베어링 자리, 전장 받침",출력(경질),1,"PETG, 채움 55 %",몸통,98.71,68.95,"trunk_frame.step, trunk_frame.stl",M3 인서트 (서보 탭)
+2,battery_tray,"배터리 받침 (2S 2200 mAh 리포, 몸통 뒤)",출력(경질),1,"PETG, 채움 55 %",몸통,2.08,1.45,"battery_tray.step, battery_tray.stl",배터리는 벨크로 끈으로 고정
+3,yaw2roll_left,왼쪽 고관절 yaw→roll 브래킷: yaw 혼 컵(6706ZZ 안고리) + hip_roll MG996R 포켓,출력(경질),1,"PETG, 채움 55 %",왼쪽 고관절 yaw,18.3,12.79,"yaw2roll_left.step, yaw2roll_left.stl",
+4,yaw2roll_right,오른쪽 고관절 yaw→roll 브래킷 (왼쪽 거울상),출력(경질),1,"PETG, 채움 55 %",오른쪽 고관절 yaw,18.3,12.79,"yaw2roll_right.step, yaw2roll_right.stl",
+5,hip_l_left,"왼쪽 고관절 roll→pitch U자 브래킷 2개 (roll 혼+623ZZ, pitch 혼+623ZZ)",출력(경질),1,"PETG, 채움 55 %",왼쪽 고관절 roll,23.29,16.27,"hip_l_left.step, hip_l_left.stl",
+6,hip_l_right,오른쪽 고관절 roll→pitch U자 브래킷 (왼쪽 거울상),출력(경질),1,"PETG, 채움 55 %",오른쪽 고관절 roll,23.29,16.27,"hip_l_right.step, hip_l_right.stl",
+7,upper_leg_left,왼쪽 허벅지: hip_pitch·knee MG996R 포켓 2개,출력(경질),1,"PETG, 채움 55 %",왼쪽 허벅지,28.96,20.23,"upper_leg_left.step, upper_leg_left.stl",
+8,upper_leg_right,오른쪽 허벅지 (왼쪽 거울상),출력(경질),1,"PETG, 채움 55 %",오른쪽 허벅지,28.96,20.23,"upper_leg_right.step, upper_leg_right.stl",
+9,leg_left,왼쪽 정강이: knee U자(혼+623ZZ) + ankle MG996R 포켓,출력(경질),1,"PETG, 채움 55 %",왼쪽 정강이,27.51,19.21,"leg_left.step, leg_left.stl",
+10,leg_right,오른쪽 정강이 (왼쪽 거울상),출력(경질),1,"PETG, 채움 55 %",오른쪽 정강이,27.51,19.21,"leg_right.step, leg_right.stl",
+11,ankle_left,왼발: ankle U자(혼+623ZZ) + 발판,출력(경질),1,"PETG, 채움 55 %",왼발,32.77,22.89,"ankle_left.step, ankle_left.stl",
+12,ankle_right,오른발 (왼쪽 거울상),출력(경질),1,"PETG, 채움 55 %",오른발,32.77,22.89,"ankle_right.step, ankle_right.stl",
+13,sole_left,"왼쪽 발바닥 (볼록 R150, 미끄럼 방지)",출력(연질),1,"TPU 95A, 채움 35 %",왼발,44.56,18.87,"sole_left.step, sole_left.stl",발판에 접착 또는 M3 ×4
+14,sole_right,오른쪽 발바닥,출력(연질),1,"TPU 95A, 채움 35 %",오른발,44.56,18.87,"sole_right.step, sole_right.stl",
+15,neck_frame,목: neck_pitch U자(혼+623ZZ) + head_pitch MG996R 포켓,출력(경질),1,"PETG, 채움 55 %",목,33.9,23.68,"neck_frame.step, neck_frame.stl",
+16,neck_pitch_frame,"머리 pitch U자(혼+623ZZ) + 윗판(6704ZZ 컵, head_yaw 혼 자리)",출력(경질),1,"PETG, 채움 55 %",머리 pitch,12.31,8.6,"neck_pitch_frame.step, neck_pitch_frame.stl",
+17,yaw_roll_frame,머리 yaw→roll 브래킷: head_yaw MG90S 하우징 + head_roll U자(혼+623ZZ),출력(경질),1,"PETG, 채움 55 %",머리 yaw,18.06,12.62,"yaw_roll_frame.step, yaw_roll_frame.stl",
+18,head_frame,머리 안 프레임: head_roll MG90S 포켓 + 셸 고정 팔 4곳 (M4),출력(경질),1,"PETG, 채움 55 %",머리 roll(머리 전체),15.89,11.1,"head_frame.step, head_frame.stl",
+19,left_shell,몸통 왼쪽 외피 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",몸통,34.04,38.91,"left_shell.step, left_shell.stl",몸통 셸 고정 방법 v1.1에서 (현재 임시: 양면테이프/케이블타이)
+20,right_shell,몸통 오른쪽 외피 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",몸통,33.27,38.03,"right_shell.step, right_shell.stl",몸통 셸 고정 방법 v1.1에서 (현재 임시: 양면테이프/케이블타이)
+21,top_head_shell,머리 윗 셸 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",머리 roll(머리 전체),100.69,115.09,"top_head_shell.step, top_head_shell.stl",
+22,bottom_head_shell,머리 아래 셸 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",머리 roll(머리 전체),72.88,83.3,"bottom_head_shell.step, bottom_head_shell.stl",머리: M4 ×4로 head_frame에 고정
+23,face_part,얼굴판 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",머리 roll(머리 전체),19.59,22.39,"face_part.step, face_part.stl",
+24,noenoeil,눈 링 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",머리 roll(머리 전체),14.37,16.43,"noenoeil.step, noenoeil.stl",
+25,jaw,부리 아래(경질) (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(셸),1,"PETG, 채움 90 %",머리 roll(머리 전체),31.52,36.02,"jaw.step, jaw.stl",
+26,jaw_soft,부리 아래 연질부 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(연질),1,"TPU 95A, 채움 35 %",머리 roll(머리 전체),62.8,26.59,"jaw_soft.step, jaw_soft.stl",
+27,soft_mouth_top,부리 위 연질부 (다이나믹셀 v1.0 셸 1.5배 + 내부 기구 자리 깎음),출력(연질),1,"TPU 95A, 채움 35 %",머리 roll(머리 전체),9.09,3.85,"soft_mouth_top.step, soft_mouth_top.stl",
+28,MG996R,"서보 TowerPro MG996R (메탈 기어, 40.7×19.7×42.9 mm, 6 V 정지 약 11 kgf·cm)",구매품,12,MG996R,"몸통, 왼쪽 고관절 yaw, 왼쪽 허벅지, 왼쪽 정강이, 목, 오른쪽 고관절 yaw, 오른쪽 허벅지, 오른쪽 정강이",,55.0,"MG996R.step, MG996R.stl",다리 10 + 목 pitch + 머리 pitch. 치수는 대표값 — 캘리퍼 실측 필요
+29,MG90S,"서보 TowerPro MG90S (메탈 기어, 22.8×12.2×28.5 mm)",구매품,2,MG90S,"머리 yaw, 머리 roll(머리 전체)",,13.4,"MG90S.step, MG90S.stl",머리 yaw·roll
+30,horn_25T_alu,"MG996R용 25T 알루미늄 원형 혼 Ø24, PCD 14 M3 ×4",구매품,12,25T 알루미늄 혼,"왼쪽 고관절 yaw, 왼쪽 고관절 roll, 왼쪽 정강이, 왼발, 목, 머리 pitch, 오른쪽 고관절 yaw, 오른쪽 고관절 roll, 오른쪽 정강이, 오른발",,6.0,"horn_25T_alu.step, horn_25T_alu.stl",서보 동봉 플라스틱 혼 대신
+31,horn_20T_metal,"MG90S용 20T 금속 원형 혼 Ø16, PCD 9 M2 ×4",구매품,2,20T 금속 혼,"머리 pitch, 머리 yaw",,2.0,"horn_20T_metal.step, horn_20T_metal.stl",
+32,623ZZ,볼베어링 3×10×4 (U자 브래킷 혼 반대편 지지),구매품,11,623ZZ,"왼쪽 고관절 roll, 왼쪽 정강이, 왼발, 목, 머리 pitch, 머리 yaw, 오른쪽 고관절 roll, 오른쪽 정강이, 오른발",,1.0,"623ZZ.step, 623ZZ.stl",M3 볼트가 축
+33,6706ZZ,얇은 볼베어링 30×37×4 (고관절 yaw 혼 둘레),구매품,2,6706ZZ (61706),"왼쪽 고관절 yaw, 오른쪽 고관절 yaw",,8.0,"6706ZZ.step, 6706ZZ.stl",
+34,6704ZZ,얇은 볼베어링 20×27×4 (머리 yaw 혼 둘레),구매품,1,6704ZZ (61704),머리 pitch,,4.0,"6704ZZ.step, 6704ZZ.stl",
+35,battery_2s2200,배터리 2S 리포 2200 mAh (자리·질량만),전장,1,7.4 V 2S 2200 mAh,몸통,,115.0,,외형·질량만 모델링
+36,pi_zero_2w,메인 보드 Raspberry Pi Zero 2 W,전장,1,Pi Zero 2 W,몸통,,10.0,,외형·질량만 모델링
+37,pca9685,16채널 PWM 서보 드라이버,전장,1,PCA9685 보드,몸통,,9.0,,외형·질량만 모델링
+38,ads1115_1,"ADC (서보 전위차계 읽기, 4채널) ×4 중 1",전장,1,ADS1115,몸통,,2.0,,외형·질량만 모델링
+39,ads1115_2,ADC ×4 중 2,전장,1,ADS1115,몸통,,2.0,,외형·질량만 모델링
+40,ads1115_3,ADC ×4 중 3,전장,1,ADS1115,몸통,,2.0,,외형·질량만 모델링
+41,ads1115_4,ADC ×4 중 4,전장,1,ADS1115,몸통,,2.0,,외형·질량만 모델링
+42,ubec_6v10a,서보 전원 UBEC 6 V 10 A,전장,1,UBEC 6 V 10 A,몸통,,25.0,,외형·질량만 모델링
+43,buck_5v3a,보드 전원 5 V 3 A 강압,전장,1,5 V 3 A buck,몸통,,3.0,,외형·질량만 모델링
+44,bno085,IMU,전장,1,BNO085,몸통,,3.0,,외형·질량만 모델링
+45,M3 열압입 인서트 (M3×4×Ø4),체결품,체결품,59,M3 열압입 인서트 (M3×4×Ø4),MG996R 탭 48 + U자 축 볼트 11,,,,CAD 구멍 개수로 계산
+46,M3×10 볼트,체결품,체결품,48,M3×10 볼트,MG996R 탭 → 인서트,,,,CAD 구멍 개수로 계산
+47,M3×12 볼트 (축),체결품,체결품,11,M3×12 볼트 (축),623ZZ 안고리 → 서보 바닥 스터드 인서트,,,,CAD 구멍 개수로 계산
+48,M3×8 볼트,체결품,체결품,48,M3×8 볼트,25T 혼 → 브래킷 (혼 12개 × 4),,,,CAD 구멍 개수로 계산
+49,M2 열압입 인서트 (Ø3.2),체결품,체결품,4,M2 열압입 인서트 (Ø3.2),MG90S 탭,,,,CAD 구멍 개수로 계산
+50,M2×8 볼트,체결품,체결품,4,M2×8 볼트,MG90S 탭,,,,CAD 구멍 개수로 계산
+51,M2×6 볼트,체결품,체결품,8,M2×6 볼트,20T 혼 → 브래킷 (2개 × 4),,,,CAD 구멍 개수로 계산
+52,M4×12 나사산 성형 나사,체결품,체결품,4,M4×12 나사산 성형 나사,머리 셸 → head_frame 팔,,,,CAD 구멍 개수로 계산
+53,혼 중심 나사,체결품,체결품,14,혼 중심 나사,서보 동봉품,,,,CAD 구멍 개수로 계산

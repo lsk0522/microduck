@@ -1,0 +1,45 @@
+{
+ "configs": {
+  "zero": [
+   [
+    "mg996r_hip_yaw_left",
+    "bearing_6706_left",
+    66.8,
+    2.5
+   ],
+   [
+    "mg996r_hip_yaw_right",
+    "bearing_6706_right",
+    66.8,
+    2.5
+   ],
+   [
+    "bearing_6704_head_yaw",
+    "mg90s_head_yaw",
+    18.6,
+    2.4
+   ]
+  ],
+  "INIT": [
+   [
+    "mg996r_hip_yaw_left",
+    "bearing_6706_left",
+    66.8,
+    2.5
+   ],
+   [
+    "mg996r_hip_yaw_right",
+    "bearing_6706_right",
+    66.8,
+    2.5
+   ],
+   [
+    "bearing_6704_head_yaw",
+    "mg90s_head_yaw",
+    18.6,
+    2.4
+   ]
+  ]
+ },
+ "pair_checks": 186
+}

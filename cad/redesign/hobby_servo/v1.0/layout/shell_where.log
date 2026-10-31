@@ -1,0 +1,16 @@
+only got 5546/6000 samples!
+only got 5948/6000 samples!
+{'right_shell': ('trunk_base', np.float64(37.8)), 'left_shell': ('trunk_base', np.float64(38.4)), 'face_part': ('jaw_soft', np.float64(19.6)), 'jaw_soft': ('jaw_soft', np.float64(62.8)), 'top_head_shell': ('jaw_soft', np.float64(100.7)), 'soft_mouth_top': ('jaw_soft', np.float64(9.1)), 'noenoeil': ('jaw_soft', np.float64(14.4)), 'jaw': ('jaw_soft', np.float64(31.5)), 'bottom_head_shell': ('jaw_soft', np.float64(80.4))}
+right_shell        neck_frame                   476 pts  x[  27.0,  51.0] y[ -29.8, -24.8] z[  36.6,  61.3]
+right_shell        mg996r_neck_pitch            154 pts  x[  29.1,  33.3] y[ -19.6,  -0.8] z[  18.1,  28.3]
+right_shell        bearing_623_neck_pitch        91 pts  x[  34.1,  44.0] y[ -27.6, -24.8] z[  43.6,  53.6]
+right_shell        trunk_frame                  524 pts  x[ -32.5,  43.0] y[ -40.8,  -0.8] z[   0.8,  52.6]
+right_shell        mg996r_hip_yaw_right          30 pts  x[  15.6,  19.2] y[ -36.1, -33.1] z[  34.7,  41.4]
+left_shell         mg996r_hip_yaw_left           39 pts  x[  15.2,  19.2] y[  32.4,  36.1] z[  34.6,  41.4]
+left_shell         neck_frame                   383 pts  x[  27.0,  51.0] y[  25.8,  29.8] z[  36.6,  60.6]
+left_shell         mg996r_neck_pitch            189 pts  x[  29.1,  33.3] y[  -2.9,  17.5] z[  11.5,  28.2]
+left_shell         horn_mg996r_neck_pitch       413 pts  x[  27.0,  51.0] y[  23.2,  25.8] z[  36.6,  60.6]
+left_shell         trunk_frame                  406 pts  x[ -32.5,  33.3] y[  -2.9,  40.9] z[   0.5,  44.2]
+bottom_head_shell  yaw_roll_frame               165 pts  x[ -15.6,  15.2] y[  15.0,  19.0] z[ 163.4, 173.7]
+bottom_head_shell  head_frame                    35 pts  x[   8.0,   9.4] y[ -19.0, -14.2] z[ 165.0, 173.4]
+bottom_head_shell  mg90s_head_roll               42 pts  x[   8.0,  14.7] y[ -18.2, -13.4] z[ 167.3, 173.4]

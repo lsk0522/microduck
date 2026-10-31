@@ -1,0 +1,52 @@
+모델: cad/redesign/hobby_servo/v1.0/mjcf/scene_allcollisions.xml
+총 질량: 1.694 kg   (원본 레퍼런스 ≈ 0.737 kg, 실물 < 0.8 kg)
+
+[바디별 질량]
+  trunk_base                   485.3 g
+  yaw2roll                      81.8 g
+  hip_l                         30.3 g
+  upper_leg_left               130.2 g
+  leg                           81.2 g
+  ankle_left                    48.8 g
+  neck                          85.7 g
+  neck_pitch                    21.6 g
+  yaw_roll_motion               29.0 g
+  jaw_soft                     328.2 g
+  bearing_roll                  81.8 g
+  hip_l_2                       30.3 g
+  upper_leg_right              130.2 g
+  leg_2                         81.2 g
+  ankle_right                   48.8 g
+
+[관절 가동 범위]
+  left_hip_yaw                 -25.0 ..   30.0 deg
+  left_hip_roll                -22.0 ..   22.0 deg
+  left_hip_pitch               -90.0 ..   90.0 deg
+  left_knee                    -90.0 ..   90.0 deg
+  left_ankle                   -90.0 ..   90.0 deg
+  neck_pitch                   -90.0 ..   60.0 deg
+  head_pitch                   -90.0 ..   90.0 deg
+  head_yaw                    -170.0 ..  170.0 deg
+  head_roll                    -25.0 ..   25.0 deg
+  right_hip_yaw                -30.0 ..   25.0 deg
+  right_hip_roll               -22.0 ..   22.0 deg
+  right_hip_pitch              -90.0 ..   90.0 deg
+  right_knee                   -90.0 ..   90.0 deg
+  right_ankle                  -90.0 ..   90.0 deg
+
+[STAND 유지 토크]  서보=mg996r, Vin=6.0 V → 정지 1.08 N·m, 연속 권장 0.22 N·m
+  2.0s 후 몸통 높이 17.6 cm (시작 18.0 cm, 자세 유지)
+  left_hip_yaw           0.008 N·m  (정지토크의  0.7%)
+  left_hip_roll          0.179 N·m  (정지토크의 16.6%)
+  left_hip_pitch         0.050 N·m  (정지토크의  4.6%)
+  left_knee              0.264 N·m  (정지토크의 24.4%)  ⚠ 연속 권장 초과
+  left_ankle             0.068 N·m  (정지토크의  6.3%)
+  neck_pitch             0.014 N·m  (정지토크의  1.3%)
+  head_pitch             0.087 N·m  (정지토크의  8.0%)
+  head_yaw               0.000 N·m  (정지토크의  0.0%)
+  head_roll              0.005 N·m  (정지토크의  0.5%)
+  right_hip_yaw          0.008 N·m  (정지토크의  0.7%)
+  right_hip_roll         0.183 N·m  (정지토크의 16.9%)
+  right_hip_pitch        0.049 N·m  (정지토크의  4.5%)
+  right_knee             0.266 N·m  (정지토크의 24.6%)  ⚠ 연속 권장 초과
+  right_ankle            0.068 N·m  (정지토크의  6.3%)

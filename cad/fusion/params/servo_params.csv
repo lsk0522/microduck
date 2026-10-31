@@ -1,0 +1,48 @@
+name,value,unit,source,comment
+# MG996R (TowerPro 표준 크기) — 판매처 사양 40.7x19.7x42.9, 55 g. 나머지는 표준 크기 서보 통상값: 실물 캘리퍼로 교체할 것
+mg996r_L,40.7,mm,spec,몸체 길이 (축 방향에서 볼 때 긴 변)
+mg996r_W,19.7,mm,spec,몸체 폭
+mg996r_H,37.1,mm,servodatabase 1.46 in,케이스 바닥→케이스 윗면
+mg996r_Htot,42.9,mm,spec,케이스 바닥→스플라인 끝
+mg996r_shaft_end,10.2,mm,typical,축 중심 ← 가까운 몸체 끝 (길이 방향)
+mg996r_tab_span,54.0,mm,typical,날개 끝-끝
+mg996r_tab_z,26.7,mm,typical,케이스 바닥→날개 아랫면
+mg996r_tab_t,2.5,mm,typical,날개 두께
+mg996r_hole_pitch_L,49.5,mm,typical,날개 구멍 길이 방향 간격
+mg996r_hole_pitch_W,10.0,mm,typical,날개 구멍 폭 방향 간격
+mg996r_hole_d,4.5,mm,typical,날개 구멍 (M3 + 여유)
+mg996r_boss_d,13.0,mm,typical,윗면 축 보스 지름
+mg996r_mass,55,g,spec,
+# 25T 알루미늄 디스크 혼 (MG996R용)
+horn25_d,24.0,mm,typical,디스크 지름
+horn25_t,2.5,mm,typical,디스크 두께 (스플라인 끝 위)
+horn25_hub_h,3.0,mm,typical,허브가 스플라인을 덮는 높이 (디스크 아랫면 = 스플라인 끝 + horn25_t - hub 생략)
+horn25_pcd,14.0,mm,typical,디스크 M3 구멍 피치원 (4개)
+horn25_mass,6,g,typical,
+# MG90S (TowerPro) — 사양 22.8x12.2x28.5, 13.4 g
+mg90s_L,22.8,mm,spec,
+mg90s_W,12.2,mm,spec,
+mg90s_H,22.7,mm,typical,케이스 바닥→케이스 윗면
+mg90s_Htot,28.5,mm,spec,케이스 바닥→스플라인 끝
+mg90s_shaft_end,6.1,mm,typical,축 중심 ← 가까운 몸체 끝
+mg90s_tab_span,32.2,mm,typical,
+mg90s_tab_z,15.9,mm,typical,
+mg90s_tab_t,2.5,mm,typical,
+mg90s_hole_pitch_L,27.6,mm,typical,
+mg90s_hole_d,2.2,mm,typical,날개 구멍 (M2)
+mg90s_mass,13.4,g,spec,
+# MG90S 금속 디스크 혼 (20T)
+horn20_d,16.0,mm,typical,
+horn20_t,2.0,mm,typical,
+horn20_pcd,9.0,mm,typical,M2 구멍 피치원
+horn20_mass,2,g,typical,
+# 베어링
+b623_d,3,mm,spec,623ZZ 내경
+b623_D,10,mm,spec,623ZZ 외경
+b623_B,4,mm,spec,623ZZ 폭
+b6706_d,30,mm,spec,6706ZZ 내경 (얇은 단면, 고관절 요)
+b6706_D,37,mm,spec,
+b6706_B,4,mm,spec,
+b6704_d,20,mm,spec,6704ZZ 내경 (머리 요)
+b6704_D,27,mm,spec,
+b6704_B,4,mm,spec,

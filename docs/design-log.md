@@ -36,3 +36,18 @@
 - 계획 대화에 요청:
   - `bom/`에 다이나믹셀 v1.0 부품 목록 반영 (`cad/redesign/dynamixel/v1.0/BOM_dynamixel_v1.0.csv`)
   - README·FUSION_REDESIGN.md 폴더 규칙 갱신: 결과물 = `cad/redesign/<dynamixel|hobby_servo>/v1.x/`, 어셈블리 파일명 앞 `1_`, 판재는 `parts/<부품>/`
+
+### 2026-10-31 일반 서보 v1.0 (MG996R ×12 + MG90S ×2, 1.5배) 완료
+- 한 일:
+  - 기구 배치를 새로 설계 (`tools/hobby_layout.py`): 서보 포켓 + 혼 반대편 623ZZ U자 브래킷, yaw 관절은 혼 둘레 6706ZZ/6704ZZ
+  - 셸 9종 = 다이나믹셀 v1.0 셸 ×1.5 − 내부 기구·가동 범위 스윕 영역, Fusion 어셈블리 `1_microduck_hobby_servo_v1.0`, BOM, MJCF, 검증
+- 결과: 완료
+  - 배치 간섭 0, 실제 메시 간섭 33자세 3547쌍 새 간섭 0 (무릎 +75° 넘김·head_pitch −90°는 원본에도 있음)
+  - 관절 14/14 (+20° 실측), 구매품 위치 42/42, MuJoCo STAND 2 s 유지, 질량 1.69 kg
+- 원본/계획 대비 변경: `cad/redesign/hobby_servo/v1.0/CHANGELOG.md`
+  - head_pitch MG90S → MG996R (MG90S면 STAND 유지만으로 정지 토크의 34 %), 부리 서보 생략, 목 pitch 서보는 몸통에 고정, 발바닥 볼록 R150
+- 확인 필요 / 가정: 무릎 유지 토크 24 % (연속 권장 20 % 약간 초과), 몸통 셸 고정 방법 v1.1, 서보 치수는 대표값(실측 필요)
+- 계획 대화에 요청:
+  - `plan-hobby-servo.md` 서보 수 갱신: MG996R ×11 + MG90S ×4 → **MG996R ×12 + MG90S ×2** (head_pitch MG996R, mouth 생략), 전원(UBEC) 계산도 MG996R 12개 기준으로
+  - `bom/`에 `cad/redesign/hobby_servo/v1.0/BOM_hobby_servo_v1.0.csv` 반영
+  - 사용자 지시: 세 번째 버전 `cad/redesign/mg996r/v1.0/` (14축 전부 MG996R) 추가 — README 폴더 규칙에 반영

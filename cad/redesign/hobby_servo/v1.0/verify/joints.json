@@ -1,0 +1,230 @@
+{
+ "passed": 14,
+ "total": 14,
+ "joints": {
+  "left_hip_yaw": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -25.0,
+    30.0
+   ],
+   "range_fusion": [
+    -25.0,
+    30.0
+   ],
+   "child": "yaw2roll",
+   "parent": "trunk_base"
+  },
+  "left_hip_roll": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -22.0,
+    22.0
+   ],
+   "range_fusion": [
+    -22.0,
+    22.0
+   ],
+   "child": "hip_l",
+   "parent": "yaw2roll"
+  },
+  "left_hip_pitch": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "upper_leg_left",
+   "parent": "hip_l"
+  },
+  "left_knee": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0015,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "leg",
+   "parent": "upper_leg_left"
+  },
+  "left_ankle": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0015,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "ankle_left",
+   "parent": "leg"
+  },
+  "neck_pitch": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0008,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    60.0
+   ],
+   "range_fusion": [
+    -90.0,
+    60.0
+   ],
+   "child": "neck",
+   "parent": "trunk_base"
+  },
+  "head_pitch": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0008,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "neck_pitch",
+   "parent": "neck"
+  },
+  "head_yaw": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -170.0,
+    170.0
+   ],
+   "range_fusion": [
+    -170.0,
+    170.0
+   ],
+   "child": "yaw_roll_motion",
+   "parent": "neck_pitch"
+  },
+  "head_roll": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0007,
+   "angle": 20.0,
+   "range_mjcf": [
+    -25.0,
+    25.0
+   ],
+   "range_fusion": [
+    -25.0,
+    25.0
+   ],
+   "child": "jaw_soft",
+   "parent": "yaw_roll_motion"
+  },
+  "right_hip_yaw": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -30.0,
+    25.0
+   ],
+   "range_fusion": [
+    -30.0,
+    25.0
+   ],
+   "child": "bearing_roll",
+   "parent": "trunk_base"
+  },
+  "right_hip_roll": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -22.0,
+    22.0
+   ],
+   "range_fusion": [
+    -22.0,
+    22.0
+   ],
+   "child": "hip_l_2",
+   "parent": "bearing_roll"
+  },
+  "right_hip_pitch": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "upper_leg_right",
+   "parent": "hip_l_2"
+  },
+  "right_knee": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0015,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "leg_2",
+   "parent": "upper_leg_right"
+  },
+  "right_ankle": {
+   "ok": true,
+   "axis_dot": 1.0,
+   "center_moved_mm": 0.0015,
+   "angle": 20.0,
+   "range_mjcf": [
+    -90.0,
+    90.0
+   ],
+   "range_fusion": [
+    -90.0,
+    90.0
+   ],
+   "child": "ankle_right",
+   "parent": "leg_2"
+  }
+ }
+}

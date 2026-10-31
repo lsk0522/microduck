@@ -1,0 +1,20 @@
+parts 70 surface points 208757
+[zero] 0 collisions []
+[INIT] 0 collisions []
+[STAND] 0 collisions []
+[SIT] 0 collisions []
+[FOLD] 0 collisions []
+left_hip_yaw     range  -25.0..  30.0  free to -25.0 / 30.0  
+left_hip_roll    range  -22.0..  22.0  free to -22.0 / 22.0  
+left_hip_pitch   range  -90.0..  90.0  free to -90.0 / 90.0  
+left_knee        range  -90.0..  90.0  free to -90.0 / 75.0  [('hip_l_left', 'ankle_left', 1.07)]
+left_ankle       range  -90.0..  90.0  free to -90.0 / 90.0  
+neck_pitch       range  -90.0..  60.0  free to -90.0 / 60.0  
+head_pitch       range  -90.0..  90.0  free to -90.0 / 90.0  
+head_yaw         range -170.0.. 170.0  free to -170.0 / 170.0  
+head_roll        range  -25.0..  25.0  free to -25.0 / 25.0  
+right_hip_yaw    range  -30.0..  25.0  free to -30.0 / 25.0  
+right_hip_roll   range  -22.0..  22.0  free to -22.0 / 22.0  
+right_hip_pitch  range  -90.0..  90.0  free to -90.0 / 90.0  
+right_knee       range  -90.0..  90.0  free to -75.0 / 90.0 [('hip_l_right', 'ankle_right', 1.07)] 
+right_ankle      range  -90.0..  90.0  free to -90.0 / 90.0  

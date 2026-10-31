@@ -1,0 +1,197 @@
+[
+ {
+  "shell": "right_shell",
+  "part": "neck_frame",
+  "n": 476,
+  "lo": [
+   27.0,
+   -29.8,
+   36.6
+  ],
+  "hi": [
+   51.0,
+   -24.8,
+   61.3
+  ]
+ },
+ {
+  "shell": "right_shell",
+  "part": "mg996r_neck_pitch",
+  "n": 154,
+  "lo": [
+   29.2,
+   -19.6,
+   18.1
+  ],
+  "hi": [
+   33.3,
+   -0.8,
+   28.3
+  ]
+ },
+ {
+  "shell": "right_shell",
+  "part": "bearing_623_neck_pitch",
+  "n": 91,
+  "lo": [
+   34.1,
+   -27.6,
+   43.6
+  ],
+  "hi": [
+   44.0,
+   -24.8,
+   53.6
+  ]
+ },
+ {
+  "shell": "right_shell",
+  "part": "trunk_frame",
+  "n": 524,
+  "lo": [
+   -32.5,
+   -40.8,
+   0.8
+  ],
+  "hi": [
+   43.0,
+   -0.8,
+   52.6
+  ]
+ },
+ {
+  "shell": "right_shell",
+  "part": "mg996r_hip_yaw_right",
+  "n": 30,
+  "lo": [
+   15.6,
+   -36.1,
+   34.7
+  ],
+  "hi": [
+   19.2,
+   -33.1,
+   41.4
+  ]
+ },
+ {
+  "shell": "left_shell",
+  "part": "mg996r_hip_yaw_left",
+  "n": 39,
+  "lo": [
+   15.2,
+   32.4,
+   34.6
+  ],
+  "hi": [
+   19.2,
+   36.1,
+   41.4
+  ]
+ },
+ {
+  "shell": "left_shell",
+  "part": "neck_frame",
+  "n": 383,
+  "lo": [
+   27.0,
+   25.8,
+   36.6
+  ],
+  "hi": [
+   51.0,
+   29.8,
+   60.6
+  ]
+ },
+ {
+  "shell": "left_shell",
+  "part": "mg996r_neck_pitch",
+  "n": 189,
+  "lo": [
+   29.2,
+   -2.9,
+   11.5
+  ],
+  "hi": [
+   33.3,
+   17.5,
+   28.2
+  ]
+ },
+ {
+  "shell": "left_shell",
+  "part": "horn_mg996r_neck_pitch",
+  "n": 413,
+  "lo": [
+   27.0,
+   23.2,
+   36.6
+  ],
+  "hi": [
+   51.0,
+   25.8,
+   60.6
+  ]
+ },
+ {
+  "shell": "left_shell",
+  "part": "trunk_frame",
+  "n": 406,
+  "lo": [
+   -32.5,
+   -2.9,
+   0.5
+  ],
+  "hi": [
+   33.3,
+   40.9,
+   44.2
+  ]
+ },
+ {
+  "shell": "bottom_head_shell",
+  "part": "yaw_roll_frame",
+  "n": 165,
+  "lo": [
+   -15.6,
+   15.0,
+   163.4
+  ],
+  "hi": [
+   15.2,
+   19.0,
+   173.7
+  ]
+ },
+ {
+  "shell": "bottom_head_shell",
+  "part": "head_frame",
+  "n": 35,
+  "lo": [
+   8.0,
+   -19.0,
+   165.0
+  ],
+  "hi": [
+   9.4,
+   -14.2,
+   173.4
+  ]
+ },
+ {
+  "shell": "bottom_head_shell",
+  "part": "mg90s_head_roll",
+  "n": 42,
+  "lo": [
+   8.0,
+   -18.2,
+   167.3
+  ],
+  "hi": [
+   14.7,
+   -13.4,
+   173.4
+  ]
+ }
+]
