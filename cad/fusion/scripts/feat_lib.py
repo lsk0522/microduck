@@ -89,3 +89,34 @@ def clear(comp):
         tl.item(i).entity.deleteMe()
     for b in list(comp.bRepBodies):
         b.deleteMe()
+
+
+def find_mat(name):
+    app = adsk.core.Application.get()
+    for lib in app.materialLibraries:
+        try:
+            m = lib.materials.itemByName(name)
+        except Exception:
+            m = None
+        if m:
+            return m
+    return None
+
+
+def find_app(name):
+    app = adsk.core.Application.get()
+    for lib in app.materialLibraries:
+        try:
+            a = lib.appearances.itemByName(name)
+        except Exception:
+            a = None
+        if a:
+            return a
+    return None
+
+
+def set_plastic(body, soft=False):
+    """출력 부품 재질: 경질 = ABS 플라스틱 / ABS(흰색), 연질 = 고무 / 고무 - 연질 (원본 단면 추적본과 같게). 알루미늄은 판재(가공품)만."""
+    m = find_mat('고무' if soft else 'ABS 플라스틱'); a = find_app('고무 - 연질' if soft else 'ABS(흰색)')
+    if m: body.material = m
+    if a: body.appearance = a

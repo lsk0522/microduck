@@ -25,7 +25,12 @@
      - 셸 방법: `tools/feat/shell_sections.py` 로 y 단면마다 바깥·안쪽 곡선(법선 방향으로 가름) → `feat_shell_loft.py run_loft_region` 으로 영역 로프트 (바깥 − 안쪽).
        한 번에 로프트하면 자체 교차 → 뒤/가운데/앞으로 나눔. 결과 주 곡면 원작 대비 중앙값 0.016 mm, 층 없음
      - 스크립트 `cad/fusion/scripts/feat_top_head_shell.py` (build + details). 남은 작은 차이: 보스–벽 이음 받침, 앞 가운데 받침, 바닥 턱(z 0–1.6) — p95 0.12 mm 안
-     - 다음 커버: bottom_head_shell (바닥판 + 수직 내벽 = 단 분해, 바깥 아래 모서리 둥근 필렛), left/right_shell
+     - 다음 커버: bottom_head_shell 분석 (2026-11-01): 바닥이 평면이 아니라 곡면(z −12.6 ~ −10.2) → 위가 열린 셸.
+       ① y 단면 로프트(바깥 = 바닥 곡면 + 옆벽, 위로 닫음 / 안쪽 = 바닥 윗면 + 안벽) — shell_sections.py 에 '위가 열림' 옵션(v 뒤집기) 추가 필요
+       ② 뒤쪽 y < −24 는 얇은 평판(z −1.5~0) → 돌출
+       ③ 안쪽 세로 벽·보스(높이 −1, 0, 1.5, 3, 4.5, 7.5) → z 단면(원작 − 셸) 영역을 바닥에서 각 높이까지 돌출
+     - 그다음 left/right_shell, jaw, jaw_soft, face_part, soft_mouth_top
+- 재질 (사용자 2026-11-01): 알루미늄은 가공품(판재 4종)만. 출력 부품 = ABS(흰색), 연질 = 고무. 새로 그린 부품은 feat_lib.set_plastic() 으로 맞춤. 렌즈도 알루미늄에서 뺌
   6. 마무리: 참고 메시 70개 삭제, 원작 비교 검증, STEP·STL·바탕화면 파일 갱신
 - 다 끝나면 참고 메시(ref_*, 숨김 70개) 삭제 → 어셈블리에 메시 0
 

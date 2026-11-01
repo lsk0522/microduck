@@ -19,6 +19,10 @@ TS = [float(v) for v in sys.argv[6].split(",")] if len(sys.argv) > 6 else list(n
 for t in TS:
     ps = section_polys(m, ax, t)
     if not ps: continue
+    FLIP = os.environ.get('FLIP') == '1'                                # 위가 열린 셸(바닥 셸): v 뒤집어 같은 방법
+    if FLIP:
+        from shapely import affinity
+        ps = [affinity.scale(p, 1.0, -1.0, origin=(0, 0)) for p in ps]
     band = max(ps, key=lambda p: p.area)
     clean = band.buffer(1.0).buffer(-1.0).buffer(-0.6).buffer(0.6)     # 홈 메우기 → 리브 지우기
     if clean.is_empty: clean = band
@@ -49,7 +53,10 @@ for t in TS:
             if a0 <= t <= a1:
                 Q = Q[(Q[:, 0] < u0) | (Q[:, 0] > u1)]                       # 빈 구간은 점 없이 → 스플라인이 매끄럽게 잇는다
         return Q
-    out.append(dict(t=round(float(t), 3), outer=rs(outer).round(4).tolist(), inner=rs(inner).round(4).tolist(),
+    oo, ii = rs(outer), rs(inner)
+    if FLIP:
+        oo[:, 1] *= -1; ii[:, 1] *= -1
+    out.append(dict(t=round(float(t), 3), outer=oo.round(4).tolist(), inner=ii.round(4).tolist(),
                     area=round(clean.area, 2), raw_area=round(band.area, 2)))
 json.dump(dict(part=n, axis=ax, sections=out), open(R / f'cad/redesign/tools/build/feat/{n}_loft.json', 'w'))
 for s in out:
