@@ -1,5 +1,8 @@
-before: timeline 772 faces 21248
-cleared 690s
-built vol 29771.1 faces 104 bodies 1 772s
-save True
+opened 15s
+right_shell: ver 2 outdated False bodies 1 vol 11312.6
+left_shell: ver 3 outdated False bodies 1 vol 11383.8
+neck_pitch: ver 3 outdated False bodies 1 vol 4090.9
+bottom_head_shell: ver 1 outdated False bodies 1 vol 23820.0
+top_head_shell: ver 2 outdated False bodies 1 vol 29771.1
+save True modified False cloud 11 31s
 DONE

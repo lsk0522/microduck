@@ -20,7 +20,15 @@
      - 자동 단 분해(`tools/feat/slabs.py`)만으로는 부피 +2 %, p95 0.53 mm → 곡선 윗변을 원통 교집합으로, 터널은 원통 자르기로 보정하는 중 (`tools/feat/motor_support_csg.py`)
   2. 다리: yaw2roll, hip_l, upper_leg_left/right, leg, ankle_left/right
   3. 발: foot_left/right, sole_left/right
-  4. 몸통: power_support, left_shell, right_shell
+  4. 몸통: power_support, ~~left_shell, right_shell~~ (완료 2026-11-02: 면 수천 개 단면 → 매끈한 피처, 원작 대비 p50 0.013 mm·p95 0.34/0.37 mm, 부피 −0.04 / +0.8 %)
+     - 방법 (커버형 셸 공통으로 쓸 것): ① 바깥 = x 단면 로프트 1개(옆 커버 쪽은 단면 대신 기울어진 평면으로 자르고 R8.2 모깎기, 아래 모서리는 R6.2 원호 자르기)
+       ② 안쪽 = 안쪽 단면 로프트 + 기울어진 평면, 자르개 둘레 R6 미리 모깎기 후 빼기 (Fusion '쉘'은 이 곡면에서 실패)
+       ③ 보스·구멍은 피처 (뒤 위 나사 보스 z 방향 R4 + 카운터보어 R2.5 기울기, 고리 구멍 x 방향 기울어진 원뿔)
+       ④ 팔·다리 끝 = '패치': 상자 안을 원작 단면 로프트로 교체 (env3.patch_spec2, 꼭짓점을 기준 단면에서 찾아 모든 단면 같은 수로 나눔)
+       ⑤ 남은 판·클립·바닥판 = 잔여 돌출(residual.py: 이웃 단 같은 모양은 하나로 합침, 혼자 있는 얇고 긴 띠는 버림 → 층 안 생김)
+     - right_shell = left_shell 거울 복사 + 고리 구멍만 오른쪽 치수(r0.8 → 기울어진 r1.5–2.2, 끝 카운터보어 r2.3) + 끝 탭 잔여
+     - 스크립트: `cad/fusion/scripts/feat_left_shell.py`, `feat_right_shell.py`, `feat_env.py`; 사양 `tools/feat/ls_spec2.py` → `build/feat/left_shell_env2.json`
+     - 남은 작은 차이(0.5 mm 안팎): 옆-앞-위 세 모서리 만나는 곳, 고리와 옆 커버 이음, 뒤 다리 끝 갈고리 x 22–28
   5. 머리: face_part, jaw, jaw_soft, soft_mouth_top, bottom_head_shell, ~~top_head_shell~~ (완료 2026-11-01: 21248면 → 104면, 원작 대비 p50 0.01 / p95 0.12 mm, 부피 −0.3 %)
      - 셸 방법: `tools/feat/shell_sections.py` 로 y 단면마다 바깥·안쪽 곡선(법선 방향으로 가름) → `feat_shell_loft.py run_loft_region` 으로 영역 로프트 (바깥 − 안쪽).
        한 번에 로프트하면 자체 교차 → 뒤/가운데/앞으로 나눔. 결과 주 곡면 원작 대비 중앙값 0.016 mm, 층 없음
@@ -33,6 +41,11 @@
 - 재질 (사용자 2026-11-01): 알루미늄은 가공품(판재 4종)만. 출력 부품 = ABS(흰색), 연질 = 고무. 새로 그린 부품은 feat_lib.set_plastic() 으로 맞춤. 렌즈도 알루미늄에서 뺌
   6. 마무리: 참고 메시 70개 삭제, 원작 비교 검증, STEP·STL·바탕화면 파일 갱신
 - 다 끝나면 참고 메시(ref_*, 숨김 70개) 삭제 → 어셈블리에 메시 0
+
+## 주의 (2026-11-02 발견)
+- 어셈블리가 연 부품 문서(참조로 열린 것)는 읽기 전용 → API save()가 True를 돌려줘도 클라우드에 안 올라감.
+  10-31~11-01의 neck_pitch·top_head_shell 재모델링도 그래서 저장 안 돼 있었음 → 11-02 어셈블리를 닫고 부품 문서를 따로 열어 다시 만들고 저장 (neck_pitch v3, top_head_shell v2, left_shell v3, right_shell v2, 어셈블리 v11)
+- 순서: 어셈블리 닫기 → `run_install.py` (PART) → `run_asm_update.py` (참조 최신화 + 저장). MCP 실행 사이에 전역 변수가 남으므로 스크립트 시작에서 초기화
 
 ## 사용자 확인 대기
 - 위치결정 핀 생략 (판재) — 가공용으로 유지하기로 함
