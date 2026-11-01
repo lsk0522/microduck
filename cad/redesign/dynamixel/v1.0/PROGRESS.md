@@ -10,10 +10,14 @@
 ## 진행 중: 출력 부품 26종을 피처 솔리드로 다시 모델링 (사용자 선택)
 - 이유: 지금 솔리드는 0.1 mm 단면을 쌓은 것이라 면이 수천~2만 개 (줄무늬, 수정 불가)
 - 방법: 원작 STL을 참고로 스케치·돌출·필렛·챔퍼·로프트로 새로 그림. 목표 원작 대비 ±0.2 mm, 부품마다 스크린샷 → 사용자 확인 → 다음
+- 도구: `tools/feat/look.py` (원작 보기·단면 그림), `prof.py` (단면 → 선·호 맞춤, ring_segments2), `slabs.py` (평면 높이로 단 나눠 돌출), `check_csg.py` (원작 비교)
 - 방법 (neck_pitch에서 확정): 원작 STL 단면 분석 → `cad/redesign/tools/feat/<부품>_csg.py`로 같은 형상을 먼저 만들어 원작과 비교(표면 거리 p95 ≤ 0.1 mm 목표) → `cad/fusion/scripts/feat_<부품>.py` (feat_lib.py)로 부품 문서를 피처로 다시 그림 → STL 다시 비교 → 저장, 어셈블리 참조 갱신(updateAllReferences), STEP·STL 내보내기
 - 이미 깔끔해서 안 해도 되는 것: banana_pcb_locker, yaw_roll_motion, noenoeil
 - 묶음 순서:
-  1. 머리·목 브래킷: ~~neck_pitch~~ (완료 2026-10-31, 42면, p95 0.046 mm), motor_support, m12_lens_holder
+  1. 머리·목 브래킷: ~~neck_pitch~~ (완료 2026-10-31, 42면, p95 0.046 mm), **motor_support (진행 중)**, m12_lens_holder
+     - motor_support 메모 (2026-11-01): 벽 두께 ~1.6 mm 얇은 틀, 일부 벽 2° 기울기, 바닥 발 3곳(Ø2.7 구멍), 위 테두리 z 17.5–19.2,
+       왼쪽 끝 벽 터널 = x축 원통 R8.4 중심 (y 0, z 7.5), 앞 벽(y≈−20) 윗변 = y축 원호 R12.7 중심 (x 0, z 4.5) 볼록 (재료 쪽), 뒤 벽(y≈+18) 윗변도 곡선
+     - 자동 단 분해(`tools/feat/slabs.py`)만으로는 부피 +2 %, p95 0.53 mm → 곡선 윗변을 원통 교집합으로, 터널은 원통 자르기로 보정하는 중 (`tools/feat/motor_support_csg.py`)
   2. 다리: yaw2roll, hip_l, upper_leg_left/right, leg, ankle_left/right
   3. 발: foot_left/right, sole_left/right
   4. 몸통: power_support, left_shell, right_shell
