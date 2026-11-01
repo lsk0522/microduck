@@ -21,7 +21,11 @@
   2. 다리: yaw2roll, hip_l, upper_leg_left/right, leg, ankle_left/right
   3. 발: foot_left/right, sole_left/right
   4. 몸통: power_support, left_shell, right_shell
-  5. 머리: face_part, jaw, jaw_soft, soft_mouth_top, bottom_head_shell, top_head_shell
+  5. 머리: face_part, jaw, jaw_soft, soft_mouth_top, bottom_head_shell, ~~top_head_shell~~ (완료 2026-11-01: 21248면 → 104면, 원작 대비 p50 0.01 / p95 0.12 mm, 부피 −0.3 %)
+     - 셸 방법: `tools/feat/shell_sections.py` 로 y 단면마다 바깥·안쪽 곡선(법선 방향으로 가름) → `feat_shell_loft.py run_loft_region` 으로 영역 로프트 (바깥 − 안쪽).
+       한 번에 로프트하면 자체 교차 → 뒤/가운데/앞으로 나눔. 결과 주 곡면 원작 대비 중앙값 0.016 mm, 층 없음
+     - 스크립트 `cad/fusion/scripts/feat_top_head_shell.py` (build + details). 남은 작은 차이: 보스–벽 이음 받침, 앞 가운데 받침, 바닥 턱(z 0–1.6) — p95 0.12 mm 안
+     - 다음 커버: bottom_head_shell (바닥판 + 수직 내벽 = 단 분해, 바깥 아래 모서리 둥근 필렛), left/right_shell
   6. 마무리: 참고 메시 70개 삭제, 원작 비교 검증, STEP·STL·바탕화면 파일 갱신
 - 다 끝나면 참고 메시(ref_*, 숨김 70개) 삭제 → 어셈블리에 메시 0
 
