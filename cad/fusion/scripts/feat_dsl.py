@@ -144,7 +144,15 @@ def _extrude_new(comp, profs, dist, name, taper_rad=0.0):
 
 def _extrude_op(comp, profs, dist, o):
     if o['mode'] == 'new':
-        f = _extrude_new(comp, profs, dist, o['name']); _apply(comp, f.bodies.item(0), o); return
+        f = _extrude_new(comp, profs, dist, o['name'])
+        bs = [f.bodies.item(i) for i in range(f.bodies.count)]
+        _apply(comp, bs[0], o)
+        if len(bs) > 1:                         # 떨어진 조각 여러 개 → 같은 몸체로 합침
+            nm = o.get('target') or o['name']
+            ci = comp.features.combineFeatures.createInput(_body(comp, nm), _col(*bs[1:]))
+            ci.operation = _OP['join']; ci.isKeepToolBodies = False
+            comp.features.combineFeatures.add(ci)
+        return
     ei = comp.features.extrudeFeatures.createInput(profs, _OP[o['mode']])
     ei.setOneSideExtent(adsk.fusion.DistanceExtentDefinition.create(VI(dist)), adsk.fusion.ExtentDirections.PositiveExtentDirection)
     ei.participantBodies = [_body(comp, o['target'])]
