@@ -313,6 +313,15 @@ def op_zloft(comp, o):
     _apply(comp, f.bodies.item(0), o)
 
 
+def op_joinall(comp, o):
+    """남은 몸체를 모두 target 에 합침 (잔여 돌출로 떨어져 나간 조각)"""
+    t = _body(comp, o['target'])
+    others = [b for b in comp.bRepBodies if b != t]
+    if others:
+        ci = comp.features.combineFeatures.createInput(t, _col(*others)); ci.operation = _OP['join']; ci.isKeepToolBodies = False
+        comp.features.combineFeatures.add(ci)
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -322,7 +331,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft, 'joinall': op_joinall}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')

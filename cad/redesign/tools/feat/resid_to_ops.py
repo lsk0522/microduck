@@ -17,7 +17,7 @@ def ring(segs):
     pts = []
     for s in segs:
         pts += arcpts(s) if s[0] == 'A' and 0.05 < s[5] < 300 else [tuple(s[1])]
-    ls = sg.LinearRing(pts).simplify(0.01)
+    ls = sg.LinearRing(pts).simplify(0.02)
     c = list(ls.coords)[:-1]
     return 'P(' + ', '.join(f'({x:.4f}, {y:.4f})' for x, y in c) + ')'
 ops = []
