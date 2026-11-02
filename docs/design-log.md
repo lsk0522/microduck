@@ -65,6 +65,16 @@
 - 결과: 진행 중 — 출력 부품 26종 피처 재모델링 시작 예정 (순서: dynamixel/v1.0/PROGRESS.md)
 - 계획 대화에 요청: 일반 서보·MG996R판은 v1.0에서 보류 (사용자 결정). 판재 주문은 피처 재모델링·사용자 확인 뒤
 
+### 2026-11-02 다이나믹셀 v1.0 motor_support·m12_lens_holder 피처 재모델링 (사양 방식)
+- 한 일: 사용자 결정("전부 피처로 다시 그리기")에 따라 각진 부품도 메시 변환 없이 피처로 그림. 새 방식 = 피처 사양 파일
+  (`cad/fusion/scripts/specs/<부품>.py`: 스케치 영역, 2° 테이퍼 돌출, 회전, 모깎기, 결합) 하나를 VM(manifold3d, `tools/feat/csg_vm.py`)과
+  Fusion(`feat_dsl.py`)이 같이 읽음 → VM 에서 원작과 맞춘 뒤 Fusion 에서 그대로 생성
+- 치수 측정: 원작 STL 을 Fusion 프리즘 변환한 면 목록(`faces_report.py`, 결과는 측정용으로만 쓰고 버림) + 단면 꼭짓점(`tools/feat/secpts.py`)
+- 결과: motor_support 106면, 원작 대비 p95 0.005 / 최대 0.01 mm, 부피 +0.02 % (클라우드 v2)
+  / m12_lens_holder 45면, p95 0.006 / 최대 0.02 mm, 부피 +0.04 % (v2). 재질 ABS
+- 발견: motor_support 는 원래 '구배 2° 뒤 모깎기' 로 만든 형상 (모서리 원통이 기울어져 있음) → 테이퍼 돌출 + 모깎기로 같게 재현
+- 다음: power_support, 그다음 다리(yaw2roll, hip_l, upper_leg, leg, ankle)·발, 머리 셸류
+
 ### 2026-11-02 다이나믹셀 v1.0 몸통 커버 left/right_shell 피처 재모델링
 - 한 일: 단면을 쌓은 솔리드(층 줄무늬) → 로프트·평면 자르기·모깎기·패치 로프트·피처 구멍으로 다시 만듦. right_shell은 left 거울 + 오른쪽만 다른 고리 구멍
 - 결과: 완료 — left p50 0.013 / p95 0.34 mm (부피 −0.04 %), right p50 0.015 / p95 0.37 mm (+0.8 %), 재질 ABS

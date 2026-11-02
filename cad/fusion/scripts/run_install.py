@@ -13,7 +13,8 @@ open(LOG, 'w').close()
 t0 = time.time()
 try:
     g = globals(); g['SKIP_RING_HOLE'] = False          # MCP 실행 사이에 전역이 남으므로 초기화
-    for fn in ('feat_lib.py', 'feat_env.py', 'feat_shell_loft.py', 'feat_' + PART + '.py'):
+    _pf = 'feat_' + PART + '.py' if os.path.exists(os.path.join(S, 'feat_' + PART + '.py')) else g.get('METHOD', 'feat_slices.py')
+    for fn in ('feat_lib.py', 'feat_env.py', 'feat_shell_loft.py', _pf):
         exec(open(os.path.join(S, fn), encoding='utf-8').read(), g)
     app = adsk.core.Application.get()
     for d in [app.documents.item(i) for i in range(app.documents.count)]:
@@ -41,7 +42,7 @@ try:
     else:
         body = build(comp, log)
     at = comp.attributes.itemByName('microduck', 'method')
-    if at: at.value = 'feature remodel v1.0 (cad/fusion/scripts/feat_' + PART + '.py)'
+    if at: at.value = 'feature remodel v1.0 (cad/fusion/scripts/' + _pf + ')'
     log(f'built faces {body.faces.count} bodies {comp.bRepBodies.count} vol {body.volume*1000:.1f} mat {body.material.name if body.material else None} {time.time()-t0:.0f}s')
     od = os.path.join(OUTV, PART); os.makedirs(od, exist_ok=True)
     em = des.exportManager

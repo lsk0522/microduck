@@ -14,10 +14,13 @@
 - 방법 (neck_pitch에서 확정): 원작 STL 단면 분석 → `cad/redesign/tools/feat/<부품>_csg.py`로 같은 형상을 먼저 만들어 원작과 비교(표면 거리 p95 ≤ 0.1 mm 목표) → `cad/fusion/scripts/feat_<부품>.py` (feat_lib.py)로 부품 문서를 피처로 다시 그림 → STL 다시 비교 → 저장, 어셈블리 참조 갱신(updateAllReferences), STEP·STL 내보내기
 - 이미 깔끔해서 안 해도 되는 것: banana_pcb_locker, yaw_roll_motion, noenoeil
 - 묶음 순서:
-  1. 머리·목 브래킷: ~~neck_pitch~~ (완료 2026-10-31, 42면, p95 0.046 mm), **motor_support (진행 중)**, m12_lens_holder
-     - motor_support 메모 (2026-11-01): 벽 두께 ~1.6 mm 얇은 틀, 일부 벽 2° 기울기, 바닥 발 3곳(Ø2.7 구멍), 위 테두리 z 17.5–19.2,
-       왼쪽 끝 벽 터널 = x축 원통 R8.4 중심 (y 0, z 7.5), 앞 벽(y≈−20) 윗변 = y축 원호 R12.7 중심 (x 0, z 4.5) 볼록 (재료 쪽), 뒤 벽(y≈+18) 윗변도 곡선
-     - 자동 단 분해(`tools/feat/slabs.py`)만으로는 부피 +2 %, p95 0.53 mm → 곡선 윗변을 원통 교집합으로, 터널은 원통 자르기로 보정하는 중 (`tools/feat/motor_support_csg.py`)
+  1. 머리·목 브래킷: ~~neck_pitch~~ (완료 2026-10-31, 42면, p95 0.046 mm), ~~motor_support~~ (완료 2026-11-02, 106면, 원작 대비 p95 0.005 / 최대 0.01 mm, 부피 +0.02 %), ~~m12_lens_holder~~ (완료 2026-11-02, 45면, p95 0.006 / 최대 0.02 mm)
+     - 방법 = **피처 사양(spec)**: `cad/fusion/scripts/specs/<부품>.py` 에 스케치 영역·돌출(구배)·회전·결합을 적고,
+       VM 에서 `tools/feat/csg_vm.py <부품>` (manifold3d) 로 원작 STL 과 비교 → 맞으면 Fusion 에서 `feat_dsl.py` 가 같은 사양으로 피처 생성.
+       치수는 원작 STL 을 Fusion 프리즘 변환해 얻은 면 목록(`faces_report.py` → `build/feat/<부품>_faces.json`, 측정용으로만 씀)에서 읽음
+     - motor_support 구조: 플랜지(z 0.4–2.1, Ø2.7×4) / 다리·후드·-y 판 / 컵 바깥벽(윗면 z 19.2 기준 2° 구배, R9.7) / 축 터널 보스(R10.1)·링 /
+       모터 포켓(48×30, 2° 구배 뒤 R8·R3 모깎기) / 오른쪽 블록 속·옆 개구부(구배) / y 아치 R11.1·R9.5·R12.7 / 터널 구멍 R8.4·R7.5 홈
+     - 구배면은 2° 테이퍼 돌출, 구배 없는 면이 섞인 곳은 테이퍼 몸체 ∩ 직각 상자 (결합 교집합) 로 만듦
   2. 다리: yaw2roll, hip_l, upper_leg_left/right, leg, ankle_left/right
   3. 발: foot_left/right, sole_left/right
   4. 몸통: power_support, ~~left_shell, right_shell~~ (완료 2026-11-02: 면 수천 개 단면 → 매끈한 피처, 원작 대비 p50 0.013 mm·p95 0.34/0.37 mm, 부피 −0.04 / +0.8 %)

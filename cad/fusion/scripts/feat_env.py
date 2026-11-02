@@ -107,7 +107,7 @@ def env_shell(comp, path, name, log=None):
     return O
 
 
-def merge_all(comp, log=None, vmin=0.5):
+def merge_all(comp, log=None, vmin=0.5, drop_frac=0.01):
     """부품 문서의 본체들을 가장 큰 것 하나로 합침 (부피 vmin mm³ 미만 조각은 지움)"""
     bs = sorted(list(comp.bRepBodies), key=lambda b: -b.volume)
     for b in bs[1:]:
@@ -115,11 +115,25 @@ def merge_all(comp, log=None, vmin=0.5):
             comp.features.removeFeatures.add(b)
     bs = sorted(list(comp.bRepBodies), key=lambda b: -b.volume)
     if len(bs) > 1:
-        combine(comp, bs[0], bs[1:], JOIN)
+        try:
+            combine(comp, bs[0], bs[1:], JOIN)
+        except Exception:
+            # 한 번에 안 되면 하나씩 (닿는 순서로), 실패한 것은 기록
+            main = bs[0]; rest = bs[1:]; fails = 0
+            for _ in range(3):
+                left = []
+                for b in rest:
+                    try:
+                        combine(comp, main, [b], JOIN)
+                    except Exception:
+                        left.append(b)
+                if len(left) == len(rest): break
+                rest = left
+            if log and rest: log(f'merge: 합치기 실패 {len(rest)}개 ' + str([round(b.volume * 1000, 1) for b in rest[:8]]))
     bs = sorted(list(comp.bRepBodies), key=lambda b: -b.volume)
     if log: log(f'merge: bodies {len(bs)} vols ' + str([round(b.volume * 1000, 1) for b in bs[:6]]))
     for b in bs[1:]:                       # 안 붙는 작은 조각(잔여 깎기에서 남은 섬) 지움
-        if b.volume < 0.01 * bs[0].volume:
+        if b.volume < drop_frac * bs[0].volume:
             comp.features.removeFeatures.add(b)
     return bs[0]
 
@@ -128,6 +142,14 @@ def edge_section(comp, ax, t, edges, name):
     """[{k:'L'|'S', p:[[u,v]..]}] 이어진 닫힌 고리 → 스케치 프로파일"""
     sk = sketch(comp, 'xyz'[ax], t, name); sk.isComputeDeferred = True
     L = sk.sketchCurves.sketchLines; first = None; prev = None
+    if len(edges) == 1 and edges[0]['k'] == 'C':                 # 꼭짓점 없는 닫힌 고리 → 닫힌 스플라인
+        oc = adsk.core.ObjectCollection.create()
+        for u, v in edges[0]['p']:
+            oc.add(sp(sk, *_q(ax, t, u, v)))
+        oc.add(oc.item(0))
+        sk.sketchCurves.sketchFittedSplines.add(oc)
+        sk.isComputeDeferred = False; sk.isVisible = False
+        return max(list(sk.profiles), key=lambda p: p.areaProperties().area)
     for j, e in enumerate(edges):
         P = e['p']
         st = prev if prev is not None else sp(sk, *_q(ax, t, *P[0]))

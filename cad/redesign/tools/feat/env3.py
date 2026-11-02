@@ -6,6 +6,7 @@ from shapely.geometry.polygon import orient
 from prof import load, section_polys
 K = 64
 GAP = 1.5
+RAW_S = [False]          # True: 스플라인 점 = 단면 원래 꼭짓점 (재표본 안 함)
 def resample(P, k=K):
     d = np.r_[0, np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))]
     s = np.linspace(0, d[-1], k)
@@ -149,7 +150,7 @@ def corner_split(poly, ang=35.0, start_near=None, simplify=0.01):
             edges.append(('L', [P[0].tolist(), P[-1].tolist()]))
         else:
             ln = np.sum(np.linalg.norm(np.diff(P, axis=0), axis=1)); k = max(6, int(ln / 0.6))
-            edges.append(('S', resample(P, k).tolist()))
+            edges.append(('S', (P if RAW_S[0] else resample(P, k)).tolist()))
     return edges
 
 
@@ -172,10 +173,16 @@ def split_at(poly, corners, simplify=0.01):
     from shapely.geometry.polygon import orient
     p = orient(poly.simplify(simplify), 1.0)
     C = np.array(p.exterior.coords)[:-1]; n = len(C)
-    idx = [int(np.argmin(np.linalg.norm(C - np.array(c), axis=1))) for c in corners]
-    # 순환 순서 확인
-    k0 = idx[0]; rel = [(i - k0) % n for i in idx]
-    if rel != sorted(rel) or len(set(idx)) != len(idx):
+    # 첫 꼭짓점은 가장 가까운 점, 나머지는 앞으로 나아가며 가장 가까운 점 (순서 보장)
+    idx = [int(np.argmin(np.linalg.norm(C - np.array(corners[0]), axis=1)))]
+    for j, c in enumerate(corners[1:], 1):
+        left = len(corners) - j                       # 남은 꼭짓점 수 (각자 한 점 이상 필요)
+        cand = [(idx[-1] + k) % n for k in range(1, n - left + 1)]
+        if (idx[0] - idx[-1]) % n:
+            cand = [q for q in cand if 0 < (q - idx[-1]) % n < (idx[0] - idx[-1]) % n or idx[0] == idx[-1]]
+        if not cand: raise ValueError('꼭짓점 순서 불일치')
+        idx.append(min(cand, key=lambda q: np.linalg.norm(C[q] - np.array(c))))
+    if len(set(idx)) != len(idx):
         raise ValueError('꼭짓점 순서 불일치')
     edges = []
     for j, i0 in enumerate(idx):
@@ -187,7 +194,7 @@ def split_at(poly, corners, simplify=0.01):
             edges.append(('L', [P[0].tolist(), P[-1].tolist()]))
         else:
             ln = np.sum(np.linalg.norm(np.diff(P, axis=0), axis=1)); k = max(6, int(ln / 0.6))
-            edges.append(('S', resample(P, k).tolist()))
+            edges.append(('S', (P if RAW_S[0] else resample(P, k)).tolist()))
     return edges
 
 
