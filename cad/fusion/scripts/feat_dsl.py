@@ -141,9 +141,9 @@ def _apply(comp, feat_body, o):
     _combine(comp, o['target'], feat_body, o['mode'], o['name'])
 
 
-def _combine(comp, target, tool_body, mode, name=None):
+def _combine(comp, target, tool_body, mode, name=None, keep=False):
     ci = comp.features.combineFeatures.createInput(_body(comp, target), _col(tool_body))
-    ci.operation = _OP[mode]; ci.isKeepToolBodies = False
+    ci.operation = _OP[mode]; ci.isKeepToolBodies = bool(keep)
     f = comp.features.combineFeatures.add(ci)
     if name:
         f.name = name + '_' + mode
@@ -301,16 +301,40 @@ def op_rot(comp, o):
     f = comp.features.moveFeatures.add(mi); f.name = o.get('name', 'rot')
 
 
-def op_zloft(comp, o):
-    """z 평면 단면들(닫힌 Pth)을 로프트 → 새 몸체 / 결합. o['secs'] = [(z, region), ...] (z 오름차순)"""
+def _loft_secs(comp, ax, secs, name):
     lo = comp.features.loftFeatures.createInput(NEW)
-    for k, (z, reg) in enumerate(o['secs']):
-        sk = sketch(comp, 'z', z, f"{o['name']}_{k}")
+    for k, (z, reg) in enumerate(secs):
+        sk = sketch(comp, ax, z, f"{name}_{k}")
+        sk.isComputeDeferred = True
         for pr in prims(reg):
-            _draw_prim(sk, 'z', z, pr)
+            _draw_prim(sk, ax, z, pr)
+        sk.isComputeDeferred = False
         lo.loftSections.add(max(list(sk.profiles), key=lambda p: p.areaProperties().area))
-    f = comp.features.loftFeatures.add(lo); f.name = o['name']
-    _apply(comp, f.bodies.item(0), o)
+    f = comp.features.loftFeatures.add(lo); f.name = name
+    return f.bodies.item(0)
+
+
+def op_zloft(comp, o):
+    """축(o['ax'], 기본 z) 평면 단면들(닫힌 Pth)을 로프트 → 새 몸체 / 결합. o['secs'] = [(위치, region), ...] (오름차순)
+    o['chunk'] = k 이면 단면 k 개씩(앞뒤 1 개 겹침) 나눠 로프트하고 합침 (Fusion 은 단면이 많으면 자체 교차로 실패) — 실패한 묶음은 2 개씩"""
+    ax = o.get('ax', 'z'); secs = o['secs']; ch = o.get('chunk')
+    if not ch:
+        body = _loft_secs(comp, ax, secs, o['name'])
+    else:
+        bodies = []; i = 0; n = len(secs)
+        while i < n - 1:
+            j = min(i + ch - 1, n - 1)
+            try:
+                bodies.append(_loft_secs(comp, ax, secs[i:j + 1], f"{o['name']}_{i}"))
+            except Exception:
+                for k in range(i, j):
+                    bodies.append(_loft_secs(comp, ax, secs[k:k + 2], f"{o['name']}_{k}p"))
+            i = j
+        body = bodies[0]
+        if len(bodies) > 1:
+            ci = comp.features.combineFeatures.createInput(body, _col(*bodies[1:])); ci.operation = _OP['join']; ci.isKeepToolBodies = False
+            comp.features.combineFeatures.add(ci)
+    _apply(comp, body, o)
 
 
 def op_joinall(comp, o):
@@ -323,7 +347,7 @@ def op_joinall(comp, o):
 
 
 def op_comb(comp, o):
-    _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
+    _combine(comp, o['target'], _body(comp, o['tool']), o['mode'], keep=o.get('keep', False))
 
 
 def dsl_build(comp, part, log=None, soft=False):
@@ -331,7 +355,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft, 'joinall': op_joinall}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft, 'loft': op_zloft, 'joinall': op_joinall}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')
