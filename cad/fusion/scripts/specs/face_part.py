@@ -1,5 +1,5 @@
 """face_part 피처 사양 (x-z 평면 판, y 로 돌출). 판(y −55.5~−54.2, 둥근 윤곽 = 스플라인) − 가운데 구멍 R7.25 − 호 슬롯 3 − 긴 구멍
-+ 큰 기둥 4 (R3, y −43 까지, 끝 모따기 0.5, 나사 구멍 R1.025 + 입구 경사) + 작은 기둥 4 (R2.25, y −47 까지, 구멍 R0.8)
++ 큰 기둥 4 (R3, y −43 까지, 끝 모따기 0.5, 나사 구멍 R1.025 + 카운터보어 R1.35×1) + 작은 기둥 4 (R2.25, y −47 까지, 구멍 R0.8 + 카운터보어 R1.1×0.75)
 + 긴 구멍 둘레 턱(R4, y −53.2) + ㄷ자 브래킷(귀 둘, 구멍 R1.025, y −51.2)."""
 import math as _m
 Y0, Y1 = -55.5, -54.2
@@ -28,9 +28,9 @@ OPS = [
 ]
 for i, (x, z) in enumerate(BIG):
     OPS += [dict(op='rev', name=f'big_hole{i}', ax='y', at=z, ac=x, mode='cut', target='main',
-                 region=P((x, -42.5), (x + 1.95, -42.5), (x + 1.025, -44.35), (x + 1.025, -48.0), (x, -48.616))),
+                 region=P((x, -42.5), (x + 1.35, -42.5), (x + 1.35, -44.0), (x + 1.025, -44.0), (x + 1.025, -48.0), (x, -48.616))),
             dict(op='rev', name=f'big_chamfer{i}', ax='y', at=z, ac=x, mode='cut', target='main', region=P((x + 2.0, -42.5), (x + 3.6, -42.5), (x + 3.6, -44.1)))]
 for i, (x, z) in enumerate(SMALL):
     OPS += [dict(op='rev', name=f'small_hole{i}', ax='y', at=z, ac=x, mode='cut', target='main',
-                 region=P((x, -46.5), (x + 1.45, -46.5), (x + 0.8, -47.98), (x + 0.8, -52.0), (x, -52.48))),
+                 region=P((x, -46.5), (x + 1.1, -46.5), (x + 1.1, -47.75), (x + 0.8, -47.75), (x + 0.8, -52.0), (x, -52.48))),
             dict(op='rev', name=f'small_chamfer{i}', ax='y', at=z, ac=x, mode='cut', target='main', region=P((x + 1.25, -46.5), (x + 2.85, -46.5), (x + 2.85, -48.1)))]

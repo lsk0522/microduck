@@ -1,4 +1,29 @@
-opened 10s
+opened 3s
+banana_pcb_locker: ver 1 outdated False bodies 1 vol 459.0
+power_support: ver 2 outdated False bodies 1 vol 10493.6
+right_shell: ver 2 outdated False bodies 1 vol 11312.6
+left_shell: ver 3 outdated False bodies 1 vol 11383.8
+yaw2roll: ver 4 outdated False bodies 1 vol 2815.7
+hip_l: ver 4 outdated False bodies 1 vol 4534.6
+upper_leg_left: ver 3 outdated False bodies 1 vol 4150.8
+leg: ver 2 outdated False bodies 1 vol 3411.3
+ankle_left: ver 2 outdated False bodies 1 vol 7885.3
+foot_left: ver 2 outdated False bodies 1 vol 12137.8
+sole_left: ver 2 outdated False bodies 1 vol 6250.8
+neck_pitch: ver 3 outdated False bodies 1 vol 4090.9
+yaw_roll_motion: ver 1 outdated False bodies 1 vol 4562.0
+noenoeil: ver 1 outdated False bodies 1 vol 4260.7
+m12_lens_holder: ver 2 outdated False bodies 1 vol 1098.2
+jaw_soft: ver 2 outdated False bodies 1 vol 18618.0
+soft_mouth_top: ver 2 outdated False bodies 1 vol 2711.1
+motor_support: ver 2 outdated False bodies 1 vol 7516.2
 jaw: ver 2 outdated False bodies 1 vol 9394.1
-save True modified False cloud 15 21s
+bottom_head_shell: ver 1 outdated False bodies 1 vol 23820.0
+top_head_shell: ver 2 outdated False bodies 1 vol 29771.1
+face_part: ver 3 outdated False bodies 1 vol 5829.3
+upper_leg_right: ver 3 outdated False bodies 1 vol 4150.9
+ankle_right: ver 2 outdated False bodies 1 vol 7885.3
+foot_right: ver 2 outdated False bodies 1 vol 12137.8
+sole_right: ver 2 outdated False bodies 1 vol 6250.8
+save True modified False cloud 17 15s
 DONE

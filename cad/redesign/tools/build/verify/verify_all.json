@@ -1,0 +1,671 @@
+[
+ {
+  "part": "face_part",
+  "vol_ref": 5824.2,
+  "vol_new": 5825.9,
+  "dvol": 0.03,
+  "p50": 0.0,
+  "p95": 0.004,
+  "max": 0.07,
+  "hole_sections": 49,
+  "hole_ok": 49,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 8032
+ },
+ {
+  "part": "jaw",
+  "vol_ref": 9360.1,
+  "vol_new": 9393.5,
+  "dvol": 0.36,
+  "p50": 0.006,
+  "p95": 0.065,
+  "max": 1.03,
+  "hole_sections": 23,
+  "hole_ok": 23,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 11078
+ },
+ {
+  "part": "neck_pitch",
+  "vol_ref": 4106.7,
+  "vol_new": 4092.0,
+  "dvol": -0.36,
+  "p50": 0.0,
+  "p95": 0.046,
+  "max": 0.16,
+  "hole_sections": 55,
+  "hole_ok": 55,
+  "hole_worst_c": 0.007,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 7204
+ },
+ {
+  "part": "motor_support",
+  "vol_ref": 7515.1,
+  "vol_new": 7516.6,
+  "dvol": 0.02,
+  "p50": 0.0,
+  "p95": 0.005,
+  "max": 0.01,
+  "hole_sections": 8,
+  "hole_ok": 8,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 3656
+ },
+ {
+  "part": "m12_lens_holder",
+  "vol_ref": 1097.7,
+  "vol_new": 1098.1,
+  "dvol": 0.04,
+  "p50": 0.0,
+  "p95": 0.006,
+  "max": 0.02,
+  "hole_sections": 13,
+  "hole_ok": 13,
+  "hole_worst_c": 0.001,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 9950
+ },
+ {
+  "part": "yaw2roll",
+  "vol_ref": 2816.1,
+  "vol_new": 2815.7,
+  "dvol": -0.01,
+  "p50": 0.0,
+  "p95": 0.005,
+  "max": 0.32,
+  "hole_sections": 32,
+  "hole_ok": 32,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 7324
+ },
+ {
+  "part": "hip_l",
+  "vol_ref": 4524.7,
+  "vol_new": 4534.9,
+  "dvol": 0.23,
+  "p50": 0.0,
+  "p95": 0.007,
+  "max": 0.2,
+  "hole_sections": 45,
+  "hole_ok": 45,
+  "hole_worst_c": 0.005,
+  "hole_worst_r": 0.003,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 20420
+ },
+ {
+  "part": "upper_leg_left",
+  "vol_ref": 4149.7,
+  "vol_new": 4149.8,
+  "dvol": 0.0,
+  "p50": 0.002,
+  "p95": 0.01,
+  "max": 0.66,
+  "hole_sections": 10,
+  "hole_ok": 10,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 14180
+ },
+ {
+  "part": "upper_leg_right",
+  "vol_ref": 4150.0,
+  "vol_new": 4149.8,
+  "dvol": -0.01,
+  "p50": 0.002,
+  "p95": 0.01,
+  "max": 0.65,
+  "hole_sections": 10,
+  "hole_ok": 10,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 14180
+ },
+ {
+  "part": "leg",
+  "vol_ref": 3405.9,
+  "vol_new": 3410.5,
+  "dvol": 0.13,
+  "p50": 0.0,
+  "p95": 0.028,
+  "max": 0.39,
+  "hole_sections": 31,
+  "hole_ok": 31,
+  "hole_worst_c": 0.001,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 15192
+ },
+ {
+  "part": "ankle_left",
+  "vol_ref": 7877.8,
+  "vol_new": 7884.6,
+  "dvol": 0.09,
+  "p50": 0.0,
+  "p95": 0.012,
+  "max": 0.05,
+  "hole_sections": 19,
+  "hole_ok": 19,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 4812
+ },
+ {
+  "part": "ankle_right",
+  "vol_ref": 7877.8,
+  "vol_new": 7884.6,
+  "dvol": 0.09,
+  "p50": 0.0,
+  "p95": 0.012,
+  "max": 0.05,
+  "hole_sections": 22,
+  "hole_ok": 22,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 4812
+ },
+ {
+  "part": "foot_left",
+  "vol_ref": 12178.1,
+  "vol_new": 12135.6,
+  "dvol": -0.35,
+  "p50": 0.002,
+  "p95": 0.161,
+  "max": 1.69,
+  "hole_sections": 5,
+  "hole_ok": 5,
+  "hole_worst_c": 0.002,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 10302
+ },
+ {
+  "part": "left_shell",
+  "vol_ref": 11388.3,
+  "vol_new": 11383.5,
+  "dvol": -0.04,
+  "p50": 0.013,
+  "p95": 0.374,
+  "max": 3.33,
+  "hole_sections": 44,
+  "hole_ok": 44,
+  "hole_worst_c": 0.023,
+  "hole_worst_r": 0.004,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 132024
+ },
+ {
+  "part": "right_shell",
+  "vol_ref": 11216.9,
+  "vol_new": 11311.1,
+  "dvol": 0.84,
+  "p50": 0.015,
+  "p95": 0.438,
+  "max": 3.3,
+  "hole_sections": 44,
+  "hole_ok": 44,
+  "hole_worst_c": 0.022,
+  "hole_worst_r": 0.004,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 130200
+ },
+ {
+  "part": "top_head_shell",
+  "vol_ref": 29873.2,
+  "vol_new": 29786.8,
+  "dvol": -0.29,
+  "p50": 0.008,
+  "p95": 0.126,
+  "max": 3.29,
+  "hole_sections": 33,
+  "hole_ok": 33,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 188426
+ },
+ {
+  "part": "soft_mouth_top",
+  "vol_ref": 2699.6,
+  "vol_new": 2710.7,
+  "dvol": 0.41,
+  "p50": 0.002,
+  "p95": 0.01,
+  "max": 0.05,
+  "hole_sections": 0,
+  "hole_ok": 0,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 7638
+ },
+ {
+  "part": "bearing_roll",
+  "vol_ref": 625.3,
+  "vol_new": 588.1,
+  "dvol": -5.95,
+  "p50": 24.728,
+  "p95": 41.44,
+  "max": 44.56,
+  "hole_sections": 5,
+  "hole_ok": 0,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [
+   [
+    "y",
+    -14.13,
+    [
+     17.5,
+     0.0
+    ],
+    9.496,
+    [
+     9.0,
+     9.0
+    ]
+   ],
+   [
+    "y",
+    -14.13,
+    [
+     8.5,
+     12.5
+    ],
+    1.1,
+    [
+     9.0,
+     9.0
+    ]
+   ],
+   [
+    "y",
+    -14.13,
+    [
+     26.5,
+     12.5
+    ],
+    1.1,
+    [
+     9.0,
+     9.0
+    ]
+   ],
+   [
+    "y",
+    -14.13,
+    [
+     9.5,
+     -22.5
+    ],
+    1.1,
+    [
+     9.0,
+     9.0
+    ]
+   ],
+   [
+    "y",
+    -14.13,
+    [
+     25.5,
+     -22.5
+    ],
+    1.1,
+    [
+     9.0,
+     9.0
+    ]
+   ]
+  ],
+  "nmiss": 5,
+  "faces": 1688
+ },
+ {
+  "part": "noenoeil",
+  "vol_ref": 4250.2,
+  "vol_new": 4260.2,
+  "dvol": 0.23,
+  "p50": 0.0,
+  "p95": 0.068,
+  "max": 0.18,
+  "hole_sections": 7,
+  "hole_ok": 5,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.004,
+  "miss": [
+   [
+    "y",
+    -63.13,
+    [
+     -0.0,
+     20.0
+    ],
+    8.828,
+    [
+     0.0,
+     0.184
+    ]
+   ],
+   [
+    "y",
+    -62.0,
+    [
+     -0.0,
+     20.0
+    ],
+    7.697,
+    [
+     0.001,
+     0.147
+    ]
+   ]
+  ],
+  "nmiss": 2,
+  "faces": 4840
+ },
+ {
+  "part": "bottom_head_shell",
+  "vol_ref": 23796.3,
+  "vol_new": 23821.6,
+  "dvol": 0.11,
+  "p50": 0.003,
+  "p95": 0.156,
+  "max": 0.33,
+  "hole_sections": 54,
+  "hole_ok": 43,
+  "hole_worst_c": 0.001,
+  "hole_worst_r": 0.024,
+  "miss": [
+   [
+    "z",
+    -11.14,
+    [
+     -0.0,
+     49.5
+    ],
+    3.174,
+    [
+     9.0,
+     9.0
+    ]
+   ],
+   [
+    "z",
+    -5.49,
+    [
+     9.35,
+     -23.0
+    ],
+    1.1,
+    [
+     39.968,
+     0.002
+    ]
+   ],
+   [
+    "z",
+    -4.36,
+    [
+     9.35,
+     -23.0
+    ],
+    1.1,
+    [
+     39.968,
+     0.001
+    ]
+   ],
+   [
+    "z",
+    -3.23,
+    [
+     9.35,
+     -23.0
+    ],
+    1.1,
+    [
+     39.968,
+     0.0
+    ]
+   ],
+   [
+    "z",
+    -2.1,
+    [
+     -0.0,
+     49.5
+    ],
+    2.857,
+    [
+     35.51,
+     1.758
+    ]
+   ],
+   [
+    "z",
+    -2.1,
+    [
+     9.35,
+     -23.0
+    ],
+    1.1,
+    [
+     39.968,
+     0.001
+    ]
+   ],
+   [
+    "z",
+    -0.97,
+    [
+     9.35,
+     -23.0
+    ],
+    1.1,
+    [
+     39.767,
+     1.65
+    ]
+   ],
+   [
+    "z",
+    0.16,
+    [
+     19.0,
+     19.5
+    ],
+    1.398,
+    [
+     35.511,
+     1.402
+    ]
+   ],
+   [
+    "z",
+    0.16,
+    [
+     -30.0,
+     -16.0
+    ],
+    1.398,
+    [
+     34.688,
+     1.351
+    ]
+   ],
+   [
+    "z",
+    0.16,
+    [
+     -30.0,
+     23.0
+    ],
+    1.398,
+    [
+     40.029,
+     1.402
+    ]
+   ],
+   [
+    "z",
+    0.16,
+    [
+     9.35,
+     -23.0
+    ],
+    1.397,
+    [
+     39.769,
+     1.353
+    ]
+   ]
+  ],
+  "nmiss": 11,
+  "faces": 62726
+ },
+ {
+  "part": "banana_pcb_locker",
+  "vol_ref": 459.7,
+  "vol_new": 459.1,
+  "dvol": -0.12,
+  "p50": 0.0,
+  "p95": 0.012,
+  "max": 0.03,
+  "hole_sections": 2,
+  "hole_ok": 2,
+  "hole_worst_c": 0.001,
+  "hole_worst_r": 0.014,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 716
+ },
+ {
+  "part": "yaw_roll_motion",
+  "vol_ref": 4555.8,
+  "vol_new": 4562.6,
+  "dvol": 0.15,
+  "p50": 0.0,
+  "p95": 0.009,
+  "max": 0.47,
+  "hole_sections": 39,
+  "hole_ok": 39,
+  "hole_worst_c": 0.001,
+  "hole_worst_r": 0.009,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 7034
+ },
+ {
+  "part": "foot_right",
+  "vol_ref": 12178.1,
+  "vol_new": 12135.6,
+  "dvol": -0.35,
+  "p50": 0.002,
+  "p95": 0.169,
+  "max": 1.71,
+  "hole_sections": 5,
+  "hole_ok": 5,
+  "hole_worst_c": 0.002,
+  "hole_worst_r": 0.001,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 10302
+ },
+ {
+  "part": "sole_left",
+  "vol_ref": 6250.3,
+  "vol_new": 6248.9,
+  "dvol": -0.02,
+  "p50": 0.027,
+  "p95": 0.522,
+  "max": 1.45,
+  "hole_sections": 0,
+  "hole_ok": 0,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 21170
+ },
+ {
+  "part": "sole_right",
+  "vol_ref": 6250.3,
+  "vol_new": 6248.9,
+  "dvol": -0.02,
+  "p50": 0.024,
+  "p95": 0.536,
+  "max": 1.51,
+  "hole_sections": 0,
+  "hole_ok": 0,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 21170
+ },
+ {
+  "part": "power_support",
+  "vol_ref": 10493.9,
+  "vol_new": 10493.5,
+  "dvol": -0.0,
+  "p50": 0.0,
+  "p95": 0.002,
+  "max": 0.07,
+  "hole_sections": 52,
+  "hole_ok": 52,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.002,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 10510
+ },
+ {
+  "part": "jaw_soft",
+  "vol_ref": 18601.2,
+  "vol_new": 18619.3,
+  "dvol": 0.1,
+  "p50": 0.003,
+  "p95": 0.053,
+  "max": 0.09,
+  "hole_sections": 0,
+  "hole_ok": 0,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.0,
+  "miss": [],
+  "nmiss": 0,
+  "faces": 7486
+ }
+]
