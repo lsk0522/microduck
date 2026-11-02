@@ -109,6 +109,8 @@ def path_segs(s, n_arc=48):
                 sw -= 2 * math.pi
             pts = [(c[0] + r * math.cos(a1 + sw * k / n_arc), c[1] + r * math.sin(a1 + sw * k / n_arc)) for k in range(n_arc + 1)]
             out.append(('A', cur, m, e, c, r, pts)); cur = e
+    if math.hypot(cur[0] - s.start[0], cur[1] - s.start[1]) > 1e-9:
+        out.append(('L', cur, tuple(s.start)))
     return out
 
 
@@ -169,3 +171,57 @@ def rev_axis(o):
     if 'zc' in o:
         return 'x', 0.0, o['zc']
     return o['ax'], o.get('at', 0.0), o.get('ac', 0.0)
+
+
+def mirror_u(R, u0=0.0):
+    """영역을 u = u0 축으로 거울"""
+    f = lambda q: (2 * u0 - q[0], q[1])
+    if isinstance(R, P):
+        return P(*[(f(q)[0], q[1]) + ((q[2][0], q[2][1]) if q[2] else ()) for q in R.v])
+    if isinstance(R, Pth):
+        return Pth(f(R.start), [(g[0],) + tuple(f(q) for q in g[1:]) for g in R.segs])
+    if isinstance(R, C):
+        return C(2 * u0 - R.c[0], R.c[1], R.r)
+    if isinstance(R, U):
+        return U(*[mirror_u(a, u0) for a in R.a])
+    if isinstance(R, I):
+        return I(*[mirror_u(a, u0) for a in R.a])
+    return D(mirror_u(R.a, u0), *[mirror_u(b, u0) for b in R.b])
+
+
+def sym(R):
+    """오른쪽 영역 + 왼쪽 거울"""
+    return U(R, mirror_u(R))
+
+
+def stadium(c1, c2, r):
+    """두 원(반지름 r)을 감싼 길쭉한 모양"""
+    dx, dy = c2[0] - c1[0], c2[1] - c1[1]; L = math.hypot(dx, dy); t = (dx / L, dy / L); n = (-t[1], t[0])
+    a1 = (c1[0] + r * n[0], c1[1] + r * n[1]); a2 = (c2[0] + r * n[0], c2[1] + r * n[1])
+    b2 = (c2[0] - r * n[0], c2[1] - r * n[1]); b1 = (c1[0] - r * n[0], c1[1] - r * n[1])
+    m2 = (c2[0] + r * t[0], c2[1] + r * t[1]); m1 = (c1[0] - r * t[0], c1[1] - r * t[1])
+    return Pth(a1, [('L', a2), ('A', m2, b2), ('L', b1), ('A', m1, a1)])
+
+
+def expand(ops):
+    """테이퍼 돌출(prism)에 region 이 합(U)·차(D)면 조각별 돌출로 풀기 (테이퍼는 조각마다 따로 해야 안쪽 면이 안 생김)"""
+    out = []
+    for o in ops:
+        if o['op'] != 'prism' or 'region' not in o or isinstance(o['region'], (P, Pth, C)):
+            out.append(o); continue
+        R = o['region']; tgt = o.get('target') or o['name']
+        if isinstance(R, U):
+            for k, a in enumerate(R.a):
+                q = dict(o, region=a, name=f"{o['name']}_{k}")
+                if o['mode'] == 'new' and k > 0:
+                    q['mode'] = 'join'; q['target'] = tgt
+                elif o['mode'] == 'new':
+                    q['name'] = tgt; q['target'] = tgt
+                out += expand([q])
+        elif isinstance(R, D):
+            out += expand([dict(o, region=R.a)])
+            for k, b in enumerate(R.b):
+                out += expand([dict(o, region=b, name=f"{o['name']}_h{k}", mode='cut', target=tgt, slope=-o['slope'])])
+        else:
+            raise ValueError('prism region I 미지원 ' + o['name'])
+    return out

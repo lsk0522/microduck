@@ -162,9 +162,11 @@ def op_ext(comp, o):
 
 
 def op_prism(comp, o):
-    pl, zr, s, z0, z1 = o['poly'], o['zref'], o['slope'], o['z0'], o['z1']
+    pl, zr, s, z0, z1 = o.get('poly') or o['region'], o['zref'], o['slope'], o['z0'], o['z1']
     ax = o.get('ax', 'z')
     d0, d1 = s * (z0 - zr), s * (z1 - zr)
+    if 'region' in o and abs(d0) > 1e-9:
+        raise RuntimeError('region prism 은 zref == z0 이어야 함 ' + o['name'])
     sk = sketch(comp, ax, z0, o['name'])
     _draw_prim(sk, ax, z0, pl, d0, fil=False)
     best = max(sk.profiles, key=lambda p: p.areaProperties().area)
@@ -173,7 +175,7 @@ def op_prism(comp, o):
     taper = math.atan2(grow, abs(z1 - z0))
     f = _extrude_new(comp, best, dz, o['name'], taper)
     body = f.bodies.item(0)
-    fl = [(i, q[2][1]) for i, q in enumerate(pl.v) if q[2] and q[2][0] == 'f']
+    fl = [(i, q[2][1]) for i, q in enumerate(pl.v) if q[2] and q[2][0] == 'f'] if isinstance(pl, P) else []
     if fl:
         sh0 = ring(pl, d0, False)[1]; sh1 = ring(pl, d1, False)[1]
         byr = {}
@@ -229,6 +231,12 @@ def op_fillet(comp, o):
     f = comp.features.filletFeatures.add(fi); f.name = o['name']
 
 
+def op_mirror(comp, o):
+    mi = comp.features.mirrorFeatures.createInput(_col(_body(comp, o['src'])), plane(comp, o['ax'], o['at']))
+    f = comp.features.mirrorFeatures.add(mi); f.name = o['name']
+    f.bodies.item(0).name = o['name']
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -237,8 +245,8 @@ def dsl_build(comp, part, log=None, soft=False):
     g = globals()
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
-    for k, o in enumerate(g['OPS']):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet}[o['op']](comp, o)
+    for k, o in enumerate(expand(g['OPS'])):
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')

@@ -1,2 +1,33 @@
-power_support: faces 291 vol 0.0
+opened: readOnly? ? ver 3
+open yaw2roll: timeline 187 bodies 1 meshes 0
+cleared 29s timeline 0 bodies 0
+  00 ext top_plate: bodies 1 main vol 1483.5
+  01 ext front_wall: bodies 1 main vol 2296.2
+  02 ext gussetA: bodies 2 main vol 2296.2
+  03 ext gussetC: bodies 3 main vol 2296.2
+  04 comb gussetC: bodies 2 main vol 2296.2
+  05 mirror gussetA2: bodies 3 main vol 2296.2
+  06 comb gussetA: bodies 2 main vol 2390.1
+  07 comb gussetA2: bodies 1 main vol 2484.0
+  08 fillet front_top_R2: bodies 1 main vol 2464.3
+  09 ext bearing_boss: bodies 1 main vol 2499.6
+  10 ext top_boss19: bodies 1 main vol 2641.4
+  11 ext top_boss16: bodies 1 main vol 3033.4
+  12 ext earA: bodies 2 main vol 3033.4
+  13 ext earB: bodies 3 main vol 3033.4
+  14 comb earB: bodies 2 main vol 3033.4
+  15 mirror earA2: bodies 3 main vol 3033.4
+  16 comb earA: bodies 2 main vol 3101.9
+  17 comb earA2: bodies 1 main vol 3170.3
+  18 rev ear_hole_l: bodies 1 main vol 3156.6
+  19 rev ear_hole_r: bodies 1 main vol 3142.9
+  20 ext fw_holes: bodies 1 main vol 3115.8
+  21 ext fw_cbore: bodies 1 main vol 3054.7
+  22 ext bearing_hole: bodies 1 main vol 3041.0
+  23 ext bearing_seat: bodies 1 main vol 2982.2
+  24 ext top_holes: bodies 1 main vol 2929.7
+  25 ext top_cbores: bodies 1 main vol 2815.7
+built faces 68 bodies 1 vol 2815.7 mat ABS 플라스틱 34s
+save True modified False
+cloud versions 4
 DONE

@@ -50,7 +50,23 @@ def ext(o):
     return m.transform(np.array(AX[o['ax']], float))
 
 
+def prism_region(o):
+    R, zr, s, z0, z1 = o['region'], o['zref'], o['slope'], o['z0'], o['z1']
+    assert abs(zr - z0) < 1e-9, o['name']
+    c0 = cs(R); lo, hi = min(z0, z1), max(z0, z1)
+    n = max(1, int(math.ceil((hi - lo) / 0.25))); h = (hi - lo) / n; m = None
+    for k in range(n):
+        zm = lo + (k + 0.5) * h
+        ck = c0.offset(s * (zm - zr), mf.JoinType.Miter) if abs(s) > 0 else c0
+        e0 = 0.003 if k > 0 else 0.0; e1 = 0.003 if k < n - 1 else 0.0
+        sl = mf.Manifold.extrude(ck, h + e0 + e1).translate([0, 0, lo + k * h - e0])
+        m = sl if m is None else m + sl
+    return m.transform(np.array(AX[o.get('ax', 'z')], float))
+
+
 def prism(o):
+    if 'region' in o:
+        return prism_region(o)
     pl, zr, s = o['poly'], o['zref'], o['slope']
     z0, z1 = o['z0'], o['z1']
     b = seg_points(ring(pl, s * (z0 - zr))[0]); t = seg_points(ring(pl, s * (z1 - zr))[0])
@@ -81,17 +97,22 @@ def rev(o):
 
 rev_axis = g['rev_axis']
 B = {}
-for o in g['OPS']:
+for o in g['expand'](g['OPS']):
     if o['op'] == 'fillet':
         continue                      # 작은 모서리 모깎기는 VM 에서 생략
+    if o['op'] == 'mirror':
+        k = 'xyz'.index(o['ax']); nv = [0, 0, 0]; nv[k] = 1; t = [0, 0, 0]; t[k] = o['at']
+        B[o['name']] = B[o['src']].translate([-v for v in t]).mirror(nv).translate(t)
+        continue
     if o['op'] == 'comb':
         a, t = B[o['target']], B.pop(o['tool'])
         B[o['target']] = {'join': a + t, 'cut': a - t, 'int': a ^ t}[o['mode']]
         continue
     m = {'ext': ext, 'prism': prism, 'rev': rev}[o['op']](o)
-    print(o['name'], round(m.volume(),1), m.status() if hasattr(m,'status') else '')
+    pass
     if o['mode'] == 'new':
-        B[o.get('target') or o['name']] = m if o.get('target') is None or o['target'] not in B else B[o['target']] + m
+        nm = o.get('target') or o['name']
+        B[nm] = m if nm not in B else B[nm] + m
     else:
         a = B[o['target']]
         B[o['target']] = {'join': a + m, 'cut': a - m, 'int': a ^ m}[o['mode']]
@@ -101,7 +122,9 @@ out = R / f'cad/redesign/tools/build/feat/{part}_csg.stl'; new.export(out)
 ref = trimesh.load(R / f'cad/reference/microduck/assets/{part}.stl'); ref.apply_scale(1000)
 n = 30000
 pa, _ = trimesh.sample.sample_surface(new, n, seed=1); pb, _ = trimesh.sample.sample_surface(ref, n, seed=2)
-_, da, _ = trimesh.proximity.closest_point(ref, pa); _, db, _ = trimesh.proximity.closest_point(new, pb)
+def _cp(M, Q):
+    return np.concatenate([trimesh.proximity.closest_point(M, Q[i:i + 1500])[1] for i in range(0, len(Q), 1500)])
+da = _cp(ref, pa); db = _cp(new, pb)
 print(f'{part}: vol new {new.volume:.1f} ref {ref.volume:.1f} ({(new.volume/ref.volume-1)*100:+.2f}%)  new→ref p50 {np.median(da):.3f} p95 {np.percentile(da,95):.3f} max {da.max():.2f} | ref→new p50 {np.median(db):.3f} p95 {np.percentile(db,95):.3f} max {db.max():.2f}')
 for P, d, lab in ((pb, db, 'ref 쪽에만 (빠진 것)'), (pa, da, 'new 쪽에만 (남는 것)')):
     f = P[d > 0.08]; print(lab, len(f))
