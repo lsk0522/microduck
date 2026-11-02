@@ -1,13 +1,19 @@
-opened 14s
-power_support: ver 2 outdated False bodies 1 vol 10493.6
-yaw2roll: ver 4 outdated False bodies 1 vol 2815.7
-hip_l: ver 4 outdated False bodies 1 vol 4534.6
-upper_leg_left: ver 3 outdated False bodies 1 vol 4150.8
-leg: ver 2 outdated False bodies 1 vol 3411.3
-ankle_left: ver 2 outdated False bodies 1 vol 7885.3
-m12_lens_holder: ver 2 outdated False bodies 1 vol 1098.2
-motor_support: ver 2 outdated False bodies 1 vol 7516.2
-upper_leg_right: ver 3 outdated False bodies 1 vol 4150.9
-ankle_right: ver 2 outdated False bodies 1 vol 7885.3
-save True modified False cloud 12 27s
+opened: readOnly? ? ver 1
+open sole_right: timeline 231 bodies 1 meshes 0
+cleared 30s timeline 0 bodies 0
+  00 ext outer: bodies 1 main vol 0.0
+  01 ext outer_sides: bodies 1 main vol 0.0
+  02 ext outer_bottom: bodies 1 main vol 0.0
+  03 fillet corner_R7: bodies 1 main vol 0.0
+  04 fillet corner_R5.5: bodies 1 main vol 0.0
+  05 fillet bottom_R8: bodies 1 main vol 0.0
+  06 ext inner: bodies 2 main vol 0.0
+  07 ext inner_bot: bodies 2 main vol 0.0
+  08 fillet inner_R5: bodies 2 main vol 0.0
+  09 comb inner: bodies 1 main vol 0.0
+  10 mirror main: bodies 2 main vol 6250.8
+  11 remove None: bodies 1 main vol 6250.8
+built faces 43 bodies 1 vol 6250.8 mat 고무 31s
+save True modified False
+cloud versions 2
 DONE

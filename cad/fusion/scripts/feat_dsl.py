@@ -241,6 +241,19 @@ def op_remove(comp, o):
     f = comp.features.removeFeatures.add(_body(comp, o['src'])); f.name = 'remove_' + o['src']
 
 
+def op_shell(comp, o):
+    """o['face'](bb_min, bb_max) 로 열 면 고르기 (모델 mm), o['t'] 안쪽 두께"""
+    b = _body(comp, o['target'])
+    oc = adsk.core.ObjectCollection.create()
+    for f in b.faces:
+        bb = f.boundingBox
+        if o['face']((bb.minPoint.x / MM, bb.minPoint.y / MM, bb.minPoint.z / MM), (bb.maxPoint.x / MM, bb.maxPoint.y / MM, bb.maxPoint.z / MM)):
+            oc.add(f)
+    si = comp.features.shellFeatures.createInput(oc, False)
+    si.insideThickness = VI(o['t'])
+    f = comp.features.shellFeatures.add(si); f.name = o['name']
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -250,7 +263,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')
