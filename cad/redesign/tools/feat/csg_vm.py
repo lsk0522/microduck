@@ -103,6 +103,8 @@ for o in g['expand'](g['OPS']):
         continue                      # 작은 모서리 모깎기는 VM 에서 생략
     if o['op'] == 'remove':
         B.pop(o['src']); continue
+    if o['op'] == 'rot':
+        B[o['target']] = B[o['target']].transform(np.array(g['rot_matrix'](o['ax'], o['at'], o['deg']), float)); continue
     if o['op'] == 'mirror':
         k = 'xyz'.index(o['ax']); nv = [0, 0, 0]; nv[k] = 1; t = [0, 0, 0]; t[k] = o['at']
         B[o['name']] = B[o['src']].translate([-v for v in t]).mirror(nv).translate(t)

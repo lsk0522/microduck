@@ -100,6 +100,9 @@ def path_segs(s, n_arc=48):
     for g in s.segs:
         if g[0] == 'L':
             out.append(('L', cur, g[1])); cur = g[1]
+        elif g[0] == 'S':                          # ('S', [지나는 점들..., 끝점]) 맞춤 스플라인
+            P_ = [tuple(cur)] + [tuple(q) for q in g[1]]
+            out.append(('S', cur, P_, P_[-1], None, None, spline_pts(P_))); cur = P_[-1]
         else:
             m, e = g[1], g[2]
             c, r = _circ3(cur, m, e)
@@ -179,7 +182,7 @@ def mirror_u(R, u0=0.0):
     if isinstance(R, P):
         return P(*[(f(q)[0], q[1]) + ((q[2][0], q[2][1]) if q[2] else ()) for q in R.v])
     if isinstance(R, Pth):
-        return Pth(f(R.start), [(g[0],) + tuple(f(q) for q in g[1:]) for g in R.segs])
+        return Pth(f(R.start), [('S', [f(q) for q in g[1]]) if g[0] == 'S' else (g[0],) + tuple(f(q) for q in g[1:]) for g in R.segs])
     if isinstance(R, C):
         return C(2 * u0 - R.c[0], R.c[1], R.r)
     if isinstance(R, U):
@@ -257,3 +260,46 @@ def mirrored_ops(ops, ax='x', at=0.0):
                 q[k] = 'L'
         out.append(q)
     return out + [dict(op='mirror', name='main', src='L', ax=ax, at=at), dict(op='remove', src='L')]
+
+
+def rot_matrix(ax, at, deg):
+    """축 ax 둘레 회전 (점 at = 나머지 두 좌표) → 3x4 행렬 (VM 용, 원작 국소 좌표 변환에도 씀)"""
+    k = 'xyz'.index(ax); i, j = [q for q in range(3) if q != k]
+    c, s_ = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    M = [[1.0 if r == q else 0.0 for q in range(3)] + [0.0] for r in range(3)]
+    if k == 1:
+        s_ = -s_                                   # y 축: (z, x) 순서라 부호 반대
+    a0, b0 = at
+    M[i][i], M[i][j], M[j][i], M[j][j] = c, -s_, s_, c
+    M[i][3] = a0 - c * a0 + s_ * b0
+    M[j][3] = b0 - s_ * a0 - c * b0
+    return M
+
+
+def spline_pts(P_, n=16):
+    """지나는 점 P_ 를 잇는 3차 스플라인 (현 길이 매개변수, 자연 끝) 표본점 — Fusion 맞춤 스플라인 근사 (VM 용)"""
+    k = len(P_)
+    if k < 3:
+        return list(P_)
+    t = [0.0]
+    for i in range(1, k):
+        t.append(t[-1] + math.dist(P_[i - 1], P_[i]))
+    def nat(vals):
+        n_ = k - 1; h = [t[i + 1] - t[i] for i in range(n_)]
+        al = [0.0] + [3 / h[i] * (vals[i + 1] - vals[i]) - 3 / h[i - 1] * (vals[i] - vals[i - 1]) for i in range(1, n_)]
+        l, mu, z = [1.0] + [0.0] * n_, [0.0] * (n_ + 1), [0.0] * (n_ + 1)
+        for i in range(1, n_):
+            l[i] = 2 * (t[i + 1] - t[i - 1]) - h[i - 1] * mu[i - 1]; mu[i] = h[i] / l[i]; z[i] = (al[i] - h[i - 1] * z[i - 1]) / l[i]
+        c = [0.0] * (n_ + 1); b = [0.0] * n_; d = [0.0] * n_
+        for j in range(n_ - 1, -1, -1):
+            c[j] = z[j] - mu[j] * c[j + 1]
+            b[j] = (vals[j + 1] - vals[j]) / h[j] - h[j] * (c[j + 1] + 2 * c[j]) / 3; d[j] = (c[j + 1] - c[j]) / (3 * h[j])
+        return lambda j, u: vals[j] + b[j] * u + c[j] * u * u + d[j] * u ** 3
+    fx = nat([q[0] for q in P_]); fy = nat([q[1] for q in P_])
+    out = []
+    for j in range(k - 1):
+        for m in range(n):
+            u = (t[j + 1] - t[j]) * m / n
+            out.append((fx(j, u), fy(j, u)))
+    out.append(tuple(P_[-1]))
+    return out

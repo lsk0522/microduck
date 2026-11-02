@@ -20,6 +20,11 @@ def _draw_segs(sk, ax, at, segs):
             if math.hypot(a[0] - b[0], a[1] - b[1]) < 1e-6:
                 continue
             e = L.addByTwoPoints(_spu(sk, ax, at, *a), _spu(sk, ax, at, *b))
+        elif s[0] == 'S':
+            oc = adsk.core.ObjectCollection.create()
+            for q in s[2]:
+                oc.add(_spu(sk, ax, at, *q))
+            e = sk.sketchCurves.sketchFittedSplines.add(oc)
         else:
             e = A.addByThreePoints(_spu(sk, ax, at, *s[1]), _spu(sk, ax, at, *s[2]), _spu(sk, ax, at, *s[3]))
         ents.append(e)
@@ -262,6 +267,20 @@ def op_shell(comp, o):
     f = comp.features.shellFeatures.add(si); f.name = o['name']
 
 
+def op_rot(comp, o):
+    """몸체를 축(ax) 둘레로 deg 만큼 회전. at = 축이 지나는 점의 나머지 두 좌표 (mm)"""
+    b = _body(comp, o['target'])
+    k = 'xyz'.index(o['ax']); v = [0.0, 0.0, 0.0]; v[k] = 1.0
+    pt = [0.0, 0.0, 0.0]; j = 0
+    for i in range(3):
+        if i != k:
+            pt[i] = o['at'][j] * MM; j += 1
+    m = adsk.core.Matrix3D.create()
+    m.setToRotation(math.radians(o['deg']), adsk.core.Vector3D.create(*v), adsk.core.Point3D.create(*pt))
+    mi = comp.features.moveFeatures.createInput2(_col(b)); mi.defineAsFreeMove(m)
+    f = comp.features.moveFeatures.add(mi); f.name = o.get('name', 'rot')
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -271,7 +290,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')

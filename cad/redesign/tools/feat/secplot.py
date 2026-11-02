@@ -3,7 +3,8 @@ import sys, trimesh, numpy as np, matplotlib
 matplotlib.use('Agg'); import matplotlib.pyplot as plt
 from pathlib import Path
 R = Path(__file__).resolve().parents[4]
-m = trimesh.load(R / f'cad/reference/microduck/assets/{sys.argv[1]}.stl'); m.apply_scale(1000)
+m = trimesh.load(sys.argv[1]) if sys.argv[1].endswith('.stl') else trimesh.load(R / f'cad/reference/microduck/assets/{sys.argv[1]}.stl')
+if not sys.argv[1].endswith('.stl'): m.apply_scale(1000)
 secs = sys.argv[3].split(',')
 k = len(secs); nc = min(k, 4); nr = (k + nc - 1) // nc
 fig, axs = plt.subplots(nr, nc, figsize=(6 * nc, 6 * nr), squeeze=False)

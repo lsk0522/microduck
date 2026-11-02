@@ -3,6 +3,7 @@ import numpy as np, trimesh, shapely.geometry as sg
 from pathlib import Path
 R = Path(__file__).resolve().parents[4]
 def load(n):
+    if n.endswith('.stl'): return trimesh.load(n)          # 이미 mm 인 STL (예: 국소 좌표로 돌린 원작)
     m = trimesh.load(R / f'cad/reference/microduck/assets/{n}.stl'); m.apply_scale(1000); return m
 def section_polys(m, axis, t):
     """axis 0/1/2 에 수직인 평면 t 에서 단면 → shapely Polygon 목록 (좌표 = 나머지 두 축, 오름차순)"""

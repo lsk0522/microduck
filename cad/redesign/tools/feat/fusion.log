@@ -1,7 +1,21 @@
-opened 12s
-foot_left: ver 2 outdated False bodies 1 vol 12137.8
-sole_left: ver 2 outdated False bodies 1 vol 6250.8
-foot_right: ver 2 outdated False bodies 1 vol 12137.8
-sole_right: ver 2 outdated False bodies 1 vol 6250.8
-save True modified False cloud 13 23s
+opened: readOnly? ? ver 1
+open jaw_soft: timeline 189 bodies 1 meshes 0
+cleared 30s timeline 0 bodies 0
+  00 prism lower: bodies 1 main vol 33659.0
+  01 ext lower_yz: bodies 1 main vol 28457.1
+  02 ext crown: bodies 2 main vol 28457.1
+  03 rot crown_tilt: bodies 2 main vol 28457.1
+  04 comb cr: bodies 1 main vol 18531.8
+  05 fillet corner_R0.7: bodies 1 main vol 18530.6
+  06 fillet bottom_R3: bodies 1 main vol 18297.7
+  07 ext upper: bodies 2 main vol 18297.7
+  08 ext upper_top: bodies 2 main vol 18297.7
+  09 fillet upper_R0.65: bodies 2 main vol 18297.7
+  10 comb up: bodies 1 main vol 24784.3
+  11 fillet ledge_R0.6: bodies 1 main vol 24796.3
+  12 ext back_chamfer: bodies 1 main vol 24716.8
+  13 ext back_cut: bodies 1 main vol 18618.0
+built faces 35 bodies 1 vol 18618.0 mat 고무 32s
+save True modified False
+cloud versions 2
 DONE

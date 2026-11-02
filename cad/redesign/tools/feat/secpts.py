@@ -2,7 +2,8 @@
 import sys, trimesh, numpy as np, shapely.geometry as sg, shapely.ops as so
 from pathlib import Path
 R = Path(__file__).resolve().parents[4]
-m = trimesh.load(R / f'cad/reference/microduck/assets/{sys.argv[1]}.stl'); m.apply_scale(1000)
+m = trimesh.load(sys.argv[1]) if sys.argv[1].endswith('.stl') else trimesh.load(R / f'cad/reference/microduck/assets/{sys.argv[1]}.stl')
+if not sys.argv[1].endswith('.stl'): m.apply_scale(1000)
 tol = float(sys.argv[3]) if len(sys.argv) > 3 else 0.05
 for sct in sys.argv[2].split(','):
     a, t = sct.split('='); k = 'xyz'.index(a); t = float(t)
