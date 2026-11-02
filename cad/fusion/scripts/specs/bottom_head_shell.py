@@ -32,4 +32,5 @@ if os.path.exists(_R) and not globals().get('BHS_ENV_ONLY'):
     _L = _j.load(open(_R, encoding='utf-8')); _L = [r for r in _L if r['op'] == 'cut'] + [r for r in _L if r['op'] == 'join']   # 깎기 먼저
     for k, r in enumerate(_L):
         OPS.append(dict(op='ext', name=f"res{k}_{r['op']}", ax='z', a0=r['a'], a1=r['b'], region=eval(r['region']), mode=r['op'], target='main', optional=True))
+OPS.append(dict(op='ext', name='floor_opening', ax='z', a0=-14, a1=-9.6, region=P((-29, -14, 'a', 8), (29, -14, 'a', 8), (29, 16, 'a', 8), (-29, 16, 'a', 8)), mode='cut', target='main'))   # 바닥 큰 구멍 (남은 막 제거)
 OPS.append(dict(op='joinall', target='main'))
