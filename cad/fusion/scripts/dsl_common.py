@@ -225,3 +225,35 @@ def expand(ops):
         else:
             raise ValueError('prism region I 미지원 ' + o['name'])
     return out
+
+
+def hull_circles(cs, r):
+    """같은 반지름 원들(볼록 다각형 꼭짓점 순서, 반시계)의 볼록 껍질 → Pth"""
+    n = len(cs); tp = []
+    for i in range(n):
+        a, b = cs[i], cs[(i + 1) % n]
+        L = math.hypot(b[0] - a[0], b[1] - a[1]); t = ((b[0] - a[0]) / L, (b[1] - a[1]) / L); nr = (t[1], -t[0])
+        tp.append(((a[0] + r * nr[0], a[1] + r * nr[1]), (b[0] + r * nr[0], b[1] + r * nr[1]), nr))
+    segs = []
+    start = tp[0][0]
+    for i in range(n):
+        p1, p2, nr = tp[i]
+        segs.append(('L', p2))
+        q1, q2, nr2 = tp[(i + 1) % n]
+        c = cs[(i + 1) % n]
+        mx, my = nr[0] + nr2[0], nr[1] + nr2[1]; ml = math.hypot(mx, my)
+        mid = (c[0] + r * mx / ml, c[1] + r * my / ml)
+        segs.append(('A', mid, q1))
+    return Pth(start, segs)
+
+
+def mirrored_ops(ops, ax='x', at=0.0):
+    """왼쪽 부품 사양 → 오른쪽(거울) 부품: 'main' 을 'L' 로 만들고 거울 복사 후 지움"""
+    out = []
+    for o in ops:
+        q = dict(o)
+        for k in ('target', 'name', 'tool', 'src'):
+            if q.get(k) == 'main':
+                q[k] = 'L'
+        out.append(q)
+    return out + [dict(op='mirror', name='main', src='L', ax=ax, at=at), dict(op='remove', src='L')]

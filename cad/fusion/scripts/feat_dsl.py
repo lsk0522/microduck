@@ -237,6 +237,10 @@ def op_mirror(comp, o):
     f.bodies.item(0).name = o['name']
 
 
+def op_remove(comp, o):
+    f = comp.features.removeFeatures.add(_body(comp, o['src'])); f.name = 'remove_' + o['src']
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -246,7 +250,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')

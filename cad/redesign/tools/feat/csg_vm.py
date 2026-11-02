@@ -3,7 +3,8 @@ import sys, math, numpy as np, manifold3d as mf, trimesh
 from pathlib import Path
 R = Path(__file__).resolve().parents[4]
 SC = R / 'cad/fusion/scripts'
-g = {}
+import os
+g = {'os': os, 'S': str(SC)}
 exec(open(SC / 'dsl_common.py', encoding='utf-8').read(), g)
 part = sys.argv[1]
 exec(open(SC / f'specs/{part}.py', encoding='utf-8').read(), g)
@@ -86,10 +87,10 @@ def prism(o):
 def rev(o):
     ax, at, ac = rev_axis(o)
     if ax == 'x':      # 평면 y=at, (u,v)=(x,z), 축 z=ac
-        c = cs(o['region'], lambda u, v: (v - ac, u))
+        c = cs(o['region'], lambda u, v: (abs(v - ac), u))
         M = [[0, 0, 1, 0], [1, 0, 0, at], [0, 1, 0, ac]]
     else:              # ax y: 평면 z=at, (u,v)=(x,y), 축 x=ac
-        c = cs(o['region'], lambda u, v: (u - ac, v))
+        c = cs(o['region'], lambda u, v: (abs(u - ac), v))
         M = [[1, 0, 0, ac], [0, 0, 1, 0], [0, -1, 0, at]]
     m = mf.Manifold.revolve(c, 256)
     return m.transform(np.array(M, float))
@@ -100,6 +101,8 @@ B = {}
 for o in g['expand'](g['OPS']):
     if o['op'] == 'fillet':
         continue                      # 작은 모서리 모깎기는 VM 에서 생략
+    if o['op'] == 'remove':
+        B.pop(o['src']); continue
     if o['op'] == 'mirror':
         k = 'xyz'.index(o['ax']); nv = [0, 0, 0]; nv[k] = 1; t = [0, 0, 0]; t[k] = o['at']
         B[o['name']] = B[o['src']].translate([-v for v in t]).mirror(nv).translate(t)

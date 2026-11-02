@@ -1,33 +1,30 @@
-opened: readOnly? ? ver 3
-open yaw2roll: timeline 187 bodies 1 meshes 0
+opened: readOnly? ? ver 1
+open leg: timeline 43 bodies 1 meshes 0
 cleared 29s timeline 0 bodies 0
-  00 ext top_plate: bodies 1 main vol 1483.5
-  01 ext front_wall: bodies 1 main vol 2296.2
-  02 ext gussetA: bodies 2 main vol 2296.2
-  03 ext gussetC: bodies 3 main vol 2296.2
-  04 comb gussetC: bodies 2 main vol 2296.2
-  05 mirror gussetA2: bodies 3 main vol 2296.2
-  06 comb gussetA: bodies 2 main vol 2390.1
-  07 comb gussetA2: bodies 1 main vol 2484.0
-  08 fillet front_top_R2: bodies 1 main vol 2464.3
-  09 ext bearing_boss: bodies 1 main vol 2499.6
-  10 ext top_boss19: bodies 1 main vol 2641.4
-  11 ext top_boss16: bodies 1 main vol 3033.4
-  12 ext earA: bodies 2 main vol 3033.4
-  13 ext earB: bodies 3 main vol 3033.4
-  14 comb earB: bodies 2 main vol 3033.4
-  15 mirror earA2: bodies 3 main vol 3033.4
-  16 comb earA: bodies 2 main vol 3101.9
-  17 comb earA2: bodies 1 main vol 3170.3
-  18 rev ear_hole_l: bodies 1 main vol 3156.6
-  19 rev ear_hole_r: bodies 1 main vol 3142.9
-  20 ext fw_holes: bodies 1 main vol 3115.8
-  21 ext fw_cbore: bodies 1 main vol 3054.7
-  22 ext bearing_hole: bodies 1 main vol 3041.0
-  23 ext bearing_seat: bodies 1 main vol 2982.2
-  24 ext top_holes: bodies 1 main vol 2929.7
-  25 ext top_cbores: bodies 1 main vol 2815.7
-built faces 68 bodies 1 vol 2815.7 mat ABS 플라스틱 34s
+  00 ext frame: bodies 1 main vol 2293.8
+  01 fillet frame_R1: bodies 1 main vol 2265.1
+  02 ext gap: bodies 1 main vol 2032.5
+  03 ext spine: bodies 1 main vol 2838.1
+  04 rev spine_cap_lo: bodies 1 main vol 2996.3
+  05 rev spine_cap_hi: bodies 1 main vol 3154.6
+  06 ext axle: bodies 1 main vol 3405.9
+  07 ext axle_step: bodies 1 main vol 3413.5
+  08 ext axle_ring: bodies 1 main vol 3427.6
+  09 prism axle_pin: bodies 1 main vol 3471.3
+  10 ext axle_bore: bodies 1 main vol 3388.2
+  11 ext axle_hole: bodies 1 main vol 3363.6
+  12 ext horn_ring: bodies 1 main vol 3520.6
+  13 prism horn_boss: bodies 1 main vol 3908.1
+  14 ext horn_center: bodies 1 main vol 3852.9
+  15 ext horn_holes: bodies 1 main vol 3809.6
+  16 ext horn_cbores: bodies 1 main vol 3575.6
+  17 ext fins: bodies 1 main vol 3628.5
+  18 ext bars: bodies 1 main vol 3631.0
+  19 ext posts: bodies 1 main vol 3637.2
+  20 ext slot: bodies 1 main vol 3454.6
+  21 ext side_holes: bodies 1 main vol 3437.4
+  22 ext side_cbores: bodies 1 main vol 3411.3
+built faces 128 bodies 1 vol 3411.3 mat ABS 플라스틱 37s
 save True modified False
-cloud versions 4
+cloud versions 2
 DONE
