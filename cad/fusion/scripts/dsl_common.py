@@ -105,6 +105,8 @@ def path_segs(s, n_arc=48):
             out.append(('S', cur, P_, P_[-1], None, None, spline_pts(P_))); cur = P_[-1]
         else:
             m, e = g[1], g[2]
+            if abs((m[0] - cur[0]) * (e[1] - cur[1]) - (m[1] - cur[1]) * (e[0] - cur[0])) < 1e-6:
+                out.append(('L', cur, e)); cur = e; continue           # 세 점이 한 줄 → 선분
             c, r = _circ3(cur, m, e)
             a1 = math.atan2(cur[1] - c[1], cur[0] - c[0]); am = math.atan2(m[1] - c[1], m[0] - c[0]); a2 = math.atan2(e[1] - c[1], e[0] - c[0])
             sw = (a2 - a1) % (2 * math.pi)

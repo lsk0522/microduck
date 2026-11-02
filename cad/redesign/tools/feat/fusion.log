@@ -1,29 +1,24 @@
-opened 3s
-banana_pcb_locker: ver 1 outdated False bodies 1 vol 459.0
-power_support: ver 2 outdated False bodies 1 vol 10493.6
-right_shell: ver 2 outdated False bodies 1 vol 11312.6
-left_shell: ver 3 outdated False bodies 1 vol 11383.8
-yaw2roll: ver 4 outdated False bodies 1 vol 2815.7
-hip_l: ver 4 outdated False bodies 1 vol 4534.6
-upper_leg_left: ver 3 outdated False bodies 1 vol 4150.8
-leg: ver 2 outdated False bodies 1 vol 3411.3
-ankle_left: ver 2 outdated False bodies 1 vol 7885.3
-foot_left: ver 2 outdated False bodies 1 vol 12137.8
-sole_left: ver 2 outdated False bodies 1 vol 6250.8
-neck_pitch: ver 3 outdated False bodies 1 vol 4090.9
-yaw_roll_motion: ver 1 outdated False bodies 1 vol 4562.0
-noenoeil: ver 1 outdated False bodies 1 vol 4260.7
-m12_lens_holder: ver 2 outdated False bodies 1 vol 1098.2
-jaw_soft: ver 2 outdated False bodies 1 vol 18618.0
-soft_mouth_top: ver 2 outdated False bodies 1 vol 2711.1
-motor_support: ver 2 outdated False bodies 1 vol 7516.2
-jaw: ver 2 outdated False bodies 1 vol 9394.1
-bottom_head_shell: ver 1 outdated False bodies 1 vol 23820.0
-top_head_shell: ver 2 outdated False bodies 1 vol 29771.1
-face_part: ver 3 outdated False bodies 1 vol 5829.3
-upper_leg_right: ver 3 outdated False bodies 1 vol 4150.9
-ankle_right: ver 2 outdated False bodies 1 vol 7885.3
-foot_right: ver 2 outdated False bodies 1 vol 12137.8
-sole_right: ver 2 outdated False bodies 1 vol 6250.8
-save True modified False cloud 17 15s
+  00 prism main: bodies 1 main vol 267298.7
+  01 ext main_front: bodies 1 main vol 253111.1
+  02 ext main_crown: bodies 2 main vol 253111.1
+  03 rot main_tilt: bodies 2 main vol 253111.1
+  04 comb mainc: bodies 1 main vol 218352.6
+  05 fillet main_corner: bodies 1 main vol 218258.4
+  06 fillet main_bottom: bodies 1 main vol 217375.5
+  07 prism inner: bodies 2 main vol 217375.5
+  08 ext inner_front: bodies 2 main vol 217375.5
+  09 ext inner_crown: bodies 3 main vol 217375.5
+  10 rot inner_tilt: bodies 3 main vol 217375.5
+  11 comb innerc: bodies 2 main vol 217375.5
+  12 fillet inner_corner: bodies 2 main vol 217375.5
+  13 fillet inner_bottom: bodies 2 main vol 217375.5
+  14 comb inner: bodies 1 main vol 22701.3
+  15 ext side_profile: bodies 1 main vol 11910.9
+  16 ext notch: bodies 1 main vol 8449.6
+  17 ext boss_r: bodies 1 main vol 8900.7
+  18 ext boss_l: bodies 1 main vol 9351.8
+  19 ext shaft_l: bodies 1 main vol 9587.4
+  20 ext holes_r: bodies 1 main vol 9415.9
+  21 ext hole_l: bodies 1 main vol 9394.1
+built faces 48 bodies 1 vol 9394.1 14s
 DONE

@@ -28,23 +28,19 @@ def _draw_segs(sk, ax, at, segs):
         else:
             e = A.addByThreePoints(_spu(sk, ax, at, *s[1]), _spu(sk, ax, at, *s[2]), _spu(sk, ax, at, *s[3]))
         ents.append(e)
-    # 끝점 잇기 (같은 좌표 점 병합)
-    pts = []
-    for e in ents:
-        pts += [e.startSketchPoint, e.endSketchPoint]
-    keep = []
-    for p in pts:
-        q = p.geometry; hit = None
-        for k in keep:
-            if k.geometry.distanceTo(q) < 1e-5:
-                hit = k; break
-        if hit is None:
-            keep.append(p)
-        elif hit != p:
-            try:
-                hit.merge(p)
-            except Exception:
-                pass
+    # 끝점 잇기: 이웃한 곡선끼리만 비교 (고리는 순서대로 그림) → 곡선 수에 비례
+    def _m(a, b):
+        for pa in (a.startSketchPoint, a.endSketchPoint):
+            for pb in (b.startSketchPoint, b.endSketchPoint):
+                if pa != pb and pa.geometry.distanceTo(pb.geometry) < 1e-5:
+                    try:
+                        pa.merge(pb)
+                    except Exception:
+                        pass
+                    return
+    for i in range(len(ents)):
+        if len(ents) > 1:
+            _m(ents[i], ents[(i + 1) % len(ents)])
     return ents
 
 
@@ -97,6 +93,21 @@ def _pick(sk, ax, region):
     for pr in sk.profiles:
         u, v = _xyz2uv(ax, _inner_point(sk, pr))
         if contains(region, u, v):
+            oc.add(pr)
+    return oc
+
+
+def _pick_fast(sk, region):
+    """잔여 영역용 빠른 선택: 구멍(D 의 빼는 고리) 넓이와 같은 프로파일만 뺌"""
+    def ar(r):
+        if isinstance(r, C): return math.pi * r.r ** 2
+        pts = [(a, b) for a, b, _ in r.v] if isinstance(r, P) else seg_points(path_segs(r))
+        return abs(_area(pts))
+    holes = [ar(b) for b in region.b] if isinstance(region, D) else []
+    oc = adsk.core.ObjectCollection.create()
+    for pr in sk.profiles:
+        a = pr.areaProperties().area * 100
+        if not any(abs(a - h) < 0.02 * h + 0.02 for h in holes):
             oc.add(pr)
     return oc
 
@@ -166,12 +177,21 @@ def _extrude_op(comp, profs, dist, o):
 
 def op_ext(comp, o):
     sk = sketch(comp, o['ax'], o['a0'], o['name'])
+    sk.isComputeDeferred = True
     for pr in prims(o['region']):
         _draw_prim(sk, o['ax'], o['a0'], pr)
-    profs = _pick(sk, o['ax'], o['region'])
+    sk.isComputeDeferred = False
+    profs = _pick_fast(sk, o['region']) if o.get('optional') else _pick(sk, o['ax'], o['region'])
     if profs.count == 0:
+        if o.get('optional'):
+            sk.name = 'SKIP_' + o['name']; return
         raise RuntimeError('no profile ' + o['name'])
-    _extrude_op(comp, profs, (o['a1'] - o['a0']) * _normal_sign(sk, o['ax']), o)
+    try:
+        _extrude_op(comp, profs, (o['a1'] - o['a0']) * _normal_sign(sk, o['ax']), o)
+    except Exception:
+        if not o.get('optional'):
+            raise
+        sk.name = 'FAIL_' + o['name']
 
 
 def op_prism(comp, o):
@@ -281,6 +301,18 @@ def op_rot(comp, o):
     f = comp.features.moveFeatures.add(mi); f.name = o.get('name', 'rot')
 
 
+def op_zloft(comp, o):
+    """z 평면 단면들(닫힌 Pth)을 로프트 → 새 몸체 / 결합. o['secs'] = [(z, region), ...] (z 오름차순)"""
+    lo = comp.features.loftFeatures.createInput(NEW)
+    for k, (z, reg) in enumerate(o['secs']):
+        sk = sketch(comp, 'z', z, f"{o['name']}_{k}")
+        for pr in prims(reg):
+            _draw_prim(sk, 'z', z, pr)
+        lo.loftSections.add(max(list(sk.profiles), key=lambda p: p.areaProperties().area))
+    f = comp.features.loftFeatures.add(lo); f.name = o['name']
+    _apply(comp, f.bodies.item(0), o)
+
+
 def op_comb(comp, o):
     _combine(comp, o['target'], _body(comp, o['tool']), o['mode'])
 
@@ -290,7 +322,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')
