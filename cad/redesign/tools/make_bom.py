@@ -1,7 +1,8 @@
 """다이나믹셀 v1.x BOM (부품마다 무엇인지·수량·재질·질량·파일).
     .venv\\Scripts\\python.exe cad/redesign/tools/make_bom.py cad/redesign/dynamixel/v1.0
 출력: <버전>/BOM_dynamixel_<ver>.csv, .xlsx
-수량 = 원본 MJCF 배치 개수 (manifest.json). 출력 부품 질량 = 새 솔리드 부피 × PETG 1.27 g/cm³ (꽉 찬 기준, 실제 출력은 채움률만큼 가벼움).
+수량 = 원본 MJCF 배치 개수 (manifest.json). 출력 부품 재질 = 어셈블리(Fusion) 재질: 경질 ABS 플라스틱(흰색) 1.06 g/cm³, 연질 고무 0.93 g/cm³.
+질량 = parts/<부품>/<부품>.stl 부피 × 밀도 (꽉 찬 기준, 실제 출력은 채움률만큼 가벼움).
 """
 import sys, json, csv
 from pathlib import Path
@@ -21,32 +22,32 @@ INFO = {
     'bearing_roll': (PL, '고관절 롤 베어링판 (고관절 앞면 수직판). 좌우 같은 부품', '알루미늄 5052-H32 1.0 mm', '원본 위치결정 핀 생략'),
     'upper_leg_rigidity_plate': (PL, '허벅지 보강판 (허벅지 바깥 옆면, hip_pitch·knee 서보를 잇는 측판). 좌우 같은 부품', '알루미늄 5052-H32 1.0 mm', 'v1.0: 무릎 접힘 여유 홈'),
     'neck': (PL, '목 옆판 (목 서보 2개를 잇는 판, 양옆 2장)', '알루미늄 5052-H32 2.0 mm', '테두리 1.5t로 외형 확대 24.3×13.3'),
-    'right_shell': (P, '몸통 오른쪽 외피(셸)', 'PETG 또는 PLA+', ''),
-    'left_shell': (P, '몸통 왼쪽 외피(셸)', 'PETG 또는 PLA+', ''),
-    'power_support': (P, '몸통 전원부 지지대 (배터리·스위치·퓨즈 자리)', 'PETG 또는 PLA+', ''),
-    'banana_pcb_locker': (P, '몸통 안 보드/배선 고정 막대 (원본 명칭 banana PCB locker, 정확한 용도 미확인)', 'PETG 또는 PLA+', ''),
-    'yaw2roll': (P, '고관절 yaw→roll 연결 브래킷 (hip_yaw 혼에 붙고 hip_roll 서보를 잡음). 좌우 공용', 'PETG 또는 PLA+', ''),
-    'hip_l': (P, '고관절 roll→pitch 브래킷 (Ø16 축이 베어링에 끼움). 좌우 공용', 'PETG 또는 PLA+', 'v1.0: Ø16 축 정확한 원통'),
-    'upper_leg_left': (P, '왼쪽 허벅지 링크 (hip_pitch·knee XL330 홀더)', 'PETG 또는 PLA+', ''),
-    'upper_leg_right': (P, '오른쪽 허벅지 링크 (hip_pitch·knee XL330 홀더)', 'PETG 또는 PLA+', ''),
-    'leg': (P, '정강이 링크 (knee 혼 ↔ ankle XL330). 좌우 공용', 'PETG 또는 PLA+', ''),
-    'ankle_left': (P, '왼쪽 발목 브래킷 (ankle 혼 ↔ 발판)', 'PETG 또는 PLA+', ''),
-    'ankle_right': (P, '오른쪽 발목 브래킷', 'PETG 또는 PLA+', ''),
-    'foot_left': (P, '왼쪽 발판', 'PETG 또는 PLA+', ''),
-    'foot_right': (P, '오른쪽 발판', 'PETG 또는 PLA+', ''),
-    'sole_left': (S, '왼쪽 발바닥 (미끄럼 방지)', 'TPU 95A', ''),
-    'sole_right': (S, '오른쪽 발바닥', 'TPU 95A', ''),
-    'neck_pitch': (P, '목 위 브래킷 (head_pitch 서보·혼, Ø16 축 베어링)', 'PETG 또는 PLA+', 'v1.0: Ø16·Ø18 원통 정확'),
-    'yaw_roll_motion': (P, '머리 yaw–roll 브래킷 (head_yaw 혼 ↔ head_roll 서보)', 'PETG 또는 PLA+', '재설계 때 롤 혼 볼트용 Ø4 공구 구멍 추가 예정'),
-    'face_part': (P, '얼굴판 (보드·카메라 장착면)', 'PETG 또는 PLA+', ''),
-    'motor_support': (P, '머리 안 서보 지지대 (M2.5 ×4 체결)', 'PETG 또는 PLA+', ''),
-    'noenoeil': (P, '얼굴의 눈 링 (원본 명칭 noenoeil)', 'PETG 또는 PLA+', ''),
-    'm12_lens_holder': (P, 'M12 렌즈 홀더 (IMX219 카메라용)', 'PETG 또는 PLA+', ''),
-    'top_head_shell': (P, '머리 윗 셸', 'PETG 또는 PLA+', ''),
-    'bottom_head_shell': (P, '머리 아래 셸', 'PETG 또는 PLA+', ''),
-    'jaw': (P, '부리 아래(경질)', 'PETG 또는 PLA+', ''),
-    'jaw_soft': (S, '부리 아래 연질부', 'TPU 95A', ''),
-    'soft_mouth_top': (S, '부리 위 연질부', 'TPU 95A', ''),
+    'right_shell': (P, '몸통 오른쪽 외피(셸)', 'ABS 플라스틱 (흰색)', ''),
+    'left_shell': (P, '몸통 왼쪽 외피(셸)', 'ABS 플라스틱 (흰색)', ''),
+    'power_support': (P, '몸통 전원부 지지대 (배터리·스위치·퓨즈 자리)', 'ABS 플라스틱 (흰색)', ''),
+    'banana_pcb_locker': (P, '몸통 안 보드/배선 고정 막대 (원본 명칭 banana PCB locker, 정확한 용도 미확인)', 'ABS 플라스틱 (흰색)', ''),
+    'yaw2roll': (P, '고관절 yaw→roll 연결 브래킷 (hip_yaw 혼에 붙고 hip_roll 서보를 잡음). 좌우 공용', 'ABS 플라스틱 (흰색)', ''),
+    'hip_l': (P, '고관절 roll→pitch 브래킷 (Ø16 축이 베어링에 끼움). 좌우 공용', 'ABS 플라스틱 (흰색)', 'v1.0: Ø16 축 정확한 원통'),
+    'upper_leg_left': (P, '왼쪽 허벅지 링크 (hip_pitch·knee XL330 홀더)', 'ABS 플라스틱 (흰색)', ''),
+    'upper_leg_right': (P, '오른쪽 허벅지 링크 (hip_pitch·knee XL330 홀더)', 'ABS 플라스틱 (흰색)', ''),
+    'leg': (P, '정강이 링크 (knee 혼 ↔ ankle XL330). 좌우 공용', 'ABS 플라스틱 (흰색)', ''),
+    'ankle_left': (P, '왼쪽 발목 브래킷 (ankle 혼 ↔ 발판)', 'ABS 플라스틱 (흰색)', ''),
+    'ankle_right': (P, '오른쪽 발목 브래킷', 'ABS 플라스틱 (흰색)', ''),
+    'foot_left': (P, '왼쪽 발판', 'ABS 플라스틱 (흰색)', ''),
+    'foot_right': (P, '오른쪽 발판', 'ABS 플라스틱 (흰색)', ''),
+    'sole_left': (S, '왼쪽 발바닥 (미끄럼 방지)', '고무 (연질)', ''),
+    'sole_right': (S, '오른쪽 발바닥', '고무 (연질)', ''),
+    'neck_pitch': (P, '목 위 브래킷 (head_pitch 서보·혼, Ø16 축 베어링)', 'ABS 플라스틱 (흰색)', 'v1.0: Ø16·Ø18 원통 정확'),
+    'yaw_roll_motion': (P, '머리 yaw–roll 브래킷 (head_yaw 혼 ↔ head_roll 서보)', 'ABS 플라스틱 (흰색)', '재설계 때 롤 혼 볼트용 Ø4 공구 구멍 추가 예정'),
+    'face_part': (P, '얼굴판 (보드·카메라 장착면)', 'ABS 플라스틱 (흰색)', ''),
+    'motor_support': (P, '머리 안 서보 지지대 (M2.5 ×4 체결)', 'ABS 플라스틱 (흰색)', ''),
+    'noenoeil': (P, '얼굴의 눈 링 (원본 명칭 noenoeil)', 'ABS 플라스틱 (흰색)', ''),
+    'm12_lens_holder': (P, 'M12 렌즈 홀더 (IMX219 카메라용)', 'ABS 플라스틱 (흰색)', ''),
+    'top_head_shell': (P, '머리 윗 셸', 'ABS 플라스틱 (흰색)', ''),
+    'bottom_head_shell': (P, '머리 아래 셸', 'ABS 플라스틱 (흰색)', ''),
+    'jaw': (P, '부리 아래(경질)', 'ABS 플라스틱 (흰색)', ''),
+    'jaw_soft': (S, '부리 아래 연질부', '고무 (연질)', ''),
+    'soft_mouth_top': (S, '부리 위 연질부', '고무 (연질)', ''),
     'xl330': (B, '서보 ROBOTIS DYNAMIXEL XL330-M288-T (20×34×26 mm, 18 g)', 'ROBOTIS XL330-M288-T', '혼·탭 구멍은 실측 모델. 동봉 볼트 사용'),
     'bearing_16x22x4': (B, '볼베어링 내경16·외경22·폭4 (관절 지지)', '16×22×4 mm 볼베어링', ''),
     'bearing_10x15x3': (B, '볼베어링 내경10·외경15·폭3 (발목·머리)', '10×15×3 mm 볼베어링', ''),
@@ -71,10 +72,11 @@ order = [k for k in INFO if INFO[k][0] == PL] + [k for k in INFO if INFO[k][0] i
 for i, n in enumerate(order, 1):
     cat, what, mat, note = INFO[n]
     vol = mass = None
-    vj = T / 'build' / 'verify' / f'{n}.json'
-    if cat in (P, S) and vj.exists():
-        vol = json.loads(vj.read_text())['vol_new'] / 1000
-        mass = vol * (1.27 if cat == P else 1.21)
+    sp = V / 'parts' / n / f'{n}.stl'
+    if cat in (P, S) and sp.exists():
+        import trimesh
+        vol = trimesh.load(sp).volume / 1000
+        mass = vol * (1.06 if cat == P else 0.93)
     lj = T / 'build' / f'{n}_loops.json'
     if cat == PL and lj.exists():
         d = json.loads(lj.read_text(encoding='utf-8')); mass = d['mass_g']; vol = d['volume_mm3'] / 1000
