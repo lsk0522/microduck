@@ -51,6 +51,7 @@ try:
         o = em.createSTLExportOptions(body, path)
         o.meshRefinement = adsk.fusion.MeshRefinementSettings.MeshRefinementHigh; o.isBinaryFormat = True
         o.unitType = adsk.fusion.DistanceUnits.MillimeterDistanceUnits; em.execute(o)
+    comp.isSketchFolderLightBulbOn = False; comp.isConstructionFolderLightBulbOn = False   # 스케치·작업 평면 숨김
     ok = doc.save('feature remodel (smooth solid)')
     time.sleep(2)
     log(f'save {ok} modified {doc.isModified}')

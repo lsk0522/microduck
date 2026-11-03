@@ -22,9 +22,13 @@ def _draw_segs(sk, ax, at, segs):
             e = L.addByTwoPoints(_spu(sk, ax, at, *a), _spu(sk, ax, at, *b))
         elif s[0] == 'S':
             oc = adsk.core.ObjectCollection.create()
-            for q in s[2]:
+            Q = s[2]
+            closed = len(segs) == 1 and math.hypot(Q[0][0] - Q[-1][0], Q[0][1] - Q[-1][1]) < 1e-9     # 닫힌 스플라인 하나 = 주기 스플라인
+            for q in (Q[:-1] if closed else Q):
                 oc.add(_spu(sk, ax, at, *q))
             e = sk.sketchCurves.sketchFittedSplines.add(oc)
+            if closed:
+                e.isClosed = True
         else:
             e = A.addByThreePoints(_spu(sk, ax, at, *s[1]), _spu(sk, ax, at, *s[2]), _spu(sk, ax, at, *s[3]))
         ents.append(e)
@@ -337,6 +341,46 @@ def op_zloft(comp, o):
     _apply(comp, body, o)
 
 
+
+def _tilt_base(comp, n):
+    """원점을 지나고 법선 n (y 성분 0) 인 평면: YZ 평면을 y 축 둘레로 돌림 (부호는 결과 법선으로 확인)"""
+    ang = math.degrees(math.atan2(-n[2], n[0]))
+    for a in (ang, -ang):
+        pi = comp.constructionPlanes.createInput()
+        pi.setByAngle(comp.yConstructionAxis, adsk.core.ValueInput.createByString(f'{a} deg'), comp.yZConstructionPlane)
+        pl = comp.constructionPlanes.add(pi)
+        g = pl.geometry.normal
+        if abs(abs(g.x * n[0] + g.y * n[1] + g.z * n[2]) - 1.0) < 1e-6:
+            return pl
+        pl.deleteMe()
+    raise RuntimeError('tilt plane')
+
+
+def op_loft3(comp, o):
+    """기울어진 평행 평면 위 닫힌 스플라인 단면들 로프트. o['normal'] = 평면 법선 (모델), o['secs'] = [[(x,y,z), ...], ...] (각 단면 점은 한 평면 위)"""
+    n = o['normal']; base = _tilt_base(comp, n); base.isLightBulbOn = False
+    g = base.geometry; on = (g.origin.x / MM, g.origin.y / MM, g.origin.z / MM); gn = (g.normal.x, g.normal.y, g.normal.z)
+    lo = comp.features.loftFeatures.createInput(NEW)
+    for k, pts in enumerate(o['secs']):
+        p0 = pts[0]; d = sum((p0[i] - on[i]) * gn[i] for i in range(3))
+        if abs(d) < 1e-9:
+            pl = base
+        else:
+            pi = comp.constructionPlanes.createInput(); pi.setByOffset(base, VI(d)); pl = comp.constructionPlanes.add(pi)
+            pl.isLightBulbOn = False
+        sk = comp.sketches.add(pl); sk.name = f"{o['name']}_{k}"
+        sk.isComputeDeferred = True
+        oc = adsk.core.ObjectCollection.create()
+        for q in pts:
+            v = sp(sk, *q); v.z = 0.0                    # 평면 위로 (어긋남 1e-5 만 있어도 프로파일 안 생김)
+            oc.add(v)
+        e = sk.sketchCurves.sketchFittedSplines.add(oc); e.isClosed = True
+        sk.isComputeDeferred = False
+        sk.isVisible = False
+        lo.loftSections.add(sk.profiles.item(0))
+    f = comp.features.loftFeatures.add(lo); f.name = o['name']
+    _apply(comp, f.bodies.item(0), o)
+
 def op_joinall(comp, o):
     """남은 몸체를 모두 target 에 합침 (잔여 돌출로 떨어져 나간 조각)"""
     t = _body(comp, o['target'])
@@ -355,7 +399,7 @@ def dsl_build(comp, part, log=None, soft=False):
     exec(open(os.path.join(S, 'specs', part + '.py'), encoding='utf-8').read(), g)
     clear(comp)
     for k, o in enumerate(expand(g['OPS'])):
-        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft, 'loft': op_zloft, 'joinall': op_joinall}[o['op']](comp, o)
+        {'ext': op_ext, 'prism': op_prism, 'rev': op_rev, 'comb': op_comb, 'fillet': op_fillet, 'mirror': op_mirror, 'remove': op_remove, 'shell': op_shell, 'rot': op_rot, 'zloft': op_zloft, 'loft': op_zloft, 'loft3': op_loft3, 'joinall': op_joinall}[o['op']](comp, o)
         if log:
             b = _body(comp, 'main')
             log(f'  {k:02d} {o["op"]} {o.get("name", o.get("tool"))}: bodies {comp.bRepBodies.count} main vol {b.volume * 1000 if b else 0:.1f}')

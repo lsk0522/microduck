@@ -210,18 +210,18 @@
  {
   "part": "left_shell",
   "vol_ref": 11388.3,
-  "vol_new": 11383.5,
-  "dvol": -0.04,
-  "p50": 0.013,
-  "p95": 0.374,
-  "max": 3.33,
+  "vol_new": 11397.3,
+  "dvol": 0.08,
+  "p50": 0.005,
+  "p95": 0.093,
+  "max": 0.93,
   "hole_sections": 44,
   "hole_ok": 44,
   "hole_worst_c": 0.023,
   "hole_worst_r": 0.004,
   "miss": [],
   "nmiss": 0,
-  "faces": 132024
+  "faces": 57884
  },
  {
   "part": "right_shell",

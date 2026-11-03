@@ -1,6 +1,49 @@
-opened 17s
-left_shell: ver 4 outdated False bodies 1 vol 11383.8
-right_shell: ver 4 outdated False bodies 1 vol 11312.6
-bottom_head_shell: ver 5 outdated False bodies 1 vol 23795.4
-save True modified False cloud 21 35s
+opened: readOnly? ? ver 4
+open left_shell: timeline 154 bodies 1 meshes 0
+cleared 30s timeline 0 bodies 0
+  00 loft3 env: bodies 1 main vol 86652.4
+  01 loft3 envS: bodies 2 main vol 86652.4
+  02 shell shell: bodies 2 main vol 17441.4
+  03 ext cutA_xy: bodies 3 main vol 17441.4
+  04 ext cutA_xz: bodies 3 main vol 17441.4
+  05 comb cA: bodies 2 main vol 15311.3
+  06 ext cutB_xy: bodies 3 main vol 15311.3
+  07 ext cutB_xz: bodies 3 main vol 15311.3
+  08 comb cB: bodies 2 main vol 11558.6
+  09 ext cut_back: bodies 2 main vol 11232.8
+  10 ext cut_bottom: bodies 2 main vol 9997.5
+  11 prism tube: bodies 3 main vol 9997.5
+  12 comb envS: bodies 3 main vol 9997.5
+  13 comb tube: bodies 2 main vol 10807.1
+  14 ext boss: bodies 3 main vol 10807.1
+  15 ext boss_bot: bodies 3 main vol 10807.1
+  16 comb envS: bodies 3 main vol 10807.1
+  17 comb boss: bodies 2 main vol 11251.3
+  18 ext clip: bodies 3 main vol 11251.3
+  19 ext clip_end: bodies 3 main vol 11251.3
+  20 comb envS: bodies 3 main vol 11251.3
+  21 comb clip: bodies 2 main vol 11468.7
+  22 ext top_groove: bodies 2 main vol 11458.6
+  23 prism plate: bodies 3 main vol 11458.6
+  24 comb plate: bodies 2 main vol 12075.7
+  25 ext lip_wedge: bodies 3 main vol 12075.7
+  26 comb envS: bodies 3 main vol 12075.7
+  27 comb wedge: bodies 2 main vol 12077.4
+  28 ext horn: bodies 2 main vol 12304.4
+  29 ext horn_pocket: bodies 2 main vol 12230.7
+  30 ext horn_holes: bodies 2 main vol 12180.5
+  31 loft3 in1: bodies 3 main vol 12180.5
+  32 ext tongue: bodies 4 main vol 12180.5
+  33 comb in1: bodies 3 main vol 12180.5
+  34 comb tq: bodies 2 main vol 12018.7
+  35 ext tongue_corner: bodies 2 main vol 12004.4
+  36 ext end_cut: bodies 2 main vol 11958.3
+  37 ext ring_hole_s: bodies 2 main vol 11950.5
+  38 prism ring_hole: bodies 2 main vol 11596.7
+  39 ext boss_hole_s: bodies 2 main vol 11589.0
+  40 prism boss_cb: bodies 2 main vol 11384.7
+  41 remove None: bodies 1 main vol 11384.7
+built faces 118 bodies 1 vol 11384.7 mat ABS 플라스틱 193s
+save True modified False
+cloud versions 5
 DONE
