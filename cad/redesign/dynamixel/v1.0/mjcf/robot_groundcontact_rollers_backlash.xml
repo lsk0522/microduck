@@ -431,42 +431,42 @@
     <mesh file="yaw_roll_motion.stl" />
     <mesh file="power_support.stl" />
     <material name="seeed_bearing__configuration__22x16x4_material" rgba="0.811765 0.858824 0.898039 1" />
-    <material name="right_shell_material" rgba="0.85098 0.85098 0.839216 1" />
-    <material name="banana_pcb_locker_material" rgba="0.647059 0.647059 0.647059 1" />
+    <material name="right_shell_material" rgba="0.9255 0.898 0.8314 1" />
+    <material name="banana_pcb_locker_material" rgba="0.6745 0.6392 0.6039 1" />
     <material name="trunk_base_material" rgba="0.129412 0.152941 0.129412 1" />
-    <material name="xl330_material" rgba="0.286275 0.286275 0.286275 1" />
-    <material name="power_support_material" rgba="0.67451 0.639216 0.603922 1" />
-    <material name="np_f970_material" rgba="0.301961 0.301961 0.301961 1" />
-    <material name="left_shell_material" rgba="0.8 0.8 0.8 1" />
-    <material name="yaw2roll_material" rgba="0.129412 0.152941 0.129412 1" />
+    <material name="xl330_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="power_support_material" rgba="0.6745 0.6392 0.6039 1" />
+    <material name="np_f970_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="left_shell_material" rgba="0.9255 0.898 0.8314 1" />
+    <material name="yaw2roll_material" rgba="0.1647 0.1647 0.1765 1" />
     <material name="bearing_roll_material" rgba="0.129412 0.152941 0.129412 1" />
-    <material name="hip_l_material" rgba="0.67451 0.639216 0.603922 1" />
-    <material name="upper_leg_left_material" rgba="0.85098 0.85098 0.839216 1" />
+    <material name="hip_l_material" rgba="0.6745 0.6392 0.6039 1" />
+    <material name="upper_leg_left_material" rgba="0.9255 0.898 0.8314 1" />
     <material name="upper_leg_rigidity_plate_material" rgba="0.67451 0.639216 0.603922 1" />
-    <material name="leg_material" rgba="0.67451 0.639216 0.603922 1" />
+    <material name="leg_material" rgba="0.6745 0.6392 0.6039 1" />
     <material name="roller_blade_material" rgba="0.901961 0.901961 0.901961 1" />
     <material name="seeed_bearing__configuration_default_material" rgba="0.811765 0.858824 0.898039 1" />
-    <material name="ankle_l_v1_material" rgba="1 0.403922 0.121569 1" />
+    <material name="ankle_l_v1_material" rgba="0.9333 0.3843 0.1098 1" />
     <material name="tire_material" rgba="0.34902 0.376471 0.4 1" />
     <material name="rim_material" rgba="0.729412 0.25098 0.105882 1" />
     <material name="neck_material" rgba="0.67451 0.639216 0.603922 1" />
-    <material name="neck_pitch_material" rgba="0.34902 0.376471 0.4 1" />
-    <material name="yaw_roll_motion_material" rgba="0.129412 0.152941 0.129412 1" />
-    <material name="lens_material" rgba="0.262745 0.282353 0.301961 1" />
-    <material name="face_part_material" rgba="0.67451 0.639216 0.603922 1" />
-    <material name="jaw_soft_material" rgba="0.85098 0.756863 0.866667 1" />
-    <material name="motor_support_material" rgba="0.129412 0.152941 0.129412 1" />
-    <material name="top_head_shell_material" rgba="0.85098 0.85098 0.839216 1" />
+    <material name="neck_pitch_material" rgba="0.349 0.3765 0.4 1" />
+    <material name="yaw_roll_motion_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="lens_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="face_part_material" rgba="0.6745 0.6392 0.6039 1" />
+    <material name="jaw_soft_material" rgba="0.9333 0.3843 0.1098 1" />
+    <material name="motor_support_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="top_head_shell_material" rgba="0.9255 0.898 0.8314 1" />
     <material name="elec_rpi_robot_hat_pcb_material" rgba="0.313725 0.486275 0.411765 1" />
-    <material name="soft_mouth_top_material" rgba="0.85098 0.756863 0.866667 1" />
-    <material name="noenoeil_material" rgba="0.956863 0.686275 0.137255 1" />
-    <material name="jaw_material" rgba="1 0.403922 0.121569 1" />
-    <material name="bottom_head_shell_material" rgba="1 0.403922 0.121569 1" />
-    <material name="m12_lens_holder_material" rgba="0.262745 0.282353 0.301961 1" />
+    <material name="soft_mouth_top_material" rgba="0.9333 0.3843 0.1098 1" />
+    <material name="noenoeil_material" rgba="0.9804 0.7373 0.0863 1" />
+    <material name="jaw_material" rgba="0.9333 0.3843 0.1098 1" />
+    <material name="bottom_head_shell_material" rgba="0.9333 0.3843 0.1098 1" />
+    <material name="m12_lens_holder_material" rgba="0.1647 0.1647 0.1765 1" />
     <material name="pcb__raspberry_pi_zero_2_w_material" rgba="0.498039 0.498039 0.498039 1" />
-    <material name="speaker_material" rgba="0.294118 0.290196 0.290196 1" />
-    <material name="upper_leg_right_material" rgba="0.85098 0.85098 0.839216 1" />
-    <material name="ankle_r_v1_material" rgba="1 0.403922 0.121569 1" />
+    <material name="speaker_material" rgba="0.1647 0.1647 0.1765 1" />
+    <material name="upper_leg_right_material" rgba="0.9255 0.898 0.8314 1" />
+    <material name="ankle_r_v1_material" rgba="0.9333 0.3843 0.1098 1" />
   <mesh name="neck_1" file="neck_1.stl" /></asset>
   <actuator>
     <position class="chosen_actuator" name="left_hip_yaw" joint="left_hip_yaw" />

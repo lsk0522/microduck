@@ -1,0 +1,27 @@
+{
+ "stand_only": {
+  "fell_at": 0.87,
+  "min_trunk_z_mm": 33.9,
+  "self_contacts_mm": {}
+ },
+ "squat amp0.15 sign(1, -2, 1)": {
+  "fell_at": 0.87,
+  "min_trunk_z_mm": 32.6,
+  "self_contacts_mm": {}
+ },
+ "squat amp0.3 sign(1, -2, 1)": {
+  "fell_at": 0.87,
+  "min_trunk_z_mm": 32.6,
+  "self_contacts_mm": {}
+ },
+ "squat amp0.15 sign(-1, 2, -1)": {
+  "fell_at": 0.87,
+  "min_trunk_z_mm": 36.7,
+  "self_contacts_mm": {}
+ },
+ "squat amp0.3 sign(-1, 2, -1)": {
+  "fell_at": 0.87,
+  "min_trunk_z_mm": 37.9,
+  "self_contacts_mm": {}
+ }
+}

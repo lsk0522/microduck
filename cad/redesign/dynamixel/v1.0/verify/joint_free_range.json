@@ -1,0 +1,378 @@
+{
+ "zero_pose": {
+  "new": {
+   "seeed_bearing__configuration__22x16x4@yaw_roll_motion | bottom_head_shell@jaw_soft": 6.26,
+   "seeed_bearing__configuration__22x16x4@yaw_roll_motion | speaker@jaw_soft": 6.63
+  },
+  "orig": {
+   "seeed_bearing__configuration__22x16x4@yaw_roll_motion | bottom_head_shell@jaw_soft": 5.27,
+   "seeed_bearing__configuration__22x16x4@yaw_roll_motion | speaker@jaw_soft": 6.17
+  }
+ },
+ "joints": {
+  "left_hip_yaw": {
+   "new": {
+    "neg": {
+     "free_deg": -18.0,
+     "limit_deg": -25.0,
+     "first_hit": "np_f970@trunk_base | leg@leg"
+    },
+    "pos": {
+     "free_deg": 30.0,
+     "limit_deg": 30.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -18.0,
+     "limit_deg": -25.0,
+     "first_hit": "np_f970@trunk_base | leg@leg"
+    },
+    "pos": {
+     "free_deg": 30.0,
+     "limit_deg": 30.0,
+     "first_hit": null
+    }
+   }
+  },
+  "left_hip_roll": {
+   "new": {
+    "neg": {
+     "free_deg": -22.0,
+     "limit_deg": -22.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 22.0,
+     "limit_deg": 22.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -22.0,
+     "limit_deg": -22.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 22.0,
+     "limit_deg": 22.0,
+     "first_hit": null
+    }
+   }
+  },
+  "left_hip_pitch": {
+   "new": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   }
+  },
+  "left_knee": {
+   "new": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 71.0,
+     "limit_deg": 90.0,
+     "first_hit": "hip_l@hip_l | foot_left@ankle_left"
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 71.0,
+     "limit_deg": 90.0,
+     "first_hit": "hip_l@hip_l | foot_left@ankle_left"
+    }
+   }
+  },
+  "left_ankle": {
+   "new": {
+    "neg": {
+     "free_deg": -0.0,
+     "limit_deg": -90.0,
+     "first_hit": "xl330@leg | ankle_left@ankle_left"
+    },
+    "pos": {
+     "free_deg": 0.0,
+     "limit_deg": 90.0,
+     "first_hit": "xl330@leg | ankle_left@ankle_left"
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -0.0,
+     "limit_deg": -90.0,
+     "first_hit": "xl330@leg | ankle_left@ankle_left"
+    },
+    "pos": {
+     "free_deg": 0.0,
+     "limit_deg": 90.0,
+     "first_hit": "xl330@leg | ankle_left@ankle_left"
+    }
+   }
+  },
+  "neck_pitch": {
+   "new": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 60.0,
+     "limit_deg": 60.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 60.0,
+     "limit_deg": 60.0,
+     "first_hit": null
+    }
+   }
+  },
+  "head_pitch": {
+   "new": {
+    "neg": {
+     "free_deg": -66.0,
+     "limit_deg": -90.0,
+     "first_hit": "right_shell@trunk_base | bottom_head_shell@jaw_soft"
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -66.0,
+     "limit_deg": -90.0,
+     "first_hit": "right_shell@trunk_base | bottom_head_shell@jaw_soft"
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   }
+  },
+  "head_yaw": {
+   "new": {
+    "neg": {
+     "free_deg": -170.0,
+     "limit_deg": -170.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 170.0,
+     "limit_deg": 170.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -170.0,
+     "limit_deg": -170.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 170.0,
+     "limit_deg": 170.0,
+     "first_hit": null
+    }
+   }
+  },
+  "head_roll": {
+   "new": {
+    "neg": {
+     "free_deg": -8.0,
+     "limit_deg": -25.0,
+     "first_hit": "yaw_roll_motion@yaw_roll_motion | xl330@jaw_soft"
+    },
+    "pos": {
+     "free_deg": 15.0,
+     "limit_deg": 25.0,
+     "first_hit": "xl330@yaw_roll_motion | xl330@jaw_soft"
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -8.0,
+     "limit_deg": -25.0,
+     "first_hit": "yaw_roll_motion@yaw_roll_motion | xl330@jaw_soft"
+    },
+    "pos": {
+     "free_deg": 15.0,
+     "limit_deg": 25.0,
+     "first_hit": "xl330@yaw_roll_motion | xl330@jaw_soft"
+    }
+   }
+  },
+  "right_hip_yaw": {
+   "new": {
+    "neg": {
+     "free_deg": -30.0,
+     "limit_deg": -30.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 18.0,
+     "limit_deg": 25.0,
+     "first_hit": "np_f970@trunk_base | leg@leg_2"
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -30.0,
+     "limit_deg": -30.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 18.0,
+     "limit_deg": 25.0,
+     "first_hit": "np_f970@trunk_base | leg@leg_2"
+    }
+   }
+  },
+  "right_hip_roll": {
+   "new": {
+    "neg": {
+     "free_deg": -22.0,
+     "limit_deg": -22.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 22.0,
+     "limit_deg": 22.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -22.0,
+     "limit_deg": -22.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 22.0,
+     "limit_deg": 22.0,
+     "first_hit": null
+    }
+   }
+  },
+  "right_hip_pitch": {
+   "new": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -90.0,
+     "limit_deg": -90.0,
+     "first_hit": null
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   }
+  },
+  "right_knee": {
+   "new": {
+    "neg": {
+     "free_deg": -71.0,
+     "limit_deg": -90.0,
+     "first_hit": "hip_l@hip_l_2 | foot_right@ankle_right"
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -71.0,
+     "limit_deg": -90.0,
+     "first_hit": "hip_l@hip_l_2 | foot_right@ankle_right"
+    },
+    "pos": {
+     "free_deg": 90.0,
+     "limit_deg": 90.0,
+     "first_hit": null
+    }
+   }
+  },
+  "right_ankle": {
+   "new": {
+    "neg": {
+     "free_deg": -0.0,
+     "limit_deg": -90.0,
+     "first_hit": "xl330@leg_2 | ankle_right@ankle_right"
+    },
+    "pos": {
+     "free_deg": 0.0,
+     "limit_deg": 90.0,
+     "first_hit": "xl330@leg_2 | ankle_right@ankle_right"
+    }
+   },
+   "orig": {
+    "neg": {
+     "free_deg": -0.0,
+     "limit_deg": -90.0,
+     "first_hit": "xl330@leg_2 | ankle_right@ankle_right"
+    },
+    "pos": {
+     "free_deg": 0.0,
+     "limit_deg": 90.0,
+     "first_hit": "xl330@leg_2 | ankle_right@ankle_right"
+    }
+   }
+  }
+ }
+}

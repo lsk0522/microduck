@@ -1,0 +1,291 @@
+{
+ "configs": 187,
+ "nonmanifold": [],
+ "pairs": {
+  "xl330@leg | ankle_left@ankle_left": {
+   "config": "left_ankle=-90",
+   "new": 773.2,
+   "orig": 667.4
+  },
+  "xl330@leg_2 | ankle_right@ankle_right": {
+   "config": "right_ankle=90",
+   "new": 773.2,
+   "orig": 667.4
+  },
+  "left_shell@trunk_base | xl330@jaw_soft": {
+   "config": "walk10",
+   "new": 106.3,
+   "orig": 57.1
+  },
+  "np_f970@trunk_base | bottom_head_shell@jaw_soft": {
+   "config": "walk10",
+   "new": 761.5,
+   "orig": 718.5
+  },
+  "np_f970@trunk_base | top_head_shell@jaw_soft": {
+   "config": "walk10",
+   "new": 204.1,
+   "orig": 165.2
+  },
+  "hip_l@hip_l | foot_left@ankle_left": {
+   "config": "walk30",
+   "new": 421.9,
+   "orig": 387.5
+  },
+  "left_shell@trunk_base | top_head_shell@jaw_soft": {
+   "config": "walk10",
+   "new": 137.5,
+   "orig": 104.5
+  },
+  "right_shell@trunk_base | xl330@jaw_soft": {
+   "config": "walk10",
+   "new": 211.6,
+   "orig": 192.1
+  },
+  "right_shell@trunk_base | bottom_head_shell@jaw_soft": {
+   "config": "walk10",
+   "new": 304.8,
+   "orig": 288.0
+  },
+  "right_shell@trunk_base | seeed_bearing__configuration__22x16x4@upper_leg_right": {
+   "config": "walk16",
+   "new": 24.4,
+   "orig": 10.6
+  },
+  "hip_l@hip_l | sole_left@ankle_left": {
+   "config": "walk30",
+   "new": 244.0,
+   "orig": 232.7
+  },
+  "power_support@trunk_base | top_head_shell@jaw_soft": {
+   "config": "head_pitch=-90",
+   "new": 363.6,
+   "orig": 354.7
+  },
+  "seeed_bearing__configuration__22x16x4@hip_l | foot_left@ankle_left": {
+   "config": "walk48",
+   "new": 57.8,
+   "orig": 50.7
+  },
+  "right_shell@trunk_base | leg@leg_2": {
+   "config": "walk16",
+   "new": 17.8,
+   "orig": 10.9
+  },
+  "left_shell@trunk_base | speaker@jaw_soft": {
+   "config": "head_pitch=-90",
+   "new": 173.8,
+   "orig": 167.3
+  },
+  "left_shell@trunk_base | bottom_head_shell@jaw_soft": {
+   "config": "walk23",
+   "new": 465.9,
+   "orig": 459.7
+  },
+  "xl330@leg_2 | foot_right@ankle_right": {
+   "config": "right_ankle=-90",
+   "new": 206.8,
+   "orig": 201.3
+  },
+  "xl330@leg | foot_left@ankle_left": {
+   "config": "left_ankle=90",
+   "new": 206.8,
+   "orig": 201.4
+  },
+  "right_shell@trunk_base | speaker@jaw_soft": {
+   "config": "head_pitch=-90",
+   "new": 125.1,
+   "orig": 121.7
+  },
+  "seeed_bearing__configuration__22x16x4@hip_l | sole_left@ankle_left": {
+   "config": "walk48",
+   "new": 23.6,
+   "orig": 20.5
+  },
+  "right_shell@trunk_base | upper_leg_right@upper_leg_right": {
+   "config": "walk37",
+   "new": 7.7,
+   "orig": 4.9
+  },
+  "banana_pcb_locker@trunk_base | bottom_head_shell@jaw_soft": {
+   "config": "walk23",
+   "new": 94.1,
+   "orig": 92.3
+  },
+  "power_support@trunk_base | bottom_head_shell@jaw_soft": {
+   "config": "walk10",
+   "new": 182.6,
+   "orig": 180.9
+  },
+  "np_f970@trunk_base | leg@leg": {
+   "config": "left_hip_yaw=-25",
+   "new": 268.1,
+   "orig": 266.5
+  },
+  "np_f970@trunk_base | leg@leg_2": {
+   "config": "right_hip_yaw=25",
+   "new": 268.1,
+   "orig": 266.5
+  },
+  "upper_leg_rigidity_plate@upper_leg_left | foot_left@ankle_left": {
+   "config": "walk30",
+   "new": 6.1,
+   "orig": 4.5
+  },
+  "right_shell@trunk_base | xl330@upper_leg_right": {
+   "config": "walk20",
+   "new": 4.4,
+   "orig": 3.1
+  },
+  "hip_l@hip_l_2 | sole_right@ankle_right": {
+   "config": "right_knee=-90",
+   "new": 177.0,
+   "orig": 175.8
+  },
+  "hip_l@hip_l_2 | foot_right@ankle_right": {
+   "config": "right_knee=-90",
+   "new": 676.9,
+   "orig": 675.7
+  },
+  "seeed_bearing__configuration__22x16x4@yaw_roll_motion | bottom_head_shell@jaw_soft": {
+   "config": "walk59",
+   "new": 6.4,
+   "orig": 5.3
+  },
+  "leg@leg | foot_left@ankle_left": {
+   "config": "left_ankle=-90",
+   "new": 73.9,
+   "orig": 72.9
+  },
+  "leg@leg_2 | foot_right@ankle_right": {
+   "config": "right_ankle=90",
+   "new": 73.9,
+   "orig": 72.9
+  },
+  "seeed_bearing__configuration__22x16x4@neck_pitch | xl330@jaw_soft": {
+   "config": "head_roll=25",
+   "new": 1.1,
+   "orig": 0.7
+  },
+  "seeed_bearing__configuration__22x16x4@yaw_roll_motion | speaker@jaw_soft": {
+   "config": "walk59",
+   "new": 6.6,
+   "orig": 6.2
+  },
+  "np_f970@trunk_base | seeed_bearing__configuration__22x16x4@upper_leg_left": {
+   "config": "left_hip_yaw=-25",
+   "new": 1.5,
+   "orig": 1.2
+  },
+  "np_f970@trunk_base | seeed_bearing__configuration__22x16x4@upper_leg_right": {
+   "config": "right_hip_yaw=25",
+   "new": 1.5,
+   "orig": 1.2
+  },
+  "right_shell@trunk_base | jaw@jaw_soft": {
+   "config": "walk23",
+   "new": 1.3,
+   "orig": 1.1
+  },
+  "xl330@yaw_roll_motion | xl330@jaw_soft": {
+   "config": "head_roll=-25",
+   "new": 148.6,
+   "orig": 148.4
+  },
+  "hip_l@hip_l | ankle_left@ankle_left": {
+   "config": "left_knee=90",
+   "new": 110.9,
+   "orig": 110.8
+  },
+  "hip_l@hip_l_2 | ankle_right@ankle_right": {
+   "config": "right_knee=-90",
+   "new": 110.9,
+   "orig": 110.8
+  },
+  "power_support@trunk_base | leg@leg": {
+   "config": "left_hip_yaw=-25",
+   "new": 1.1,
+   "orig": 1.0
+  },
+  "power_support@trunk_base | leg@leg_2": {
+   "config": "right_hip_yaw=25",
+   "new": 1.1,
+   "orig": 1.0
+  },
+  "yaw_roll_motion@yaw_roll_motion | xl330@jaw_soft": {
+   "config": "head_roll=-25",
+   "new": 69.1,
+   "orig": 69.0
+  },
+  "leg@leg | ankle_left@ankle_left": {
+   "config": "left_ankle=-90",
+   "new": 62.1,
+   "orig": 62.1
+  },
+  "power_support@trunk_base | speaker@jaw_soft": {
+   "config": "head_pitch=-90",
+   "new": 21.6,
+   "orig": 21.6
+  },
+  "leg@leg_2 | ankle_right@ankle_right": {
+   "config": "right_ankle=-90",
+   "new": 19.4,
+   "orig": 19.4
+  },
+  "neck_pitch@neck_pitch | bottom_head_shell@jaw_soft": {
+   "config": "walk48",
+   "new": 3.0,
+   "orig": 3.0
+  },
+  "upper_leg_left@upper_leg_left | foot_left@ankle_left": {
+   "config": "walk49",
+   "new": 11.5,
+   "orig": 11.5
+  },
+  "upper_leg_rigidity_plate@upper_leg_left | sole_left@ankle_left": {
+   "config": "walk48",
+   "new": 4.2,
+   "orig": 4.2
+  },
+  "banana_pcb_locker@trunk_base | top_head_shell@jaw_soft": {
+   "config": "head_pitch=-90",
+   "new": 6.0,
+   "orig": 6.1
+  },
+  "upper_leg_left@upper_leg_left | sole_left@ankle_left": {
+   "config": "walk30",
+   "new": 2.2,
+   "orig": 2.3
+  },
+  "xl330@upper_leg_left | sole_left@ankle_left": {
+   "config": "walk48",
+   "new": 162.1,
+   "orig": 162.3
+  },
+  "xl330@upper_leg_left | foot_left@ankle_left": {
+   "config": "walk3",
+   "new": 73.7,
+   "orig": 74.1
+  },
+  "right_shell@trunk_base | top_head_shell@jaw_soft": {
+   "config": "head_pitch=-68",
+   "new": 1.1,
+   "orig": 1.6
+  },
+  "xl330@yaw2roll | foot_left@ankle_left": {
+   "config": "walk44",
+   "new": 2.3,
+   "orig": 3.4
+  },
+  "xl330@upper_leg_right | foot_right@ankle_right": {
+   "config": "right_ankle=90",
+   "new": 14.1,
+   "orig": 19.1
+  },
+  "right_shell@trunk_base | upper_leg_rigidity_plate@upper_leg_right": {
+   "config": "walk16",
+   "new": 76.0,
+   "orig": 86.3
+  }
+ }
+}

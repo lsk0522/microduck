@@ -1,0 +1,318 @@
+{
+ "joints": {
+  "left_hip_yaw": [
+   -25.0,
+   30.0
+  ],
+  "left_hip_roll": [
+   -22.0,
+   22.0
+  ],
+  "left_hip_pitch": [
+   -90.0,
+   90.0
+  ],
+  "left_knee": [
+   -90.0,
+   90.0
+  ],
+  "left_ankle": [
+   -90.0,
+   90.0
+  ],
+  "neck_pitch": [
+   -90.0,
+   60.0
+  ],
+  "head_pitch": [
+   -90.0,
+   90.0
+  ],
+  "head_yaw": [
+   -170.0,
+   170.0
+  ],
+  "head_roll": [
+   -25.0,
+   25.0
+  ],
+  "right_hip_yaw": [
+   -30.0,
+   25.0
+  ],
+  "right_hip_roll": [
+   -22.0,
+   22.0
+  ],
+  "right_hip_pitch": [
+   -90.0,
+   90.0
+  ],
+  "right_knee": [
+   -90.0,
+   90.0
+  ],
+  "right_ankle": [
+   -90.0,
+   90.0
+  ]
+ },
+ "sweep_worst": {
+  "jaw_soft|trunk_base": [
+   -46.93,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_right|jaw_soft": [
+   -36.84,
+   "random",
+   "",
+   ""
+  ],
+  "jaw_soft|leg_2": [
+   -34.09,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|jaw_soft": [
+   -32.37,
+   "random",
+   "left_foot_collision",
+   ""
+  ],
+  "jaw_soft|upper_leg_left": [
+   -31.51,
+   "random",
+   "",
+   ""
+  ],
+  "jaw_soft|leg": [
+   -29.82,
+   "random",
+   "",
+   ""
+  ],
+  "trunk_base|yaw_roll_motion": [
+   -26.75,
+   "random",
+   "",
+   ""
+  ],
+  "jaw_soft|upper_leg_right": [
+   -24.67,
+   "random",
+   "",
+   ""
+  ],
+  "leg|trunk_base": [
+   -23.84,
+   "random",
+   "",
+   ""
+  ],
+  "trunk_base|upper_leg_left": [
+   -23.05,
+   "random",
+   "",
+   ""
+  ],
+  "leg_2|trunk_base": [
+   -22.25,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_right|upper_leg_right": [
+   -22.11,
+   "random",
+   "",
+   ""
+  ],
+  "trunk_base|upper_leg_right": [
+   -21.9,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|upper_leg_left": [
+   -21.76,
+   "random",
+   "",
+   ""
+  ],
+  "jaw_soft|yaw2roll": [
+   -21.56,
+   "random",
+   "",
+   ""
+  ],
+  "bearing_roll|jaw_soft": [
+   -18.9,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|ankle_right": [
+   -16.94,
+   "random",
+   "left_foot_collision",
+   "right_foot_collision"
+  ],
+  "hip_l_2|jaw_soft": [
+   -16.11,
+   "random",
+   "",
+   ""
+  ],
+  "hip_l|jaw_soft": [
+   -15.16,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|hip_l": [
+   -13.15,
+   "random",
+   "",
+   "left_foot_collision"
+  ],
+  "ankle_right|hip_l_2": [
+   -13.15,
+   "random",
+   "",
+   "right_foot_collision"
+  ],
+  "ankle_right|trunk_base": [
+   -12.72,
+   "random",
+   "",
+   "right_foot_collision"
+  ],
+  "ankle_left|trunk_base": [
+   -12.32,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|leg_2": [
+   -8.81,
+   "random",
+   "left_foot_collision",
+   ""
+  ],
+  "jaw_soft|neck": [
+   -7.92,
+   "random",
+   "",
+   ""
+  ],
+  "neck_pitch|trunk_base": [
+   -7.44,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|yaw2roll": [
+   -6.52,
+   "random",
+   "",
+   "left_foot_collision"
+  ],
+  "ankle_right|bearing_roll": [
+   -6.3,
+   "random",
+   "",
+   "right_foot_collision"
+  ],
+  "hip_l_2|leg_2": [
+   -5.95,
+   "random",
+   "",
+   ""
+  ],
+  "hip_l|leg": [
+   -5.93,
+   "random",
+   "",
+   ""
+  ],
+  "ankle_left|yaw_roll_motion": [
+   -5.19,
+   "random",
+   "left_foot_collision",
+   ""
+  ],
+  "ankle_right|yaw_roll_motion": [
+   -5.09,
+   "random",
+   "",
+   "right_foot_collision"
+  ],
+  "ankle_right|leg": [
+   -4.94,
+   "random",
+   "",
+   "right_foot_collision"
+  ],
+  "ankle_left|neck_pitch": [
+   -4.3,
+   "random",
+   "left_foot_collision",
+   ""
+  ],
+  "leg_2|yaw_roll_motion": [
+   -3.83,
+   "random",
+   "",
+   ""
+  ],
+  "leg|yaw2roll": [
+   -3.36,
+   "random",
+   "",
+   ""
+  ],
+  "bearing_roll|leg_2": [
+   -2.83,
+   "random",
+   "",
+   ""
+  ],
+  "hip_l_2|trunk_base": [
+   -2.02,
+   "right_hip_roll=-22",
+   "",
+   ""
+  ],
+  "hip_l|trunk_base": [
+   -2.02,
+   "left_hip_roll=22",
+   "",
+   ""
+  ],
+  "ankle_left|neck": [
+   -0.58,
+   "random",
+   "left_foot_collision",
+   ""
+  ]
+ },
+ "walk_range_worst": {
+  "jaw_soft|trunk_base": -21.15,
+  "ankle_left|upper_leg_left": -14.78,
+  "ankle_left|hip_l": -12.62,
+  "trunk_base|upper_leg_right": -7.33,
+  "trunk_base|upper_leg_left": -6.79,
+  "leg_2|trunk_base": -5.15,
+  "leg|trunk_base": -5.13,
+  "ankle_left|yaw2roll": -3.18,
+  "jaw_soft|neck": -0.5
+ },
+ "dynamic": {
+  "fell": true,
+  "min_trunk_z": 0.03260458794152375,
+  "self_contacts": {}
+ }
+}

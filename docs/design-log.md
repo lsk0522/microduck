@@ -125,3 +125,14 @@
 - 머리 아래 파란 빗살 = bottom_head_shell 문서의 스케치 253개(예전 단면 추적용)가 켜져 있어 프로파일이 파랗게 보인 것. 형상 문제 아님
 - bottom_head_shell(253)·left_shell(4)·right_shell(4) 스케치 숨김 후 저장, 어셈블리 v21: 켜진 스케치 0, 화면에 안 그려지는 몸체 0
 - 앞·오른쪽 옆에서 확인: 몸통 좌우 셸 모두 보임 (앞 가운데 열린 곳은 원작과 같음)
+
+## 2026-11-03 관절·시뮬·케이블 검증, 색, 고해상도 STL
+
+- 관절 14/14 PASS. 정확 메시 충돌: 관절 14개 무충돌 범위가 원본과 완전히 같음 (새 간섭 0). 동역학: 정책 없는 STAND는 새·원본 모두 0.9 s에 넘어짐(정책 필요), 몸끼리 접촉 0. 케이블: 플러그·경로 원본 대비 차이 ≤ 4%p / +4 mm. hat→34만 250 mm 권장. 상세: `cad/redesign/dynamixel/v1.0/verify/sim_cable_report.md`.
+- 색: 제품 사진 기준. 크림(윗머리·몸통 셸·허벅지), 주황(부리 jaw·jaw_soft·soft_mouth_top·아래 머리 셸·발목), 노랑(눈 링·발·발바닥), 회색(얼굴판·hip_l·정강이·전원 지지대·banana), 진회색(neck_pitch), 검정(yaw2roll·yaw_roll_motion·motor_support·렌즈 홀더·XL330). Fusion 외관 "MD 크림/주황/노랑/회색/진회색/검정", MJCF material rgba, BOM 재질 칸에 반영.
+- parts/*/*.stl 재출력: 사용자 지정 메시(곡면 편차 0.02 mm, 법선 편차 4°) — 이전 High(0.05 mm, 10°)보다 매끄러움. MJCF assets는 시뮬 속도 때문에 이전 메시 유지.
+- 남은 것: bottom_head_shell 뒤쪽 계단(층) 면 — 메시 해상도가 아니라 형상 자체라 재모델링 필요.
+
+### 계획 대화에 요청
+- bom/BOM.csv 출력 색: 크림·주황·노랑·회색·검정 ABS, 고무(주황·노랑) — dynamixel v1.0 BOM 참고.
+- docs/assembly OPERATION.md 3절: hat→34 케이블 250 mm, 목 30·31·허벅지 12/22 케이블은 조립 전에 꽂기.
