@@ -43,13 +43,13 @@
   "neck_1"
  ],
  "patched_geoms": {
+  "robot_walk.xml": 1,
+  "robot_walk_backlash.xml": 1,
   "robot_allcollisions.xml": 2,
+  "robot_groundcontact_backlash.xml": 1,
+  "robot_groundcontact_rollers_backlash.xml": 1,
   "robot_allcollisions_backlash.xml": 2,
   "robot_groundcontact.xml": 1,
-  "robot_groundcontact_backlash.xml": 1,
-  "robot_groundcontact_rollers.xml": 1,
-  "robot_groundcontact_rollers_backlash.xml": 1,
-  "robot_walk.xml": 1,
-  "robot_walk_backlash.xml": 1
+  "robot_groundcontact_rollers.xml": 1
  }
 }
