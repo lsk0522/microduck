@@ -59,6 +59,7 @@
 - ~~다 끝나면 참고 메시(ref_*, 숨김 70개) 삭제 → 어셈블리에 메시 0~~ (11-03 완료)
 
 ## 주의 (2026-11-02 발견)
+- (2026-11-03) 원작 비교만으로는 '화면에 안 그려지는 몸체'를 못 잡음 → 설치 뒤 어셈블리에서 몸체마다 meshManager.displayMeshes.count > 0 확인. right_shell 이 0 이라 가슴이 비어 보였음 → 깨끗한 복사본으로 교체 (v3)
 - 어셈블리가 연 부품 문서(참조로 열린 것)는 읽기 전용 → API save()가 True를 돌려줘도 클라우드에 안 올라감.
   10-31~11-01의 neck_pitch·top_head_shell 재모델링도 그래서 저장 안 돼 있었음 → 11-02 어셈블리를 닫고 부품 문서를 따로 열어 다시 만들고 저장 (neck_pitch v3, top_head_shell v2, left_shell v3, right_shell v2, 어셈블리 v11)
 - 순서: 어셈블리 닫기 → `run_install.py` (PART) → `run_asm_update.py` (참조 최신화 + 저장). MCP 실행 사이에 전역 변수가 남으므로 스크립트 시작에서 초기화

@@ -1,0 +1,37 @@
+doc 1_microduck_hobby_servo_v1.0 visible True
+doc 1_microduck_mg996r_v1.0 visible True
+doc face_part visible True
+doc soft_mouth_top visible True
+doc motor_support visible True
+doc foot_left visible True
+doc ankle_right visible True
+doc jaw_soft visible True
+doc upper_leg_right visible True
+doc sole_left visible True
+doc banana_pcb_locker visible True
+doc left_shell visible True
+doc noenoeil visible True
+doc right_shell visible True
+disp 0
+body mesh 18432
+timeline 189 health []
+doc m12_lens_holder visible True
+doc foot_right visible True
+doc sole_right visible True
+doc top_head_shell visible True
+doc yaw2roll visible True
+doc jaw visible True
+doc ankle_left visible True
+doc leg visible True
+doc power_support visible True
+doc hip_l visible True
+doc neck_pitch visible True
+doc yaw_roll_motion visible True
+doc upper_leg_left visible True
+doc bottom_head_shell visible True
+doc 1_microduck_dynamixel_v1.0 visible True
+doc bottom_head_shell visible True
+doc right_shell visible True
+disp 0
+body mesh 18432
+timeline 189 health []
