@@ -399,18 +399,18 @@
  {
   "part": "bottom_head_shell",
   "vol_ref": 23796.3,
-  "vol_new": 23795.8,
-  "dvol": -0.0,
+  "vol_new": 23770.8,
+  "dvol": -0.11,
   "p50": 0.001,
-  "p95": 0.028,
-  "max": 0.37,
+  "p95": 0.026,
+  "max": 0.62,
   "hole_sections": 54,
   "hole_ok": 54,
   "hole_worst_c": 0.002,
   "hole_worst_r": 0.008,
   "miss": [],
   "nmiss": 0,
-  "faces": 167496
+  "faces": 136696
  },
  {
   "part": "banana_pcb_locker",

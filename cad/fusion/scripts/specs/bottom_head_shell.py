@@ -1,6 +1,6 @@
 """bottom_head_shell 피처 사양 (직접 그리기, 2026-11-02).
-- 컵: z 단면 로프트(바깥, 앞 직선 + 모서리 + 스플라인) ∩ 앞벽 곡선(x 돌출) ∩ 바닥 곡면(jaw 바깥 바닥과 같은 면)
-       − 안쪽(원작 단면에서 법선 방향으로 잰 안쪽 면 단면 로프트 ∩ 앞벽 안쪽 곡선 ∩ jaw 안쪽 바닥면)
+- 컵 (2026-11-03 다시): 위 단면 3° 구배 프리즘 ∩ 앞벽 곡선(x 돌출) ∩ 바닥 곡면(jaw 바깥 바닥과 같은 면) → 바닥 둘레 R5 모깎기
+       − 안쪽(안쪽 위 단면 3° 프리즘 ∩ 앞벽 안쪽 곡선 ∩ jaw 안쪽 바닥면 → R3.3)  — 예전 z 단면 로프트 18+15 개(3개씩 나눔) 대신
 - 옆 턱(jaw 팔 받침, x>27): y 단면 로프트로 바꿔 끼움 (바깥 공기 A, 안쪽 공기 C, 오른쪽을 재고 왼쪽은 거울)
 - 앞 쟁반: z 0 윤곽 3° 프리즘 − 기울어진(0.5054°) 치마 아랫면 − 판 아래 주머니 − 판 윗면 위, 앞 립 7.6°, 홈
 - 립(높이 1.5), 경첩 자리 R9.48, 안쪽 벽(위 z 0.2 폭 1.02, 아래로 2° 구배), 보스·구멍, 틀(원통 R9.5/R11.1 자리), 왼쪽 집게, 바닥 R20 평면·R21.7 받침, 큰 구멍
@@ -15,10 +15,13 @@ CR = [(0, -11.024), (10, -10.996), (20, -10.911), (28, -10.779), (34, -10.629), 
 ptop = lambda y: -0.021 + SL * (y + 40)        # 판 윗면 (y −54 ~ −23.3)
 pbot = lambda y: ptop(y) - 1.70                # 판 아랫면
 zsk = lambda y: -3.79 + SL * (y + 59.7)        # 치마 아랫면
-def cloop(s):
-    """앞 직선(모서리 xc) + 모서리→뒤 스플라인 + 거울"""
+def cloop(s, ext=0.0):
+    """앞 직선(모서리 xc) + 모서리→뒤 스플라인 + 거울. ext > 0 이면 앞을 ext 만큼 내밂 (앞벽 곡선으로 자를 때: 구배가 앞면을 끌어들이지 않게)"""
     h = [tuple(p) for p in s['pts']]; yf = s['yf']
     l = [(-x, y) for x, y in h[::-1]]
+    if ext:
+        x0 = h[0][0]
+        return Pth((0.0, yf - ext), [('L', (x0, yf - ext)), ('L', h[0]), ('S', h[1:]), ('S', l[1:]), ('L', (-x0, yf - ext)), ('L', (0.0, yf - ext))])
     return Pth((0.0, yf), [('L', h[0]), ('S', h[1:]), ('S', l[1:]), ('L', (0.0, yf))])
 def crown(nm, d):
     crv = [(-x, z - d) for x, z in CR[::-1]] + [(x, z - d) for x, z in CR[1:]]
@@ -43,13 +46,17 @@ RAMP = [(-21.85, zsk(-21.85)), (-21.15, -3.43), (-20.46, -3.33), (-19.78, -3.17)
 UP_CUT = Pth((-70, -10), [('L', (-70, zsk(-70))), ('L', RAMP[0]), ('S', RAMP[1:]), ('L', (-15.33, 2)), ('L', (70, 2)), ('L', (70, -10))])
 # 윗면 위 자르기: y < −55.5 는 0, −55.5 ~ −23.3 은 판 윗면(기울어짐), 그 뒤는 0 (벽 윗면)
 TOP_CUT = P((-70, 0.0), (-55.5, 0.0), (-55.5, ptop(-55.5)), (-23.3, ptop(-23.3)), (-23.3, 0.0), (70, 0.0), (70, 5), (-70, 5))
+# 컵 = 위 단면(z −0.2) 3° 구배 프리즘 ∩ 앞벽 곡선 ∩ 바닥 곡면 → 바닥 둘레 R5 모깎기 (원작: 옆·뒤 어디서나 구배 3° + R5)
+#      안쪽 = 안쪽 위 단면 3° 프리즘 ∩ 앞벽 안쪽 ∩ 안쪽 바닥 → R3.3 (= 5 − 1.7)
+_CO = SEC['cup'][-1]; _CI = SEC['cupin'][-1]
+_BOT = lambda zt: (lambda p, q: p[2] < zt and q[2] < zt and not (p[1] < -18.0 and q[1] < -18.0))   # 바닥 둘레 (앞벽 아래 모서리 뺌)
 OPS = [
-    dict(op='zloft', name='cup', chunk=3, secs=[(s['z'], cloop(s)) for s in SEC['cup']], mode='new', target='main'),
-    dict(op='ext', name='cup_dn', ax='z', a0=-14, a1=SEC['cup'][0]['z'], region=cloop(SEC['cup'][0]), mode='join', target='main'),
-    dict(op='ext', name='cup_up', ax='z', a0=SEC['cup'][-1]['z'], a1=0.0, region=cloop(SEC['cup'][-1]), mode='join', target='main'),
+    dict(op='prism', name='cup', ax='z', region=cloop(_CO, 1.0), zref=_CO['z'], z0=_CO['z'], z1=-14.0, slope=T3, mode='new', target='main'),
+    dict(op='ext', name='cup_up', ax='z', a0=_CO['z'], a1=0.0, region=cloop(_CO), mode='join', target='main'),
     dict(op='ext', name='front_o', ax='x', a0=-50, a1=50, region=FRONT_O, mode='int', target='main'),
 ] + crown('cr_o', 1.8) + [
     dict(op='comb', target='main', tool='cr_o', mode='int'),
+    dict(op='fillet', name='cup_R5', target='main', r=5.0, edge=_BOT(-9.0)),
     dict(op='prism', name='up', ax='z', region=Z0, zref=0.3, z0=0.3, z1=-3.9, slope=T3, mode='new', target='up'),
     dict(op='ext', name='up_cut', ax='x', a0=-50, a1=50, region=UP_CUT, mode='cut', target='up'),
     dict(op='ext', name='top_cut', ax='x', a0=-50, a1=50, region=TOP_CUT, mode='cut', target='up'),
@@ -59,12 +66,12 @@ OPS = [
     dict(op='ext', name='groove', ax='z', a0=-1.0, a1=1.0, region=rect(-44.03, -55.5, 44.03, -54.0), mode='cut', target='up'),
     dict(op='ext', name='lip_front', ax='x', a0=-50, a1=50, region=P((-60.25 - 0.134 * 0.5, 0.5), (-59.74 + 0.134 * 0.5, -4.29), (-70, -4.29), (-70, 0.5)), mode='cut', target='up'),
     dict(op='comb', target='main', tool='up', mode='join'),
-    dict(op='zloft', name='cav', chunk=3, secs=[(s['z'], cloop(s)) for s in SEC['cupin']], mode='new', target='cav'),
-    dict(op='ext', name='cav_dn', ax='z', a0=-14, a1=SEC['cupin'][0]['z'], region=cloop(SEC['cupin'][0]), mode='join', target='cav'),
-    dict(op='ext', name='cav_up', ax='z', a0=SEC['cupin'][-1]['z'], a1=10, region=cloop(SEC['cupin'][-1]), mode='join', target='cav'),
+    dict(op='prism', name='cav', ax='z', region=cloop(_CI, 1.0), zref=_CI['z'], z0=_CI['z'], z1=-14.0, slope=T3, mode='new', target='cav'),
+    dict(op='ext', name='cav_up', ax='z', a0=_CI['z'], a1=10, region=cloop(_CI), mode='join', target='cav'),
     dict(op='ext', name='front_i', ax='x', a0=-50, a1=50, region=FRONT_I, mode='int', target='cav'),
 ] + crown('cr_i', 0.1) + [
     dict(op='comb', target='cav', tool='cr_i', mode='int'),
+    dict(op='fillet', name='cav_R3', target='cav', r=3.3, edge=_BOT(-8.0)),
 ]
 # 립: z 0 윤곽에서 안으로 0.96 ~ 1.72 띠 (앞 y −54 ~ −17.36, 뒤 y 5.5 ~), 가운데(y −17.36 ~ −5) 는 직선 띠, 끝은 경첩 자리 R9.48 로 잘림
 _lo, _hi = SEC['lip']['lo'], SEC['lip']['hi']
