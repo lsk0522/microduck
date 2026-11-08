@@ -415,18 +415,18 @@
  {
   "part": "banana_pcb_locker",
   "vol_ref": 459.7,
-  "vol_new": 459.1,
-  "dvol": -0.12,
+  "vol_new": 459.6,
+  "dvol": -0.0,
   "p50": 0.0,
-  "p95": 0.012,
-  "max": 0.03,
+  "p95": 0.001,
+  "max": 0.01,
   "hole_sections": 2,
   "hole_ok": 2,
-  "hole_worst_c": 0.001,
-  "hole_worst_r": 0.014,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
   "miss": [],
   "nmiss": 0,
-  "faces": 716
+  "faces": 892
  },
  {
   "part": "yaw_roll_motion",
