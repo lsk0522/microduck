@@ -431,18 +431,18 @@
  {
   "part": "yaw_roll_motion",
   "vol_ref": 4555.8,
-  "vol_new": 4562.6,
-  "dvol": 0.15,
+  "vol_new": 4557.1,
+  "dvol": 0.03,
   "p50": 0.0,
-  "p95": 0.009,
-  "max": 0.47,
+  "p95": 0.005,
+  "max": 0.01,
   "hole_sections": 39,
   "hole_ok": 39,
-  "hole_worst_c": 0.001,
-  "hole_worst_r": 0.009,
+  "hole_worst_c": 0.0,
+  "hole_worst_r": 0.001,
   "miss": [],
   "nmiss": 0,
-  "faces": 7034
+  "faces": 5786
  },
  {
   "part": "foot_right",
