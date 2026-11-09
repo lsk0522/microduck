@@ -73,6 +73,7 @@ OPS = [
     dict(op='comb', target='cav', tool='cr_i', mode='int'),
     dict(op='fillet', name='cav_R3', target='cav', r=3.3, edge=_BOT(-8.0)),
 ]
+_N_CUPCAV = len(OPS)
 # 립: z 0 윤곽에서 안으로 0.96 ~ 1.72 띠 (앞 y −54 ~ −17.36, 뒤 y 5.5 ~), 가운데(y −17.36 ~ −5) 는 직선 띠, 끝은 경첩 자리 R9.48 로 잘림
 _lo, _hi = SEC['lip']['lo'], SEC['lip']['hi']
 def _band(o, i):
@@ -91,26 +92,73 @@ OPS += [
     dict(op='ext', name='hinge_r', ax='x', a0=38.8, a1=50, region=C(0, 7.52, 9.48), mode='cut', target='main'),
     dict(op='ext', name='hinge_l', ax='x', a0=-50, a1=-39.55, region=C(0, 7.52, 9.48), mode='cut', target='main'),
 ]
-# 옆 턱(jaw 팔 받침) 상자: z 단면 로프트 대신 y 단면 로프트 (바깥 공기 A, 안쪽 공기 C) — 오른쪽 재고 왼쪽은 거울
-SIDE = SEC['side']
-def _ap(d, x0, z1):
-    ch = [tuple(p) for p in d['A']]; return Pth(ch[0], [('S', ch[1:]), ('L', (44.0, z1)), ('L', (44.0, -14.0)), ('L', (x0, -14.0))])
-def _cp(d, x0, z1):
-    ch = [tuple(p) for p in d['C']]; return Pth(ch[0], [('S', ch[1:]), ('L', (x0, z1))])
-for _k in ('b1', 'b2'):
-    _b = SIDE[_k]; _x0 = _b['x0']; _z1 = _b['z1']; _s = _b['secs']; _ya, _yb = _s[0]['y'], _s[-1]['y']
-    for _sd, _f in (('r', lambda R: R), ('l', mirror_u)):
-        _n = f'{_k}{_sd}'
-        OPS += [
-            dict(op='ext', name='sb_' + _n, ax='y', a0=_ya, a1=_yb, region=_f(rect(_x0, -14.0, 44.0, _z1)), mode='new', target='sb'),
-            dict(op='comb', target='main', tool='sb', mode='cut', keep=True),
-            dict(op='comb', target='cav', tool='sb', mode='cut', keep=True),
-            dict(op='loft', ax='y', name='sA_' + _n, chunk=3, secs=[(d['y'], _f(_ap(d, _x0, _z1))) for d in _s], mode='new', target='sA'),
-            dict(op='loft', ax='y', name='sC_' + _n, chunk=3, secs=[(d['y'], _f(_cp(d, _x0, _z1))) for d in _s if 'C' in d], mode='new', target='sC'),
-            dict(op='comb', target='sb', tool='sA', mode='cut'),
-            dict(op='comb', target='main', tool='sb', mode='join'),
-            dict(op='comb', target='cav', tool='sC', mode='join'),
-        ]
+# 옆 턱(jaw 팔 받침) 홈 (2026-11-09 다시): 컵 바닥 둘레가 계단 곡선 S 바깥(x > S)에서 2.1 mm 올라가고 모서리가 R5 → R2.9 인 홈.
+#   바깥 = 컵과 같은 3° 프리즘 ∩ 앞벽 ∩ 바닥 곡면(2.1 올림) → R2.9 (c2),  안쪽 = 안쪽 프리즘 ∩ 앞벽 안쪽 ∩ 안쪽 바닥(2.1 올림) → R1.25 (c2i)
+#   홈 자리(S 바깥 ∩ 옆 상자)에서 몸체는 c2 밖을, 안쪽 공간(cav)은 c2i 밖을 덜어냄. 계단 곡선 = 원작 바닥 높이 지도 −11.2 등고선 (tools/feat/bhs/groove.py)
+#   예전: y 단면 26개 로프트를 3개씩 이어 줄무늬 면이 생김
+_SO = [tuple(p) for p in [[25.5, -20.78], [28.564, -19.929], [30.68, -18.103], [32.132, -15.747], [33.08, -13.174], [33.682, -10.475], [34.094, -7.697], [34.459, -4.886], [34.782, -2.07], [35.025, 0.731], [35.228, 3.498], [35.538, 6.212], [36.272, 8.854], [37.15, 10.3], [38.1, 11.1], [39.5, 11.5], [41.8, 11.65]]]   # 바깥 계단 (원작 바닥 높이 −11.2 등고선, 뒤 끝 y 11.6 에서 벽으로)
+_SI = [tuple(p) for p in [[25.741, -20.823], [27.232, -19.837], [28.412, -18.484], [29.468, -17.031], [30.405, -15.5], [31.075, -13.844], [31.471, -12.093], [31.849, -10.337], [32.192, -8.575], [32.47, -6.8], [32.678, -5.016], [32.874, -3.23], [33.053, -1.443], [33.217, 0.346], [33.34, 2.138], [33.398, 3.933], [33.434, 5.729], [34.25, 8.3], [34.9, 9.8], [35.6, 10.9], [36.6, 12.0], [37.15, 13.0], [37.4, 14.2], [37.6, 15.5]]]   # 안쪽 계단 (C 단면 −9.55 교점; y ≤ 6 은 R2.8 둥글림 만큼 0.5 바깥으로). 뒤 끝을 벽으로 돌리면 R2.8 모깎기가 안 됨
+G_O = Pth(_SO[0], [('S', _SO[1:]), ('L', (46.0, _SO[-1][1])), ('L', (46.0, -23.0)), ('L', (_SO[0][0], -23.0)), ('L', _SO[0])])
+G_I = Pth(_SI[0], [('S', _SI[1:]), ('L', (46.0, _SI[-1][1])), ('L', (46.0, -23.0)), ('L', (_SI[0][0], -23.0)), ('L', _SI[0])])
+_BX1 = rect(31.2, -15.4, 44.0, 14.0); _BX2 = rect(27.0, -21.9, 44.0, -15.4)    # 원작에서 홈이 있는 상자 (z 위 끝 −4 / −7.5)
+_BX1I = rect(30.0, -15.4, 44.0, 12.9)                                          # 안쪽: y −15.4 에서 계단 x 30.4 라 조금 넓힘, 원작 안쪽 홈은 y 12.9 근처에서 끝남
+# 홈 바닥 (y z 단면, x 로 돌출 후 y 축 둘레로 2.29° 기울임 = x 로 0.04/mm 올라감): y ≤ 0 은 0.5054° 기울어진 직선, y > 0 은 R18 로 올라감 (홈 뒤 끝이 벽 쪽으로 감아 오름)
+_FZ0, _FR, _FT = -9.90, 18.0, 0.0400          # x 37.5 에서 y 0 바닥 높이, 뒤 끝 곡률 반지름, x 기울기 (원작 바닥 높이 지도에서 잼)
+def _floor(dz, R):
+    z0 = _FZ0 + dz; ye = 15.0                # 끝(z −1.85)이 컵 윗면 아래여야 바닥 둘레 모서리가 한 줄로 이어짐
+    a = lambda y: z0 + R - _m.sqrt(R * R - y * y)
+    return Pth((-30.0, z0 - SL * 30.0), [('L', (0.0, z0)), ('A', (ye / 2, a(ye / 2)), (ye, a(ye))), ('L', (ye, 30.0)), ('L', (-30.0, 30.0)), ('L', (-30.0, z0 - SL * 30.0))])
+_FT_DEG = _m.degrees(_m.atan(_FT))
+# 안쪽 바닥: y ≤ 9 은 바깥 바닥 + 1.7 (같은 꼴), 그 뒤는 −5 근처에서 눕는다 (원작 C 단면에서 잼)
+_FLI = [(3.0, -7.93), (5.0, -7.42), (7.0, -6.62), (9.0, -5.55), (10.5, -5.15), (12.0, -5.0), (14.0, -4.93), (16.0, -4.9)]
+def _floor_i():
+    z0 = -8.22
+    return Pth((-30.0, z0 - SL * 30.0), [('L', (0.0, z0)), ('S', [(1.5, z0 + 0.06)] + _FLI), ('L', (16.0, 30.0)), ('L', (-30.0, 30.0)), ('L', (-30.0, z0 - SL * 30.0))])
+def _edge_bot(sg):
+    """바닥 둘레 모서리 (윗면 z −0.2·바닥 몸체 끝면 y 15·16·x 10 끝면·앞벽 아래 모서리 뺌)"""
+    return lambda p, q: (p[2] < -1.0 and q[2] < -1.0 and (sg * p[0] > 11.0 or sg * q[0] > 11.0)
+                         and not (p[1] < -18.0 and q[1] < -18.0) and not (p[1] > 14.9 and q[1] > 14.9))
+def _dpoly(pt, poly):
+    best = 1e9
+    for (ax_, ay_), (bx_, by_) in zip(poly[:-1], poly[1:]):
+        dx, dy = bx_ - ax_, by_ - ay_; L2 = dx * dx + dy * dy or 1e-12
+        t = max(0.0, min(1.0, ((pt[0] - ax_) * dx + (pt[1] - ay_) * dy) / L2))
+        best = min(best, _m.hypot(pt[0] - ax_ - t * dx, pt[1] - ay_ - t * dy))
+    return best
+def _edge_step(poly, sg, zmin, tol=0.35):
+    """계단 곡선 위(평면 거리 < tol)에 두 끝이 있고 z > zmin 인 모서리 = 홈 도구의 계단 윗모서리"""
+    pl = [(sg * x, y) for x, y in poly] + [(sg * 46.0, poly[-1][1])]
+    return lambda p, q: p[2] > zmin and q[2] > zmin and not (p[2] > -4.05 and q[2] > -4.05) and _dpoly(p, pl) < tol and _dpoly(q, pl) < tol
+GROOVE = []
+for _sd, _sg, _f in (('r', 1.0, lambda R: R), ('l', -1.0, mirror_u)):
+    GROOVE += [
+        # 바깥 기준 몸체 c2: 컵 프리즘 ∩ 앞벽 ∩ 홈 바닥 → 바닥 둘레 R2.9
+        dict(op='prism', name='c2_' + _sd, ax='z', region=cloop(_CO, 1.0), zref=_CO['z'], z0=_CO['z'], z1=-14.0, slope=T3, mode='new', target='c2'),
+        dict(op='ext', name='c2_front_' + _sd, ax='x', a0=-50, a1=50, region=FRONT_O, mode='int', target='c2'),
+        dict(op='ext', name='fl_' + _sd, ax='x', a0=min(10.0 * _sg, 50.0 * _sg), a1=max(10.0 * _sg, 50.0 * _sg), region=_floor(0.0, _FR), mode='new', target='fl'),
+        dict(op='rot', name='fl_tilt_' + _sd, target='fl', ax='y', at=(37.5 * _sg, _FZ0), deg=-_sg * _FT_DEG),
+        dict(op='comb', target='c2', tool='fl', mode='int'),
+        dict(op='fillet', name='c2_R2.9_' + _sd, target='c2', r=2.9, edge=_edge_bot(_sg)),
+        # 안쪽 기준 몸체 c2i: 안쪽 프리즘 ∩ 앞벽 안쪽 ∩ 홈 안쪽 바닥(_floor_i) → R1.25
+        dict(op='prism', name='c2i_' + _sd, ax='z', region=cloop(_CI, 1.0), zref=_CI['z'], z0=_CI['z'], z1=-14.0, slope=T3, mode='new', target='c2i'),
+        dict(op='ext', name='c2i_front_' + _sd, ax='x', a0=-50, a1=50, region=FRONT_I, mode='int', target='c2i'),
+        dict(op='ext', name='fli_' + _sd, ax='x', a0=min(10.0 * _sg, 50.0 * _sg), a1=max(10.0 * _sg, 50.0 * _sg), region=_floor_i(), mode='new', target='fli'),
+        dict(op='rot', name='fli_tilt_' + _sd, target='fli', ax='y', at=(37.5 * _sg, _FZ0), deg=-_sg * _FT_DEG),
+        dict(op='comb', target='c2i', tool='fli', mode='int'),
+        dict(op='fillet', name='c2i_R1.25_' + _sd, target='c2i', r=1.25, edge=_edge_bot(_sg)),
+        # 홈 자리(S 바깥 ∩ 상자)에서 몸체는 c2 밖, 안쪽 공간은 c2i 밖을 덜어냄
+        dict(op='ext', name='go1_' + _sd, ax='z', a0=-14.0, a1=-4.0, region=_f(I(G_O, _BX1)), mode='new', target='go'),
+        dict(op='ext', name='go2_' + _sd, ax='z', a0=-14.0, a1=-7.5, region=_f(I(G_O, _BX2)), mode='join', target='go'),
+        dict(op='comb', target='go', tool='c2', mode='cut'),
+        dict(op='fillet', name='go_R1_' + _sd, target='go', r=1.0, edge=_edge_step(_SO, _sg, -11.5)),          # 계단 위 오목 R1 (원작)
+        dict(op='comb', target='main', tool='go', mode='cut'),
+        dict(op='ext', name='gi1_' + _sd, ax='z', a0=-14.0, a1=-4.0, region=_f(I(G_I, _BX1I)), mode='new', target='gi'),
+        dict(op='ext', name='gi2_' + _sd, ax='z', a0=-14.0, a1=-7.5, region=_f(I(G_I, _BX2)), mode='join', target='gi'),
+        dict(op='comb', target='gi', tool='c2i', mode='cut'),
+        dict(op='fillet', name='gi_R2.8_' + _sd, target='gi', r=2.8, edge=_edge_step(_SI, _sg, -10.0)),        # 안쪽 계단 위 볼록 R2.8 (원작)
+        dict(op='comb', target='cav', tool='gi', mode='cut'),
+    ]
+OPS += GROOVE
 # 옆 벽 위쪽 오목 자리 (쟁반 옆벽 안쪽 면이 컵 안으로 이어짐, y −23.3 ~ −17, 바닥은 경사)
 _SP = P((40.3, -23.35), (41.755, -23.35), (41.42, -16.8), (40.3, -16.8))
 _SPZ = Pth((-23.5, -1.6), [('L', (-20.0, -1.46)), ('S', [(-18.9, -1.0), (-17.9, -0.4), (-16.8, 0.4)]), ('L', (-16.8, 2.0)), ('L', (-23.5, 2.0))])

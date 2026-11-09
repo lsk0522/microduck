@@ -1,0 +1,11 @@
+import trimesh, numpy as np, matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+r=trimesh.load('/root/microduck/cad/reference/microduck/assets/bottom_head_shell.stl'); r.apply_scale(1000)
+xs=np.arange(24,46,0.25); ys=np.arange(-26,18,0.25)
+X,Y=np.meshgrid(xs,ys)
+O=np.c_[X.ravel(),Y.ravel(),np.full(X.size,-30.0)]; D=np.tile([0,0,1.0],(X.size,1))
+loc,ri,_=r.ray.intersects_location(O,D,multiple_hits=False)
+Z=np.full(X.size,np.nan); Z[ri]=loc[:,2]; Z=Z.reshape(X.shape)
+np.save('side/zbot.npy',np.stack([X,Y,Z]))
+fig,ax=plt.subplots(figsize=(8,12)); c=ax.contourf(X,Y,Z,levels=np.arange(-12.8,-3,0.25),cmap='jet'); plt.colorbar(c)
+ax.contour(X,Y,Z,levels=[-11.5,-10.5],colors='k',linewidths=0.5); ax.set_aspect('equal'); ax.grid()
+plt.savefig('side/zbot.png',dpi=60)
