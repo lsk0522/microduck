@@ -184,125 +184,237 @@ MuJoCo 뷰어에서 키프레임 <code>INIT</code>을 고르면 같은 자세를
     return [p1, pm, p2, p3]
 
 
+CHAIN_COL = {"neck": "#3b7d3b", "imu": "#8e44ad", "left": "#EF6A1F", "right": "#4a7fb5"}
+PART_KO = {"board": "SBC", "hat": "HAT", "battery": "배터리", "power": "전원부", "imu": "IMU 200", "camera": "카메라",
+           "tof": "ToF", "speaker": "스피커", "head_imu": "머리 IMU", "hub": "허브"}
+SEG_ORDER = [("hat", "34"), ("34", "33"), ("33", "32"), ("32", "31"), ("31", "30"), ("30", "hub"), ("hub", "imu"),
+             ("hub", "20"), ("20", "21"), ("21", "22"), ("22", "23"), ("23", "24"),
+             ("hub", "10"), ("10", "11"), ("11", "12"), ("12", "13"), ("13", "14")]
+SEG_JOINT = {"33-32": "머리 요", "32-31": "머리 피치", "30-hub": "목 피치", "20-21": "고관절 요", "21-22": "고관절 롤",
+             "23-24": "무릎", "10-11": "고관절 요", "11-12": "고관절 롤", "13-14": "무릎"}
+POSE_KO = {"all_min": "모든 관절 −끝", "all_max": "모든 관절 +끝", "crouch": "웅크림", "knee=min": "무릎 −끝",
+           "head_yaw=max": "머리 요 +끝", "neck_pitch=min": "목 숙임 끝"}
+BLOCKER_KO = {"xl330": "서보", "np_f970": "배터리", "power_support": "전원부 받침", "upper_leg_left": "허벅지",
+              "upper_leg_right": "허벅지", "motor_support": "모터 지지대", "top_head_shell": "머리 윗셸",
+              "bottom_head_shell": "머리 아래 셸", "right_shell": "몸통 셸", "left_shell": "몸통 셸", "leg": "정강이"}
+# 꽂는 순서: 서보 ID → (조립 단계, 할 일)
+PLUG_NOTE = {"30": (9, "31과 끝면이 1 mm로 마주본다 → 목 옆판을 닫기 전에 31→30, 30→허브 케이블을 먼저 꽂는다"),
+             "31": (9, "30과 같음"),
+             "12": (3, "무릎 서보(13)가 끝면 앞을 가린다 → 허벅지에 서보를 넣기 전에 11→12, 12→13 케이블을 꽂는다"),
+             "22": (3, "12와 같음 (무릎 서보 23)"),
+             "10": (5, "8단계에 배터리가 들어오면 굽힘 칸이 가려진다 → 허브→10, 10→11을 5단계에 꽂아 둔다"),
+             "20": (5, "10과 같음"),
+             "14": (2, "무릎을 끝까지 굽히면 굽힘 칸이 가려진다 → 13→14 케이블을 무릎 축 쪽으로 고리 지게"),
+             "24": (2, "14와 같음")}
+
+
+def _cable(data_dir: Path):
+    p = data_dir / "cable.json"
+    return json.load(open(p, encoding="utf-8")) if p.exists() else None
+
+
+def _chain_of(a, b):
+    ids = {a, b}
+    if ids & {"hat", "34", "33", "32", "31", "30"}:
+        return "neck"
+    if "imu" in ids:
+        return "imu"
+    return "left" if any(x.startswith("2") for x in ids) else "right"
+
+
+def view_fig(img: str, name: str, V: dict, caption: str, height_mm: float, parts=True, font=30):
+    """렌더 + 라벨. 서보 ID = 노랑(커넥터 끝면), 전장 부품 = 파랑 — 왼쪽 라벨 칸에 세로로 쌓고 지시선.
+    라벨 위치·라벨 칸 폭은 cable.json views (render_views.py → crop_views.py)."""
+    v = V[name]; W, H, pad = v["w"], v["h"], v.get("pad", 0)
+    servos, prts = [], []
+    for key, (x, y) in v["pts"].items():
+        g, k = key.split(":")
+        if g == "servo":
+            servos.append([x, y, k])
+        elif parts and k in PART_KO:
+            prts.append([x, y, PART_KO[k]])
+    merged = []
+    for x, y, t in sorted(servos, key=lambda t: t[2]):
+        for m in merged:
+            if abs(m[0] - x) < 60 and abs(m[1] - y) < 40:
+                m[2] += "·" + t; break
+        else:
+            merged.append([x, y, t])
+    sv = []
+    for x, y, t in merged:
+        w = 16 + font * 0.62 * len(t)
+        sv.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="7" fill="#d63031"/>'
+                  f'<rect x="{x + 11:.0f}" y="{y - font * 0.7:.0f}" width="{w:.0f}" height="{font * 1.25:.0f}" rx="6" fill="#ffd43b" stroke="#7a5c00" stroke-width="1.5"/>'
+                  f'<text x="{x + 11 + w / 2:.0f}" y="{y + font * 0.32:.0f}" font-size="{font}" font-weight="800" text-anchor="middle" fill="#1d1d1f">{t}</text>')
+    if prts and pad:
+        prts.sort(key=lambda t: t[1])
+        gap = font * 1.55
+        ys = []
+        for _, y, _ in prts:                       # 겹치지 않게 아래로 밀기
+            ys.append(max(y, ys[-1] + gap) if ys else max(y, gap))
+        over = ys[-1] - (H - gap / 2)
+        if over > 0:                               # 아래로 넘치면 위로 당기기
+            ys = [yy - over for yy in ys]
+            for i in range(len(ys) - 2, -1, -1):
+                ys[i] = min(ys[i], ys[i + 1] - gap)
+        for (x, y, t), ly in zip(prts, ys):
+            w = 20 + font * 0.98 * len(t); rx = pad - 14
+            sv.append(f'<polyline points="{rx:.0f},{ly:.0f} {rx + 24:.0f},{ly:.0f} {x:.0f},{y:.0f}" fill="none" stroke="#1f5fbf" stroke-width="2.5"/>'
+                      f'<circle cx="{x:.0f}" cy="{y:.0f}" r="7" fill="#1f5fbf"/>'
+                      f'<rect x="{rx - w:.0f}" y="{ly - font * 0.68:.0f}" width="{w:.0f}" height="{font * 1.3:.0f}" rx="6" fill="#1f5fbf"/>'
+                      f'<text x="{rx - w / 2:.0f}" y="{ly + font * 0.33:.0f}" font-size="{font}" font-weight="700" text-anchor="middle" fill="#fff">{t}</text>')
+    ov = (f'<svg viewBox="0 0 {W} {H}" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible" '
+          f'font-family="Noto Sans CJK KR, Noto Sans KR, sans-serif">{"".join(sv)}</svg>')
+    return (f'<figure style="margin:0;display:flex;flex-direction:column;align-items:center">'
+            f'<div style="position:relative;height:{height_mm}mm;width:{height_mm * W / H:.1f}mm"><img src="{img}/cable_{name}.png" '
+            f'style="width:100%;height:100%;display:block">{ov}</div>'
+            f'<figcaption style="font-size:8pt;color:#666;margin-top:1mm">{caption}</figcaption></figure>')
+
+
 def elec_pages(img: str, data_dir: Path):
+    from wiring_svg import bench_svg, robot_svg, zone_svg
     Z, L = load(data_dir)
+    C = _cable(data_dir)
     P = L["parts"]
-    prow = "".join(f"<tr><td>{html.escape(v['label'])}</td><td>{v['pos_mm'][0]:+.0f}</td><td>{v['pos_mm'][1]:+.0f}</td><td>{v['pos_mm'][2]:+.0f}</td></tr>"
-                   for k, v in P.items())
-    p_layout = ("전장", "부품 배치도", f"""
+    note_s = 'style="font-size:8.5pt"'
 
-<div class="two" style="grid-template-columns:1fr 1fr 0.62fr;gap:3mm"><div class="img" style="height:165mm"><img src="{img}/layout_side.png" style="max-height:165mm"></div>
-<div class="img" style="height:165mm"><img src="{img}/layout_front.png" style="max-height:165mm"></div>
-<div><h2>부품 배치도</h2><p style="font-size:8pt;color:#555">셸·얼굴·부리를 걷어낸 그림. 왼쪽 = 오른쪽 옆, 가운데 = 정면. 숫자 = 서보 ID.</p><h3>위치 (mm, 몸통 원점)</h3><table class="tight" style="font-size:7pt"><tr><th>부품</th><th>X 앞</th><th>Y 왼</th><th>Z 위</th></tr>{prow}</table>
-<p style="font-size:7.5pt;color:#666">관절각 0 자세, 모델(MJCF) 값. 보드는 Pi Zero 2W 자리표시자 — Radxa Zero 3W도 같은 65×30 mm.
-IMU 브리지·머리 IMU·카메라·ToF는 모델의 site 위치 (부품 형상은 모델에 없음). 허브는 권장 위치.</p>
-<div class="note" style="font-size:8pt"><b>무게중심</b>: 무거운 것(배터리, 서보 15 × 18 g)이 몸통 뒤·다리에 있다.
-재설계 때 옮기면 HOME_FRAME과 정책을 다시 맞춰야 한다 (plan.md 4·6.4절).</div></div></div>""")
-
-    svg = wiring_svg()
-    p_wiring = ("전장", "배선도", f"""
-<div class="two" style="grid-template-columns:1.35fr 1fr"><div>
-<h2>배선도 (트랙 A 권장)</h2>
-{svg}
+    # 1. 배선도 — 로봇
+    p_wiring = ("전장", "배선도 — 로봇", f"""
+<div class="two" style="grid-template-columns:1.5fr 1fr;gap:7mm"><div>
+<h2>배선도 — 로봇에 탑재</h2>
+{robot_svg()}
 </div><div>
-<h3>커넥터 (XL330 · IMU 브리지 · 허브 공통)</h3>
+<h3 style="margin-top:0">커넥터 (서보 · IMU 브리지 · 허브 공통)</h3>
 <table style="font-size:8.5pt"><tr><th>핀</th><th>신호</th><th>비고</th></tr>
 <tr><td>1</td><td>GND</td><td></td></tr><tr><td>2</td><td>VDD</td><td>배터리 2S 그대로 (6.6–8.2 V)</td></tr>
-<tr><td>3</td><td>DATA</td><td>TTL 반이중, 1 Mbps</td></tr></table>
-<p style="font-size:7.5pt;color:#666">JST EH 2.5 mm 3핀, ROBOTIS TTL 표준 순서. 자작 허브·HAT를 만들기 전에 e-manual 커넥터 그림으로 한 번 더 확인.
-XL330에는 같은 커넥터가 2개 있어 아무 쪽이나 이어도 된다 (데이지체인).</p>
+<tr><td>3</td><td>DATA</td><td>TTL 반이중, 1 Mbps, Protocol 2.0</td></tr></table>
+<p style="font-size:7.5pt;color:#666;margin:1.5mm 0 0">JST EH 2.5 mm 3핀 (B3B-EH-A). ROBOTIS e-manual(U2D2 Power Hub 커넥터 표)과 같은 순서.
+XL330에는 같은 커넥터가 2개라 들어오는 줄·나가는 줄 구분이 없다.</p>
 <h3>전원</h3>
-<ul style="font-size:8.5pt;line-height:1.5;padding-left:4mm">
-<li>배터리 NP-F550 → <b>퓨즈 5 A → 스위치</b> → 몸통 허브의 VDD/GND. 서보 15개 + IMU 브리지 + HAT가 모두 이 레일을 쓴다.</li>
-<li>HAT는 버스 케이블로 들어온 2S를 <b>5 V 강압</b>(3 A 이상)해 SBC에 준다. 목 케이블 하나에 신호·전원이 같이 올라간다.</li>
-<li>⚠ <b>결정 D1</b>: XL330 정격은 3.7–6.0 V(권장 5 V)인데 원본은 2S(최대 8.2 V) 직결이다. 그래서 shutdown=52로 전압 보호를 끈다. plan.md D1 참고.</li>
-<li>충전은 배터리를 빼서 NP-F 충전기로. (banana_pcb_locker는 몸통 뒤 작은 PCB 고정부 — 원본에서 용도 미확인)</li></ul>
+<ul style="font-size:8.5pt;line-height:1.5;padding-left:4mm;margin:0">
+<li>배터리 → <b>퓨즈 5 A → 스위치 → XT30</b> → 몸통 허브. 서보 15개 + IMU 브리지 + HAT가 모두 이 2S 레일을 쓴다.</li>
+<li>허브 = 3핀 4개 병렬 (목·왼다리·오른다리·IMU). 여분 1개를 달아 두면 HAT를 끄고 U2D2를 꽂아 로봇 그대로 서보를 읽을 수 있다 (선택).</li>
+<li>HAT는 목 케이블로 올라온 2S를 <b>5 V(3 A 이상)</b>로 낮춰 SBC에 준다 — 케이블 하나에 신호·전원이 같이 간다.</li>
+<li>⚠ <b>결정 D1</b>: XL330 정격 3.7–6.0 V, 원본은 2S 직결 → shutdown 52로 입력전압 보호를 끈다 (plan.md D1).</li></ul>
 <h3>신호</h3>
-<ul style="font-size:8.5pt;line-height:1.5;padding-left:4mm">
-<li>SBC UART2 (<code>/dev/ttyS2</code>) TX/RX + 방향 GPIO → <b>SN74LVC2G241</b> 반이중 버퍼 → DATA (hardware/hat).</li>
-<li>Armbian은 UART2에 콘솔을 띄운다 → <code>serial-getty@ttyS2</code> 마스크 필수.</li>
-<li>1단계 벤치는 HAT 대신 U2D2(USB) + U2D2 Power Hub (plan.md 3.4절).</li>
-<li>카메라 CSI, ToF·오디오 I²C, 스피커는 머리 안에서 SBC/HAT로 (이 그림에서 생략).</li></ul>
+<ul style="font-size:8.5pt;line-height:1.5;padding-left:4mm;margin:0">
+<li>SBC UART2 <code>/dev/ttyS2</code> TX/RX + 방향 GPIO → <b>SN74LVC2G241</b> 반이중 버퍼 → DATA (hardware/hat).</li>
+<li>Armbian은 UART2에 콘솔을 띄운다 → <code>serial-getty@ttyS2</code> 마스크.</li>
+<li>카메라 CSI, ToF·머리 IMU·코덱 I²C, 스피커 I²S는 머리 안에서 SBC·HAT로.</li></ul>
+<div class="note warn" style="font-size:8pt;margin-top:2.5mm"><b>30 → 허브</b>는 목을 끝까지 숙이면 경로가 156 mm다. 동봉 180 mm로는 여유가 24 mm뿐이라
+이 한 가닥만 <b>250 mm</b>(JST EH 3핀, 1:1 결선)를 쓴다. 나머지 16가닥은 동봉 180 mm로 된다.</div>
 </div></div>""")
 
-    crow = "".join(f"<tr><td>{c['frm']} → {c['to']}</td><td>{c['straight_mm']:.0f}</td><td>{'⚠ 관절 통과' if c['crosses_joint'] else ''}</td></tr>"
-                   for c in L["cables"])
+    # 2. 배선도 — U2D2 벤치
+    p_bench = ("전장", "배선도 — U2D2 벤치", f"""
+<h2>배선도 — U2D2 벤치 (1단계, HAT를 만들기 전)</h2>
+<div style="height:104mm;display:flex;justify-content:center">{bench_svg().replace('width="100%"', 'height="100%"')}</div>
+<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:5mm;margin-top:3mm">
+<div class="box"><h4>순서</h4><ol style="font-size:8.5pt;line-height:1.55;margin:0;padding-left:4.5mm">
+<li>서보 <b>1개만</b> 꽂고 <code>dxl_zero.py setup --port COM5 --new-id 23</code> — ID, 1 Mbps, return delay 0, shutdown 52, 무릎은 homing −512</li>
+<li>ID 라벨을 붙이고 다음 서보. 15개 모두 (6쪽 표)</li>
+<li><code>dxl_zero.py zero --port COM5 --ids 23</code> → 2048에 둔 채 혼에 부품 고정 (조립 단계마다)</li>
+<li>다리·목을 3갈래로 꽂고 <code>dxl_zero.py read --all</code>로 15개 응답 확인</li></ol></div>
+<div class="box"><h4>연결</h4><ul style="font-size:8.5pt;line-height:1.55;margin:0;padding-left:4mm">
+<li>U2D2 → Power Hub: 세트에 든 X3P 100 mm</li>
+<li>Power Hub 전원은 단자대 <b>한 곳만</b> (DC 잭·Molex·단자대 동시 사용 금지), 3.5–24 V</li>
+<li>U2D2는 신호만 바꾼다. 서보 전원은 Power Hub가 준다</li>
+<li>Radxa로 돌릴 때: <code>robotd --port /dev/ttyUSB0</code>, FTDI <code>latency_timer</code> 1</li></ul></div>
+<div class="box"><h4>주의</h4><ul style="font-size:8.5pt;line-height:1.55;margin:0;padding-left:4mm">
+<li>공장값 서보는 모두 ID 1 — 두 개 이상 꽂고 setup하면 충돌</li>
+<li>벤치에서도 퓨즈 5 A를 넣는다 (2S는 단락 전류가 크다)</li>
+<li>IMU 브리지(ID 200)는 벤치에 없다 → 정책 구동은 2단계(HAT)에서</li></ul></div>
+</div>""")
+
+    if C is None:
+        return [p_wiring, p_bench]
+    V = C["views"]
+    R = C["routes"]
+
+    # 3. 부품 배치도
+    prow = "".join(f"<tr><td>{html.escape(v['label'])}</td><td>{v['pos_mm'][0]:+.0f}</td><td>{v['pos_mm'][1]:+.0f}</td><td>{v['pos_mm'][2]:+.0f}</td></tr>"
+                   for k, v in P.items() if k != "banana")
+    prow = " · ".join(f"<b>{html.escape(v['label'])}</b> ({v['pos_mm'][0]:+.0f}, {v['pos_mm'][1]:+.0f}, {v['pos_mm'][2]:+.0f})"
+                      for k, v in P.items() if k != "banana")
+    p_layout = ("전장", "부품 배치도", f"""
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+<h2 style="margin:0">부품 배치도</h2>
+<p style="font-size:8pt;color:#555;margin:1mm 0 0;max-width:150mm;text-align:right">셸은 투명, 서보 검정, 보드 청록, 배터리 회색. 선 = 0° 자세의 배선 경로 (다음 쪽).
+<span style="background:#ffd43b;padding:0 1mm;border-radius:1mm"><b>노랑</b></span> = 서보 ID(커넥터 끝면) ·
+<span style="background:#1f5fbf;color:#fff;padding:0 1mm;border-radius:1mm">파랑</span> = 전장 부품</p></div>
+<div style="display:flex;justify-content:space-around;margin-top:1mm">
+{view_fig(img, "side", V, "옆 (오른쪽에서 봄, 앞 = 오른쪽)", 146)}
+{view_fig(img, "front", V, "정면", 146)}</div>
+<p style="font-size:7.4pt;color:#444;line-height:1.5;margin:2mm 0 0"><b>위치 (mm, 몸통 원점 · X 앞 Y 왼 Z 위)</b> — {prow}.
+<span style="color:#777">관절각 0 자세. 보드는 Pi Zero 2W 자리표시자(Radxa Zero 3W도 같은 65×30 mm). IMU 브리지·머리 IMU·카메라·ToF는 모델의 site 위치, 허브는 권장 위치.
+무거운 것(배터리, 서보 15 × 18 g)을 옮기면 HOME_FRAME과 정책을 다시 맞춘다 (plan.md 4·6.4절).</span></p>""")
+
+    # 4. 배선 경로 · 케이블 길이
+    rows, n_ok = [], 0
+    ok_slack = C["method"]["ok_slack_mm"]; cab = C["method"]["cable_mm"]
+    for a, b in SEG_ORDER:
+        seg = f"{a}-{b}"; r = R.get(seg, {})
+        z = r.get("zero"); poses = r.get("poses", {})
+        worst = max(poses, key=poses.get) if poses else None
+        mx = max([z] + list(poses.values())) if z is not None else None
+        slack = None if mx is None else cab - mx
+        ok = slack is not None and slack >= ok_slack
+        n_ok += ok
+        col = CHAIN_COL[_chain_of(a, b)]
+        nm = lambda x: {"hat": "HAT", "hub": "허브", "imu": "IMU 200"}.get(x, x)
+        verdict = (f'<b style="color:#2f7d32">180 mm</b>' if ok else '<b style="color:#c0392b">250 mm</b>')
+        orig = r.get("orig_zero")
+        diff = "" if orig is None else ("= 원본" if abs(orig - z) < 0.5 else f"원본 {orig:.0f}")
+        rows.append(f'<tr><td><span style="display:inline-block;width:4mm;height:1.6mm;border-radius:.8mm;background:{col};margin-right:1.5mm;vertical-align:middle"></span>'
+                    f'{nm(a)} → {nm(b)}</td><td>{z:.0f}</td><td>{mx:.0f}</td><td>{POSE_KO.get(worst, "") if mx > z + 0.5 else "0°"}</td>'
+                    f'<td>{SEG_JOINT.get(seg, "")}</td><td>{slack:.0f}</td><td>{verdict}</td><td style="color:#888">{diff}</td></tr>')
     p_route = ("전장", "배선 경로·케이블 길이", f"""
-<div class="two" style="grid-template-columns:1.2fr 1fr"><div class="img" style="height:165mm"><img src="{img}/wiring_route.png" style="max-height:165mm"></div>
+<div style="display:grid;grid-template-columns:auto 1fr;gap:6mm;height:100%">
+{view_fig(img, "iso", V, "앞·오른쪽 위에서 — 0° 자세의 배선 경로", 150, parts=False, font=26)}
 <div><h2>배선 경로 · 케이블 길이</h2>
-<table class="tight" style="font-size:7.5pt"><tr><th>구간</th><th>직선 mm</th><th></th></tr>{crow}</table>
-<p style="font-size:7.5pt;color:#666">커넥터 끝(서보 아래 끝면 중앙)끼리 관절각 0에서 잰 직선거리. 실제 배선은 1.3–1.8배.
-가장 긴 구간(34 → 33)도 직선 76 mm라 길이는 <b>동봉 X3P 180 mm</b>로 전부 된다.
-가닥 수는 <b>{len(L['cables'])}가닥</b> (머리·목 6, IMU 1, 다리 5×2)인데 서보 동봉분은 15가닥 → <b>{len(L['cables']) - 15}가닥 추가</b> (X3P 180 mm 또는 자작).</p>
-<div class="note warn" style="font-size:8.5pt">관절을 지나는 구간은 <b>회전 중심 가까이로</b> 지나게 하고, 가동 범위 끝까지 돌려 당김이 없게 고리를 남긴다.
-특히 머리 요(32, ±170°)와 목 피치(30)·고관절 롤·무릎. 케이블이 기어·혼 사이에 끼면 서보가 과부하로 꺼진다.</div>
-<div class="note" style="font-size:8.5pt;margin-top:2mm">Pollen의 실제 배선 경로는 공개돼 있지 않다. 위 체인 순서는 부품 배치에서 정한 권장안 — 버스는 한 줄이라 순서를 바꿔도 동작은 같다.</div>
+<table class="ct" style="font-size:7.6pt"><tr><th>구간</th><th>0° mm</th><th>최대 mm</th><th>최대일 때</th><th>지나는 관절</th><th>여유</th><th>케이블</th><th>원본</th></tr>{"".join(rows)}</table>
+<p style="font-size:7.3pt;color:#666;margin:1.5mm 0">{html.escape(C["method"]["route"])}. 자세: 0°, 모든 관절 ±끝, 웅크림, 무릎·머리 요·목 피치 끝.
+여유 = {cab} mm − 최대. 원본 = 같은 계산을 원본 메시로 (빈 칸은 계산 안 함). <b>{n_ok} / {len(SEG_ORDER)}가닥</b>은 동봉 X3P 180 mm로 {ok_slack} mm 이상 남는다.
+가닥 수 {len(SEG_ORDER)} (머리·목 6, IMU 1, 다리 5×2) − 서보 동봉 15 = <b>{len(SEG_ORDER) - 15}가닥 추가</b> (그중 1가닥은 30 → 허브용 250 mm).</p>
+<div class="note warn" style="font-size:8pt">관절을 지나는 구간은 <b>회전 중심 가까이로</b> 지나게 하고 가동 범위 끝까지 돌려 당김이 없게 고리를 남긴다.
+고관절 롤 → 피치(21→22, 11→12)는 롤을 끝까지 돌리면 0°보다 38 mm 길어진다 — 여유 61 mm 중 고리로 남긴다.</div>
 </div></div>""")
-    return [p_layout, p_wiring, p_route]
 
-
-def wiring_svg():
-    R, K, Y, O = "#d63031", "#2d3436", "#e1b12c", "#e67e22"
-
-    def box(x, y, w, h, t, sub="", c="#fff", s="#333", tc="#111"):
-        return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="{c}" stroke="{s}" stroke-width="2"/>'
-                f'<text x="{x + w / 2}" y="{y + h / 2 - (5 if sub else -4)}" text-anchor="middle" font-weight="700" fill="{tc}">{t}</text>'
-                + (f'<text x="{x + w / 2}" y="{y + h / 2 + 11}" text-anchor="middle" font-size="9.5" fill="{tc}">{sub}</text>' if sub else ""))
-
-    def chain(x0, y0, ids, col, dy=34):
-        out = ""
-        for k, i in enumerate(ids):
-            y = y0 + k * dy
-            out += f'<rect x="{x0}" y="{y}" width="62" height="24" rx="5" fill="#fff" stroke="{col}" stroke-width="2.2"/>'
-            out += f'<text x="{x0 + 31}" y="{y + 16}" text-anchor="middle" font-weight="700">{i}</text>'
-            if k:
-                out += f'<line x1="{x0 + 31}" y1="{y - dy + 24}" x2="{x0 + 31}" y2="{y}" stroke="{Y}" stroke-width="3"/>'
-        return out
-
-    s = '<svg viewBox="0 0 560 520" width="100%" style="font-family:\'Noto Sans CJK KR\';font-size:12px">'
-    # 머리
-    s += '<rect x="8" y="6" width="544" height="150" rx="10" fill="#f3f8f3" stroke="#3b7d3b" stroke-dasharray="5 4"/>'
-    s += '<text x="18" y="24" font-weight="700" fill="#3b7d3b">머리</text>'
-    s += box(30, 40, 120, 46, "SBC", "Radxa Zero 3W", c="#1d1d1f", s="#1d1d1f", tc="#fff")
-    s += box(190, 40, 150, 46, "HAT", "반이중 버퍼 + 5 V 강압", c="#2d6a3e", s="#2d6a3e", tc="#fff")
-    s += f'<line x1="150" y1="56" x2="190" y2="56" stroke="{Y}" stroke-width="3"/><text x="170" y="50" text-anchor="middle" font-size="9">UART2</text>'
-    s += f'<line x1="190" y1="72" x2="150" y2="72" stroke="{O}" stroke-width="3"/><text x="170" y="84" text-anchor="middle" font-size="9">5 V</text>'
-    s += box(30, 100, 120, 40, "카메라 · ToF · 오디오", "CSI / I²C", c="#fafafa")
-    s += f'<line x1="90" y1="86" x2="90" y2="100" stroke="#999" stroke-width="2"/>'
-    s += chain(380, 22, [34, 33, 32], "#3b7d3b")
-    s += f'<line x1="340" y1="63" x2="380" y2="34" stroke="{Y}" stroke-width="3"/>'
-    s += '<text x="452" y="40" font-size="9.5">34 부리</text><text x="452" y="74" font-size="9.5">33 머리 롤</text><text x="452" y="108" font-size="9.5">32 머리 요</text>'
-    # 목
-    s += '<rect x="8" y="164" width="544" height="72" rx="10" fill="#f3f8f3" stroke="#3b7d3b" stroke-dasharray="5 4"/>'
-    s += '<text x="18" y="182" font-weight="700" fill="#3b7d3b">목</text>'
-    s += chain(380, 172, [31, 30], "#3b7d3b")
-    s += f'<line x1="411" y1="114" x2="411" y2="172" stroke="{Y}" stroke-width="3"/>'
-    s += '<text x="452" y="188" font-size="9.5">31 머리 피치</text><text x="452" y="222" font-size="9.5">30 목 피치</text>'
-    s += '<text x="40" y="212" font-size="10" fill="#555">X3P 케이블 1가닥 = GND · VDD(2S) · DATA</text>'
-    # 몸통
-    s += '<rect x="8" y="244" width="544" height="110" rx="10" fill="#f7f7f7" stroke="#555" stroke-dasharray="5 4"/>'
-    s += '<text x="18" y="262" font-weight="700">몸통</text>'
-    s += box(30, 272, 92, 46, "배터리", "NP-F550 2S", c="#2f6b3a", s="#2f6b3a", tc="#fff")
-    s += box(140, 280, 62, 30, "퓨즈 5A")
-    s += box(216, 280, 56, 30, "스위치")
-    s += f'<line x1="122" y1="295" x2="140" y2="295" stroke="{R}" stroke-width="3.5"/><line x1="202" y1="295" x2="216" y2="295" stroke="{R}" stroke-width="3.5"/>'
-    s += box(300, 268, 150, 56, "버스 허브", "3핀 ×4 병렬 + 전원 입력", c="#fff7e6", s="#e67e22")
-    s += f'<line x1="272" y1="295" x2="300" y2="295" stroke="{R}" stroke-width="3.5"/><text x="286" y="288" text-anchor="middle" font-size="9">XT30</text>'
-    s += f'<path d="M411 230 L411 268" stroke="{Y}" stroke-width="3" fill="none"/>'
-    s += box(470, 278, 74, 36, "IMU 200", "브리지", c="#fff", s="#8a5a00")
-    s += f'<line x1="450" y1="296" x2="470" y2="296" stroke="{Y}" stroke-width="3"/>'
-    # 다리
-    s += f'<path d="M330 324 L330 340 L120 340 L120 372" stroke="{Y}" stroke-width="3" fill="none"/>'
-    s += f'<path d="M420 324 L420 340 L440 340 L440 372" stroke="{Y}" stroke-width="3" fill="none"/>'
-    s += '<text x="40" y="388" font-weight="700" fill="#EF6A1F">왼다리</text>' + chain(89, 372, [20, 21, 22, 23, 24], "#EF6A1F", 28)
-    s += '<text x="160" y="396" font-size="9.5">20 고관절 요</text><text x="160" y="424" font-size="9.5">21 고관절 롤</text><text x="160" y="452" font-size="9.5">22 고관절 피치</text><text x="160" y="480" font-size="9.5">23 무릎 (−512)</text><text x="160" y="508" font-size="9.5">24 발목</text>'
-    s += '<text x="520" y="388" font-weight="700" fill="#4a7fb5" text-anchor="end">오른다리</text>' + chain(409, 372, [10, 11, 12, 13, 14], "#4a7fb5", 28)
-    s += '<text x="400" y="396" font-size="9.5" text-anchor="end">10 고관절 요</text><text x="400" y="424" font-size="9.5" text-anchor="end">11 고관절 롤</text><text x="400" y="452" font-size="9.5" text-anchor="end">12 고관절 피치</text><text x="400" y="480" font-size="9.5" text-anchor="end">13 무릎 (−512)</text><text x="400" y="508" font-size="9.5" text-anchor="end">14 발목</text>'
-    # 범례
-    s += f'<line x1="250" y1="372" x2="272" y2="372" stroke="{Y}" stroke-width="3"/><text x="276" y="376" font-size="9.5">버스 (3핀)</text>'
-    s += f'<line x1="250" y1="390" x2="272" y2="390" stroke="{R}" stroke-width="3.5"/><text x="276" y="394" font-size="9.5">배터리 2S</text>'
-    s += f'<line x1="250" y1="408" x2="272" y2="408" stroke="{O}" stroke-width="3"/><text x="276" y="412" font-size="9.5">5 V</text>'
-    return s + "</svg>"
+    # 5. 케이블 간섭 · 꽂는 순서
+    zr = []
+    for s in sorted(C["zones"], key=lambda s: (s[0], s)):
+        zz = C["zones"][s]; mxp = max(zz["plug"], zz["bend"])
+        lvl = "#c0392b" if mxp >= 75 else ("#e67e22" if mxp >= 40 else "#2f7d32")
+        by = next(iter(zz["by"]), "") if mxp >= 10 else ""
+        same = abs(zz["plug"] - zz["orig_plug"]) < 1.5 and abs(zz["bend"] - zz["orig_bend"]) < 1.5
+        st, note = PLUG_NOTE.get(s, (None, ""))
+        orig_txt = "같음" if same else f'{zz["orig_plug"]:.0f}% / {zz["orig_bend"]:.0f}%'
+        zr.append(f'<tr><td><span style="display:inline-block;width:2.4mm;height:2.4mm;border-radius:50%;background:{lvl};margin-right:1.2mm"></span><b>{s}</b></td>'
+                  f'<td>{KOR[L["servos"][s]["joint"]]}</td><td>{zz["plug"]:.0f}%</td>'
+                  f'<td>{zz["bend"]:.0f}%</td><td style="color:#888">{orig_txt}</td>'
+                  f'<td>{BLOCKER_KO.get(by, by)}</td><td>{f"{st}단계" if st else ""}</td></tr>')
+    steps_txt = "".join(f"<li><b>{st}</b> — {t}</li>" for st, t in [
+        ("2단계", "13→14 · 23→24를 발목 서보에 먼저 꽂는다. 무릎 끝 자세에서 굽힘 칸이 79 % 가려진다 → 무릎 축 쪽으로 고리"),
+        ("3단계", "서보를 넣기 전에 고관절 피치(12·22)와 무릎(13·23) 케이블을 꽂는다. 넣은 뒤엔 무릎 서보가 12·22 앞을 47 % 막는다"),
+        ("5단계", "허브→10·20, 10→11·20→21을 꽂아 둔다. 8단계에 배터리가 들어오면 굽힘 칸이 61 % 가려진다"),
+        ("8단계", "허브를 전원부 위에 두고 XT30·다리 2갈래·IMU 브리지를 꽂는다. 배터리는 마지막"),
+        ("9단계", "옆판을 닫기 전에 31→30, 30→허브(250 mm). 닫으면 두 끝면이 1 mm로 마주봐 플러그 칸이 82 % 막힌다"),
+        ("11–14단계", "33→32는 서브조립 때, 32→31은 12단계, 34→33은 13단계, HAT→34는 14단계")])
+    p_interf = ("전장", "케이블 간섭·꽂는 순서", f"""
+<div class="two" style="grid-template-columns:1.15fr 1fr;gap:7mm"><div>
+<h2>케이블 간섭 검사</h2>
+<p style="font-size:8pt;color:#555;margin:0 0 2mm">{html.escape(C["method"]["zone"])}. 원본 = 같은 계산을 원본 메시로.</p>
+<table class="ct" style="font-size:7.8pt"><tr><th>ID</th><th>관절</th><th>플러그 칸</th><th>굽힘 칸</th><th>원본</th><th>가장 많이 가리는 것</th><th>꽂는 때</th></tr>{"".join(zr)}</table>
+<p style="font-size:7.3pt;color:#666;margin-top:1.5mm">● 초록 40 % 미만 · 주황 40–75 % · 빨강 75 % 이상 (둘 중 큰 값). 15개 모두 원본과 같다 — 재설계로 생긴 막힘은 없고,
+막힌 곳은 원본 배치에서 온 것이라 <b>꽂는 순서</b>로 해결한다.</p>
+</div><div>
+<div style="width:112mm">{zone_svg()}</div>
+<h3>꽂는 순서 (조립 단계에도 적혀 있다)</h3>
+<ol style="font-size:8.6pt;line-height:1.55;padding-left:4.5mm;margin:0">{steps_txt}</ol>
+<div class="note" style="font-size:8pt;margin-top:3mm">플러그 칸이 막히면 커넥터가 들어가지 않고, 굽힘 칸이 막히면 꽂힌 케이블이 꺾여 빠지거나 단선된다.
+막힌 서보는 해당 부품을 달기 <b>전에</b> 케이블을 꽂고, 꽂은 뒤 커넥터를 손으로 당겨 걸림을 확인한다.</div>
+</div></div>""")
+    return [p_wiring, p_bench, p_layout, p_route, p_interf]
 
 
 def control_pages():

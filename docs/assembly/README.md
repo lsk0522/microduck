@@ -1,6 +1,6 @@
 # 조립 가이드 (트랙 A · 다이나믹셀 XL330 · 원본 형상)
 
-**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 33쪽, VORON 2.4 매뉴얼 형식. 검증 기록: [`VERIFICATION.md`](VERIFICATION.md) ·
+**[`Microduck_Assembly_Guide.pdf`](Microduck_Assembly_Guide.pdf)** — A4 가로 35쪽, VORON 2.4 매뉴얼 형식. 검증 기록: [`VERIFICATION.md`](VERIFICATION.md) ·
 서보 원점·배선·배치·제어·시뮬레이션: [`OPERATION.md`](OPERATION.md)
 
 | 쪽 | 내용 |
@@ -10,9 +10,9 @@
 | 6 | 0단계: 서보 15개 설정 (ID, 레지스터, 무릎 homing offset −512) |
 | 7–10 | **서보 원점(2048)·혼 방향·+ 방향 표**, **원점 맞추기 A·B·C 그림 + 관절별 글자**, 원점 자세 그림, 장착 절차·기본 자세 |
 | 11–26 | 조립 16단계 (다리 ×2 → 몸통·전원부 → 목 → 머리 서브조립 → 머리). 단계마다 **다이나믹셀 상자**(ID·원점 A/B·혼 방향·+ 방향)와 그림 표시 |
-| 27–30 | **부품 배치도, 배선도, 배선 경로·케이블 길이**, 첫 전원 점검·문제 해결 |
-| 31–32 | **제어 방법**(robotd 50 Hz 루프, 관측 61, 게인), **시뮬레이션 방법**(레벨 1–3, 학습) |
-| 33 | 모델에서 확인되지 않은 체결, 기하 검증 요약, 출처 |
+| 27–32 | **배선도(로봇·U2D2 벤치), 부품 배치도, 배선 경로·케이블 길이, 케이블 간섭·꽂는 순서**, 첫 전원 점검·문제 해결 |
+| 33–34 | **제어 방법**(robotd 50 Hz 루프, 관측 61, 게인), **시뮬레이션 방법**(레벨 1–3, 학습) |
+| 35 | 모델에서 확인되지 않은 체결, 기하 검증 요약, 출처 |
 
 ## 주의
 
@@ -51,9 +51,11 @@ cd docs/assembly && uv run --with playwright python tools/build_guide.py data/sc
 | `tools/verify_screws.py` | 독립 기하 검증 (통과·물림·바닥·머리·공구 경로) → `data/verify.json`, [`VERIFICATION.md`](VERIFICATION.md) |
 | `tools/servo_zero.py` | 관절마다 서보·혼 방향·+ 방향·가동 범위·기본 자세 → `data/servo_zero.json` |
 | `tools/layout.py` | 원점·기본 자세·부품 배치·배선 경로 그림, 부품 위치·케이블 길이 → `data/layout.json` |
-| `tools/ops_pages.py` | PDF의 원점·전장·제어·시뮬레이션 쪽 |
+| `tools/ops_pages.py` | PDF의 원점·전장·제어·시뮬레이션 쪽 (전장 쪽은 `data/cable.json` · `img/cable_*.png`를 쓴다) |
+| `tools/wiring_svg.py` | 배선도(로봇·U2D2 벤치)·플러그 칸 그림 |
 | `tools/dxl_zero.py` | 실물 서보 설정·원점(2048)·기본 자세·위치 읽기 (dynamixel-sdk, 미검증) |
 | `tools/build_guide.py` | HTML → PDF |
 | `data/holes.json`, `data/screws.json`, `data/verify.json`, `data/servo_zero.json`, `data/layout.json`, `data/step_servos.json` | 계산·검증 결과 |
+| `data/cable.json`, `img/cable_*.png` | 배선 경로 길이·플러그 칸 막힘·배치 그림 — [`cad/redesign/tools/verify_sim/cable`](../../cad/redesign/tools/verify_sim/cable/README.md) (Linux) |
 
-단계 내용을 고칠 때는 `tools/steps.py`만 수정하고 다시 생성한다.
+단계 내용(부품·주의·**케이블** 메모)을 고칠 때는 `tools/steps.py`만 수정하고 다시 생성한다.

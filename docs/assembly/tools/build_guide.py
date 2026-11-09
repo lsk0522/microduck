@@ -163,6 +163,8 @@ tr:nth-child(even) td {{ background:#fafafa; }}
 .img img {{ max-width:100%; max-height:172mm; }}
 .note {{ background:#f4f6f8; border-left:1.2mm solid #7a8a99; padding:2mm 3mm; font-size:9pt; border-radius:0 1.5mm 1.5mm 0; }}
 .warn {{ background:#fff3e8; border-left:1.2mm solid {ACCENT}; }}
+.cable {{ background:#eef4fa; border-left:1.2mm solid #4a7fb5; }}
+.cable b {{ color:#2f5f8f; }}
 .legend {{ display:flex; flex-wrap:wrap; gap:3mm 7mm; }}
 .legend span.sw {{ display:inline-block; width:6mm; height:4mm; border-radius:1mm; vertical-align:middle; margin-right:2mm; border:0.2mm solid #0002; }}
 .grid {{ display:grid; grid-template-columns:repeat(9,1fr); gap:1.8mm; }}
@@ -182,6 +184,7 @@ tr:nth-child(even) td {{ background:#fafafa; }}
 .ruler {{ height:6mm; }}
 table.tight td {{ padding:0.8mm 1.5mm; }} table.tight th {{ padding:1.2mm 1.5mm; }}
 table.tight td:nth-child(3) {{ line-height:1; }}
+table.ct td {{ padding:0.9mm 1.6mm; }} table.ct th {{ padding:1.2mm 1.6mm; white-space:nowrap; }}
 code {{ font-family:'DejaVu Sans Mono',monospace; font-size:8.5pt; background:#f0f0f0; padding:0 1mm; border-radius:0.8mm; }}
 """
 
@@ -278,19 +281,22 @@ def build(screws_path, img, out_pdf):
 체결 대상: XL330 frame = 서보 본체 관통 구멍(Ø2.0, 양쪽에서 짧게) · XL330 horn = 혼/뒷면 보스(Ø1.6, 깊이 6 mm) · printed tap = 출력물 탭 구멍.</p>
 <div class="two" style="margin-top:3mm"><div>
 <h3>그 외 기구·구동</h3>
-<table><tr><th>품목</th><th>수량</th><th>비고</th></tr>
+<table class="ct" style="font-size:8.4pt"><tr><th>품목</th><th style="white-space:nowrap">수량</th><th>비고</th></tr>
 <tr><td>XL330-M288-T</td><td>15</td><td>다리 10 · 목/머리 4 · 부리 1</td></tr>
 <tr><td>베어링 16×22×4</td><td>11</td><td>몸통 2 · 다리 3×2 · 목/머리 3</td></tr>
 <tr><td>베어링 10×15×3</td><td>3</td><td>발목 2 · 머리 1</td></tr>
 {''.join(f"<tr><td>{p['part']} (알루미늄 {p['권장재질/품목'].replace('알루미늄 ','')})</td><td>{p['수량']}</td><td>DXF: cad/plates/dynamixel</td></tr>" for p in plates)}
 <tr><td>M2.5 스페이서 (보드↔HAT)</td><td>4</td><td>확인 필요 — HAT에 Ø2.7 4개</td></tr>
+<tr><td>버스 케이블 X3P 180 mm</td><td>16</td><td>서보 동봉 15 + 추가 1</td></tr>
+<tr><td>버스 케이블 JST EH 3핀 250 mm</td><td>1</td><td>30 → 허브 (경로 최대 156 mm)</td></tr>
 </table></div><div>
 <h3>전자·전원</h3>
-<table><tr><th>품목</th><th>수량</th><th>비고</th></tr>
+<table class="ct" style="font-size:8.4pt"><tr><th>품목</th><th style="white-space:nowrap">수량</th><th>비고</th></tr>
 <tr><td>Radxa Zero 3W</td><td>1</td><td>머리 안 (모델은 Pi Zero 2W 자리표시자)</td></tr>
 <tr><td>HAT PCB (반이중 버스·전원)</td><td>1</td><td>hardware/hat</td></tr>
 <tr><td>IMU 브리지 (LSM6DSV16X + MCU)</td><td>1</td><td>버스 ID 200 — firmware/imu_to_dxl</td></tr>
 <tr><td>NP-F550 배터리 + 플레이트</td><td>1</td><td>몸통 power_support</td></tr>
+<tr><td>버스 허브(3핀 ×4) · 퓨즈 5 A · 스위치 · XT30</td><td>각 1</td><td>몸통 전원부 위</td></tr>
 <tr><td>IMX219 + M12 렌즈, 스피커, ToF</td><td>각 1</td><td>오리지널 구성</td></tr>
 <tr><td>출력물</td><td>{n_printed}</td><td>다음 페이지</td></tr></table>
 <p style="font-size:8pt;color:#666">가격·구매처: bom/BOM.xlsx</p></div></div>"""))
@@ -340,6 +346,8 @@ PETG 인필 30–40 %, 벽 3–4줄, 관절부 100 %. 롤러 옵션 부품(rolle
             chip(k, n, alt_text(Counter(tuple(s["alt"]) for s in mine if s["key"] == k), k.split("x")[0]))
             for k, n in sorted(cnt.items())) or "<div style='color:#888'>나사 없음</div>"
         notes = "".join(f'<div class="note {"warn" if n.startswith("⚠") else ""}">{html.escape(n)}</div>' for n in st["notes"])
+        if st.get("cable"):
+            notes += f'<div class="note cable"><b>케이블</b> · {html.escape(st["cable"])}</div>'
         x2 = '<span class="badge">×2 · 왼쪽 그림, 수량은 양쪽 합</span>' if st.get("x2") else ""
         body = f"""<div class="step"><div class="side">
 <div><span class="stepno">{st['id']:02d}</span> {x2}</div><div class="stitle">{html.escape(st['title'])}</div>

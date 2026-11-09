@@ -1,0 +1,791 @@
+{
+ "date": "2026-11-09",
+ "model": "다이나믹셀 v1.0 출력 부품(Fusion, 어셈블리 v26) + 원본 구매 부품(서보·배터리·보드). 원본 비교는 같은 계산을 원본 메시로.",
+ "method": {
+  "route": "커넥터 끝면 뒤 9 mm 점끼리, 부품 메시를 1 mm 부풀린 빈 공간에서 1 mm 격자 최단 경로 (skimage MCP)",
+  "zone": "커넥터 끝면 앞 0–7 mm(플러그)·7–14 mm(굽힘) 상자에서 다른 부품이 차지하는 비율, 관절각 0 + 관절별 끝 자세 28개 중 최대",
+  "cable_mm": 180,
+  "ok_slack_mm": 30
+ },
+ "routes": {
+  "hat-34": {
+   "zero": 32.8,
+   "poses": {
+    "all_max": 30.1,
+    "all_min": 38.8,
+    "head_yaw=max": 37.7,
+    "neck_pitch=min": 33.3
+   },
+   "orig_zero": null
+  },
+  "34-33": {
+   "zero": 102.9,
+   "poses": {
+    "all_max": 112.2,
+    "all_min": 106.0,
+    "head_yaw=max": 110.2,
+    "neck_pitch=min": 107.9
+   },
+   "orig_zero": null
+  },
+  "33-32": {
+   "zero": 34.7,
+   "poses": {
+    "all_max": 37.4,
+    "all_min": 38.4,
+    "head_yaw=max": 34.9,
+    "neck_pitch=min": 33.7
+   },
+   "orig_zero": null
+  },
+  "32-31": {
+   "zero": 89.7,
+   "poses": {
+    "all_max": 99.3,
+    "all_min": 76.5,
+    "head_yaw=max": 90.0,
+    "neck_pitch=min": 90.1
+   },
+   "orig_zero": 89.7
+  },
+  "31-30": {
+   "zero": 29.7,
+   "poses": {
+    "all_max": 32.5,
+    "all_min": 32.5,
+    "head_yaw=max": 29.7,
+    "neck_pitch=min": 30.7
+   },
+   "orig_zero": 29.7
+  },
+  "30-hub": {
+   "zero": 139.2,
+   "poses": {
+    "all_max": 89.6,
+    "all_min": 156.2,
+    "head_yaw=max": 139.2,
+    "neck_pitch=min": 156.2
+   },
+   "orig_zero": 139.2
+  },
+  "hub-imu": {
+   "zero": 68.8,
+   "poses": {
+    "all_min": 68.8,
+    "all_max": 68.8,
+    "crouch": 68.8,
+    "knee=min": 68.8
+   },
+   "orig_zero": 68.8
+  },
+  "hub-20": {
+   "zero": 24.8,
+   "poses": {
+    "all_min": 24.8,
+    "all_max": 24.8,
+    "crouch": 24.8,
+    "knee=min": 24.8
+   },
+   "orig_zero": 24.8
+  },
+  "20-21": {
+   "zero": 88.1,
+   "poses": {
+    "all_min": 88.1,
+    "all_max": 88.1,
+    "crouch": 88.1,
+    "knee=min": 88.1
+   },
+   "orig_zero": 88.1
+  },
+  "21-22": {
+   "zero": 80.7,
+   "poses": {
+    "all_min": 34.2,
+    "all_max": 118.9,
+    "crouch": 91.3,
+    "knee=min": 80.7
+   },
+   "orig_zero": 77.5
+  },
+  "22-23": {
+   "zero": 7.1,
+   "poses": {
+    "all_min": 8.1,
+    "all_max": 8.3,
+    "crouch": 9.3,
+    "knee=min": 7.1
+   },
+   "orig_zero": null
+  },
+  "23-24": {
+   "zero": 69.6,
+   "poses": {
+    "all_min": 50.1,
+    "all_max": 54.0,
+    "crouch": 49.5,
+    "knee=min": 49.6
+   },
+   "orig_zero": null
+  },
+  "hub-10": {
+   "zero": 27.8,
+   "poses": {
+    "all_min": 27.8,
+    "all_max": 27.8,
+    "crouch": 27.8,
+    "knee=min": 27.8
+   },
+   "orig_zero": 27.8
+  },
+  "10-11": {
+   "zero": 82.6,
+   "poses": {
+    "all_min": 82.0,
+    "all_max": 82.8,
+    "crouch": 82.6,
+    "knee=min": 82.6
+   },
+   "orig_zero": 82.6
+  },
+  "11-12": {
+   "zero": 79.7,
+   "poses": {
+    "all_min": 118.9,
+    "all_max": 34.2,
+    "crouch": 90.9,
+    "knee=min": 79.7
+   },
+   "orig_zero": 76.5
+  },
+  "12-13": {
+   "zero": 6.8,
+   "poses": {
+    "all_min": 8.3,
+    "all_max": 8.1,
+    "crouch": 8.2,
+    "knee=min": 6.8
+   },
+   "orig_zero": null
+  },
+  "13-14": {
+   "zero": 68.6,
+   "poses": {
+    "all_min": 54.0,
+    "all_max": 50.1,
+    "crouch": 49.5,
+    "knee=min": 49.6
+   },
+   "orig_zero": null
+  }
+ },
+ "zones": {
+  "10": {
+   "plug": 25.8,
+   "bend": 60.9,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 25.8,
+   "orig_bend": 60.9,
+   "by": {
+    "np_f970": 54.9,
+    "power_support": 21.6,
+    "right_shell": 3.6
+   }
+  },
+  "11": {
+   "plug": 0,
+   "bend": 0,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 0,
+   "orig_bend": 0,
+   "by": {}
+  },
+  "12": {
+   "plug": 47.0,
+   "bend": 62.5,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 47.0,
+   "orig_bend": 62.5,
+   "by": {
+    "xl330": 62.5,
+    "upper_leg_right": 0.1
+   }
+  },
+  "13": {
+   "plug": 3.3,
+   "bend": 12.7,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 3.3,
+   "orig_bend": 12.7,
+   "by": {
+    "upper_leg_right": 12.7
+   }
+  },
+  "14": {
+   "plug": 15.0,
+   "bend": 79.1,
+   "plug_pose": "right_ankle=max",
+   "bend_pose": "right_knee=min",
+   "orig_plug": 15.0,
+   "orig_bend": 79.0,
+   "by": {
+    "xl330": 69.7,
+    "foot_right": 13.3,
+    "seeed_bearing__configuration__22x16x4": 5.5
+   }
+  },
+  "20": {
+   "plug": 26.3,
+   "bend": 61.3,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 26.2,
+   "orig_bend": 61.3,
+   "by": {
+    "np_f970": 55.0,
+    "power_support": 21.6,
+    "left_shell": 4.1
+   }
+  },
+  "21": {
+   "plug": 0,
+   "bend": 0,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 0,
+   "orig_bend": 0,
+   "by": {}
+  },
+  "22": {
+   "plug": 47.0,
+   "bend": 62.5,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 47.0,
+   "orig_bend": 62.5,
+   "by": {
+    "xl330": 62.5,
+    "upper_leg_left": 0.1
+   }
+  },
+  "23": {
+   "plug": 3.3,
+   "bend": 12.7,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 3.3,
+   "orig_bend": 12.7,
+   "by": {
+    "upper_leg_left": 12.7
+   }
+  },
+  "24": {
+   "plug": 15.0,
+   "bend": 79.1,
+   "plug_pose": "left_ankle=min",
+   "bend_pose": "left_knee=max",
+   "orig_plug": 15.0,
+   "orig_bend": 79.0,
+   "by": {
+    "xl330": 69.7,
+    "foot_left": 13.3,
+    "seeed_bearing__configuration__22x16x4": 5.5
+   }
+  },
+  "30": {
+   "plug": 82.4,
+   "bend": 93.6,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 82.4,
+   "orig_bend": 93.6,
+   "by": {
+    "xl330": 93.6
+   }
+  },
+  "31": {
+   "plug": 82.4,
+   "bend": 93.6,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 82.4,
+   "orig_bend": 93.6,
+   "by": {
+    "xl330": 93.6
+   }
+  },
+  "32": {
+   "plug": 11.5,
+   "bend": 27.5,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 11.5,
+   "orig_bend": 27.5,
+   "by": {
+    "bottom_head_shell": 11.3,
+    "motor_support": 9.0,
+    "jaw": 3.5
+   }
+  },
+  "33": {
+   "plug": 20.6,
+   "bend": 24.1,
+   "plug_pose": "head_pitch=min",
+   "bend_pose": "zero",
+   "orig_plug": 20.7,
+   "orig_bend": 24.7,
+   "by": {
+    "top_head_shell": 14.1,
+    "bottom_head_shell": 9.3,
+    "motor_support": 6.9
+   }
+  },
+  "34": {
+   "plug": 15.6,
+   "bend": 18.4,
+   "plug_pose": "zero",
+   "bend_pose": "zero",
+   "orig_plug": 15.6,
+   "orig_bend": 18.4,
+   "by": {
+    "bottom_head_shell": 8.8,
+    "elec_rpi_robot_hat_pcb": 5.9,
+    "soft_mouth_top": 4.0
+   }
+  }
+ },
+ "views": {
+  "side": {
+   "w": 1015,
+   "h": 1273,
+   "pts": {
+    "servo:10": [
+     478.3,
+     702.1
+    ],
+    "servo:11": [
+     592.2,
+     950.8
+    ],
+    "servo:12": [
+     469.0,
+     836.9
+    ],
+    "servo:13": [
+     416.5,
+     825.3
+    ],
+    "servo:14": [
+     416.5,
+     1020.5
+    ],
+    "servo:20": [
+     478.3,
+     702.1
+    ],
+    "servo:21": [
+     592.2,
+     950.8
+    ],
+    "servo:22": [
+     469.0,
+     836.9
+    ],
+    "servo:23": [
+     416.5,
+     825.3
+    ],
+    "servo:24": [
+     416.5,
+     1020.5
+    ],
+    "servo:30": [
+     685.1,
+     491.1
+    ],
+    "servo:31": [
+     685.1,
+     486.4
+    ],
+    "servo:32": [
+     685.1,
+     218.2
+    ],
+    "servo:33": [
+     534.5,
+     218.2
+    ],
+    "servo:34": [
+     799.5,
+     204.3
+    ],
+    "part:board": [
+     880.8,
+     139.2
+    ],
+    "part:hat": [
+     841.3,
+     140.1
+    ],
+    "part:battery": [
+     398.8,
+     774.6
+    ],
+    "part:power": [
+     450.9,
+     742.1
+    ],
+    "part:speaker": [
+     539.2,
+     155.5
+    ],
+    "part:imu": [
+     466.7,
+     823.9
+    ],
+    "part:camera": [
+     942.6,
+     146.2
+    ],
+    "part:tof": [
+     942.6,
+     155.5
+    ],
+    "part:head_imu": [
+     839.4,
+     147.6
+    ],
+    "part:hub": [
+     450.9,
+     686.3
+    ]
+   },
+   "pad": 300
+  },
+  "front": {
+   "w": 1003,
+   "h": 1273,
+   "pts": {
+    "servo:10": [
+     570.7,
+     702.1
+    ],
+    "servo:11": [
+     570.7,
+     950.8
+    ],
+    "servo:12": [
+     396.3,
+     836.9
+    ],
+    "servo:13": [
+     396.3,
+     825.3
+    ],
+    "servo:14": [
+     419.6,
+     1020.5
+    ],
+    "servo:20": [
+     733.3,
+     702.1
+    ],
+    "servo:21": [
+     733.3,
+     950.8
+    ],
+    "servo:22": [
+     907.7,
+     836.9
+    ],
+    "servo:23": [
+     907.7,
+     825.3
+    ],
+    "servo:24": [
+     884.4,
+     1020.5
+    ],
+    "servo:30": [
+     652.0,
+     491.1
+    ],
+    "servo:31": [
+     652.0,
+     486.4
+    ],
+    "servo:32": [
+     538.1,
+     218.2
+    ],
+    "servo:33": [
+     538.1,
+     218.2
+    ],
+    "servo:34": [
+     770.5,
+     204.3
+    ],
+    "part:board": [
+     652.0,
+     139.2
+    ],
+    "part:hat": [
+     646.9,
+     140.1
+    ],
+    "part:battery": [
+     652.0,
+     774.6
+    ],
+    "part:power": [
+     652.0,
+     742.1
+    ],
+    "part:speaker": [
+     655.3,
+     155.5
+    ],
+    "part:imu": [
+     652.5,
+     823.9
+    ],
+    "part:camera": [
+     651.5,
+     146.2
+    ],
+    "part:tof": [
+     756.1,
+     155.5
+    ],
+    "part:head_imu": [
+     652.5,
+     147.6
+    ],
+    "part:hub": [
+     652.0,
+     686.3
+    ]
+   },
+   "pad": 300
+  },
+  "top": {
+   "w": 1157,
+   "h": 1179,
+   "pts": {
+    "servo:10": [
+     716.7,
+     894.2
+    ],
+    "servo:11": [
+     716.7,
+     701.4
+    ],
+    "servo:12": [
+     1011.7,
+     910.0
+    ],
+    "servo:13": [
+     1011.7,
+     998.9
+    ],
+    "servo:14": [
+     972.4,
+     998.9
+    ],
+    "servo:20": [
+     441.3,
+     894.2
+    ],
+    "servo:21": [
+     441.3,
+     701.4
+    ],
+    "servo:22": [
+     146.3,
+     910.0
+    ],
+    "servo:23": [
+     146.3,
+     998.9
+    ],
+    "servo:24": [
+     185.6,
+     998.9
+    ],
+    "servo:30": [
+     579.0,
+     544.1
+    ],
+    "servo:31": [
+     579.0,
+     544.1
+    ],
+    "servo:32": [
+     771.8,
+     544.1
+    ],
+    "servo:33": [
+     771.8,
+     799.0
+    ],
+    "servo:34": [
+     378.4,
+     350.5
+    ],
+    "part:board": [
+     579.0,
+     212.8
+    ],
+    "part:hat": [
+     587.7,
+     279.7
+    ],
+    "part:battery": [
+     579.0,
+     1028.8
+    ],
+    "part:power": [
+     579.0,
+     940.6
+    ],
+    "part:speaker": [
+     573.5,
+     791.1
+    ],
+    "part:imu": [
+     578.2,
+     913.9
+    ],
+    "part:camera": [
+     579.8,
+     108.2
+    ],
+    "part:tof": [
+     402.8,
+     108.2
+    ],
+    "part:head_imu": [
+     578.2,
+     282.9
+    ],
+    "part:hub": [
+     579.0,
+     940.6
+    ]
+   },
+   "pad": 0
+  },
+  "iso": {
+   "w": 713,
+   "h": 982,
+   "pts": {
+    "servo:10": [
+     240.2,
+     497.3
+    ],
+    "servo:11": [
+     308.6,
+     703.8
+    ],
+    "servo:12": [
+     140.5,
+     639.8
+    ],
+    "servo:13": [
+     109.0,
+     618.4
+    ],
+    "servo:14": [
+     121.6,
+     751.8
+    ],
+    "servo:20": [
+     328.1,
+     452.3
+    ],
+    "servo:21": [
+     396.4,
+     658.8
+    ],
+    "servo:22": [
+     416.6,
+     498.2
+    ],
+    "servo:23": [
+     385.1,
+     476.8
+    ],
+    "servo:24": [
+     372.6,
+     623.0
+    ],
+    "servo:30": [
+     408.3,
+     375.3
+    ],
+    "servo:31": [
+     408.3,
+     371.9
+    ],
+    "servo:32": [
+     346.8,
+     211.4
+    ],
+    "servo:33": [
+     256.4,
+     173.9
+    ],
+    "servo:34": [
+     540.9,
+     165.6
+    ],
+    "part:board": [
+     525.7,
+     172.1
+    ],
+    "part:hat": [
+     499.2,
+     164.3
+    ],
+    "part:battery": [
+     236.5,
+     506.9
+    ],
+    "part:power": [
+     267.7,
+     496.6
+    ],
+    "part:speaker": [
+     322.5,
+     97.7
+    ],
+    "part:imu": [
+     277.4,
+     559.0
+    ],
+    "part:camera": [
+     562.5,
+     192.6
+    ],
+    "part:tof": [
+     619.0,
+     170.3
+    ],
+    "part:head_imu": [
+     501.1,
+     167.6
+    ],
+    "part:hub": [
+     267.7,
+     456.7
+    ]
+   },
+   "pad": 0
+  }
+ }
+}
