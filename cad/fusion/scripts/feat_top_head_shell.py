@@ -137,3 +137,67 @@ def details(comp, body):
     rib(comp, body, 12.2, 12.48, 13.5, 2.0, 'rib_y13')
     rib(comp, body, -27.2, -26.96, -25.94, 2.0, 'rib_y-26')
     rib(comp, body, -53.9, -53.8, -53.0, 0.85, 'rib_y-53')
+    # (2026-11-09 구동 테스트에서 찾음) 원작에 있는 부리 서보(+x 쪽) 모서리 자리: 안쪽 면을 x 37.1 까지 세로로 깎음 (y −2.2 ~ 9.55, z 17.7 아래).
+    # 없으면 서보 모서리가 셸 안쪽 면에 최대 0.64 mm 파고듦
+    s = sketch(comp, 'z', -1.0, 'servo_relief')
+    poly(s, [(30.0, -2.2, -1.0), (37.1, -2.2, -1.0), (37.1, 9.55, -1.0), (30.0, 9.55, -1.0)])
+    extrude(comp, s.profiles.item(0), 18.7, CUT, name='servo_relief')
+    rear_lip_pocket(comp)
+    lip_pocket_from_bottom(comp, body)
+
+
+def lip_pocket_from_bottom(comp, body):
+    """(2026-11-09 구동 테스트에서 찾음) 아래 셸 립(z 0~1.5) 자리를 위 셸에서 깎음 — 원작처럼 계단 홈. 립 모양은 bottom_head_shell 사양의 LIP_LO/HI/MID 그대로.
+    없을 때: 옆 뒤쪽(x ±31, y 42) 립과 0.6 mm, 옆 앞쪽(x ±41.5, y −26) 0.68 mm 겹침. 같이: 셸 아래 끝이 z 0 아래로 0.56 mm 처져 있던 것 잘라냄"""
+    g = globals()
+    for fn in ('dsl_common.py', 'feat_dsl.py'):
+        exec(open(os.path.join(S, fn), encoding='utf-8').read(), g)
+    g2 = dict(g)
+    exec(open(os.path.join(S, 'specs', 'bottom_head_shell.py'), encoding='utf-8').read(), g2)
+    mu = g['mirror_u']
+    reg = g['U'](g2['LIP_LO'], mu(g2['LIP_LO']), g2['LIP_HI'], g2['LIP_MID'], mu(g2['LIP_MID']))
+    g['op_ext'](comp, dict(op='ext', name='lip_pocket', ax='z', a0=-1.0, a1=1.5, region=reg, mode='cut', target=body.name))
+    # z 0 아래 (안쪽 리브 끝·옆 아래 끝이 0.56 mm 처짐) 잘라냄. z 0 바닥면과 겹치면 결합이 실패해 −0.03 에서 자름, 스케치 법선 방향 확인
+    sk = g['sketch'](comp, 'z', -0.03, 'below_z0')
+    g['poly'](sk, [(-60.0, -80.0, -0.03), (60.0, -80.0, -0.03), (60.0, 70.0, -0.03), (-60.0, 70.0, -0.03)])
+    for dz in (-5.0, 5.0):
+        fe = g['extrude'](comp, sk.profiles.item(0), dz, NEW, name='below_z0_box')
+        bx = fe.bodies.item(0)
+        if bx.boundingBox.maxPoint.z * 10 < 0.0:
+            tools = adsk.core.ObjectCollection.create(); tools.add(bx)
+            ci = comp.features.combineFeatures.createInput(body, tools); ci.operation = CUT
+            comp.features.combineFeatures.add(ci).name = 'below_z0'
+            break
+        fe.deleteMe()
+    big = max(comp.bRepBodies, key=lambda b: b.volume)
+    for b in [b for b in comp.bRepBodies if b.entityToken != big.entityToken]:
+        with open(os.path.join(REPO, 'cad', 'redesign', 'tools', 'feat', 'fusion.log'), 'a', encoding='utf-8') as f:
+            f.write(f'  lip_pocket 조각 지움: {b.volume * 1000:.3f} mm3 bbox {[round(v * 10, 2) for v in b.boundingBox.minPoint.asArray()]} {[round(v * 10, 2) for v in b.boundingBox.maxPoint.asArray()]}\n')
+        comp.features.removeFeatures.add(b)
+
+
+_LIP_LO = [(-18, 53.05), (-16, 53.70), (-14, 54.25), (-12, 54.67), (-10, 55.01), (-8, 55.29), (-6, 55.48), (-4, 55.61), (-2, 55.68), (0, 55.73),
+           (2, 55.70), (4, 55.61), (6, 55.49), (8, 55.28), (10, 55.01), (12, 54.67), (14, 54.25), (16, 53.70), (18, 53.05)]
+_LIP_HI = [(-14, 53.15), (-12, 53.62), (-10, 53.94), (-8, 54.24), (-6, 54.42), (-4, 54.57), (-2, 54.64), (0, 54.67),
+           (2, 54.64), (4, 54.57), (6, 54.42), (8, 54.24), (10, 53.94), (12, 53.62), (14, 53.15)]          # 원작 안쪽 면 z 2.3
+_LIP_HI2 = [(-9, 53.9), (-8, 54.03), (-6, 54.22), (-4, 54.36), (-2, 54.45), (0, 54.47), (2, 54.45), (4, 54.36), (6, 54.22), (8, 54.03), (9, 53.9)]   # z 4.3
+
+
+def rear_lip_pocket(comp):
+    """(2026-11-09 구동 테스트에서 찾음) 뒤 끝 안쪽: 안쪽 로프트가 y 54 단면에서 끝나 그 뒤가 막혀 있었음 → 아래 셸 뒤 립(z 0~1.5)과 0.9 mm 겹침.
+    원작처럼 립 자리(z < 1.5, 안쪽 면 y 55.7) + 그 위 안쪽 면(z 1.5~3.2 / 3.2~5.5 두 단)을 깎음"""
+    for nm, z0, h, pts, taper in (('rear_lip_pocket', -1.0, 2.5, _LIP_LO, '0 deg'), ('rear_inner_band', 1.5, 1.7, _LIP_HI, '0 deg'), ('rear_inner_band2', 3.2, 2.3, _LIP_HI2, '0 deg')):
+        sk = sketch(comp, 'z', z0, nm)
+        oc = adsk.core.ObjectCollection.create()
+        for x, y in pts:
+            oc.add(sp(sk, x, y, z0))
+        spl = sk.sketchCurves.sketchFittedSplines.add(oc)
+        L = sk.sketchCurves.sketchLines
+        a = L.addByTwoPoints(spl.startSketchPoint, sp(sk, pts[0][0], 53.0, z0))
+        b = L.addByTwoPoints(spl.endSketchPoint, sp(sk, pts[-1][0], 53.0, z0))
+        L.addByTwoPoints(a.endSketchPoint, b.endSketchPoint)
+        pr = min(list(sk.profiles), key=lambda p: p.areaProperties().area)
+        ei = comp.features.extrudeFeatures.createInput(pr, CUT)
+        ei.setOneSideExtent(adsk.fusion.DistanceExtentDefinition.create(VI(h)), adsk.fusion.ExtentDirections.PositiveExtentDirection,
+                            adsk.core.ValueInput.createByString(taper))
+        comp.features.extrudeFeatures.add(ei).name = nm

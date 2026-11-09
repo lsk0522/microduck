@@ -242,18 +242,18 @@
  {
   "part": "top_head_shell",
   "vol_ref": 29873.2,
-  "vol_new": 29553.9,
-  "dvol": -1.07,
+  "vol_new": 29446.4,
+  "dvol": -1.43,
   "p50": 0.008,
-  "p95": 0.108,
-  "max": 2.07,
+  "p95": 0.094,
+  "max": 1.92,
   "hole_sections": 33,
   "hole_ok": 33,
   "hole_worst_c": 0.0,
   "hole_worst_r": 0.002,
   "miss": [],
   "nmiss": 0,
-  "faces": 186218
+  "faces": 176642
  },
  {
   "part": "soft_mouth_top",

@@ -32,6 +32,13 @@ for mesh in M['meshes']:
     tm = trimesh.load(src)
     if mesh in PLATES:
         inst = [(b['name'], g) for b in M['bodies'] for g in b['geoms'] if g['mesh'] == mesh]
+        # 판 STL 은 인스턴스 하나의 자리에 있다 → 원본 메시를 각 인스턴스에 놓았을 때 중심이 판 STL 중심과 가장 가까운 인스턴스를 기준으로
+        # (2026-11-09: 예전엔 inst[0] 을 기준으로 해서 neck 판이 반대쪽 자리면 메시가 25 mm 밀려 두 판이 한 자리에 겹쳤음)
+        _ref = trimesh.load(REF / 'assets' / f'{mesh}.stl'); _ref.apply_scale(1000.0)
+        _c = tm.bounds.mean(0)
+        def _dist(g):
+            r = _ref.copy(); r.apply_transform(np.array(g['T_trunk'])); return np.linalg.norm(r.bounds.mean(0) - _c)
+        inst.sort(key=lambda bg: _dist(bg[1]))
         T0 = np.array(inst[0][1]['T_trunk'])
         mesh_frame = tm.copy(); mesh_frame.apply_transform(np.linalg.inv(T0))
         for k, (bname, g) in enumerate(inst):

@@ -92,6 +92,11 @@
   - 남은 차이: 홈 뒤 끝(y 11~13)은 원작이 비스듬히 끝나 0.6~1.0 mm (안쪽 면). 안쪽 계단을 벽으로 돌리면 R2.8 모깎기가 계산 안 돼 상자를 y 12.9 에서 끊음
   - 도구: `tools/feat/bhs/groove_hmap.py`(바닥 높이 지도) → `groove_steps.py` → `groove_curves.py`, 시험 사양 `specs/bhs_grv_test.py`
 
+## 구동 테스트 (2026-11-09, 사용자 요청) — `verify/drive_test_2026-11-09.md`
+- 관절 14/14, 움직일 때 충돌·토크·서기 시뮬 모두 원본과 같음 (새 접촉 0건)
+- 조립 맞물림에서 찾아 고침: top_head_shell 부리 서보 자리(0.64 mm), 아래 셸 립 자리(0.92 mm) → 부품 v11 / MJCF neck 판 메시 25 mm 밀림 (시뮬만)
+- 같이 찾은 것: Fusion MCP 전역에 다른 대화가 남긴 `run`(dyn_50 관절 검사)이 남아 스크립트마다 실행돼 verify/joints.json 을 덮어씀 → 빈 run 으로 바꾸고 joints.json 다시 만듦
+
 ## 주의 (2026-11-02 발견)
 - (2026-11-03) 원작 비교만으로는 '화면에 안 그려지는 몸체'를 못 잡음 → 설치 뒤 어셈블리에서 몸체마다 meshManager.displayMeshes.count > 0 확인. right_shell 이 0 이라 가슴이 비어 보였음 → 깨끗한 복사본으로 교체 (v3)
 - 어셈블리가 연 부품 문서(참조로 열린 것)는 읽기 전용 → API save()가 True를 돌려줘도 클라우드에 안 올라감.
