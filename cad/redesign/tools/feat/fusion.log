@@ -1,12 +1,7 @@
-opened: readOnly? ? ver 1
-open banana_pcb_locker: timeline 13 bodies 1 meshes 0
-cleared 25s timeline 0 bodies 0
-  00 prism plate: bodies 1 main vol 448.6
-  01 prism hook_r: bodies 1 main vol 459.7
-  02 prism hook_l: bodies 1 main vol 470.8
-  03 prism holes: bodies 1 main vol 465.2
-  04 prism holes_l: bodies 1 main vol 459.6
-built faces 28 bodies 1 vol 459.6 mat ABS 플라스틱 27s
+opened: readOnly? ? ver 2
+open top_head_shell: timeline 170 bodies 1 meshes 0
+cleared 32s timeline 0 bodies 0
+built faces 98 bodies 1 vol 29540.4 mat ABS 플라스틱 159s
 save True modified False
-cloud versions 2
+cloud versions 3
 DONE
